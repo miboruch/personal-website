@@ -26,6 +26,7 @@ module.exports = {
         "react-hooks"
     ],
     "rules": {
-        "prettier/prettier": "warn"
+        "prettier/prettier": "warn",
+        "no-unused-vars": "off"
     }
 };

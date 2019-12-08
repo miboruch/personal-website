@@ -1,14 +1,18 @@
 import React from 'react';
 import { Link } from 'gatsby';
-
-import Layout from '../components/layout';
+import styled from 'styled-components';
+import Layout from '../components/Layout';
 import Image from '../components/image';
 import SEO from '../components/seo';
+
+const StyledHeader = styled.h1`
+  font-family: ${({ theme }) => theme.font.family.futura};
+`;
 
 const IndexPage = () => (
   <Layout>
     <SEO title='Home' />
-    <h1>Hi people</h1>
+    <StyledHeader>Hi people</StyledHeader>
     <p>Welcome to your new Gatsby site.</p>
     <p>Now go build something great.</p>
     <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
