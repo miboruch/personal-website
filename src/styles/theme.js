@@ -11,7 +11,9 @@ export const theme = {
       futuraRegular: 'Futura-regular'
     }
   },
-  color: {},
+  color: {
+    background: '#212121'
+  },
   mq: {
     mobileL: '@media all and (min-width: 370px)',
     tablet: '@media all and (min-width: 710px)',

@@ -1,25 +1,52 @@
 import React from 'react';
-import { Link } from 'gatsby';
 import styled from 'styled-components';
+import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
-import Image from '../components/image';
 import SEO from '../components/seo';
+import { convertObjectToArray } from '../utils/functions';
+import MainSlider from '../components/MainSlider/MainSlider';
 
 const StyledHeader = styled.h1`
   font-family: ${({ theme }) => theme.font.family.futura};
 `;
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title='Home' />
-    <StyledHeader>Hi people</StyledHeader>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to='/page-2/'>Go to page 2</Link>
-  </Layout>
-);
+const IndexPage = ({ data }) => {
+  const imagesArray = convertObjectToArray(
+    data.image1,
+    data.image2,
+    data.image3
+  );
+  console.log(imagesArray);
+  return (
+    <Layout>
+      <SEO title='Home' />
+      <MainSlider images={imagesArray} />
+    </Layout>
+  );
+};
+
+export const sliderMockup = graphql`
+  fragment sliderMockup on File {
+    childImageSharp {
+      fluid(maxWidth: 2000, quality: 100) {
+        ...GatsbyImageSharpFluid_noBase64
+      }
+    }
+  }
+`;
+
+export const query = graphql`
+  query {
+    image1: file(name: { regex: "/weather-mobile/" }) {
+      ...sliderMockup
+    }
+    image2: file(name: { regex: "/indeed-main-mobile/" }) {
+      ...sliderMockup
+    }
+    image3: file(name: { regex: "/archicept-mobile/" }) {
+      ...sliderMockup
+    }
+  }
+`;
 
 export default IndexPage;
