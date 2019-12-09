@@ -11,16 +11,20 @@ const StyledHeader = styled.h1`
 `;
 
 const IndexPage = ({ data }) => {
+  const {
+    mainPageData: { sliderContents }
+  } = data;
+
   const imagesArray = convertObjectToArray(
     data.image1,
     data.image2,
     data.image3
   );
-  console.log(imagesArray);
+
   return (
     <Layout>
       <SEO title='Home' />
-      <MainSlider images={imagesArray} />
+      <MainSlider images={imagesArray} data={sliderContents} />
     </Layout>
   );
 };
@@ -37,14 +41,22 @@ export const sliderMockup = graphql`
 
 export const query = graphql`
   query {
-    image1: file(name: { regex: "/weather-mobile/" }) {
+    image1: file(name: { regex: "/indeed-main-mobile/" }) {
       ...sliderMockup
     }
-    image2: file(name: { regex: "/indeed-main-mobile/" }) {
+    image2: file(name: { regex: "/archicept-mobile/" }) {
       ...sliderMockup
     }
-    image3: file(name: { regex: "/archicept-mobile/" }) {
+    image3: file(name: { regex: "/weather-mobile/" }) {
       ...sliderMockup
+    }
+    mainPageData: portfolio {
+      sliderContents {
+        index
+        name
+        next
+        description
+      }
     }
   }
 `;
