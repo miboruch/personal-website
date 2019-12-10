@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Paragraph from '../atoms/Paragraph/Paragraph';
 import Menu from '../Menu/Menu';
@@ -16,16 +16,25 @@ const StyledHeader = styled.header`
 
 const StyledParagraph = styled(Paragraph)`
   padding: 2rem;
-  width: 80px;
+  width: 120px;
 `;
 
 const Header = () => {
+  const [isMenuOpen, setOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setOpen(!isMenuOpen);
+    console.log(isMenuOpen);
+  };
+
   return (
-    <StyledHeader>
-      <StyledParagraph medium>MICHAL BORUCH</StyledParagraph>
-      <Menu />
-      <Hamburger />
-    </StyledHeader>
+    <>
+      <StyledHeader>
+        <StyledParagraph medium>MICHAL BORUCH</StyledParagraph>
+        <Hamburger onClick={toggleMenu} />
+      </StyledHeader>
+      <Menu isMenuOpen={isMenuOpen} />
+    </>
   );
 };
 
