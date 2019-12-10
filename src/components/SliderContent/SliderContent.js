@@ -1,13 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
+import GatsbyImage from 'gatsby-image';
 import BackgroundImage from 'gatsby-background-image';
 
-const StyledImage = styled(BackgroundImage)`
+const StyledWrapper = styled.div`
   width: 100%;
   height: 100vh;
-  z-index: 10;
-  padding-left: 15rem;
-  background-color: transparent;
+  position: relative;
+  background-color: ${({ theme }) => theme.color.background};
+`;
+
+const StyledBackgroundImage = styled(BackgroundImage)`
+  width: 100%;
+  height: 100vh;
+  opacity: 0.7;
 `;
 
 const StyledHeading = styled.h1`
@@ -19,9 +25,13 @@ const StyledHeading = styled.h1`
 
 const SliderContent = ({ image, content }) => {
   return (
-    <StyledImage fluid={image.childImageSharp.fluid}>
+    <StyledWrapper>
+      <StyledBackgroundImage
+        preserveStackingContext={true}
+        fluid={image.childImageSharp.fluid}
+      />
       <StyledHeading>{content.name}</StyledHeading>
-    </StyledImage>
+    </StyledWrapper>
   );
 };
 

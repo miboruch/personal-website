@@ -1,10 +1,21 @@
 export const theme = {
   font: {
     size: {
-      s: '1.2rem',
-      m: '1.5rem',
-      l: '2rem',
-      xl: '2.4rem'
+      mobile: {
+        s: '1rem',
+        m: '1.4rem',
+        l: '2rem',
+        xl: '2.4rem',
+        title: '5.8rem'
+      },
+      desktop: {
+        xs: '1.2rem',
+        s: '1.6rem',
+        m: '2rem',
+        l: '3.2rem',
+        xl: '4.6rem',
+        title: '15rem'
+      }
     },
     family: {
       futura: 'Futura',
@@ -12,7 +23,8 @@ export const theme = {
     }
   },
   color: {
-    background: '#212121'
+    background: '#212121',
+    menuBox: '#272727'
   },
   mq: {
     mobileL: '@media all and (min-width: 370px)',

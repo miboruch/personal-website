@@ -4,6 +4,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import GlobalStyle from '../styles/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../styles/theme';
+import Header from './Header/Header';
 
 import './layout.css';
 
@@ -21,7 +22,10 @@ const Layout = ({ children }) => {
   return (
     <>
       <GlobalStyle />
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <Header />
+        {children}
+      </ThemeProvider>
     </>
   );
 };

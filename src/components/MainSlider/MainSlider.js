@@ -9,7 +9,6 @@ const StyledWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100vh;
-  background: ${({ theme }) => theme.color.background};
   z-index: -1;
 `;
 

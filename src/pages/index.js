@@ -32,7 +32,7 @@ const IndexPage = ({ data }) => {
 export const sliderMockup = graphql`
   fragment sliderMockup on File {
     childImageSharp {
-      fluid(maxWidth: 2000, quality: 100) {
+      fluid(maxWidth: 1000, quality: 100) {
         ...GatsbyImageSharpFluid_noBase64
       }
     }
