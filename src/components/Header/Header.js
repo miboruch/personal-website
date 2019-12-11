@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Paragraph from '../atoms/Paragraph/Paragraph';
 import Menu from '../Menu/Menu';
@@ -44,8 +44,24 @@ const StyledParagraph = styled(Paragraph)`
   margin: auto 0;
 `;
 
+const useBoxSize = ref => {
+  const [boxSize, setBoxSize] = useState({ width: '215px', height: '62px' });
+
+  useEffect(() => {
+    setBoxSize({
+      width: ref.current.offsetWidth,
+      height: ref.current.offsetHeight
+    });
+  }, [ref.current]);
+
+  return boxSize;
+};
+
 const Header = () => {
   const [isOpen, setOpen] = useState(false);
+  const menuButton = useRef(null);
+
+  const boxSize = useBoxSize(menuButton);
 
   const toggleMenu = () => {
     setOpen(!isOpen);
@@ -55,12 +71,12 @@ const Header = () => {
     <>
       <StyledHeader>
         <StyledLogo medium>MICHAL BORUCH</StyledLogo>
-        <StyledBox onClick={() => toggleMenu()}>
+        <StyledBox onClick={() => toggleMenu()} ref={menuButton}>
           <StyledParagraph small>web design & code</StyledParagraph>
           <Hamburger isOpen={isOpen} />
         </StyledBox>
       </StyledHeader>
-      <Menu isOpen={isOpen} />
+      <Menu isOpen={isOpen} boxSize={boxSize} />
     </>
   );
 };

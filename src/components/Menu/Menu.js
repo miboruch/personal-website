@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Paragraph from '../atoms/Paragraph/Paragraph';
-import { easeExpOut, easeExpInOut } from 'd3-ease';
+import { easeExpInOut } from 'd3-ease';
 import { Keyframes } from 'react-spring/renderprops-universal';
-import { useSpring, config, animated } from 'react-spring';
+import { useSpring, animated } from 'react-spring';
 
 const StyledMenuBox = styled(animated.div)`
   position: fixed;
-  top: 0;
-  right: 0;
+  top: 5px;
+  right: 5px;
   width: calc(100% - 10px);
   height: calc(100vh - 10px);
   display: flex;
@@ -16,14 +16,38 @@ const StyledMenuBox = styled(animated.div)`
   z-index: 899;
   opacity: 1;
   box-sizing: content-box !important;
+  transform-origin: top right;
+  will-change: transform;
 `;
 
 const AnimatedParagraph = styled(animated(Paragraph))``;
 
+const useScreenSize = () => {
+  const [screenSize, setScreenSize] = useState({
+    screenWidth: window.innerWidth,
+    screenHeight: window.innerHeight
+  });
+
+  useEffect(() => {
+    const setSize = () =>
+      setScreenSize({
+        screenWidth: window.innerWidth,
+        screenHeight: window.innerHeight
+      });
+    window.addEventListener('resize', setSize);
+
+    return () => window.removeEventListener('resize', setSize);
+  }, []);
+
+  return screenSize;
+};
+
+let scaleData = {};
+
 const AnimatedMenu = Keyframes.Spring({
   in: async next => {
     await next({
-      transform: 'translate(0, 0) scale(1,1)',
+      transform: 'scale(1,1)',
       config: {
         duration: 3000,
         easing: easeExpInOut
@@ -44,7 +68,7 @@ const AnimatedMenu = Keyframes.Spring({
       }
     });
     await next({
-      transform: 'translate(87%, -78%) scale(0.3, 0.08)',
+      transform: `scale(${scaleData.scaleWidth}, ${scaleData.scaleHeight})`,
       config: {
         duration: 3000,
         easing: easeExpInOut
@@ -53,9 +77,15 @@ const AnimatedMenu = Keyframes.Spring({
   }
 });
 
-const Menu = ({ isOpen }) => {
+const Menu = ({ isOpen, boxSize }) => {
+  const { width, height } = boxSize;
+  const { screenWidth, screenHeight } = useScreenSize();
+
+  scaleData.scaleWidth = width / screenWidth;
+  scaleData.scaleHeight = height / screenHeight;
+
   const setVisible = useSpring({
-    to: { opacity: isOpen ? 1 : 0 },
+    to: { opacity: 1 },
     config: {
       duration: 1000
     },
@@ -74,10 +104,3 @@ const Menu = ({ isOpen }) => {
 };
 
 export default Menu;
-/*
-<StyledMenuBox>
-      <StyledPseudoMenu isOpen={isOpen}>
-        <AnimatedParagraph props={setVisible}>hello boy</AnimatedParagraph>
-      </StyledPseudoMenu>
-    </StyledMenuBox>
-*/
