@@ -5,6 +5,7 @@ import Menu from '../Menu/Menu';
 import Hamburger from '../atoms/Hamburger/Hamburger';
 
 const StyledHeader = styled.header`
+  position: relative;
   width: 100%;
   height: 66px;
   background: transparent;
@@ -14,26 +15,52 @@ const StyledHeader = styled.header`
   overflow: hidden;
 `;
 
+const StyledLogo = styled(Paragraph)`
+  padding-left: 2rem;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  width: 100px;
+  z-index: 1000;
+`;
+
+const StyledBox = styled.div`
+  text-align: right;
+  width: 215px;
+  height: 62px;
+  position: fixed;
+  top: 5px;
+  right: 5px;
+  background-color: ${({ theme }) => theme.color.menuBox};
+  border: none;
+  display: flex;
+  flex-direction: row;
+  z-index: 1000;
+`;
+
 const StyledParagraph = styled(Paragraph)`
-  padding: 2rem;
-  width: 120px;
+  font-family: ${({ theme }) => theme.font.family.futura};
+  width: 105px;
+  padding: 0 0.5rem;
+  margin: auto 0;
 `;
 
 const Header = () => {
-  const [isMenuOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState(false);
 
   const toggleMenu = () => {
-    setOpen(!isMenuOpen);
-    console.log(isMenuOpen);
+    setOpen(!isOpen);
   };
 
   return (
     <>
       <StyledHeader>
-        <StyledParagraph medium>MICHAL BORUCH</StyledParagraph>
-        <Hamburger onClick={toggleMenu} />
+        <StyledLogo medium>MICHAL BORUCH</StyledLogo>
+        <StyledBox onClick={() => toggleMenu()}>
+          <StyledParagraph small>web design & code</StyledParagraph>
+          <Hamburger isOpen={isOpen} />
+        </StyledBox>
       </StyledHeader>
-      <Menu isMenuOpen={isMenuOpen} />
+      <Menu isOpen={isOpen} />
     </>
   );
 };

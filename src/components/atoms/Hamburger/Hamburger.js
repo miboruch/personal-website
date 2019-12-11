@@ -34,10 +34,12 @@ const InnerHamburger = styled.div`
   }
 
   ::before {
-    top: -3px;
+    top: ${({ isOpen }) => (isOpen ? '0' : '-3px')};
+    transform: rotate(${({ isOpen }) => (isOpen ? '40deg' : '0deg')});
   }
   ::after {
-    top: 3px;
+    top: ${({ isOpen }) => (isOpen ? '0' : '3px')};
+    transform: rotate(${({ isOpen }) => (isOpen ? '-40deg' : '0deg')});
   }
 
   ${StyledHamburger}:hover & {
@@ -50,10 +52,10 @@ const InnerHamburger = styled.div`
   }
 `;
 
-const Hamburger = ({ onClick }) => {
+const Hamburger = ({ isOpen }) => {
   return (
-    <StyledHamburger onClick={() => onClick()}>
-      <InnerHamburger />
+    <StyledHamburger>
+      <InnerHamburger isOpen={isOpen} />
     </StyledHamburger>
   );
 };

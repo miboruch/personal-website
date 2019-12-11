@@ -2,7 +2,7 @@ export const theme = {
   font: {
     size: {
       mobile: {
-        s: '1rem',
+        s: '1.2rem',
         m: '1.4rem',
         l: '2rem',
         xl: '2.4rem',
