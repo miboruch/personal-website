@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { useStaticQuery, graphql } from 'gatsby';
 import GlobalStyle from '../styles/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../styles/theme';
 import Header from './Header/Header';
 
-import './layout.css';
-import Menu from './Menu/Menu';
+import './index.css';
 
 const Layout = ({ children }) => {
   return (

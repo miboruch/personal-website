@@ -6,11 +6,13 @@ const Paragraph = styled(animated.p)`
   left: 0;
   letter-spacing: 2px;
   color: #fff;
+  font-weight: 500;
 
   ${({ small }) =>
     small &&
     css`
       font-size: ${({ theme }) => theme.font.size.mobile.s};
+      font-weight: 200;
     `}
   
   ${({ medium }) =>
@@ -44,6 +46,7 @@ const Paragraph = styled(animated.p)`
       ${({ theme }) => theme.mq.desktop} {
         font-size: ${({ theme }) => theme.font.size.desktop.title};
       }
+      font-weight: 700;
     `}
 `;
 

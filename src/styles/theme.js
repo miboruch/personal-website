@@ -14,7 +14,7 @@ export const theme = {
         m: '2rem',
         l: '3.2rem',
         xl: '4.6rem',
-        title: '15rem'
+        title: '8.9rem'
       }
     },
     family: {

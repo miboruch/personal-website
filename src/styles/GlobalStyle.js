@@ -2,21 +2,6 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
 
-  @font-face {
-    font-family: 'Futura';
-    src: url('../../static/fonts/FuturaPT-Bold.woff')   format('woff');
-  }
-  
-  @font-face {
-    font-family: 'Futura';
-    src: url('../../static/fonts/FuturaPT-Book.woff')   format('woff');
-  }
-  
-  @font-face {
-    font-family: 'Futura';
-    src: url('../../static/fonts/FuturaPT-Light.woff')   format('woff');
-  }
-
   *, *::before, *::after{
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
@@ -34,9 +19,9 @@ const GlobalStyle = createGlobalStyle`
   
   body{
     font-size: 1.6rem;
+    color: #fff;
     font-family: Futura;
     font-weight: 200;
-    color: #fff;
   }
   
   h1{

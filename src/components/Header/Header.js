@@ -21,6 +21,7 @@ const StyledLogo = styled(Paragraph)`
   padding-bottom: 14px;
   width: 100px;
   z-index: 1000;
+  font-family: Avanti;
 `;
 
 const StyledBox = styled.div`
@@ -34,7 +35,7 @@ const StyledBox = styled.div`
   border: none;
   display: flex;
   flex-direction: row;
-  z-index: 1000;
+  z-index: 901;
 `;
 
 const StyledParagraph = styled(Paragraph)`
@@ -42,6 +43,7 @@ const StyledParagraph = styled(Paragraph)`
   width: 105px;
   padding: 0 0.5rem;
   margin: auto 0;
+  z-index: 901;
 `;
 
 const useBoxSize = ref => {

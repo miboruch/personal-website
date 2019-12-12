@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import GatsbyImage from 'gatsby-image';
 import BackgroundImage from 'gatsby-background-image';
+import Paragraph from '../atoms/Paragraph/Paragraph';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -16,11 +17,13 @@ const StyledBackgroundImage = styled(BackgroundImage)`
   opacity: 0.7;
 `;
 
-const StyledHeading = styled.h1`
+const StyledTitle = styled(Paragraph)`
   position: absolute;
   top: 50%;
-  left: 30%;
+  left: 50%;
   transform: translate(-50%, -50%);
+  font-family: Futura;
+  font-weight: bold;
 `;
 
 const SliderContent = ({ image, content }) => {
@@ -30,7 +33,7 @@ const SliderContent = ({ image, content }) => {
         preserveStackingContext={true}
         fluid={image.childImageSharp.fluid}
       />
-      <StyledHeading>{content.name}</StyledHeading>
+      <StyledTitle title>{content.name}</StyledTitle>
     </StyledWrapper>
   );
 };

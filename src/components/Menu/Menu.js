@@ -12,35 +12,25 @@ const StyledMenuBox = styled(animated.div)`
   width: calc(100% - 10px);
   height: calc(100vh - 10px);
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   background-color: ${({ theme }) => theme.color.menuBox};
-  z-index: 899;
+  z-index: 900;
   opacity: 1;
-  box-sizing: content-box !important;
   transform-origin: top right;
   will-change: transform;
 `;
 
-const AnimatedParagraph = styled(animated(Paragraph))``;
-
-const useScreenSize = () => {
-  const [screenSize, setScreenSize] = useState({
-    screenWidth: window.innerWidth,
-    screenHeight: window.innerHeight
-  });
-
-  useEffect(() => {
-    const setSize = () =>
-      setScreenSize({
-        screenWidth: window.innerWidth,
-        screenHeight: window.innerHeight
-      });
-    window.addEventListener('resize', setSize);
-
-    return () => window.removeEventListener('resize', setSize);
-  }, []);
-
-  return screenSize;
-};
+const ParagraphBox = styled(animated.div)`
+  width: 100%;
+  height: 33vh;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+`;
 
 let scaleData = {};
 
@@ -49,7 +39,7 @@ const AnimatedMenu = Keyframes.Spring({
     await next({
       transform: 'scale(1,1)',
       config: {
-        duration: 3000,
+        duration: 1500,
         easing: easeExpInOut
       }
     });
@@ -70,25 +60,80 @@ const AnimatedMenu = Keyframes.Spring({
     await next({
       transform: `scale(${scaleData.scaleWidth}, ${scaleData.scaleHeight})`,
       config: {
-        duration: 3000,
+        duration: 1500,
         easing: easeExpInOut
       }
     });
   }
 });
 
+const MenuItems = Keyframes.Trail({
+  in: async next => {
+    await next({
+      opacity: 1,
+      transform: 'translateX(0px)',
+      delay: 600
+    });
+  },
+  out: async next => {
+    await next({
+      opacity: 0,
+      transform: 'translateX(-40px)'
+    });
+  }
+});
+
+const useScreenSize = () => {
+  const [screenSize, setScreenSize] = useState({
+    screenWidth: window.innerWidth || 1920,
+    screenHeight: window.innerHeight || 1440
+  });
+
+  useEffect(() => {
+    const setSize = () =>
+      setScreenSize({
+        screenWidth: window.innerWidth,
+        screenHeight: window.innerHeight
+      });
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('load', setSize);
+      window.addEventListener('resize', setSize);
+    }
+    return () => {
+      window.removeEventListener('load', setSize);
+      window.removeEventListener('resize', setSize);
+    };
+  }, []);
+
+  return screenSize;
+};
+
 const Menu = ({ isOpen, boxSize }) => {
+  const items = ['Home', 'About', 'Project'];
+
   const { width, height } = boxSize;
   const { screenWidth, screenHeight } = useScreenSize();
 
-  scaleData.scaleWidth = width / screenWidth;
-  scaleData.scaleHeight = height / screenHeight;
+  console.log(`Box sizes: ${width} ${height}`);
+  console.log(`Screen sizes: ${screenWidth} ${screenHeight}`);
+
+  const scaleWidth = width / screenWidth;
+  const scaleHeight = height / screenHeight;
+
+  console.log(`Scale sizes: ${scaleWidth} ${scaleHeight}`);
+
+  useEffect(() => {
+    scaleData.scaleWidth = scaleWidth;
+    scaleData.scaleHeight = scaleHeight;
+  }, [scaleWidth, scaleHeight]);
 
   const setVisible = useSpring({
-    to: { opacity: 1 },
+    to: { opacity: isOpen ? 1 : 0 },
     config: {
-      duration: 1000
+      duration: 2000
     },
+    delay: 1000,
     easing: 'cubic-bezier(.84, 0, .08, .99)'
   });
 
@@ -96,7 +141,19 @@ const Menu = ({ isOpen, boxSize }) => {
     <AnimatedMenu state={isOpen ? 'in' : 'out'}>
       {props => (
         <StyledMenuBox style={props}>
-          <AnimatedParagraph props={setVisible}>hello boy</AnimatedParagraph>
+          <MenuItems
+            state={isOpen ? 'in' : 'out'}
+            reverse={!isOpen}
+            items={items}
+          >
+            {trailItem => trailProps => {
+              return (
+                <ParagraphBox style={trailProps}>
+                  <Paragraph title>{trailItem}</Paragraph>
+                </ParagraphBox>
+              );
+            }}
+          </MenuItems>
         </StyledMenuBox>
       )}
     </AnimatedMenu>
