@@ -50,7 +50,9 @@ const AnimatedMenu = Keyframes.Spring({
       }
     });
   },
-  out: async next => {
+  out: async (next, ...props) => {
+    const { scaleWidth, scaleHeight } = props[1].value;
+    console.log('PASSED SCALE: ' + scaleWidth + ' ' + scaleHeight);
     await next({
       border: '0px solid #fff',
       config: {
@@ -58,7 +60,7 @@ const AnimatedMenu = Keyframes.Spring({
       }
     });
     await next({
-      transform: `scale(${scaleData.scaleWidth}, ${scaleData.scaleHeight})`,
+      transform: `scale(${scaleWidth}, ${scaleHeight})`,
       config: {
         duration: 1500,
         easing: easeExpInOut
@@ -85,8 +87,8 @@ const MenuItems = Keyframes.Trail({
 
 const useScreenSize = () => {
   const [screenSize, setScreenSize] = useState({
-    screenWidth: window.innerWidth || 1920,
-    screenHeight: window.innerHeight || 1440
+    screenWidth: 1920,
+    screenHeight: 1440
   });
 
   useEffect(() => {
@@ -96,10 +98,9 @@ const useScreenSize = () => {
         screenHeight: window.innerHeight
       });
 
-    if (typeof window !== 'undefined') {
-      window.addEventListener('load', setSize);
-      window.addEventListener('resize', setSize);
-    }
+    window.addEventListener('load', setSize);
+    window.addEventListener('resize', setSize);
+
     return () => {
       window.removeEventListener('load', setSize);
       window.removeEventListener('resize', setSize);
@@ -121,7 +122,7 @@ const Menu = ({ isOpen, boxSize }) => {
   const scaleWidth = width / screenWidth;
   const scaleHeight = height / screenHeight;
 
-  console.log(`Scale sizes: ${scaleWidth} ${scaleHeight}`);
+  console.log(`Scale sizes: ${typeof scaleWidth} ${typeof scaleHeight}`);
 
   useEffect(() => {
     scaleData.scaleWidth = scaleWidth;
@@ -138,7 +139,10 @@ const Menu = ({ isOpen, boxSize }) => {
   });
 
   return (
-    <AnimatedMenu state={isOpen ? 'in' : 'out'}>
+    <AnimatedMenu
+      state={isOpen ? 'in' : 'out'}
+      value={{ scaleWidth, scaleHeight }}
+    >
       {props => (
         <StyledMenuBox style={props}>
           <MenuItems

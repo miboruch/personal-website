@@ -36,6 +36,10 @@ const StyledBox = styled.div`
   display: flex;
   flex-direction: row;
   z-index: 901;
+
+  ${({ theme }) => theme.mq.tablet} {
+    width: 300px;
+  }
 `;
 
 const StyledParagraph = styled(Paragraph)`
@@ -47,14 +51,18 @@ const StyledParagraph = styled(Paragraph)`
 `;
 
 const useBoxSize = ref => {
-  const [boxSize, setBoxSize] = useState({ width: '215px', height: '62px' });
+  const [boxSize, setBoxSize] = useState({ width: 215, height: 62 });
 
   useEffect(() => {
-    setBoxSize({
-      width: ref.current.offsetWidth,
-      height: ref.current.offsetHeight
-    });
-  }, [ref.current]);
+    const setSize = () =>
+      setBoxSize({
+        width: ref.current.offsetWidth,
+        height: ref.current.offsetHeight
+      });
+    window.addEventListener('resize', setSize);
+
+    return () => window.removeEventListener('resize', setSize);
+  }, []);
 
   return boxSize;
 };
