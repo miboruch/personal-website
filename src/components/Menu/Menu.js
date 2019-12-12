@@ -4,13 +4,16 @@ import Paragraph from '../atoms/Paragraph/Paragraph';
 import { easeExpInOut } from 'd3-ease';
 import { Keyframes } from 'react-spring/renderprops-universal';
 import { useSpring, animated } from 'react-spring';
+import { config } from 'react-spring';
 
 const StyledMenuBox = styled(animated.div)`
   position: fixed;
   top: 5px;
   right: 5px;
-  width: calc(100% - 5px);
-  height: calc(100vh - 5px);
+  //width: calc(100% - 5px);
+  //height: calc(100vh - 5px);
+  width: 215px;
+  height: 62px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,12 +35,15 @@ const ParagraphBox = styled(animated.div)`
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 `;
 
-let scaleData = {};
-
 const AnimatedMenu = Keyframes.Spring({
-  in: async next => {
+  in: async (next, ...props) => {
+    const { boxWidth, boxHeight } = props[1].value;
+    const { width, height } = props[1].value;
+    console.log('PASSED BOX: width: ' + boxWidth + ' height: ' + boxHeight);
     await next({
-      transform: 'scale(1,1)',
+      // transform: 'scale(1,1)',
+      width: `${width - 10}px`,
+      height: `${height - 10}px`,
       config: {
         duration: 1500,
         easing: easeExpInOut
@@ -52,7 +58,11 @@ const AnimatedMenu = Keyframes.Spring({
   },
   out: async (next, ...props) => {
     const { scaleWidth, scaleHeight } = props[1].value;
+    const { width, height } = props[1].value;
+    const { boxWidth, boxHeight } = props[1].value;
+
     console.log('PASSED SCALE: ' + scaleWidth + ' ' + scaleHeight);
+    console.log('PASSED SIZE: ' + width + ' ' + height);
     await next({
       border: '0px solid #fff',
       config: {
@@ -60,7 +70,9 @@ const AnimatedMenu = Keyframes.Spring({
       }
     });
     await next({
-      transform: `scale(${scaleWidth}, ${scaleHeight})`,
+      // transform: `scale(${scaleWidth}, ${scaleHeight})`,
+      width: `${boxWidth}px`,
+      height: `${boxHeight}px`,
       config: {
         duration: 1500,
         easing: easeExpInOut
@@ -87,8 +99,8 @@ const MenuItems = Keyframes.Trail({
 
 const useScreenSize = () => {
   const [screenSize, setScreenSize] = useState({
-    screenWidth: 1920,
-    screenHeight: 1440
+    screenWidth: undefined,
+    screenHeight: undefined
   });
 
   useEffect(() => {
@@ -98,11 +110,10 @@ const useScreenSize = () => {
         screenHeight: window.innerHeight
       });
 
-    window.addEventListener('load', setSize);
+    setSize();
     window.addEventListener('resize', setSize);
 
     return () => {
-      window.removeEventListener('load', setSize);
       window.removeEventListener('resize', setSize);
     };
   }, []);
@@ -111,52 +122,70 @@ const useScreenSize = () => {
 };
 
 const Menu = ({ isOpen, boxSize }) => {
-  const items = ['Home', 'About', 'Project'];
-  const menuElement = useRef(null);
   const { screenWidth, screenHeight } = useScreenSize();
-  const { width, height } = boxSize;
+  console.log(screenWidth, screenHeight);
 
+  const items = ['Home', 'About', 'Projects'];
+  const menuElement = useRef(null);
+
+  const { width, height } = boxSize;
+  console.log('BOX SIZE: width: ' + width + ' height: ' + height);
   const scaleWidth = width / screenWidth;
   const scaleHeight = height / screenHeight;
 
   useEffect(() => {
     const scaleBox = () => {
+      console.log('BOX SCALED');
+      console.log('width: ' + scaleWidth);
+      console.log('height: ' + scaleHeight);
       menuElement.current.style.transform = `scale(${scaleWidth}, ${scaleHeight})`;
     };
     window.addEventListener('resize', scaleBox);
-  }, []);
-  console.log(`Screen sizes: ${screenWidth} ${screenHeight}`);
 
-  console.log(`Scale sizes: ${scaleWidth} ${scaleHeight}`);
-
-  useEffect(() => {
-    scaleData.scaleWidth = scaleWidth;
-    scaleData.scaleHeight = scaleHeight;
+    return () => window.removeEventListener('resize', scaleBox);
   }, [scaleWidth, scaleHeight]);
 
   return (
-    <AnimatedMenu
-      state={isOpen ? 'in' : 'out'}
-      value={{ scaleWidth, scaleHeight }}
-    >
-      {props => (
-        <StyledMenuBox style={props} ref={menuElement}>
-          <MenuItems
-            state={isOpen ? 'in' : 'out'}
-            reverse={!isOpen}
-            items={items}
-          >
-            {trailItem => trailProps => {
-              return (
-                <ParagraphBox style={trailProps}>
-                  <Paragraph title>{trailItem}</Paragraph>
-                </ParagraphBox>
-              );
-            }}
-          </MenuItems>
-        </StyledMenuBox>
+    <>
+      {screenWidth === undefined ? (
+        <h1>is not working</h1>
+      ) : (
+        <AnimatedMenu
+          state={isOpen ? 'in' : 'out'}
+          value={{
+            scaleWidth,
+            scaleHeight,
+            width: screenWidth,
+            height: screenHeight,
+            boxWidth: width,
+            boxHeight: height
+          }}
+        >
+          {props => (
+            <StyledMenuBox
+              style={props}
+              ref={menuElement}
+              boxWidth={width}
+              boxHeight={height}
+            >
+              <MenuItems
+                state={isOpen ? 'in' : 'out'}
+                reverse={!isOpen}
+                items={items}
+              >
+                {trailItem => trailProps => {
+                  return (
+                    <ParagraphBox style={trailProps}>
+                      <Paragraph title>{trailItem}</Paragraph>
+                    </ParagraphBox>
+                  );
+                }}
+              </MenuItems>
+            </StyledMenuBox>
+          )}
+        </AnimatedMenu>
       )}
-    </AnimatedMenu>
+    </>
   );
 };
 

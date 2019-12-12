@@ -39,30 +39,40 @@ const StyledBox = styled(animated.div)`
   flex-direction: row;
   z-index: 901;
   cursor: pointer;
+
+  ${({ theme }) => theme.mq.tablet} {
+    width: 340px;
+  }
 `;
 
 const StyledParagraph = styled(Paragraph)`
   font-family: ${({ theme }) => theme.font.family.futura};
+  padding-left: 3rem;
   width: 105px;
-  padding: 0 0.5rem;
   margin: auto 0;
   z-index: 901;
+
+  ${({ theme }) => theme.mq.tablet} {
+    padding-left: 5rem;
+    width: auto;
+  }
 `;
 
 const useBoxSize = ref => {
   const [boxSize, setBoxSize] = useState({ width: 215, height: 62 });
 
   useEffect(() => {
+    const element = ref.current;
     const setSize = () => {
       setBoxSize({
-        width: ref.current.offsetWidth,
-        height: ref.current.offsetHeight
+        width: element.offsetWidth,
+        height: element.offsetHeight
       });
     };
     window.addEventListener('resize', setSize);
 
     return () => window.removeEventListener('resize', setSize);
-  }, []);
+  }, [ref.current]);
 
   return boxSize;
 };
