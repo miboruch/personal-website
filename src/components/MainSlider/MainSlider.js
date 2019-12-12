@@ -21,6 +21,7 @@ const StyledSlider = styled(Slider)`
 const MainSlider = ({ images, data }) => {
   const settings = {
     dots: false,
+    draggable: true,
     infinite: true,
     autoplay: true,
     autoplaySpeed: 2500,

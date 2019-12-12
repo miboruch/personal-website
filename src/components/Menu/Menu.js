@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Paragraph from '../atoms/Paragraph/Paragraph';
 import { easeExpInOut } from 'd3-ease';
@@ -9,8 +9,8 @@ const StyledMenuBox = styled(animated.div)`
   position: fixed;
   top: 5px;
   right: 5px;
-  width: calc(100% - 10px);
-  height: calc(100vh - 10px);
+  width: calc(100% - 5px);
+  height: calc(100vh - 5px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -112,31 +112,27 @@ const useScreenSize = () => {
 
 const Menu = ({ isOpen, boxSize }) => {
   const items = ['Home', 'About', 'Project'];
-
-  const { width, height } = boxSize;
+  const menuElement = useRef(null);
   const { screenWidth, screenHeight } = useScreenSize();
-
-  console.log(`Box sizes: ${width} ${height}`);
-  console.log(`Screen sizes: ${screenWidth} ${screenHeight}`);
+  const { width, height } = boxSize;
 
   const scaleWidth = width / screenWidth;
   const scaleHeight = height / screenHeight;
 
-  console.log(`Scale sizes: ${typeof scaleWidth} ${typeof scaleHeight}`);
+  useEffect(() => {
+    const scaleBox = () => {
+      menuElement.current.style.transform = `scale(${scaleWidth}, ${scaleHeight})`;
+    };
+    window.addEventListener('resize', scaleBox);
+  }, []);
+  console.log(`Screen sizes: ${screenWidth} ${screenHeight}`);
+
+  console.log(`Scale sizes: ${scaleWidth} ${scaleHeight}`);
 
   useEffect(() => {
     scaleData.scaleWidth = scaleWidth;
     scaleData.scaleHeight = scaleHeight;
   }, [scaleWidth, scaleHeight]);
-
-  const setVisible = useSpring({
-    to: { opacity: isOpen ? 1 : 0 },
-    config: {
-      duration: 2000
-    },
-    delay: 1000,
-    easing: 'cubic-bezier(.84, 0, .08, .99)'
-  });
 
   return (
     <AnimatedMenu
@@ -144,7 +140,7 @@ const Menu = ({ isOpen, boxSize }) => {
       value={{ scaleWidth, scaleHeight }}
     >
       {props => (
-        <StyledMenuBox style={props}>
+        <StyledMenuBox style={props} ref={menuElement}>
           <MenuItems
             state={isOpen ? 'in' : 'out'}
             reverse={!isOpen}

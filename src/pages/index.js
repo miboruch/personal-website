@@ -1,20 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
 import SEO from '../components/seo';
 import { convertObjectToArray } from '../utils/functions';
 import MainSlider from '../components/MainSlider/MainSlider';
-
-const StyledWrapper = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  position: relative;
-`;
-
-const StyledHeader = styled.h1`
-  font-family: ${({ theme }) => theme.font.family.futura};
-`;
 
 const IndexPage = ({ data }) => {
   const {
@@ -28,12 +17,10 @@ const IndexPage = ({ data }) => {
   );
 
   return (
-    <StyledWrapper>
-      <Layout>
-        <SEO title='Home' />
-        <MainSlider images={imagesArray} data={sliderContents} />
-      </Layout>
-    </StyledWrapper>
+    <Layout>
+      <SEO title='Home' />
+      <MainSlider images={imagesArray} data={sliderContents} />
+    </Layout>
   );
 };
 
