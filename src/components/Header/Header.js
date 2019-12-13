@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import Paragraph from '../atoms/Paragraph/Paragraph';
 import Menu from '../Menu/Menu';
@@ -6,9 +6,12 @@ import Hamburger from '../atoms/Hamburger/Hamburger';
 import { Keyframes } from 'react-spring/renderprops-universal';
 import { easeExpInOut } from 'd3-ease';
 import { animated } from 'react-spring';
+import MenuButton from '../atoms/MenuButton/MenuButton';
 
 const StyledHeader = styled.header`
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 66px;
   background: transparent;
@@ -27,55 +30,44 @@ const StyledLogo = styled(Paragraph)`
   font-family: Avanti;
 `;
 
-const StyledBox = styled(animated.div)`
-  text-align: right;
-  width: 215px;
-  height: 62px;
-  position: fixed;
-  top: 5px;
-  right: 5px;
-  background-color: ${({ theme }) => theme.color.menuBox};
-  display: flex;
-  flex-direction: row;
-  z-index: 901;
-  cursor: pointer;
+const useHookWithRefCallback = () => {
+  const ref = useRef(null);
+  const [size, setSize] = useState();
+  const setRef = useCallback(node => {
+    if (ref.current) {
+      // Make sure to cleanup any events/references added to the last instance
+    }
 
-  ${({ theme }) => theme.mq.tablet} {
-    width: 340px;
-  }
-`;
+    if (node) {
+      // Check if a node is actually passed. Otherwise node would be null.
+      // You can now do what you need to, addEventListeners, measure, etc.
+    }
 
-const StyledParagraph = styled(Paragraph)`
-  font-family: ${({ theme }) => theme.font.family.futura};
-  padding-left: 3rem;
-  width: 105px;
-  margin: auto 0;
-  z-index: 901;
+    // Save a reference to the node
+    ref.current = node;
+  }, []);
 
-  ${({ theme }) => theme.mq.tablet} {
-    padding-left: 5rem;
-    width: auto;
-  }
-`;
-
-const useBoxSize = ref => {
-  const [boxSize, setBoxSize] = useState({ width: 215, height: 62 });
-
-  useEffect(() => {
-    const element = ref.current;
-    const setSize = () => {
-      setBoxSize({
-        width: element.offsetWidth,
-        height: element.offsetHeight
-      });
-    };
-    window.addEventListener('resize', setSize);
-
-    return () => window.removeEventListener('resize', setSize);
-  }, [ref.current]);
-
-  return boxSize;
+  return [setRef];
 };
+
+// const useBoxSize = ref => {
+//   const [boxSize, setBoxSize] = useState({ width: 215, height: 62 });
+//
+//   useEffect(() => {
+//     const element = ref.current;
+//     const setSize = () => {
+//       setBoxSize({
+//         width: element.offsetWidth,
+//         height: element.offsetHeight
+//       });
+//     };
+//     window.addEventListener('resize', setSize);
+//
+//     return () => window.removeEventListener('resize', setSize);
+//   }, [ref.current]);
+//
+//   return boxSize;
+// };
 
 /* --------- TESTING --------- */
 
@@ -106,32 +98,36 @@ const AnimatedBorder = Keyframes.Spring({
 const Header = () => {
   const [isOpen, setOpen] = useState(false);
   const menuButton = useRef(null);
-
-  const boxSize = useBoxSize(menuButton);
+  const [size, setSize] = useState({});
+  // const boxSize = useBoxSize(menuButton);
 
   const toggleMenu = () => {
     setOpen(!isOpen);
   };
-
+  console.log(isOpen);
+  // const [menuButton] = useHookWithRefCallback();
+  // useEffect(() => {
+  //   setSize({
+  //     width: menuButton.current.clientWidth,
+  //     height: menuButton.current.clientHeight
+  //   });
+  // }, []);
   return (
     <>
       <StyledHeader>
         <StyledLogo medium>MICHAL BORUCH</StyledLogo>
         <AnimatedBorder state={isOpen ? 'in' : 'out'}>
           {props => (
-            <StyledBox
-              onClick={() => toggleMenu()}
-              ref={menuButton}
+            <MenuButton
               isOpen={isOpen}
               style={props}
-            >
-              <StyledParagraph small>web design & code</StyledParagraph>
-              <Hamburger isOpen={isOpen} />
-            </StyledBox>
+              toggleMenu={toggleMenu}
+              ref={menuButton}
+            />
           )}
         </AnimatedBorder>
       </StyledHeader>
-      <Menu isOpen={isOpen} boxSize={boxSize} />
+      <Menu isOpen={isOpen} boxSize={{ width: 215, height: 62 }} />
     </>
   );
 };

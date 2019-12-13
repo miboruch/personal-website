@@ -4,11 +4,9 @@ import Slider from 'react-slick';
 import SliderContent from '../SliderContent/SliderContent';
 
 const StyledWrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100vh;
+  position: relative;
   z-index: -1;
 `;
 
@@ -21,7 +19,6 @@ const StyledSlider = styled(Slider)`
 const MainSlider = ({ images, data }) => {
   const settings = {
     dots: false,
-    draggable: true,
     infinite: true,
     autoplay: true,
     autoplaySpeed: 2500,

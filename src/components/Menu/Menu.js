@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Paragraph from '../atoms/Paragraph/Paragraph';
 import { easeExpInOut } from 'd3-ease';
@@ -10,10 +10,10 @@ const StyledMenuBox = styled(animated.div)`
   position: fixed;
   top: 5px;
   right: 5px;
-  //width: calc(100% - 5px);
-  //height: calc(100vh - 5px);
-  width: 215px;
-  height: 62px;
+  width: calc(100% - 5px);
+  height: calc(100vh - 5px);
+  //width: 215px;
+  //height: 62px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,9 +41,10 @@ const AnimatedMenu = Keyframes.Spring({
     const { width, height } = props[1].value;
     console.log('PASSED BOX: width: ' + boxWidth + ' height: ' + boxHeight);
     await next({
-      // transform: 'scale(1,1)',
-      width: `${width - 10}px`,
-      height: `${height - 10}px`,
+      opacity: 1,
+      transform: 'scale(1,1)',
+      // width: `${width - 10}px`,
+      // height: `${height - 10}px`,
       config: {
         duration: 1500,
         easing: easeExpInOut
@@ -70,9 +71,10 @@ const AnimatedMenu = Keyframes.Spring({
       }
     });
     await next({
-      // transform: `scale(${scaleWidth}, ${scaleHeight})`,
-      width: `${boxWidth}px`,
-      height: `${boxHeight}px`,
+      opacity: 0,
+      transform: `scale(${scaleWidth}, ${scaleHeight})`,
+      // width: `${boxWidth}px`,
+      // height: `${boxHeight}px`,
       config: {
         duration: 1500,
         easing: easeExpInOut
@@ -104,11 +106,13 @@ const useScreenSize = () => {
   });
 
   useEffect(() => {
-    const setSize = () =>
+    const setSize = () => {
+      console.log('EVENT LISTENER RESIZE');
       setScreenSize({
         screenWidth: window.innerWidth,
         screenHeight: window.innerHeight
       });
+    };
 
     setSize();
     window.addEventListener('resize', setSize);
@@ -121,12 +125,32 @@ const useScreenSize = () => {
   return screenSize;
 };
 
+const useHookWithRefCallback = () => {
+  const ref = useRef(null);
+  const setRef = useCallback(node => {
+    if (ref.current) {
+      // Make sure to cleanup any events/references added to the last instance
+    }
+
+    if (node) {
+      // Check if a node is actually passed. Otherwise node would be null.
+      // You can now do what you need to, addEventListeners, measure, etc.
+    }
+
+    // Save a reference to the node
+    ref.current = node;
+  }, []);
+
+  return [setRef];
+};
+
 const Menu = ({ isOpen, boxSize }) => {
   const { screenWidth, screenHeight } = useScreenSize();
   console.log(screenWidth, screenHeight);
 
   const items = ['Home', 'About', 'Projects'];
-  const menuElement = useRef(null);
+  // const menuElement = useRef(null);
+  const [menuElement] = useHookWithRefCallback();
 
   const { width, height } = boxSize;
   console.log('BOX SIZE: width: ' + width + ' height: ' + height);
@@ -138,11 +162,11 @@ const Menu = ({ isOpen, boxSize }) => {
       console.log('BOX SCALED');
       console.log('width: ' + scaleWidth);
       console.log('height: ' + scaleHeight);
-      menuElement.current.style.transform = `scale(${scaleWidth}, ${scaleHeight})`;
     };
-    window.addEventListener('resize', scaleBox);
-
-    return () => window.removeEventListener('resize', scaleBox);
+    // menuElement.current.style.transform = `scale(${scaleWidth}, ${scaleHeight})`;
+    // window.addEventListener('resize', scaleBox);
+    //
+    // return () => window.removeEventListener('resize', scaleBox);
   }, [scaleWidth, scaleHeight]);
 
   return (
@@ -155,8 +179,6 @@ const Menu = ({ isOpen, boxSize }) => {
           value={{
             scaleWidth,
             scaleHeight,
-            width: screenWidth,
-            height: screenHeight,
             boxWidth: width,
             boxHeight: height
           }}
