@@ -8,7 +8,7 @@ const StyledBox = styled(animated.div)`
   text-align: right;
   width: 220px;
   height: 62px;
-  position: fixed;
+  position: absolute;
   top: 5px;
   right: 5px;
   background-color: ${({ theme }) => theme.color.menuBox};
@@ -34,8 +34,8 @@ const StyledParagraph = styled(Paragraph)`
   }
 `;
 
-const MenuButton = React.forwardRef(({ isOpen, style, toggleMenu }, ref) => (
-  <StyledBox style={style} onClick={() => toggleMenu()} ref={ref}>
+const MenuButton = React.forwardRef(({ isOpen, toggleMenu }, ref) => (
+  <StyledBox onClick={() => toggleMenu()} ref={ref}>
     <StyledParagraph small='true'>web design & code</StyledParagraph>
     <Hamburger isOpen={isOpen} />
   </StyledBox>

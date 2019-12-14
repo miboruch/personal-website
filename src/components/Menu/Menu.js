@@ -1,19 +1,13 @@
-import React, {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState
-} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Paragraph from '../atoms/Paragraph/Paragraph';
 import { easeExpInOut } from 'd3-ease';
 import { Keyframes } from 'react-spring/renderprops-universal';
-import { useSpring, animated } from 'react-spring';
-import { config } from 'react-spring';
+import { animated } from 'react-spring';
+import { useScreenSize } from '../../utils/customHooks';
 
 const StyledMenuBox = styled(animated.div)`
-  position: fixed;
+  position: absolute;
   top: 5px;
   right: 5px;
   width: calc(100% - 10px);
@@ -41,9 +35,7 @@ const ParagraphBox = styled(animated.div)`
 
 const AnimatedMenu = Keyframes.Spring({
   in: async (next, ...props) => {
-    console.log(props);
     const { scaleWidth, scaleHeight } = props[1].scale;
-    console.log(`IN: scaleWidth: ${scaleWidth}, scaleHeight: ${scaleHeight}`);
     await next({
       to: {
         transform: `scale(${scaleWidth}, ${scaleHeight})`
@@ -52,37 +44,36 @@ const AnimatedMenu = Keyframes.Spring({
         duration: 0
       }
     });
-    //----
-    // await next({
-    //   visibility: 'visible',
-    //   transform: 'scale(1,1)',
-    //   config: {
-    //     duration: 500,
-    //     easing: easeExpInOut
-    //   }
-    // });
-    //----
     await next({
-      to: {
-        visibility: 'visible',
-        transform: `scale(1, ${scaleHeight})`
-      },
-      config: {
-        duration: 1000,
-        easing: easeExpInOut
-      }
-    });
-    await next({
-      to: {
-        transform: `scale(1, 1)`
-      },
+      visibility: 'visible',
+      transform: 'scale(1,1)',
       config: {
         duration: 1500,
         easing: easeExpInOut
       }
     });
+
+    // await next({
+    //   to: {
+    //     visibility: 'visible',
+    //     transform: `scale(1, ${scaleHeight})`
+    //   },
+    //   config: {
+    //     duration: 1000,
+    //     easing: easeExpInOut
+    //   }
+    // });
+    // await next({
+    //   to: {
+    //     transform: `scale(1, 1)`
+    //   },
+    //   config: {
+    //     duration: 1500,
+    //     easing: easeExpInOut
+    //   }
+    // });
     await next({
-      border: '5px solid #fff',
+      outline: '5px solid #fff',
       config: {
         duration: 300
       }
@@ -92,7 +83,7 @@ const AnimatedMenu = Keyframes.Spring({
     const { scaleWidth, scaleHeight } = props[1].scale;
 
     await next({
-      border: '0px solid #fff',
+      outline: '0px solid #fff',
       config: {
         duration: 300
       }
@@ -126,42 +117,14 @@ const MenuItems = Keyframes.Trail({
   }
 });
 
-const useScreenSize = () => {
-  const [screenSize, setScreenSize] = useState({
-    screenWidth: undefined,
-    screenHeight: undefined
-  });
-
-  useLayoutEffect(() => {
-    const setSize = () => {
-      setScreenSize({
-        screenWidth: window.innerWidth,
-        screenHeight: window.innerHeight
-      });
-    };
-
-    setSize();
-
-    window.addEventListener('resize', setSize);
-
-    return () => window.removeEventListener('resize', setSize);
-  }, []);
-
-  return screenSize;
-};
-
 const Menu = ({ isOpen, boxSize }) => {
   const items = ['Home', 'About', 'Projects'];
 
-  const menuElement = useRef();
   const { screenWidth, screenHeight } = useScreenSize();
-
   const { width, height } = boxSize;
-  console.log(width, height);
 
   const scaleWidth = width / screenWidth;
   const scaleHeight = height / screenHeight;
-  console.log(scaleWidth, scaleHeight);
 
   return (
     <>
@@ -173,7 +136,7 @@ const Menu = ({ isOpen, boxSize }) => {
           scale={{ scaleWidth, scaleHeight }}
         >
           {props => (
-            <StyledMenuBox style={props} ref={menuElement}>
+            <StyledMenuBox style={props}>
               <MenuItems
                 state={isOpen ? 'in' : 'out'}
                 reverse={!isOpen}

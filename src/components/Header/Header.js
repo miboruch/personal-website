@@ -1,9 +1,8 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Paragraph from '../atoms/Paragraph/Paragraph';
 import Menu from '../Menu/Menu';
-import { Keyframes } from 'react-spring/renderprops-universal';
-import { easeExpInOut } from 'd3-ease';
+import { useElementSize } from '../../utils/customHooks';
 import MenuButton from '../atoms/MenuButton/MenuButton';
 
 const StyledHeader = styled.header`
@@ -28,53 +27,9 @@ const StyledLogo = styled(Paragraph)`
   font-family: Avanti;
 `;
 
-const AnimatedBorder = Keyframes.Spring({
-  in: async next => {
-    await next({
-      borderTop: '5px solid #fff',
-      borderRight: '5px solid #fff',
-      delay: 2600,
-      config: {
-        duration: 300,
-        easing: easeExpInOut
-      }
-    });
-  },
-  out: async next => {
-    await next({
-      borderTop: '0px solid #fff',
-      borderRight: '0px solid #fff',
-      delay: 0,
-      config: {
-        duration: 300
-      }
-    });
-  }
-});
-
-const useElementSize = ref => {
-  const [size, setSize] = useState({ width: 220, height: 62 });
-
-  useLayoutEffect(() => {
-    const updateSize = () => {
-      return setSize({
-        width: ref.current.getBoundingClientRect().width,
-        height: ref.current.getBoundingClientRect().height
-      });
-    };
-
-    setSize();
-    window.addEventListener('resize', updateSize);
-
-    return () => window.removeEventListener('resize', updateSize);
-  }, []);
-  return size;
-};
-
 const Header = () => {
   const [isOpen, setOpen] = useState(false);
-  const menuButton = useRef();
-  const size = useElementSize(menuButton);
+  const [size, menuButton] = useElementSize();
 
   const toggleMenu = () => {
     setOpen(!isOpen);
@@ -84,25 +39,9 @@ const Header = () => {
     <>
       <StyledHeader>
         <StyledLogo medium='true'>MICHAL BORUCH</StyledLogo>
-        <AnimatedBorder state={isOpen ? 'in' : 'out'}>
-          {props => (
-            <MenuButton
-              isOpen={isOpen}
-              style={props}
-              toggleMenu={toggleMenu}
-              ref={menuButton}
-            />
-          )}
-        </AnimatedBorder>
+        <MenuButton isOpen={isOpen} toggleMenu={toggleMenu} ref={menuButton} />
       </StyledHeader>
-      <Menu
-        isOpen={isOpen}
-        boxSize={
-          size !== undefined
-            ? { width: size.width, height: size.height }
-            : { width: 220, height: 62 }
-        }
-      />
+      <Menu isOpen={isOpen} boxSize={size} />
     </>
   );
 };
