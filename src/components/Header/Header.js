@@ -33,7 +33,7 @@ const AnimatedBorder = Keyframes.Spring({
     await next({
       borderTop: '5px solid #fff',
       borderRight: '5px solid #fff',
-      delay: 1600,
+      delay: 2600,
       config: {
         duration: 300,
         easing: easeExpInOut

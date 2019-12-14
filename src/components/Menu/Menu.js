@@ -47,6 +47,9 @@ const AnimatedMenu = Keyframes.Spring({
     await next({
       to: {
         transform: `scale(${scaleWidth}, ${scaleHeight})`
+      },
+      config: {
+        duration: 0
       }
     });
     //----
@@ -65,7 +68,7 @@ const AnimatedMenu = Keyframes.Spring({
         transform: `scale(1, ${scaleHeight})`
       },
       config: {
-        duration: 500,
+        duration: 1000,
         easing: easeExpInOut
       }
     });
@@ -74,7 +77,7 @@ const AnimatedMenu = Keyframes.Spring({
         transform: `scale(1, 1)`
       },
       config: {
-        duration: 1000,
+        duration: 1500,
         easing: easeExpInOut
       }
     });
