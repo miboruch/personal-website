@@ -21,7 +21,7 @@ const MainSlider = ({ images, data }) => {
     dots: false,
     infinite: true,
     autoplay: true,
-    autoplaySpeed: 2500,
+    autoplaySpeed: 4000,
     speed: 2000,
     slidesToShow: 1,
     slidesToScroll: 1,

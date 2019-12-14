@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState
+} from 'react';
 import styled from 'styled-components';
 import Paragraph from '../atoms/Paragraph/Paragraph';
 import { easeExpInOut } from 'd3-ease';
@@ -10,10 +16,8 @@ const StyledMenuBox = styled(animated.div)`
   position: fixed;
   top: 5px;
   right: 5px;
-  width: calc(100% - 5px);
-  height: calc(100vh - 5px);
-  //width: 215px;
-  //height: 62px;
+  width: calc(100% - 10px);
+  height: calc(100vh - 10px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,33 +41,53 @@ const ParagraphBox = styled(animated.div)`
 
 const AnimatedMenu = Keyframes.Spring({
   in: async (next, ...props) => {
-    const { boxWidth, boxHeight } = props[1].value;
-    const { width, height } = props[1].value;
-    console.log('PASSED BOX: width: ' + boxWidth + ' height: ' + boxHeight);
+    console.log(props);
+    const { scaleWidth, scaleHeight } = props[1].scale;
+    console.log(`IN: scaleWidth: ${scaleWidth}, scaleHeight: ${scaleHeight}`);
     await next({
-      opacity: 1,
-      transform: 'scale(1,1)',
-      // width: `${width - 10}px`,
-      // height: `${height - 10}px`,
+      to: {
+        transform: `scale(${scaleWidth}, ${scaleHeight})`
+      }
+    });
+    //----
+    // await next({
+    //   visibility: 'visible',
+    //   transform: 'scale(1,1)',
+    //   config: {
+    //     duration: 500,
+    //     easing: easeExpInOut
+    //   }
+    // });
+    //----
+    await next({
+      to: {
+        visibility: 'visible',
+        transform: `scale(1, ${scaleHeight})`
+      },
       config: {
-        duration: 1500,
+        duration: 500,
+        easing: easeExpInOut
+      }
+    });
+    await next({
+      to: {
+        transform: `scale(1, 1)`
+      },
+      config: {
+        duration: 1000,
         easing: easeExpInOut
       }
     });
     await next({
       border: '5px solid #fff',
       config: {
-        duration: 100
+        duration: 300
       }
     });
   },
   out: async (next, ...props) => {
-    const { scaleWidth, scaleHeight } = props[1].value;
-    const { width, height } = props[1].value;
-    const { boxWidth, boxHeight } = props[1].value;
+    const { scaleWidth, scaleHeight } = props[1].scale;
 
-    console.log('PASSED SCALE: ' + scaleWidth + ' ' + scaleHeight);
-    console.log('PASSED SIZE: ' + width + ' ' + height);
     await next({
       border: '0px solid #fff',
       config: {
@@ -71,14 +95,14 @@ const AnimatedMenu = Keyframes.Spring({
       }
     });
     await next({
-      opacity: 0,
       transform: `scale(${scaleWidth}, ${scaleHeight})`,
-      // width: `${boxWidth}px`,
-      // height: `${boxHeight}px`,
       config: {
         duration: 1500,
         easing: easeExpInOut
       }
+    });
+    await next({
+      visibility: 'hidden'
     });
   }
 });
@@ -105,9 +129,8 @@ const useScreenSize = () => {
     screenHeight: undefined
   });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const setSize = () => {
-      console.log('EVENT LISTENER RESIZE');
       setScreenSize({
         screenWidth: window.innerWidth,
         screenHeight: window.innerHeight
@@ -115,59 +138,27 @@ const useScreenSize = () => {
     };
 
     setSize();
+
     window.addEventListener('resize', setSize);
 
-    return () => {
-      window.removeEventListener('resize', setSize);
-    };
+    return () => window.removeEventListener('resize', setSize);
   }, []);
 
   return screenSize;
 };
 
-const useHookWithRefCallback = () => {
-  const ref = useRef(null);
-  const setRef = useCallback(node => {
-    if (ref.current) {
-      // Make sure to cleanup any events/references added to the last instance
-    }
-
-    if (node) {
-      // Check if a node is actually passed. Otherwise node would be null.
-      // You can now do what you need to, addEventListeners, measure, etc.
-    }
-
-    // Save a reference to the node
-    ref.current = node;
-  }, []);
-
-  return [setRef];
-};
-
 const Menu = ({ isOpen, boxSize }) => {
-  const { screenWidth, screenHeight } = useScreenSize();
-  console.log(screenWidth, screenHeight);
-
   const items = ['Home', 'About', 'Projects'];
-  // const menuElement = useRef(null);
-  const [menuElement] = useHookWithRefCallback();
+
+  const menuElement = useRef();
+  const { screenWidth, screenHeight } = useScreenSize();
 
   const { width, height } = boxSize;
-  console.log('BOX SIZE: width: ' + width + ' height: ' + height);
+  console.log(width, height);
+
   const scaleWidth = width / screenWidth;
   const scaleHeight = height / screenHeight;
-
-  useEffect(() => {
-    const scaleBox = () => {
-      console.log('BOX SCALED');
-      console.log('width: ' + scaleWidth);
-      console.log('height: ' + scaleHeight);
-    };
-    // menuElement.current.style.transform = `scale(${scaleWidth}, ${scaleHeight})`;
-    // window.addEventListener('resize', scaleBox);
-    //
-    // return () => window.removeEventListener('resize', scaleBox);
-  }, [scaleWidth, scaleHeight]);
+  console.log(scaleWidth, scaleHeight);
 
   return (
     <>
@@ -176,20 +167,10 @@ const Menu = ({ isOpen, boxSize }) => {
       ) : (
         <AnimatedMenu
           state={isOpen ? 'in' : 'out'}
-          value={{
-            scaleWidth,
-            scaleHeight,
-            boxWidth: width,
-            boxHeight: height
-          }}
+          scale={{ scaleWidth, scaleHeight }}
         >
           {props => (
-            <StyledMenuBox
-              style={props}
-              ref={menuElement}
-              boxWidth={width}
-              boxHeight={height}
-            >
+            <StyledMenuBox style={props} ref={menuElement}>
               <MenuItems
                 state={isOpen ? 'in' : 'out'}
                 reverse={!isOpen}
@@ -198,7 +179,7 @@ const Menu = ({ isOpen, boxSize }) => {
                 {trailItem => trailProps => {
                   return (
                     <ParagraphBox style={trailProps}>
-                      <Paragraph title>{trailItem}</Paragraph>
+                      <Paragraph title='true'>{trailItem}</Paragraph>
                     </ParagraphBox>
                   );
                 }}

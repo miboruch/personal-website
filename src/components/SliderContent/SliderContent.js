@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import GatsbyImage from 'gatsby-image';
 import BackgroundImage from 'gatsby-background-image';
 import Paragraph from '../atoms/Paragraph/Paragraph';
 
@@ -15,6 +14,13 @@ const StyledBackgroundImage = styled(BackgroundImage)`
   width: 100%;
   height: 100vh;
   opacity: 0.7;
+  background-color: transparent;
+  background-position: center;
+
+  ${({ theme }) => theme.mq.standard} {
+    width: 70%;
+    background-position: right center;
+  }
 `;
 
 const StyledTitle = styled(Paragraph)`
@@ -33,7 +39,7 @@ const SliderContent = ({ image, content }) => {
         preserveStackingContext={true}
         fluid={image.childImageSharp.fluid}
       />
-      <StyledTitle title>{content.name}</StyledTitle>
+      <StyledTitle title='true'>{content.name}</StyledTitle>
     </StyledWrapper>
   );
 };
