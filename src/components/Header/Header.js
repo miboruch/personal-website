@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import Paragraph from '../atoms/Paragraph/Paragraph';
 import Menu from '../Menu/Menu';
 import { useElementSize } from '../../utils/customHooks';
@@ -27,7 +28,7 @@ const StyledLogo = styled(Paragraph)`
   font-family: Avanti;
 `;
 
-const Header = () => {
+const Header = ({ lightTheme }) => {
   const [isOpen, setOpen] = useState(false);
   const [size, menuButton] = useElementSize();
 
@@ -39,11 +40,20 @@ const Header = () => {
     <>
       <StyledHeader>
         <StyledLogo medium='true'>MICHAL BORUCH</StyledLogo>
-        <MenuButton isOpen={isOpen} toggleMenu={toggleMenu} ref={menuButton} />
+        <MenuButton
+          isOpen={isOpen}
+          toggleMenu={toggleMenu}
+          ref={menuButton}
+          lightTheme={lightTheme}
+        />
       </StyledHeader>
-      <Menu isOpen={isOpen} boxSize={size} />
+      <Menu isOpen={isOpen} boxSize={size} lightTheme={lightTheme} />
     </>
   );
+};
+
+Header.propTypes = {
+  lightTheme: PropTypes.bool
 };
 
 export default Header;

@@ -24,3 +24,7 @@
     src: url('../../static/fonts/FuturaPT-Light.woff')  format('woff');
     font-weight: 200;
 }
+
+a{
+    text-decoration: none !important;
+}

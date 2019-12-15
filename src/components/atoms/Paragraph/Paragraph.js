@@ -48,6 +48,24 @@ const Paragraph = styled(animated.p)`
       }
       font-weight: 700;
     `}
+  
+  ${({ titleMenu }) =>
+    titleMenu &&
+    css`
+      ${({ theme }) => theme.mq.mobileL} {
+        font-size: ${({ theme }) => theme.font.size.mobile.title};
+      }
+      ${({ theme }) => theme.mq.desktop} {
+        font-size: ${({ theme }) => theme.font.size.desktop.title};
+      }
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.2);
+      transition: color 1s ease;
+
+      &:hover {
+        color: rgba(255, 255, 255, 1);
+      }
+    `}
 `;
 
 export default Paragraph;

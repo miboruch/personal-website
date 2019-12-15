@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { animated } from 'react-spring';
 import Paragraph from '../Paragraph/Paragraph';
 import Hamburger from '../Hamburger/Hamburger';
@@ -34,13 +35,19 @@ const StyledParagraph = styled(Paragraph)`
   }
 `;
 
-const MenuButton = React.forwardRef(({ isOpen, toggleMenu }, ref) => (
-  <StyledBox onClick={() => toggleMenu()} ref={ref}>
-    <StyledParagraph small='true'>web design & code</StyledParagraph>
-    <Hamburger isOpen={isOpen} />
-  </StyledBox>
-));
+const MenuButton = React.forwardRef(
+  ({ isOpen, toggleMenu, lightTheme }, ref) => (
+    <StyledBox onClick={() => toggleMenu()} ref={ref}>
+      <StyledParagraph small='true'>web design & code</StyledParagraph>
+      <Hamburger isOpen={isOpen} />
+    </StyledBox>
+  )
+);
 
 MenuButton.displayName = 'MenuButton';
+
+MenuButton.propTypes = {
+  lightTheme: PropTypes.bool
+};
 
 export default MenuButton;

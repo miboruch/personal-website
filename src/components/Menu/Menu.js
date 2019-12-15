@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import AniLink from 'gatsby-plugin-transition-link/AniLink';
 import Paragraph from '../atoms/Paragraph/Paragraph';
-import { easeExpInOut } from 'd3-ease';
-import { Keyframes } from 'react-spring/renderprops-universal';
 import { animated } from 'react-spring';
 import { useScreenSize } from '../../utils/customHooks';
+import { menuItems, mediaItems } from '../../utils/items';
+import { AnimatedMenu, LinksFade, MenuItems } from './menuAnimations';
 
 const StyledMenuBox = styled(animated.div)`
   position: absolute;
@@ -23,6 +25,17 @@ const StyledMenuBox = styled(animated.div)`
   will-change: transform;
 `;
 
+const StyledLinksBox = styled(animated.div)`
+  width: 90%;
+  margin: auto;
+  position: absolute;
+  bottom: 2rem;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  align-items: center;
+`;
+
 const ParagraphBox = styled(animated.div)`
   width: 100%;
   height: 33vh;
@@ -33,93 +46,28 @@ const ParagraphBox = styled(animated.div)`
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 `;
 
-const AnimatedMenu = Keyframes.Spring({
-  in: async (next, ...props) => {
-    const { scaleWidth, scaleHeight } = props[1].scale;
-    await next({
-      to: {
-        transform: `scale(${scaleWidth}, ${scaleHeight})`
-      },
-      config: {
-        duration: 0
-      }
-    });
-    await next({
-      visibility: 'visible',
-      transform: 'scale(1,1)',
-      config: {
-        duration: 1500,
-        easing: easeExpInOut
-      }
-    });
+const StyledMenuItems = styled(Paragraph)`
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 1s ease;
 
-    // await next({
-    //   to: {
-    //     visibility: 'visible',
-    //     transform: `scale(1, ${scaleHeight})`
-    //   },
-    //   config: {
-    //     duration: 1000,
-    //     easing: easeExpInOut
-    //   }
-    // });
-    // await next({
-    //   to: {
-    //     transform: `scale(1, 1)`
-    //   },
-    //   config: {
-    //     duration: 1500,
-    //     easing: easeExpInOut
-    //   }
-    // });
-    await next({
-      outline: '5px solid #fff',
-      config: {
-        duration: 300
-      }
-    });
-  },
-  out: async (next, ...props) => {
-    const { scaleWidth, scaleHeight } = props[1].scale;
+  ${({ theme }) => theme.mq.standard} {
+    color: rgba(255, 255, 255, 0.2);
+    transition: color 1s ease;
 
-    await next({
-      outline: '0px solid #fff',
-      config: {
-        duration: 300
-      }
-    });
-    await next({
-      transform: `scale(${scaleWidth}, ${scaleHeight})`,
-      config: {
-        duration: 1500,
-        easing: easeExpInOut
-      }
-    });
-    await next({
-      visibility: 'hidden'
-    });
+    &:hover {
+      color: rgba(255, 255, 255, 1);
+    }
   }
-});
+`;
 
-const MenuItems = Keyframes.Trail({
-  in: async next => {
-    await next({
-      opacity: 1,
-      transform: 'translateX(0px)',
-      delay: 600
-    });
-  },
-  out: async next => {
-    await next({
-      opacity: 0,
-      transform: 'translateX(-40px)'
-    });
-  }
-});
+const StyledLink = styled.a`
+  color: #fff;
+  text-decoration: none;
+  padding: 2rem 2rem 0.5rem 2rem;
+  letter-spacing: 1px;
+`;
 
-const Menu = ({ isOpen, boxSize }) => {
-  const items = ['Home', 'About', 'Projects'];
-
+const Menu = ({ isOpen, boxSize, lightTheme }) => {
   const { screenWidth, screenHeight } = useScreenSize();
   const { width, height } = boxSize;
 
@@ -129,33 +77,59 @@ const Menu = ({ isOpen, boxSize }) => {
   return (
     <>
       {screenWidth === undefined ? (
-        <h1>is not working</h1>
+        <p>Screen width is loading</p>
       ) : (
         <AnimatedMenu
           state={isOpen ? 'in' : 'out'}
           scale={{ scaleWidth, scaleHeight }}
         >
           {props => (
-            <StyledMenuBox style={props}>
+            <StyledMenuBox isLightTheme={lightTheme} style={props}>
               <MenuItems
+                keys={item => item.id}
                 state={isOpen ? 'in' : 'out'}
                 reverse={!isOpen}
-                items={items}
+                items={menuItems}
               >
-                {trailItem => trailProps => {
-                  return (
-                    <ParagraphBox style={trailProps}>
-                      <Paragraph title='true'>{trailItem}</Paragraph>
-                    </ParagraphBox>
-                  );
-                }}
+                {trailItem => trailProps => (
+                  <ParagraphBox style={trailProps}>
+                    <AniLink to={trailItem.link}>
+                      <StyledMenuItems title='true' isLightTheme={lightTheme}>
+                        {trailItem.name}
+                      </StyledMenuItems>
+                    </AniLink>
+                  </ParagraphBox>
+                )}
               </MenuItems>
+              <LinksFade state={isOpen ? 'in' : 'out'}>
+                {props => (
+                  <StyledLinksBox style={props}>
+                    {mediaItems.map(item => (
+                      <StyledLink
+                        key={item.id}
+                        medium='true'
+                        href={item.link}
+                        target='_blank'
+                        rel='noreferrer'
+                      >
+                        {item.name}
+                      </StyledLink>
+                    ))}
+                  </StyledLinksBox>
+                )}
+              </LinksFade>
             </StyledMenuBox>
           )}
         </AnimatedMenu>
       )}
     </>
   );
+};
+
+Menu.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  boxSize: PropTypes.object.isRequired,
+  lightTheme: PropTypes.bool
 };
 
 export default Menu;
