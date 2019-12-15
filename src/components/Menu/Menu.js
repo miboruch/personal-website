@@ -18,7 +18,8 @@ const StyledMenuBox = styled(animated.div)`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.color.menuBox};
+  background-color: ${({ lightTheme, theme }) =>
+    lightTheme ? '#fff' : theme.color.menuBox};
   z-index: 900;
   opacity: 1;
   transform-origin: top right;
@@ -43,25 +44,32 @@ const ParagraphBox = styled(animated.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  //border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: ${({ lightTheme }) =>
+    lightTheme
+      ? '1px solid rgba(0, 0, 0, 0.15)'
+      : '1px solid rgba(255, 255, 255, 0.3)'};
 `;
 
 const StyledMenuItems = styled(Paragraph)`
-  color: rgba(255, 255, 255, 0.8);
+  color: ${({ lightTheme }) =>
+    lightTheme ? 'rgba(0,0,0,0.7)' : 'rgba(255,255,255,0.8)'};
   transition: color 1s ease;
 
   ${({ theme }) => theme.mq.standard} {
-    color: rgba(255, 255, 255, 0.2);
+    color: ${({ lightTheme }) =>
+      lightTheme ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.2)'}
     transition: color 1s ease;
 
     &:hover {
-      color: rgba(255, 255, 255, 1);
+      color: ${({ lightTheme }) =>
+        lightTheme ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)'}
     }
   }
 `;
 
 const StyledLink = styled.a`
-  color: #fff;
+  color: ${({ lightTheme }) => (lightTheme ? '#000' : '#fff')};
   text-decoration: none;
   padding: 2rem 2rem 0.5rem 2rem;
   letter-spacing: 1px;
@@ -84,7 +92,7 @@ const Menu = ({ isOpen, boxSize, lightTheme }) => {
           scale={{ scaleWidth, scaleHeight }}
         >
           {props => (
-            <StyledMenuBox isLightTheme={lightTheme} style={props}>
+            <StyledMenuBox lightTheme={lightTheme} style={props}>
               <MenuItems
                 keys={item => item.id}
                 state={isOpen ? 'in' : 'out'}
@@ -92,9 +100,9 @@ const Menu = ({ isOpen, boxSize, lightTheme }) => {
                 items={menuItems}
               >
                 {trailItem => trailProps => (
-                  <ParagraphBox style={trailProps}>
+                  <ParagraphBox style={trailProps} lightTheme={lightTheme}>
                     <AniLink to={trailItem.link}>
-                      <StyledMenuItems title='true' isLightTheme={lightTheme}>
+                      <StyledMenuItems title='true' lightTheme={lightTheme}>
                         {trailItem.name}
                       </StyledMenuItems>
                     </AniLink>
@@ -111,6 +119,7 @@ const Menu = ({ isOpen, boxSize, lightTheme }) => {
                         href={item.link}
                         target='_blank'
                         rel='noreferrer'
+                        lightTheme={lightTheme}
                       >
                         {item.name}
                       </StyledLink>

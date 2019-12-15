@@ -29,7 +29,6 @@ export const AnimatedMenu = Keyframes.Spring({
   },
   out: async (next, ...props) => {
     const { scaleWidth, scaleHeight } = props[1].scale;
-
     await next({
       outline: '0px solid #fff',
       config: {
