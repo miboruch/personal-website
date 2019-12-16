@@ -12,7 +12,6 @@ const Paragraph = styled(animated.p)`
     small &&
     css`
       font-size: ${({ theme }) => theme.font.size.mobile.s};
-      font-weight: 200;
     `}
   
   ${({ medium }) =>

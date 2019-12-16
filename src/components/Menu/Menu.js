@@ -44,7 +44,6 @@ const ParagraphBox = styled(animated.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  //border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   border-bottom: ${({ lightTheme }) =>
     lightTheme
       ? '1px solid rgba(0, 0, 0, 0.15)'

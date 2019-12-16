@@ -21,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1.6rem;
     color: #fff;
     font-family: Futura;
-    font-weight: 200;
+    font-weight: 500;
   }
   
   h1{

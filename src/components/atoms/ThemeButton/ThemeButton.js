@@ -20,14 +20,9 @@ const StyledButton = styled.button`
   }
 `;
 
-const ThemeButton = ({ lightTheme, changeTheme }) => {
-  console.log(lightTheme);
-  return (
-    <StyledButton lightTheme={lightTheme} onClick={() => changeTheme()}>
-      .
-    </StyledButton>
-  );
-};
+const ThemeButton = ({ lightTheme, changeTheme }) => (
+  <StyledButton lightTheme={lightTheme} onClick={() => changeTheme()} />
+);
 
 ThemeButton.propTypes = {
   lightTheme: PropTypes.bool.isRequired

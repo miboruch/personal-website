@@ -2,6 +2,7 @@ export const theme = {
   font: {
     size: {
       mobile: {
+        xs: '1rem',
         s: '1.2rem',
         m: '1.4rem',
         l: '2rem',
@@ -12,7 +13,7 @@ export const theme = {
         xs: '1.2rem',
         s: '1.6rem',
         m: '2rem',
-        l: '3.2rem',
+        l: '2.4rem',
         xl: '4.6rem',
         title: '8.9rem'
       }
@@ -24,6 +25,8 @@ export const theme = {
   },
   color: {
     background: '#212121',
+    backgroundGradient:
+      'linear-gradient(to bottom, rgba(28,28,28,1) 0%, rgba(33,33,33,1) 20%, rgba(33,33,33,1) 52%)',
     menuBox: '#272727'
   },
   mq: {
