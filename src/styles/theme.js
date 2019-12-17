@@ -2,20 +2,20 @@ export const theme = {
   font: {
     size: {
       mobile: {
-        xs: '1rem',
-        s: '1.2rem',
-        m: '1.4rem',
-        l: '2rem',
-        xl: '2.4rem',
-        title: '5.8rem'
+        xs: '10px',
+        s: '12px',
+        m: '14px',
+        l: '20px',
+        xl: '24px',
+        title: '58px'
       },
       desktop: {
-        xs: '1.2rem',
-        s: '1.6rem',
-        m: '2rem',
-        l: '2.4rem',
-        xl: '4.6rem',
-        title: '8.9rem'
+        xs: '12px',
+        s: '16px',
+        m: '20px',
+        l: '24px',
+        xl: '46px',
+        title: '89px'
       }
     },
     family: {

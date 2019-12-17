@@ -43,7 +43,7 @@ const StyledContextBox = styled.section`
 `;
 
 const StyledTitle = styled(Paragraph)`
-  width: 100%;
+  font-size: 58px;
   text-align: center;
   font-family: Avanti;
   font-weight: bold;
