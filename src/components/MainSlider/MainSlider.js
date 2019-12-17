@@ -24,6 +24,7 @@ const ArrowRight = styled(Arrow)`
   height: 30px;
   fill: #fff;
   margin: 0 1rem;
+  cursor: pointer;
 `;
 
 const ArrowLeft = styled(ArrowRight)`

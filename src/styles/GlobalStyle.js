@@ -6,6 +6,8 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
   }
   
   html, body{
