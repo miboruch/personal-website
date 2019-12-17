@@ -16,6 +16,14 @@ module.exports = {
     {
       resolve: `gatsby-plugin-styled-components`
     },
+    {
+      resolve: `gatsby-plugin-react-svg`,
+      options: {
+        rule: {
+          include: /icons/
+        }
+      }
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-transition-link`,

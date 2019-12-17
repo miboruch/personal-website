@@ -7,6 +7,7 @@ import { animated } from 'react-spring';
 import { useScreenSize } from '../../utils/customHooks';
 import { menuItems, mediaItems } from '../../utils/items';
 import { AnimatedMenu, LinksFade, MenuItems } from './menuAnimations';
+import SocialNavigation from '../molecules/SocialNavigation/SocialNavigation';
 
 const StyledMenuBox = styled(animated.div)`
   position: absolute;
@@ -26,15 +27,10 @@ const StyledMenuBox = styled(animated.div)`
   will-change: transform;
 `;
 
-const StyledLinksBox = styled(animated.div)`
-  width: 90%;
-  margin: auto;
+const NavigationWrapper = styled.div`
   position: absolute;
   bottom: 2rem;
-  display: flex;
-  justify-content: space-around;
-  text-align: center;
-  align-items: center;
+  padding: 0 2rem;
 `;
 
 const ParagraphBox = styled(animated.div)`
@@ -48,6 +44,10 @@ const ParagraphBox = styled(animated.div)`
     lightTheme
       ? '1px solid rgba(0, 0, 0, 0.15)'
       : '1px solid rgba(255, 255, 255, 0.3)'};
+
+  &:last-child {
+    border: none;
+  }
 `;
 
 const StyledMenuItems = styled(Paragraph)`
@@ -65,13 +65,6 @@ const StyledMenuItems = styled(Paragraph)`
         lightTheme ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)'}
     }
   }
-`;
-
-const StyledLink = styled.a`
-  color: ${({ lightTheme }) => (lightTheme ? '#000' : '#fff')};
-  text-decoration: none;
-  padding: 2rem 2rem 0.5rem 2rem;
-  letter-spacing: 1px;
 `;
 
 const Menu = ({ isOpen, boxSize, lightTheme }) => {
@@ -108,24 +101,9 @@ const Menu = ({ isOpen, boxSize, lightTheme }) => {
                   </ParagraphBox>
                 )}
               </MenuItems>
-              <LinksFade state={isOpen ? 'in' : 'out'}>
-                {props => (
-                  <StyledLinksBox style={props}>
-                    {mediaItems.map(item => (
-                      <StyledLink
-                        key={item.id}
-                        medium='true'
-                        href={item.link}
-                        target='_blank'
-                        rel='noreferrer'
-                        lightTheme={lightTheme}
-                      >
-                        {item.name}
-                      </StyledLink>
-                    ))}
-                  </StyledLinksBox>
-                )}
-              </LinksFade>
+              <NavigationWrapper>
+                <SocialNavigation toggleState={isOpen} />
+              </NavigationWrapper>
             </StyledMenuBox>
           )}
         </AnimatedMenu>

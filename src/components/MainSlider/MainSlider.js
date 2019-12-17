@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import SliderContent from '../SliderContent/SliderContent';
+import SliderNavigation from '../molecules/SliderNavigation/SliderNavigation';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -35,6 +36,7 @@ const MainSlider = ({ images, data }) => {
           <SliderContent image={item} key={index} content={data[index]} />
         ))}
       </StyledSlider>
+      <SliderNavigation next='Indeed' />
     </StyledWrapper>
   );
 };

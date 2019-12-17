@@ -48,27 +48,6 @@ export const AnimatedMenu = Keyframes.Spring({
   }
 });
 
-export const LinksFade = Keyframes.Spring({
-  in: async next => {
-    await next({
-      opacity: 1,
-      config: {
-        duration: 1000
-      },
-      delay: 3000
-    });
-  },
-  out: async next => {
-    await next({
-      opacity: 0,
-      delay: 0,
-      config: {
-        duration: 1000
-      }
-    });
-  }
-});
-
 export const MenuItems = Keyframes.Trail({
   in: async next => {
     await next({

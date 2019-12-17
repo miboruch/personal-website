@@ -9,7 +9,7 @@ const IndexPage = ({ data }) => {
   const {
     mainPageData: { sliderContents }
   } = data;
-
+  console.log(data);
   const imagesArray = convertObjectToArray(
     data.image1,
     data.image2,

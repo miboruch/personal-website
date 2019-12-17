@@ -75,28 +75,13 @@ const StyledOpenCase = styled(Paragraph)`
   text-decoration: underline;
 `;
 
-const StyledNavigationBox = styled.div`
-  position: absolute;
-  bottom: 5px;
-  left: 5px;
-  padding: 2rem;
-`;
-
-const StyledNextLabel = styled(Paragraph)`
-  text-transform: uppercase;
-  letter-spacing: 5px;
-`;
-
-const StyledNextCase = styled(Paragraph)`
-  font-family: Avanti;
-`;
-
 const StyledTitleWrapper = styled(animated.div)`
   display: flex;
   flex-direction: row;
 `;
 
 const SliderContent = ({ image, content }) => {
+  // const trail = textWave(1, true);
   const trail = textWave(content.name, true);
 
   return (
@@ -112,10 +97,14 @@ const SliderContent = ({ image, content }) => {
               key={index}
               style={{
                 ...rest,
-                transform: x.interpolate(x => `translate3d(0, ${x}px, 0)`)
+                transform: x.interpolate(
+                  x => `rotate(${x}px)`,
+                  `translate3d(0, ${x}px, 0)`
+                )
               }}
             >
               <StyledTitle title='true' style={{ height }}>
+                {/*{content.name}*/}
                 {content.name[index]}
               </StyledTitle>
             </animated.div>
@@ -127,12 +116,7 @@ const SliderContent = ({ image, content }) => {
         </StyledDescription>
         <StyledOpenCase>Open project</StyledOpenCase>
       </StyledContextBox>
-      <StyledNavigationBox>
-        <div>
-          <StyledNextLabel small='true'>Next</StyledNextLabel>
-          <StyledNextCase large='true'>{content.next}</StyledNextCase>
-        </div>
-      </StyledNavigationBox>
+      {/*<SliderNavigation next={content.next} />*/}
     </StyledWrapper>
   );
 };
