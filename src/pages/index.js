@@ -4,6 +4,7 @@ import Layout from '../components/Layout';
 import SEO from '../components/seo';
 import { convertObjectToArray } from '../utils/functions';
 import MainSlider from '../components/MainSlider/MainSlider';
+import CurrentSlideContextProvider from '../providers/CurrentSlideContext';
 
 const IndexPage = ({ data }) => {
   const {
@@ -18,8 +19,10 @@ const IndexPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title='Home' />
-      <MainSlider images={imagesArray} data={sliderContents} />
+      <CurrentSlideContextProvider>
+        <SEO title='Home' />
+        <MainSlider images={imagesArray} data={sliderContents} />
+      </CurrentSlideContextProvider>
     </Layout>
   );
 };

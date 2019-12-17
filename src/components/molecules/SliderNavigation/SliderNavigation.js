@@ -20,6 +20,7 @@ const StyledNextLabel = styled(Paragraph)`
 
 const StyledNextCase = styled(Paragraph)`
   font-family: Avanti;
+  transition: all 1s ease;
 `;
 
 const ArrowWrapper = styled.div`
@@ -27,28 +28,14 @@ const ArrowWrapper = styled.div`
   align-items: center;
 `;
 
-const ArrowRight = styled(Arrow)`
-  width: 50px;
-  height: 30px;
-  fill: #fff;
-  margin: 0 1rem;
-`;
-
-const ArrowLeft = styled(ArrowRight)`
-  transform: rotate(180deg);
-`;
-
-const SliderNavigation = ({ next }) => {
+const SliderNavigation = ({ next, children }) => {
   return (
     <StyledNavigationBox>
       <div>
         <StyledNextLabel small='true'>Next</StyledNextLabel>
         <StyledNextCase large='true'>{next}</StyledNextCase>
       </div>
-      <ArrowWrapper>
-        <ArrowLeft />
-        <ArrowRight />
-      </ArrowWrapper>
+      <ArrowWrapper>{children}</ArrowWrapper>
     </StyledNavigationBox>
   );
 };

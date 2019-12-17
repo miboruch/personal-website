@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import BackgroundImage from 'gatsby-background-image';
 import Paragraph from '../atoms/Paragraph/Paragraph';
-import { animated } from 'react-spring';
-import { textWave } from './sliderContentAnimations';
+import { useSpring, animated, useTransition } from 'react-spring';
+import { textWave, slideFade } from './sliderContentAnimations';
+import { CurrentSlideContext } from '../../providers/CurrentSlideContext';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -80,9 +81,13 @@ const StyledTitleWrapper = styled(animated.div)`
   flex-direction: row;
 `;
 
-const SliderContent = ({ image, content }) => {
-  // const trail = textWave(1, true);
-  const trail = textWave(content.name, true);
+const SliderContent = ({ image, content, index }) => {
+  const { currentSlide, oldSlide } = useContext(CurrentSlideContext);
+  const isCurrentSlide = currentSlide === index;
+  const isCurrentSlideEnd = oldSlide === index;
+
+  const fade = slideFade(isCurrentSlide);
+  const trail = textWave(content.name, isCurrentSlide);
 
   return (
     <StyledWrapper>
@@ -111,7 +116,7 @@ const SliderContent = ({ image, content }) => {
           ))}
         </StyledTitleWrapper>
         <StyledLine />
-        <StyledDescription large='true'>
+        <StyledDescription large='true' style={fade}>
           {content.description}
         </StyledDescription>
         <StyledOpenCase>Open project</StyledOpenCase>
