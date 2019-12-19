@@ -59,7 +59,7 @@ export const MenuItems = Keyframes.Trail({
   out: async next => {
     await next({
       opacity: 0,
-      transform: 'translateX(-40px)'
+      transform: 'translateX(-20px)'
     });
   }
 });

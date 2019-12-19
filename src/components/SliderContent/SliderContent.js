@@ -2,9 +2,14 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import BackgroundImage from 'gatsby-background-image';
 import Paragraph from '../atoms/Paragraph/Paragraph';
-import { useSpring, animated, useTransition } from 'react-spring';
-import { textWave, slideFade } from './sliderContentAnimations';
+import { animated } from 'react-spring';
 import { CurrentSlideContext } from '../../providers/CurrentSlideContext';
+import {
+  textWave,
+  slideFade,
+  slideFadeDelayed,
+  lineSlide
+} from './sliderContentAnimations';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -53,10 +58,10 @@ const StyledTitle = styled(Paragraph)`
   overflow: hidden;
 `;
 
-const StyledLine = styled.div`
+const StyledLine = styled(animated.div)`
   width: 100%;
   height: 1px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.3);
 `;
 
 const StyledDescription = styled(Paragraph)`
@@ -69,7 +74,8 @@ const StyledDescription = styled(Paragraph)`
 
 const StyledOpenCase = styled(Paragraph)`
   font-size: 14px;
-  margin-top: 4rem;
+  margin-top: 2rem;
+  padding: 2rem;
   font-weight: bold;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -82,11 +88,12 @@ const StyledTitleWrapper = styled(animated.div)`
 `;
 
 const SliderContent = ({ image, content, index }) => {
-  const { currentSlide, oldSlide } = useContext(CurrentSlideContext);
+  const { currentSlide } = useContext(CurrentSlideContext);
   const isCurrentSlide = currentSlide === index;
-  const isCurrentSlideEnd = oldSlide === index;
 
   const fade = slideFade(isCurrentSlide);
+  const fadeDelayed = slideFadeDelayed(isCurrentSlide);
+  const line = lineSlide(isCurrentSlide);
   const trail = textWave(content.name, isCurrentSlide);
 
   return (
@@ -109,19 +116,17 @@ const SliderContent = ({ image, content, index }) => {
               }}
             >
               <StyledTitle title='true' style={{ height }}>
-                {/*{content.name}*/}
                 {content.name[index]}
               </StyledTitle>
             </animated.div>
           ))}
         </StyledTitleWrapper>
-        <StyledLine />
+        <StyledLine style={line} />
         <StyledDescription large='true' style={fade}>
           {content.description}
         </StyledDescription>
-        <StyledOpenCase>Open project</StyledOpenCase>
+        <StyledOpenCase style={fadeDelayed}>Open project</StyledOpenCase>
       </StyledContextBox>
-      {/*<SliderNavigation next={content.next} />*/}
     </StyledWrapper>
   );
 };

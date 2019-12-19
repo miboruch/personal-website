@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Arrow from '../../../assets/icons/arrow-right.svg';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 
 const StyledNavigationBox = styled.div`

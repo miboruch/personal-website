@@ -33,10 +33,8 @@ export const useScreenSize = () => {
         screenHeight: window.innerHeight
       });
     };
-
-    setSize();
-
     window.addEventListener('resize', setSize);
+    setSize();
 
     return () => window.removeEventListener('resize', setSize);
   }, []);
