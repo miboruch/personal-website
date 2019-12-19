@@ -9,11 +9,10 @@ const StyledBox = styled(animated.div)`
   text-align: right;
   width: 220px;
   height: 62px;
-  position: absolute;
-  top: 5px;
-  right: 5px;
+  margin-top: 5px;
+  margin-right: 5px;
   background-color: ${({ lightTheme, theme }) =>
-    lightTheme ? '#fff' : theme.color.menuBox};
+    lightTheme ? theme.color.lightThemeBackground : theme.color.menuBox};
   display: flex;
   flex-direction: row;
   z-index: 901;
@@ -27,10 +26,11 @@ const StyledBox = styled(animated.div)`
 
 const StyledParagraph = styled(Paragraph)`
   font-family: ${({ theme }) => theme.font.family.futura};
-  padding-left: 3rem;
-  width: 105px;
+  padding-left: 2rem;
+  width: 120px;
   margin: auto 0;
   z-index: 901;
+  text-transform: uppercase;
   color: ${({ lightTheme }) => (lightTheme ? '#000' : '#fff')};
   ${({ theme }) => theme.mq.tablet} {
     width: auto;

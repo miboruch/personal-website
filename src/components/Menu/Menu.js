@@ -20,7 +20,8 @@ const StyledMenuBox = styled(animated.div)`
   align-items: center;
   flex-direction: column;
   background-color: ${({ lightTheme, theme }) =>
-    lightTheme ? '#fff' : theme.color.menuBox};
+    lightTheme ? theme.color.lightThemeBackground : theme.color.menuBox};
+  border: ${({ lightTheme }) => (lightTheme ? '1px solid #000' : 'none')}
   z-index: 900;
   opacity: 1;
   transform-origin: top right;
@@ -52,8 +53,9 @@ const ParagraphBox = styled(animated.div)`
 
 const StyledMenuItems = styled(Paragraph)`
   color: ${({ lightTheme }) =>
-    lightTheme ? 'rgba(0,0,0,0.7)' : 'rgba(255,255,255,0.8)'};
+    lightTheme ? 'rgba(0,0,0,0.45)' : 'rgba(255,255,255,0.8)'};
   transition: color 1s ease;
+  font-family: ${({ theme }) => theme.font.family.avanti};
 
   ${({ theme }) => theme.mq.standard} {
     color: ${({ lightTheme }) =>
@@ -102,7 +104,10 @@ const Menu = ({ isOpen, boxSize, lightTheme }) => {
                 )}
               </MenuItems>
               <NavigationWrapper>
-                <SocialNavigation toggleState={isOpen} />
+                <SocialNavigation
+                  toggleState={isOpen}
+                  lightTheme={lightTheme}
+                />
               </NavigationWrapper>
             </StyledMenuBox>
           )}

@@ -6,6 +6,7 @@ import { useElementSize } from '../../utils/customHooks';
 import MenuButton from '../atoms/MenuButton/MenuButton';
 import { graphql, useStaticQuery } from 'gatsby';
 import GatsbyImage from 'gatsby-image';
+import Paragraph from '../atoms/Paragraph/Paragraph';
 
 const StyledHeader = styled.header`
   position: absolute;
@@ -17,6 +18,7 @@ const StyledHeader = styled.header`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   overflow: hidden;
   transition: all 1s ease;
 `;
@@ -30,6 +32,33 @@ const StyledLogo = styled(GatsbyImage)`
   ${({ theme }) => theme.mq.mobileL} {
     width: 100px;
     margin-left: 2rem;
+  }
+`;
+
+const StyledMenuButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const StyledParagraph = styled(Paragraph)`
+  display: none;
+  margin-right: 3rem;
+  letter-spacing: 0;
+
+  ${({ theme }) => theme.mq.standard} {
+    display: block;
+  }
+`;
+
+const StyledLink = styled.a`
+  color: #fff;
+  display: none;
+  margin-right: 3rem;
+  letter-spacing: 0;
+
+  ${({ theme }) => theme.mq.standard} {
+    display: block;
   }
 `;
 
@@ -65,19 +94,22 @@ const Header = ({ lightTheme }) => {
       <StyledHeader>
         <StyledLogo
           medium='true'
-          lightTheme={lightTheme}
           fluid={
             lightTheme
               ? logoDark.childImageSharp.fluid
               : logoWhite.childImageSharp.fluid
           }
         />
-        <MenuButton
-          isOpen={isOpen}
-          toggleMenu={toggleMenu}
-          ref={menuButton}
-          lightTheme={lightTheme}
-        />
+        <StyledMenuButtonWrapper>
+          <StyledParagraph>Krakow, Poland</StyledParagraph>
+          <StyledLink href='mailto:miboruch@gmail.com'>miboruch@gmail.com</StyledLink>
+          <MenuButton
+            isOpen={isOpen}
+            toggleMenu={toggleMenu}
+            ref={menuButton}
+            lightTheme={lightTheme}
+          />
+        </StyledMenuButtonWrapper>
       </StyledHeader>
       <Menu isOpen={isOpen} boxSize={size} lightTheme={lightTheme} />
     </>

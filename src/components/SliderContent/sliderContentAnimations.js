@@ -11,16 +11,19 @@ export const textWave = (text, stateToggle) => {
   });
 };
 
-export const slideFade = stateToggle => {
+export const createFade = (stateToggle, duration, delay, offDuration = 500) => {
   return useSpring({
-    config: { duration: stateToggle ? 2000 : 500, easing: easeExpOut },
+    config: {
+      duration: stateToggle ? duration : offDuration,
+      easing: easeExpOut
+    },
     from: {
       opacity: 0
     },
     to: {
       opacity: stateToggle ? 1 : 0
     },
-    delay: stateToggle ? 1500 : 0
+    delay: stateToggle ? delay : 0
   });
 };
 

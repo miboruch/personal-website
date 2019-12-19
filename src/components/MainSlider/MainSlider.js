@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Slider from 'react-slick';
 import SliderContent from '../SliderContent/SliderContent';
 import SliderNavigation from '../molecules/SliderNavigation/SliderNavigation';
+import SocialNavigation from '../molecules/SocialNavigation/SocialNavigation';
 import Arrow from '../../assets/icons/arrow-right.svg';
 import { CurrentSlideContext } from '../../providers/CurrentSlideContext';
 
@@ -25,26 +26,51 @@ const ArrowRight = styled(Arrow)`
   fill: #fff;
   margin: 0 1rem;
   cursor: pointer;
+  transition: all 0.5s ease;
+
+  ${({ theme }) => theme.mq.standard} {
+    fill: #000;
+
+    &:hover {
+      transform: translateX(10px);
+    }
+  }
 `;
 
 const ArrowLeft = styled(ArrowRight)`
   transform: rotate(180deg);
+
+  ${({ theme }) => theme.mq.standard} {
+    &:hover {
+      transform: translateX(-10px) rotate(180deg);
+    }
+  }
+`;
+
+const NavigationWrapper = styled.div`
+  display: none;
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 0 2rem;
+
+  ${({ theme }) => theme.mq.standard} {
+    display: block;
+  }
 `;
 
 const MainSlider = ({ images, data }) => {
   const sliderRef = useRef();
-  const { currentSlide, setSlide, setOldSlide } = useContext(CurrentSlideContext);
+  const { currentSlide, setSlide } = useContext(CurrentSlideContext);
 
   const settings = {
     dots: false,
     infinite: true,
     autoplay: false,
-    // autoplaySpeed: 7000,
     speed: 2000,
     slidesToShow: 1,
     slidesToScroll: 1,
     cssEase: 'cubic-bezier(.84, 0, .08, .99)',
-    // beforeChange: oldIndex => setOldSlide(oldIndex),
     beforeChange: (oldIndex, nextSlide) => setSlide(nextSlide),
     afterChange: current => setSlide(current)
   };
@@ -65,6 +91,9 @@ const MainSlider = ({ images, data }) => {
         <ArrowLeft onClick={() => sliderRef.current.slickPrev()} />
         <ArrowRight onClick={() => sliderRef.current.slickNext()} />
       </SliderNavigation>
+      <NavigationWrapper>
+        <SocialNavigation toggleState={true} lightTheme={false} />
+      </NavigationWrapper>
     </StyledWrapper>
   );
 };

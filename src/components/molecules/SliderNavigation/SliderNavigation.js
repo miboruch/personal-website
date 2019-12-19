@@ -9,22 +9,37 @@ const StyledNavigationBox = styled.div`
   left: 5px;
   display: flex;
   justify-content: space-between;
-  padding: 2rem;
+  padding: 3rem;
+
+  ${({ theme }) => theme.mq.standard} {
+    width: 500px;
+    background: ${({ theme }) => theme.color.lightThemeBackground};
+  }
 `;
 
 const StyledNextLabel = styled(Paragraph)`
   text-transform: uppercase;
   letter-spacing: 5px;
+
+  ${({ theme }) => theme.mq.standard} {
+    color: #000;
+  }
 `;
 
 const StyledNextCase = styled(Paragraph)`
   font-family: Avanti;
   transition: all 1s ease;
+  letter-spacing: 0;
+
+  ${({ theme }) => theme.mq.standard} {
+    color: #000;
+  }
 `;
 
 const ArrowWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin-right: 1rem;
 `;
 
 const SliderNavigation = ({ next, children }) => {
