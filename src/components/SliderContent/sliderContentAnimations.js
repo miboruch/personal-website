@@ -11,22 +11,6 @@ export const textWave = (text, stateToggle) => {
   });
 };
 
-export const createFade = (stateToggle, duration, delay, offDuration = 500) => {
-  return useSpring({
-    config: {
-      duration: stateToggle ? duration : offDuration,
-      easing: easeExpOut
-    },
-    from: {
-      opacity: 0
-    },
-    to: {
-      opacity: stateToggle ? 1 : 0
-    },
-    delay: stateToggle ? delay : 0
-  });
-};
-
 export const slideFadeDelayed = stateToggle => {
   return useSpring({
     config: { duration: stateToggle ? 2000 : 500, easing: easeExpOut },
@@ -37,19 +21,6 @@ export const slideFadeDelayed = stateToggle => {
     to: {
       opacity: stateToggle ? 1 : 0,
       transform: stateToggle ? 'translateX(0px)' : 'translateX(-20px)'
-    },
-    delay: stateToggle ? 1800 : 0
-  });
-};
-
-export const lineSlide = stateToggle => {
-  return useSpring({
-    config: { duration: stateToggle ? 2000 : 500, easing: easeExpOut },
-    from: {
-      width: '0%'
-    },
-    to: {
-      width: stateToggle ? '100%' : '0%'
     },
     delay: stateToggle ? 1800 : 0
   });
