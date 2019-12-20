@@ -14,7 +14,7 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledLink = styled(animated.a)`
-  color: ${({ lightTheme }) => (lightTheme ? '#000' : '#fff')};
+  color: ${({ headerTheme }) => (headerTheme === 'light' ? '#000' : '#fff')};
   text-decoration: none;
   padding: 2rem 2rem 0.5rem 2rem;
   letter-spacing: 1px;
@@ -45,7 +45,7 @@ const LinksFade = Keyframes.Spring({
   }
 });
 
-const SocialNavigation = ({ lightTheme, toggleState }) => {
+const SocialNavigation = ({ headerTheme, toggleState }) => {
   // const {
   //   portfolio: { socialMenus }
   // } = useStaticQuery(graphql`
@@ -72,7 +72,7 @@ const SocialNavigation = ({ lightTheme, toggleState }) => {
                 href={item.link}
                 target='_blank'
                 rel='noreferrer'
-                lightTheme={lightTheme}
+                headerTheme={headerTheme}
               >
                 {item.name}
               </StyledLink>
@@ -85,11 +85,7 @@ const SocialNavigation = ({ lightTheme, toggleState }) => {
 };
 
 SocialNavigation.propTypes = {
-  lightTheme: PropTypes.bool
-};
-
-SocialNavigation.defaultProps = {
-  lightTheme: false
+  headerTheme: PropTypes.oneOf(['dark, light'])
 };
 
 export default SocialNavigation;

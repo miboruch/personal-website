@@ -1,12 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import AniLink from 'gatsby-plugin-transition-link/AniLink';
 import Paragraph from '../atoms/Paragraph/Paragraph';
 import { animated } from 'react-spring';
 import { useScreenSize } from '../../utils/customHooks';
-import { menuItems, mediaItems } from '../../utils/items';
-import { AnimatedMenu, LinksFade, MenuItems } from './menuAnimations';
+import { menuItems } from '../../utils/items';
+import { AnimatedMenu, MenuItems } from './menuAnimations';
 import SocialNavigation from '../molecules/SocialNavigation/SocialNavigation';
 
 const StyledMenuBox = styled(animated.div)`
@@ -19,13 +19,17 @@ const StyledMenuBox = styled(animated.div)`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: ${({ lightTheme, theme }) =>
-    lightTheme ? theme.color.lightThemeBackground : theme.color.menuBox};
-  border: ${({ lightTheme }) => (lightTheme ? '1px solid #000' : 'none')}
+  background-color: ${({ theme }) => theme.color.menuBox};
   z-index: 900;
   opacity: 1;
   transform-origin: top right;
   will-change: transform;
+
+  ${({ headerTheme }) =>
+    headerTheme === 'light' &&
+    css`
+      background-color: ${({ theme }) => theme.color.lightThemeBackground};
+    `}
 `;
 
 const NavigationWrapper = styled.div`
@@ -38,38 +42,58 @@ const ParagraphBox = styled(animated.div)`
   width: 100%;
   height: 33vh;
   text-align: center;
+  font-size: 42px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: ${({ lightTheme }) =>
-    lightTheme
-      ? '1px solid rgba(0, 0, 0, 0.15)'
-      : '1px solid rgba(255, 255, 255, 0.3)'};
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 
   &:last-child {
     border: none;
   }
+
+  ${({ headerTheme }) =>
+    headerTheme === 'light' &&
+    css`
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    `}
 `;
 
 const StyledMenuItems = styled(Paragraph)`
-  color: ${({ lightTheme }) =>
-    lightTheme ? 'rgba(0,0,0,0.45)' : 'rgba(255,255,255,0.8)'};
+  color: rgba(255, 255, 255, 0.8);
   transition: color 1s ease;
   font-family: ${({ theme }) => theme.font.family.avanti};
 
-  ${({ theme }) => theme.mq.standard} {
-    color: ${({ lightTheme }) =>
-      lightTheme ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.2)'}
-    transition: color 1s ease;
+  ${({ headerTheme }) =>
+    headerTheme === 'light' &&
+    css`
+      color: rgba(0, 0, 0, 0.45);
 
+      &:hover {
+        color: rgba(0, 0, 0, 1);
+      }
+    `}
+
+  ${({ theme }) => theme.mq.standard} {
+    color: rgba(255, 255, 255, 0.2);
+    transition: color 1s ease;
     &:hover {
-      color: ${({ lightTheme }) =>
-        lightTheme ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)'}
+      color: rgba(255, 255, 255, 1);
     }
+
+    ${({ headerTheme }) =>
+      headerTheme === 'light' &&
+      css`
+        color: rgba(0, 0, 0, 0.5);
+
+        &:hover {
+          color: rgba(0, 0, 0, 0.8);
+        }
+      `}
   }
 `;
 
-const Menu = ({ isOpen, boxSize, lightTheme }) => {
+const Menu = ({ isOpen, boxSize, headerTheme }) => {
   const { screenWidth, screenHeight } = useScreenSize();
   const { width, height } = boxSize;
 
@@ -86,7 +110,7 @@ const Menu = ({ isOpen, boxSize, lightTheme }) => {
           scale={{ scaleWidth, scaleHeight }}
         >
           {props => (
-            <StyledMenuBox lightTheme={lightTheme} style={props}>
+            <StyledMenuBox headerTheme={headerTheme} style={props}>
               <MenuItems
                 keys={item => item.id}
                 state={isOpen ? 'in' : 'out'}
@@ -94,9 +118,9 @@ const Menu = ({ isOpen, boxSize, lightTheme }) => {
                 items={menuItems}
               >
                 {trailItem => trailProps => (
-                  <ParagraphBox style={trailProps} lightTheme={lightTheme}>
+                  <ParagraphBox style={trailProps} headerTheme={headerTheme}>
                     <AniLink to={trailItem.link}>
-                      <StyledMenuItems title='true' lightTheme={lightTheme}>
+                      <StyledMenuItems title='true' headerTheme={headerTheme}>
                         {trailItem.name}
                       </StyledMenuItems>
                     </AniLink>
@@ -106,7 +130,7 @@ const Menu = ({ isOpen, boxSize, lightTheme }) => {
               <NavigationWrapper>
                 <SocialNavigation
                   toggleState={isOpen}
-                  lightTheme={lightTheme}
+                  headerTheme={headerTheme}
                 />
               </NavigationWrapper>
             </StyledMenuBox>
@@ -120,7 +144,7 @@ const Menu = ({ isOpen, boxSize, lightTheme }) => {
 Menu.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   boxSize: PropTypes.object.isRequired,
-  lightTheme: PropTypes.bool
+  headerTheme: PropTypes.oneOf(['dark, light'])
 };
 
 export default Menu;

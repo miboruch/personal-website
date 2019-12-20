@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
 const StyledHamburger = styled.button`
@@ -28,7 +28,8 @@ const InnerHamburger = styled.div`
     content: '';
     width: 44px;
     height: 1px;
-    background: ${({ lightTheme }) => (lightTheme ? '#000' : '#fff')};
+    background: ${({ headerTheme }) =>
+      headerTheme === 'light' ? '#000' : '#fff'};
     position: absolute;
     left: 0;
     transition: all 0.5s ease;
@@ -53,17 +54,17 @@ const InnerHamburger = styled.div`
   }
 `;
 
-const Hamburger = ({ isOpen, lightTheme }) => {
+const Hamburger = ({ isOpen, headerTheme }) => {
   return (
     <StyledHamburger>
-      <InnerHamburger isOpen={isOpen} lightTheme={lightTheme} />
+      <InnerHamburger isOpen={isOpen} headerTheme={headerTheme} />
     </StyledHamburger>
   );
 };
 
 Hamburger.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  lightTheme: PropTypes.bool
+  headerTheme: PropTypes.oneOf(['dark, light'])
 };
 
 export default Hamburger;

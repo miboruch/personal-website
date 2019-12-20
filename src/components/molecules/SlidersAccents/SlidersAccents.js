@@ -56,11 +56,26 @@ const AllProjectCase = styled(Paragraph)`
   right: 0;
   padding: 0 2rem;
   transform: translateY(-100%);
-  border-bottom: 2px solid #fff;
   font-weight: bold;
   letter-spacing: 4px;
   text-transform: uppercase;
   display: none;
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: all 1s cubic-bezier(0.66, 0.24, 0, 0.82);
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
 
   ${({ theme }) => theme.mq.standard} {
     display: block;

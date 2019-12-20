@@ -18,6 +18,8 @@ const IndexPage = ({ data }) => {
   );
 
   return (
+    /* Three themes to choose from: light, dark, default.
+    To have default, don't pass any props to Layout component  */
     <Layout>
       <CurrentSlideContextProvider>
         <SEO title='Home' />

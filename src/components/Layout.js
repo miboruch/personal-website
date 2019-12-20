@@ -7,12 +7,12 @@ import Header from './Header/Header';
 
 import './index.css';
 
-const Layout = ({ children, lightTheme }) => {
+const Layout = ({ children, headerTheme }) => {
   return (
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <Header lightTheme={lightTheme} />
+        <Header headerTheme={headerTheme} />
         {children}
       </ThemeProvider>
     </>
@@ -21,11 +21,7 @@ const Layout = ({ children, lightTheme }) => {
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-  lightTheme: PropTypes.bool
-};
-
-Layout.defaultProps = {
-  lightTheme: false
+  headerTheme: PropTypes.oneOf(['dark, light'])
 };
 
 export default Layout;

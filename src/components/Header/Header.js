@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Menu from '../Menu/Menu';
 import { useElementSize } from '../../utils/customHooks';
-import MenuButton from '../atoms/MenuButton/MenuButton';
+import MenuButton from '../molecules/MenuButton/MenuButton';
 import { graphql, useStaticQuery } from 'gatsby';
 import GatsbyImage from 'gatsby-image';
 import Paragraph from '../atoms/Paragraph/Paragraph';
@@ -62,7 +62,7 @@ const StyledLink = styled.a`
   }
 `;
 
-const Header = ({ lightTheme }) => {
+const Header = ({ headerTheme }) => {
   const [isOpen, setOpen] = useState(false);
   const [size, menuButton] = useElementSize();
 
@@ -93,31 +93,34 @@ const Header = ({ lightTheme }) => {
     <>
       <StyledHeader>
         <StyledLogo
-          medium='true'
           fluid={
-            lightTheme
+            headerTheme === 'dark'
+              ? logoDark.childImageSharp.fluid
+              : headerTheme === 'light' && isOpen
               ? logoDark.childImageSharp.fluid
               : logoWhite.childImageSharp.fluid
           }
         />
         <StyledMenuButtonWrapper>
           <StyledParagraph>Krakow, Poland</StyledParagraph>
-          <StyledLink href='mailto:miboruch@gmail.com'>miboruch@gmail.com</StyledLink>
+          <StyledLink href='mailto:miboruch@gmail.com'>
+            miboruch@gmail.com
+          </StyledLink>
           <MenuButton
             isOpen={isOpen}
             toggleMenu={toggleMenu}
             ref={menuButton}
-            lightTheme={lightTheme}
+            headerTheme={headerTheme}
           />
         </StyledMenuButtonWrapper>
       </StyledHeader>
-      <Menu isOpen={isOpen} boxSize={size} lightTheme={lightTheme} />
+      <Menu isOpen={isOpen} boxSize={size} headerTheme={headerTheme} />
     </>
   );
 };
 
 Header.propTypes = {
-  lightTheme: PropTypes.bool
+  headerTheme: PropTypes.oneOf(['dark, light'])
 };
 
 export default Header;

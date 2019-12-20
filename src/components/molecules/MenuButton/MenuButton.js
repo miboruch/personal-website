@@ -1,9 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { animated } from 'react-spring';
-import Paragraph from '../Paragraph/Paragraph';
-import Hamburger from '../Hamburger/Hamburger';
+import Paragraph from '../../atoms/Paragraph/Paragraph';
+import Hamburger from '../../atoms/Hamburger/Hamburger';
 
 const StyledBox = styled(animated.div)`
   text-align: right;
@@ -11,13 +11,18 @@ const StyledBox = styled(animated.div)`
   height: 62px;
   margin-top: 5px;
   margin-right: 5px;
-  background-color: ${({ lightTheme, theme }) =>
-    lightTheme ? theme.color.lightThemeBackground : theme.color.menuBox};
+  background-color: ${({ theme }) => theme.color.menuBox};
   display: flex;
   flex-direction: row;
   z-index: 901;
   cursor: pointer;
   transition: all 1s ease;
+
+  ${({ headerTheme }) =>
+    headerTheme === 'light' &&
+    css`
+      background-color: ${({ theme }) => theme.color.lightThemeBackground};
+    `}
 
   ${({ theme }) => theme.mq.tablet} {
     width: 300px;
@@ -31,19 +36,26 @@ const StyledParagraph = styled(Paragraph)`
   margin: auto 0;
   z-index: 901;
   text-transform: uppercase;
-  color: ${({ lightTheme }) => (lightTheme ? '#000' : '#fff')};
+  color: #fff;
+
+  ${({ headerTheme }) =>
+    headerTheme === 'light' &&
+    css`
+      color: #000;
+    `}
+
   ${({ theme }) => theme.mq.tablet} {
     width: auto;
   }
 `;
 
 const MenuButton = React.forwardRef(
-  ({ isOpen, toggleMenu, lightTheme }, ref) => (
-    <StyledBox onClick={() => toggleMenu()} ref={ref} lightTheme={lightTheme}>
-      <StyledParagraph small='true' lightTheme={lightTheme}>
+  ({ isOpen, toggleMenu, headerTheme }, ref) => (
+    <StyledBox onClick={() => toggleMenu()} ref={ref} headerTheme={headerTheme}>
+      <StyledParagraph small='true' headerTheme={headerTheme}>
         web design & code
       </StyledParagraph>
-      <Hamburger isOpen={isOpen} lightTheme={lightTheme} />
+      <Hamburger isOpen={isOpen} headerTheme={headerTheme} />
     </StyledBox>
   )
 );
@@ -51,7 +63,7 @@ const MenuButton = React.forwardRef(
 MenuButton.displayName = 'MenuButton';
 
 MenuButton.propTypes = {
-  lightTheme: PropTypes.bool
+  headerTheme: PropTypes.oneOf(['dark, light'])
 };
 
 export default MenuButton;
