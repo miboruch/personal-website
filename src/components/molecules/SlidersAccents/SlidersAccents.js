@@ -5,6 +5,7 @@ import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { lineSlide } from './slidersAccentsAnimations';
 import { createFade } from '../../../utils/animations';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
+import AniLink from 'gatsby-plugin-transition-link/AniLink';
 
 const StyledLine = styled(animated.div)`
   position: relative;
@@ -97,9 +98,11 @@ const SlidersAccents = ({ index }) => {
           open project
         </StyledCircleText>
       </StyledCircle>
-      <AllProjectCase small='true' style={projectsFade}>
-        all projects
-      </AllProjectCase>
+      <AniLink swipe direction='down' to='/projects' duration={1}>
+        <AllProjectCase small='true' style={projectsFade}>
+          all projects
+        </AllProjectCase>
+      </AniLink>
     </StyledLine>
   );
 };

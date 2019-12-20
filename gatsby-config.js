@@ -49,6 +49,7 @@ module.exports = {
           'https://api-euwest.graphcms.com/v1/ck3yat3vk6j3c01gcfr6zhmvu/master'
       }
     }
+
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

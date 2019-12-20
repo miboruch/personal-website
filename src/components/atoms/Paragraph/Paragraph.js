@@ -51,6 +51,7 @@ const Paragraph = styled(animated.p)`
   ${({ titleMenu }) =>
     titleMenu &&
     css`
+      font-family: Avanti;
       ${({ theme }) => theme.mq.mobileL} {
         font-size: ${({ theme }) => theme.font.size.mobile.title};
       }

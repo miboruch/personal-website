@@ -10,7 +10,6 @@ const IndexPage = ({ data }) => {
   const {
     mainPageData: { sliderContents }
   } = data;
-  console.log(data);
   const imagesArray = convertObjectToArray(
     data.image1,
     data.image2,
@@ -29,8 +28,8 @@ const IndexPage = ({ data }) => {
   );
 };
 
-export const sliderMockup = graphql`
-  fragment sliderMockup on File {
+export const photoFragment = graphql`
+  fragment photoFragment on File {
     childImageSharp {
       fluid(maxWidth: 1000, quality: 100) {
         ...GatsbyImageSharpFluid_noBase64
@@ -42,13 +41,13 @@ export const sliderMockup = graphql`
 export const query = graphql`
   query {
     image1: file(name: { regex: "/indeed-main-mobile/" }) {
-      ...sliderMockup
+      ...photoFragment
     }
     image2: file(name: { regex: "/archicept-mobile/" }) {
-      ...sliderMockup
+      ...photoFragment
     }
     image3: file(name: { regex: "/weather-mobile/" }) {
-      ...sliderMockup
+      ...photoFragment
     }
     mainPageData: portfolio {
       sliderContents {

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import Menu from '../Menu/Menu';
 import { useElementSize } from '../../utils/customHooks';
 import MenuButton from '../molecules/MenuButton/MenuButton';
 import { graphql, useStaticQuery } from 'gatsby';
-import GatsbyImage from 'gatsby-image';
 import Paragraph from '../atoms/Paragraph/Paragraph';
+import Logo from '../../assets/icons/logo.svg';
 
 const StyledHeader = styled.header`
   position: absolute;
@@ -23,18 +23,6 @@ const StyledHeader = styled.header`
   transition: all 1s ease;
 `;
 
-const StyledLogo = styled(GatsbyImage)`
-  margin-left: 1rem;
-  width: 80px;
-  z-index: 1000;
-  transition: all 1s ease;
-
-  ${({ theme }) => theme.mq.mobileL} {
-    width: 100px;
-    margin-left: 2rem;
-  }
-`;
-
 const StyledMenuButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -45,10 +33,32 @@ const StyledParagraph = styled(Paragraph)`
   display: none;
   margin-right: 3rem;
   letter-spacing: 0;
+  color: ${({ headerTheme }) => (headerTheme === 'dark' ? '#000' : '#fff')};
 
   ${({ theme }) => theme.mq.standard} {
     display: block;
   }
+`;
+
+const StyledLogo = styled(Logo)`
+  width: 100px;
+  height: 50px;
+  margin-left: 2rem;
+  z-index: 1000;
+  fill: #fff;
+  transition: fill 1s ease;
+
+  ${({ headerTheme }) =>
+    headerTheme === 'dark' &&
+    css`
+      fill: ${({ isOpen }) => (isOpen ? '#fff' : '#000')};
+    `}
+
+  ${({ headerTheme }) =>
+    headerTheme === 'light' &&
+    css`
+      fill: ${({ isOpen }) => (isOpen ? '#000' : '#fff')};
+    `}
 `;
 
 const StyledLink = styled.a`
@@ -56,6 +66,7 @@ const StyledLink = styled.a`
   display: none;
   margin-right: 3rem;
   letter-spacing: 0;
+  color: ${({ headerTheme }) => (headerTheme === 'dark' ? '#000' : '#fff')};
 
   ${({ theme }) => theme.mq.standard} {
     display: block;
@@ -70,40 +81,18 @@ const Header = ({ headerTheme }) => {
     setOpen(!isOpen);
   };
 
-  const { logoWhite, logoDark } = useStaticQuery(graphql`
-    query {
-      logoWhite: file(relativePath: { eq: "logo-white-square.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 300) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      }
-      logoDark: file(relativePath: { eq: "logo-dark-square.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 300) {
-            ...GatsbyImageSharpFluid_noBase64
-          }
-        }
-      }
-    }
-  `);
-
   return (
     <>
       <StyledHeader>
-        <StyledLogo
-          fluid={
-            headerTheme === 'dark'
-              ? logoDark.childImageSharp.fluid
-              : headerTheme === 'light' && isOpen
-              ? logoDark.childImageSharp.fluid
-              : logoWhite.childImageSharp.fluid
-          }
-        />
+        <StyledLogo headerTheme={headerTheme} isOpen={isOpen} />
         <StyledMenuButtonWrapper>
-          <StyledParagraph>Krakow, Poland</StyledParagraph>
-          <StyledLink href='mailto:miboruch@gmail.com'>
+          <StyledParagraph headerTheme={headerTheme}>
+            Krakow, Poland
+          </StyledParagraph>
+          <StyledLink
+            href='mailto:miboruch@gmail.com'
+            headerTheme={headerTheme}
+          >
             miboruch@gmail.com
           </StyledLink>
           <MenuButton
