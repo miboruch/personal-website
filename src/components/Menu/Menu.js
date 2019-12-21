@@ -65,24 +65,6 @@ const StyledMenuItems = styled(Paragraph)`
   transition: color 1s ease;
   font-family: ${({ theme }) => theme.font.family.avanti};
 
-  &::after {
-    content: '.0${({ id }) => id}';
-    font-size: 25px;
-    font-family: ${({ theme }) => theme.font.family.futura};
-    font-weight: 500;
-    position: absolute;
-    letter-spacing: 5px;
-    bottom: 0;
-    right: 10px;
-    color: #fff;
-    opacity: 0;
-    transition: opacity 1s ease;
-  }
-
-  &:hover::after {
-    opacity: 0.4;
-  }
-
   ${({ headerTheme }) =>
     headerTheme === 'light' &&
     css`
@@ -139,11 +121,7 @@ const Menu = ({ isOpen, boxSize, headerTheme }) => {
                 {trailItem => trailProps => (
                   <ParagraphBox style={trailProps} headerTheme={headerTheme}>
                     <AniLink to={trailItem.link}>
-                      <StyledMenuItems
-                        title='true'
-                        headerTheme={headerTheme}
-                        id={trailItem.id}
-                      >
+                      <StyledMenuItems title='true' headerTheme={headerTheme}>
                         {trailItem.name}
                       </StyledMenuItems>
                     </AniLink>
