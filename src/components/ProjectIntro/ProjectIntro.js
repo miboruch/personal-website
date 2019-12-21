@@ -5,7 +5,21 @@ import Paragraph from '../atoms/Paragraph/Paragraph';
 
 const StyledWrapper = styled.section`
   border-top: 1px solid rgba(141, 141, 141, 0.25);
-  padding: 4rem 2rem;
+  border-bottom: 1px solid rgba(141, 141, 141, 0.25);
+
+  ${({ theme }) => theme.mq.standard} {
+    display: flex;
+    flex-direction: ${({ reverse }) => (reverse ? 'row-reverse' : 'row')};
+    justify-content: center;
+    align-items: center;
+    height: 450px;
+    margin: 4rem 0;
+  }
+
+  ${({ theme }) => theme.mq.desktop} {
+    margin-bottom: 100px;
+    height: 550px;
+  }
 `;
 
 const StyledImage = styled(GatsbyImage)`
@@ -14,6 +28,14 @@ const StyledImage = styled(GatsbyImage)`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 150%;
+
+  ${({ theme }) => theme.mq.standard} {
+    width: 120%;
+  }
+
+  ${({ theme }) => theme.mq.desktop} {
+    width: 100%;
+  }
 `;
 
 const PhotoWrapper = styled.div`
@@ -23,6 +45,34 @@ const PhotoWrapper = styled.div`
   object-fit: cover;
   position: relative;
   overflow: hidden;
+
+  ${({ theme }) => theme.mq.tablet} {
+    height: 500px;
+  }
+
+  ${({ theme }) => theme.mq.standard} {
+    height: 100%;
+  }
+`;
+
+const ContentWrapper = styled.section`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  ${({ theme }) => theme.mq.tablet} {
+    width: 70%;
+  }
+
+  ${({ theme }) => theme.mq.standard} {
+    margin: 0 4rem;
+    width: 50%;
+  }
+
+  ${({ theme }) => theme.mq.desktop} {
+    width: 30%;
+    padding: 0 4rem;
+  }
 `;
 
 const StyledTitle = styled(Paragraph)`
@@ -38,14 +88,18 @@ const StyledParagraph = styled(Paragraph)`
   letter-spacing: 0;
 `;
 
-const ProjectIntro = ({ data, image }) => {
+const ProjectIntro = ({ data, image, reverse }) => {
   return (
-    <StyledWrapper>
+    <StyledWrapper reverse={reverse}>
       <PhotoWrapper>
         <StyledImage fluid={image.childImageSharp.fluid} />
       </PhotoWrapper>
-      <StyledTitle title='true'>{data.name}</StyledTitle>
-      <StyledParagraph small='true'>{data.primaryDescription}</StyledParagraph>
+      <ContentWrapper>
+        <StyledTitle title='true'>{data.name}</StyledTitle>
+        <StyledParagraph small='true'>
+          {data.primaryDescription}
+        </StyledParagraph>
+      </ContentWrapper>
     </StyledWrapper>
   );
 };

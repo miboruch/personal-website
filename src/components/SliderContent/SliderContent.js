@@ -62,6 +62,7 @@ const StyledTitle = styled(Paragraph)`
   margin-bottom: 2rem;
   will-change: transform, opacity;
   overflow: hidden;
+  letter-spacing: 0;
 `;
 
 const StyledDescription = styled(Paragraph)`

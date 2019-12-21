@@ -9,7 +9,7 @@ const StyledNavigationBox = styled.div`
   left: 5px;
   display: flex;
   justify-content: space-between;
-  padding: 2rem;
+  padding: 3rem;
 
   ${({ theme }) => theme.mq.standard} {
     width: 500px;

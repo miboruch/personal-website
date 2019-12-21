@@ -35,6 +35,7 @@ const StyledMenuBox = styled(animated.div)`
 const NavigationWrapper = styled.div`
   position: absolute;
   bottom: 2rem;
+  right: 2rem;
   padding: 0 2rem;
 `;
 

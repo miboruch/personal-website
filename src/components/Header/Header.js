@@ -7,6 +7,7 @@ import MenuButton from '../molecules/MenuButton/MenuButton';
 import { graphql, useStaticQuery } from 'gatsby';
 import Paragraph from '../atoms/Paragraph/Paragraph';
 import Logo from '../../assets/icons/logo.svg';
+import LogoLine from '../../assets/icons/logo-line.svg';
 
 const StyledHeader = styled.header`
   position: absolute;
@@ -43,10 +44,11 @@ const StyledParagraph = styled(Paragraph)`
 const StyledLogo = styled(Logo)`
   width: 100px;
   height: 50px;
-  margin-left: 2rem;
+  margin: 3rem;
   z-index: 1000;
   fill: #fff;
   transition: fill 1s ease;
+  display: block;
 
   ${({ headerTheme }) =>
     headerTheme === 'dark' &&

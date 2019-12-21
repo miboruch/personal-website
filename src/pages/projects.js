@@ -7,6 +7,7 @@ import SEO from '../components/seo';
 import { convertObjectToArray } from '../utils/functions';
 import ProjectIntro from '../components/ProjectIntro/ProjectIntro';
 import Paragraph from '../components/atoms/Paragraph/Paragraph';
+import Footer from '../components/molecules/Footer/Footer';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -48,8 +49,14 @@ const SecondPage = ({ data }) => {
         <StyledParagraph>2019/20</StyledParagraph>
         <StyledTitle>Projects</StyledTitle>
         {projects.map((item, index) => (
-          <ProjectIntro data={item} image={imageArray[index]} key={index} />
+          <ProjectIntro
+            data={item}
+            image={imageArray[index]}
+            key={index}
+            reverse={index % 2 !== 0 ? 'true' : null}
+          />
         ))}
+        <Footer />
       </StyledWrapper>
     </Layout>
   );

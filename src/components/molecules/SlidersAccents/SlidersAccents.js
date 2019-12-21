@@ -98,7 +98,13 @@ const SlidersAccents = ({ index }) => {
           open project
         </StyledCircleText>
       </StyledCircle>
-      <AniLink swipe direction='down' to='/projects' duration={1}>
+      <AniLink
+        cover
+        direction='down'
+        to='/projects'
+        duration={1.3}
+        bg='#212121'
+      >
         <AllProjectCase small='true' style={projectsFade}>
           all projects
         </AllProjectCase>
