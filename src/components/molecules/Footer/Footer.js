@@ -4,9 +4,10 @@ import Paragraph from '../../atoms/Paragraph/Paragraph';
 
 const StyledFooter = styled.footer`
   background: transparent;
-  padding: 0 3rem 3rem;
+  padding: 3rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const StyledParagraph = styled(Paragraph)`

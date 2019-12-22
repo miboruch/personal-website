@@ -10,7 +10,7 @@ import { AnimatedMenu, MenuItems } from './menuAnimations';
 import SocialNavigation from '../molecules/SocialNavigation/SocialNavigation';
 
 const StyledMenuBox = styled(animated.div)`
-  position: absolute;
+  position: fixed;
   top: 5px;
   right: 5px;
   width: calc(100% - 10px);
@@ -35,8 +35,15 @@ const StyledMenuBox = styled(animated.div)`
 const NavigationWrapper = styled.div`
   position: absolute;
   bottom: 2rem;
-  right: 2rem;
   padding: 0 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+
+  ${({ theme }) => theme.mq.standard} {
+    right: 2rem;
+    left: auto;
+    transform: translate(0);
+  }
 `;
 
 const ParagraphBox = styled(animated.div)`
@@ -111,7 +118,11 @@ const Menu = ({ isOpen, boxSize, headerTheme }) => {
           scale={{ scaleWidth, scaleHeight }}
         >
           {props => (
-            <StyledMenuBox headerTheme={headerTheme} style={props}>
+            <StyledMenuBox
+              headerTheme={headerTheme}
+              style={props}
+              isOpen={isOpen}
+            >
               <MenuItems
                 keys={item => item.id}
                 state={isOpen ? 'in' : 'out'}

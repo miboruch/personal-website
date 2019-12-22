@@ -20,7 +20,7 @@ export const slideFadeDelayed = stateToggle => {
     },
     to: {
       opacity: stateToggle ? 1 : 0,
-      transform: stateToggle ? 'translateX(0px)' : 'translateX(-20px)'
+      transform: stateToggle ? 'translateX(0px)' : 'translateX(20px)'
     },
     delay: stateToggle ? 1800 : 0
   });

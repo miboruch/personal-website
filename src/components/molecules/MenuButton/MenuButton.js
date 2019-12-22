@@ -11,6 +11,7 @@ const StyledBox = styled(animated.div)`
   height: 62px;
   margin-top: 5px;
   margin-right: 5px;
+  margin-bottom: 5px;
   background-color: ${({ theme }) => theme.color.menuBox};
   display: flex;
   flex-direction: row;

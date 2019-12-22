@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 export const useElementSize = () => {
   const [size, setSize] = useState({ width: 220, height: 62 });
@@ -40,4 +40,20 @@ export const useScreenSize = () => {
   }, []);
 
   return screenSize;
+};
+
+export const useScrollPosition = () => {
+  const [isOnTop, setIsOnTop] = useState(true);
+
+  useEffect(() => {
+    const setPosition = () => {
+      setIsOnTop(window.pageYOffset === 0);
+    };
+    window.addEventListener('scroll', setPosition);
+    setPosition();
+
+    return () => window.removeEventListener('scroll', setPosition);
+  }, []);
+
+  return isOnTop;
 };

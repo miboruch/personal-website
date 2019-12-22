@@ -9,7 +9,10 @@ import AniLink from 'gatsby-plugin-transition-link/AniLink';
 import OpenCircle from '../../atoms/OpenCircle/OpenCircle';
 
 const StyledLine = styled(animated.div)`
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 100%;
   height: 1px;
   background: rgba(255, 255, 255, 0.2);
@@ -50,7 +53,7 @@ const AllProjectCase = styled(Paragraph)`
 
 const CircleWrapper = styled(animated.div)`
   position: absolute;
-  top: 50%;
+  top: 100%;
   left: 150px;
   transform: translate(-50%, -50%);
 `;

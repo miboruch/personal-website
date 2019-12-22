@@ -15,22 +15,27 @@ const StyledWrapper = styled.section`
     justify-content: center;
     align-items: center;
     height: 450px;
-    margin: 4rem 0;
+    margin-top: 50px;
   }
 
   ${({ theme }) => theme.mq.desktop} {
-    margin-bottom: 100px;
+    margin-top: 70px;
     height: 550px;
   }
 `;
 
 const CircleWrapper = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: opacity 1s ease;
+  display: none;
+
+  ${({ theme }) => theme.mq.standard} {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
 `;
 
 const StyledImage = styled(GatsbyImage)`
@@ -50,7 +55,7 @@ const StyledImage = styled(GatsbyImage)`
   }
 `;
 
-const PhotoWrapper = styled(Link)`
+const PhotoWrapper = styled.div`
   width: 100%;
   height: 300px;
   background-color: ${({ theme }) => theme.color.background};
@@ -64,14 +69,14 @@ const PhotoWrapper = styled(Link)`
 
   ${({ theme }) => theme.mq.standard} {
     height: 100%;
-  }
 
-  &:hover ${CircleWrapper} {
-    opacity: 1;
-  }
+    &:hover ${CircleWrapper} {
+      opacity: 1;
+    }
 
-  &:hover ${StyledImage} {
-    opacity: 0.25;
+    &:hover ${StyledImage} {
+      opacity: 0.25;
+    }
   }
 `;
 
@@ -79,6 +84,8 @@ const ContentWrapper = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
+  padding: 3rem;
+  margin-bottom: 2rem;
 
   ${({ theme }) => theme.mq.tablet} {
     width: 70%;
@@ -104,24 +111,43 @@ const StyledTitle = styled(Paragraph)`
 
 const StyledParagraph = styled(Paragraph)`
   font-size: 16px;
-  color: #7d7d7d;
+  color: #8d8d8d;
   letter-spacing: 0;
+`;
+
+const StyledLink = styled(Link)`
+  border-radius: 50%;
+`;
+
+const MobileLink = styled(Link)`
+  color: #000;
+  font-family: ${({ theme }) => theme.font.family.avanti};
+  letter-spacing: 2px;
+  display: block;
+  margin-top: 3rem;
+
+  ${({ theme }) => theme.mq.standard} {
+    display: none;
+  }
 `;
 
 const ProjectIntro = ({ data, image, reverse }) => {
   return (
     <StyledWrapper reverse={reverse}>
-      <PhotoWrapper to='/'>
+      <PhotoWrapper>
         <StyledImage fluid={image.childImageSharp.fluid} />
-        <CircleWrapper>
-          <OpenCircle />
-        </CircleWrapper>
+        <StyledLink to='/'>
+          <CircleWrapper>
+            <OpenCircle />
+          </CircleWrapper>
+        </StyledLink>
       </PhotoWrapper>
       <ContentWrapper>
         <StyledTitle title='true'>{data.name}</StyledTitle>
         <StyledParagraph small='true'>
           {data.primaryDescription}
         </StyledParagraph>
+        <MobileLink to='/'>Open project, link to another page here</MobileLink>
       </ContentWrapper>
     </StyledWrapper>
   );

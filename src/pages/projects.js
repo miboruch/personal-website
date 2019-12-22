@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { graphql, Link } from 'gatsby';
 
-import Layout from '../components/Layout';
+import Layout from '../components/templates/Layout';
 import SEO from '../components/seo';
 import { convertObjectToArray } from '../utils/functions';
 import ProjectIntro from '../components/ProjectIntro/ProjectIntro';
@@ -13,41 +13,45 @@ const StyledWrapper = styled.div`
   width: 100%;
   min-height: 100vh;
   padding-top: 70px;
-  background-color: ${({ theme }) => theme.color.lightThemeBackground};
+  // background-color: ${({ theme }) => theme.color.lightThemeBackground};
+  background-color: #fff;
   margin: 0;
+  overflow-y: hidden;
 `;
 
-const StyledTitle = styled(Paragraph)`
-  font-size: 34px !important;
-  font-family: ${({ theme }) => theme.font.family.avanti};
-  color: #1b1b1b;
-  padding-left: 2rem;
-  margin-bottom: 2rem;
+const TextWrapper = styled.div`
+  margin: 3rem;
 `;
 
 const StyledParagraph = styled(Paragraph)`
   font-size: 10px;
   color: #1b1b1b;
   letter-spacing: 3px;
-  padding: 2rem;
-  margin-top: 2rem;
+  padding-bottom: 1rem;
 `;
 
-const SecondPage = ({ data }) => {
+const StyledTitle = styled(Paragraph)`
+  font-size: 34px !important;
+  font-family: ${({ theme }) => theme.font.family.avanti};
+  color: #1b1b1b;
+`;
+
+const Projects = ({ data }) => {
   const imageArray = convertObjectToArray(
     data.image1,
     data.image2,
     data.image3
   );
   const { projects } = data.projectData;
-  console.log(projects);
-  console.log(imageArray);
+
   return (
     <Layout headerTheme='dark'>
       <SEO title='Projects' />
       <StyledWrapper>
-        <StyledParagraph>2019/20</StyledParagraph>
-        <StyledTitle>Projects</StyledTitle>
+        <TextWrapper>
+          <StyledParagraph>2019/20</StyledParagraph>
+          <StyledTitle>Projects</StyledTitle>
+        </TextWrapper>
         {projects.map((item, index) => (
           <ProjectIntro
             data={item}
@@ -82,4 +86,4 @@ export const query = graphql`
   }
 `;
 
-export default SecondPage;
+export default Projects;

@@ -21,7 +21,7 @@ const StyledSlider = styled(Slider)`
 `;
 
 const ArrowRight = styled(Arrow)`
-  width: 50px;
+  width: 60px;
   height: 30px;
   fill: #fff;
   margin: 0 1rem;

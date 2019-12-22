@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import GlobalStyle from '../styles/GlobalStyle';
+import GlobalStyle from '../../styles/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
-import { theme } from '../styles/theme';
-import Header from './Header/Header';
+import { theme } from '../../styles/theme';
+import Header from '../Header/Header';
 
-import './index.css';
+import '../index.css';
 
 const Layout = ({ children, headerTheme }) => {
   return (
