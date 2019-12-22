@@ -7,7 +7,7 @@ import Hamburger from '../../atoms/Hamburger/Hamburger';
 
 const StyledBox = styled(animated.div)`
   text-align: right;
-  width: 220px;
+  width: 200px;
   height: 62px;
   margin-top: 5px;
   margin-right: 5px;
@@ -24,6 +24,10 @@ const StyledBox = styled(animated.div)`
     css`
       background-color: ${({ theme }) => theme.color.lightThemeBackground};
     `}
+
+  ${({ theme }) => theme.mq.mobileL} {
+    width: 220px;
+  }
 
   ${({ theme }) => theme.mq.tablet} {
     width: 300px;

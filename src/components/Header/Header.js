@@ -5,8 +5,7 @@ import Menu from '../Menu/Menu';
 import { useElementSize, useScrollPosition } from '../../utils/customHooks';
 import MenuButton from '../molecules/MenuButton/MenuButton';
 import Paragraph from '../atoms/Paragraph/Paragraph';
-import Logo from '../../assets/icons/logo.svg';
-import LogoLine from '../../assets/icons/logo-line.svg';
+import Logo from '../atoms/Logo/Logo';
 
 const StyledHeader = styled.header`
   position: fixed;
@@ -43,31 +42,6 @@ const StyledMenuButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-`;
-
-const StyledLogo = styled(Logo)`
-  width: 80px;
-  height: 50px;
-  margin: 2rem;
-  fill: #fff;
-  transition: fill 1s ease;
-  display: block;
-
-  ${({ headerTheme }) =>
-    headerTheme === 'dark' &&
-    css`
-      fill: ${({ isOpen }) => (isOpen ? '#fff' : '#000')};
-    `}
-
-  ${({ headerTheme }) =>
-    headerTheme === 'light' &&
-    css`
-      fill: ${({ isOpen }) => (isOpen ? '#000' : '#fff')};
-    `}
-  
-  ${({ theme }) => theme.mq.standard}{
-    margin: 3rem;
-  }
 `;
 
 const StyledTextWrapper = styled.div`
@@ -107,7 +81,7 @@ const Header = ({ headerTheme }) => {
   return (
     <>
       <StyledHeader isOnTop={pageY} isOpen={isOpen} headerTheme={headerTheme}>
-        <StyledLogo headerTheme={headerTheme} isOpen={isOpen} />
+        <Logo headerTheme={headerTheme} isOpen={isOpen} />
         <StyledTextWrapper>
           <StyledParagraph headerTheme={headerTheme}>
             Krakow, Poland
