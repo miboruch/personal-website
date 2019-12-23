@@ -56,7 +56,7 @@ const Projects = ({ data }) => {
         </TextWrapper>
         <Controller>
           {projects.map((item, index) => (
-            <Scene triggerHook={0} duration={500} offset={-830} key={index}>
+            <Scene triggerHook={0} duration={500} offset={-860} key={index}>
               <Tween
                 from={{
                   opacity: 0,

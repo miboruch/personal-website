@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
-import Div100vh from 'react-div-100vh';
 import SliderContent from '../SliderContent/SliderContent';
 import SliderNavigation from '../molecules/SliderNavigation/SliderNavigation';
 import SocialNavigation from '../molecules/SocialNavigation/SocialNavigation';
@@ -78,25 +77,23 @@ const MainSlider = ({ images, data }) => {
 
   return (
     <StyledWrapper>
-      <Div100vh>
-        <StyledSlider {...settings} ref={sliderRef}>
-          {images.map((item, index) => (
-            <SliderContent
-              image={item}
-              key={index}
-              content={data[index]}
-              index={index}
-            />
-          ))}
-        </StyledSlider>
-        <SliderNavigation next={data[currentSlide].next}>
-          <ArrowLeft onClick={() => sliderRef.current.slickPrev()} />
-          <ArrowRight onClick={() => sliderRef.current.slickNext()} />
-        </SliderNavigation>
-        <NavigationWrapper>
-          <SocialNavigation toggleState={true} lightTheme={false} />
-        </NavigationWrapper>
-      </Div100vh>
+      <StyledSlider {...settings} ref={sliderRef}>
+        {images.map((item, index) => (
+          <SliderContent
+            image={item}
+            key={index}
+            content={data[index]}
+            index={index}
+          />
+        ))}
+      </StyledSlider>
+      <SliderNavigation next={data[currentSlide].next}>
+        <ArrowLeft onClick={() => sliderRef.current.slickPrev()} />
+        <ArrowRight onClick={() => sliderRef.current.slickNext()} />
+      </SliderNavigation>
+      <NavigationWrapper>
+        <SocialNavigation toggleState={true} lightTheme={false} />
+      </NavigationWrapper>
     </StyledWrapper>
   );
 };

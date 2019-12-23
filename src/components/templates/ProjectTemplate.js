@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Paragraph from '../atoms/Paragraph/Paragraph';
+import ProjectContentBox from '../atoms/ProjectContentBox/ProjectContentBox';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -41,27 +42,6 @@ const ContentBox = styled.section`
   }
 `;
 
-const StyledSmallHeading = styled(Paragraph)`
-  color: #1b1b1b;
-  font-family: ${({ theme }) => theme.font.family.avanti};
-  font-weight: bold;
-  letter-spacing: 2px;
-  font-size: 13px;
-`;
-
-const StyledAnswerParagraph = styled(Paragraph)`
-  font-size: 15px;
-  letter-spacing: 0;
-  color: #8d8d8d;
-  padding-top: 1rem;
-`;
-
-const StyledContentPiece = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 2rem;
-`;
-
 const ProjectTemplate = ({ content, images }) => {
   return (
     <StyledWrapper>
@@ -70,22 +50,10 @@ const ProjectTemplate = ({ content, images }) => {
         <StyledTitle>Indeed</StyledTitle>
       </TextWrapper>
       <ContentBox>
-        <StyledContentPiece>
-          <StyledSmallHeading>CATEGORY</StyledSmallHeading>
-          <StyledAnswerParagraph>e-commerce</StyledAnswerParagraph>
-        </StyledContentPiece>
-        <StyledContentPiece>
-          <StyledSmallHeading>TECHNOLOGIES</StyledSmallHeading>
-          <StyledAnswerParagraph>React, Redux</StyledAnswerParagraph>
-        </StyledContentPiece>
-        <StyledContentPiece>
-          <StyledSmallHeading>STATUS</StyledSmallHeading>
-          <StyledAnswerParagraph>finished</StyledAnswerParagraph>
-        </StyledContentPiece>
-        <StyledContentPiece>
-          <StyledSmallHeading>DATE</StyledSmallHeading>
-          <StyledAnswerParagraph>October 2019</StyledAnswerParagraph>
-        </StyledContentPiece>
+        <ProjectContentBox title='CATEGORY' description='e-commerce' />
+        <ProjectContentBox title='TECHNOLOGIES' description='React, Redux' />
+        <ProjectContentBox title='STATUS' description='finished' />
+        <ProjectContentBox title='DATE' description='October 2019' />
       </ContentBox>
     </StyledWrapper>
   );
