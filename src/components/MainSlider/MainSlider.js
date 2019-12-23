@@ -11,7 +11,7 @@ const StyledWrapper = styled.div`
   width: 100%;
   height: 100vh;
   position: relative;
-  z-index: -1;
+  z-index: 10;
 `;
 
 const StyledSlider = styled(Slider)`

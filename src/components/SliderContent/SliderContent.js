@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import BackgroundImage from 'gatsby-background-image';
-import Div100vh from 'react-div-100vh';
 import Paragraph from '../atoms/Paragraph/Paragraph';
 import { animated } from 'react-spring';
 import { Link } from 'gatsby';
@@ -129,48 +128,44 @@ const SliderContent = ({ image, content, index }) => {
   const trail = textWave(content.name, isCurrentSlide);
 
   return (
-    <Div100vh>
-      <StyledWrapper>
-        <StyledBackgroundImage
-          preserveStackingContext={true}
-          fluid={image.childImageSharp.fluid}
-        />
-        <StyledContextBox>
-          <ContentWrapper>
-            <TextWrapper>
-              <StyledTitleWrapper>
-                {trail.map(({ x, height, ...rest }, index) => (
-                  <animated.div
-                    key={index}
-                    style={{
-                      ...rest,
-                      transform: x.interpolate(
-                        x => `rotate(${x}px)`,
-                        `translate3d(0, ${x}px, 0)`
-                      )
-                    }}
-                  >
-                    <StyledTitle title='true' style={{ height }}>
-                      {content.name[index]}
-                    </StyledTitle>
-                  </animated.div>
-                ))}
-              </StyledTitleWrapper>
-              <StyledDescription style={fade}>
-                {content.description}
-              </StyledDescription>
-              <Link to='/projects'>
-                <StyledOpenCase style={slideDelayed}>
-                  Open project
-                </StyledOpenCase>
-              </Link>
-            </TextWrapper>
-            <SlidersAccents index={index} />
-          </ContentWrapper>
-          {/*</ContentWrapper>*/}
-        </StyledContextBox>
-      </StyledWrapper>
-    </Div100vh>
+    <StyledWrapper>
+      <StyledBackgroundImage
+        preserveStackingContext={true}
+        fluid={image.childImageSharp.fluid}
+      />
+      <StyledContextBox>
+        <ContentWrapper>
+          <TextWrapper>
+            <StyledTitleWrapper>
+              {trail.map(({ x, height, ...rest }, index) => (
+                <animated.div
+                  key={index}
+                  style={{
+                    ...rest,
+                    transform: x.interpolate(
+                      x => `rotate(${x}px)`,
+                      `translate3d(0, ${x}px, 0)`
+                    )
+                  }}
+                >
+                  <StyledTitle title='true' style={{ height }}>
+                    {content.name[index]}
+                  </StyledTitle>
+                </animated.div>
+              ))}
+            </StyledTitleWrapper>
+            <StyledDescription style={fade}>
+              {content.description}
+            </StyledDescription>
+            <Link to='/projects'>
+              <StyledOpenCase style={slideDelayed}>Open project</StyledOpenCase>
+            </Link>
+          </TextWrapper>
+          <SlidersAccents index={index} />
+        </ContentWrapper>
+        {/*</ContentWrapper>*/}
+      </StyledContextBox>
+    </StyledWrapper>
   );
 };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { graphql } from 'gatsby';
+import Div100vh from 'react-div-100vh';
 import Layout from '../components/templates/Layout';
 import SEO from '../components/seo';
 import { convertObjectToArray } from '../utils/functions';
@@ -20,12 +21,14 @@ const IndexPage = ({ data }) => {
   return (
     /* Three themes to choose from: light, dark, default.
     To have default, don't pass any props to Layout component  */
-    <Layout>
-      <CurrentSlideContextProvider>
-        <SEO title='Home' />
-        <MainSlider images={imagesArray} data={sliderContents} />
-      </CurrentSlideContextProvider>
-    </Layout>
+    <Div100vh>
+      <Layout>
+        <CurrentSlideContextProvider>
+          <SEO title='Home' />
+          <MainSlider images={imagesArray} data={sliderContents} />
+        </CurrentSlideContextProvider>
+      </Layout>
+    </Div100vh>
   );
 };
 
