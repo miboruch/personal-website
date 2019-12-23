@@ -3,8 +3,6 @@ import { graphql } from 'gatsby';
 import Layout from '../components/templates/Layout';
 import SEO from '../components/seo';
 import { convertObjectToArray } from '../utils/functions';
-import MainSlider from '../components/MainSlider/MainSlider';
-import CurrentSlideContextProvider from '../providers/CurrentSlideContext';
 import ProjectTemplate from '../components/templates/ProjectTemplate';
 import styled from 'styled-components';
 

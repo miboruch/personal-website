@@ -1,13 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { graphql, Link } from 'gatsby';
-
+import { Scene, Controller } from 'react-scrollmagic';
+import { Tween } from 'react-gsap';
 import Layout from '../components/templates/Layout';
 import SEO from '../components/seo';
 import { convertObjectToArray } from '../utils/functions';
 import ProjectIntro from '../components/ProjectIntro/ProjectIntro';
 import Paragraph from '../components/atoms/Paragraph/Paragraph';
 import Footer from '../components/molecules/Footer/Footer';
+import { easeQuadIn } from 'd3-ease';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -52,14 +54,28 @@ const Projects = ({ data }) => {
           <StyledParagraph>2019/20</StyledParagraph>
           <StyledTitle>Projects</StyledTitle>
         </TextWrapper>
-        {projects.map((item, index) => (
-          <ProjectIntro
-            data={item}
-            image={imageArray[index]}
-            key={index}
-            reverse={index % 2 !== 0 ? 'true' : null}
-          />
-        ))}
+        <Controller>
+          {projects.map((item, index) => (
+            <Scene triggerHook={0} duration={500} offset={-830} key={index}>
+              <Tween
+                from={{
+                  opacity: 0,
+                  ease: easeQuadIn
+                }}
+                to={{ opacity: 1, ease: easeQuadIn }}
+              >
+                <div>
+                  <ProjectIntro
+                    data={item}
+                    image={imageArray[index]}
+                    key={index}
+                    reverse={index % 2 !== 0 ? 'true' : null}
+                  />
+                </div>
+              </Tween>
+            </Scene>
+          ))}
+        </Controller>
         <Footer />
       </StyledWrapper>
     </Layout>

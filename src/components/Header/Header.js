@@ -27,7 +27,10 @@ const StyledHeader = styled.header`
     !isOnTop &&
     css`
       transition: all 1s 1s ease;
-      background: rgba(255, 255, 255, 0.9);
+      background: ${({ headerTheme }) =>
+        headerTheme === 'dark'
+          ? 'rgba(255, 255, 255, 0.9)'
+          : 'rgba(0,0,0,0.4)'};
     `}
 
   ${({ isOpen }) =>
