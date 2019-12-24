@@ -4,9 +4,6 @@ import GatsbyImage from 'gatsby-image';
 import Paragraph from '../atoms/Paragraph/Paragraph';
 import OpenCircle from '../atoms/OpenCircle/OpenCircle';
 import { Link } from 'gatsby';
-import { Scene, Controller } from 'react-scrollmagic';
-import { easeQuadIn } from 'd3-ease';
-import { Tween } from 'react-gsap';
 
 const StyledWrapper = styled.section`
   border-top: 1px solid rgba(141, 141, 141, 0.25);

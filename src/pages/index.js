@@ -35,7 +35,7 @@ const IndexPage = ({ data }) => {
 export const photoFragment = graphql`
   fragment photoFragment on File {
     childImageSharp {
-      fluid(maxWidth: 1000, quality: 100) {
+      fluid(maxWidth: 1500, quality: 100) {
         ...GatsbyImageSharpFluid_noBase64
       }
     }

@@ -17,14 +17,14 @@ const StyledWrapper = styled.div`
 `;
 
 const IndeedPage = ({ data }) => {
-  // const {
-  //   mainPageData: { sliderContents }
-  // } = data;
-  // const imagesArray = convertObjectToArray(
-  //   data.image1,
-  //   data.image2,
-  //   data.image3
-  // );
+  const {
+    indeedData: { projects }
+  } = data;
+  const imagesArray = convertObjectToArray(
+    data.image1,
+    data.image2,
+    data.image3
+  );
 
   console.log(data);
 
@@ -34,7 +34,7 @@ const IndeedPage = ({ data }) => {
     <Layout headerTheme='dark'>
       <SEO title='Projects' />
       <StyledWrapper>
-        <ProjectTemplate />
+        <ProjectTemplate content={projects[0]} images={imagesArray} />
       </StyledWrapper>
     </Layout>
   );
@@ -43,7 +43,7 @@ const IndeedPage = ({ data }) => {
 export const photoFragment = graphql`
   fragment photoFragment on File {
     childImageSharp {
-      fluid(maxWidth: 1000, quality: 100) {
+      fluid(maxWidth: 1500, quality: 100) {
         ...GatsbyImageSharpFluid_noBase64
       }
     }

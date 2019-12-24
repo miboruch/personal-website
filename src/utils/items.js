@@ -7,7 +7,7 @@ export const menuItems = [
   {
     id: 1,
     name: 'Projects',
-    link: '/'
+    link: '/projects'
   },
   {
     id: 2,

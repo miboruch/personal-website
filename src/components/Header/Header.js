@@ -54,6 +54,20 @@ const StyledTextWrapper = styled.div`
   justify-content: center;
   flex-direction: row;
   align-items: center;
+  color: #fff;
+  transition: color 1s ease;
+
+  ${({ headerTheme }) =>
+    headerTheme === 'dark' &&
+    css`
+      color: ${({ isOpen }) => (isOpen ? '#fff' : '#000')};
+    `}
+  
+  ${({ headerTheme }) =>
+    headerTheme === 'light' &&
+    css`
+      color: ${({ isOpen }) => (isOpen ? '#000' : '#fff')};
+    `}
 
   ${({ theme }) => theme.mq.standard} {
     display: flex;
@@ -63,13 +77,13 @@ const StyledTextWrapper = styled.div`
 const StyledParagraph = styled(Paragraph)`
   margin-right: 3rem;
   letter-spacing: 0;
-  color: ${({ headerTheme }) => (headerTheme === 'dark' ? '#000' : '#fff')};
+  color: inherit;
 `;
 
 const StyledLink = styled.a`
   margin-right: 3rem;
   letter-spacing: 0;
-  color: ${({ headerTheme }) => (headerTheme === 'dark' ? '#000' : '#fff')};
+  color: inherit;
 `;
 
 const Header = ({ headerTheme }) => {
@@ -85,14 +99,9 @@ const Header = ({ headerTheme }) => {
     <>
       <StyledHeader isOnTop={pageY} isOpen={isOpen} headerTheme={headerTheme}>
         <Logo headerTheme={headerTheme} isOpen={isOpen} />
-        <StyledTextWrapper>
-          <StyledParagraph headerTheme={headerTheme}>
-            Krakow, Poland
-          </StyledParagraph>
-          <StyledLink
-            href='mailto:miboruch@gmail.com'
-            headerTheme={headerTheme}
-          >
+        <StyledTextWrapper headerTheme={headerTheme} isOpen={isOpen}>
+          <StyledParagraph>Krakow, Poland</StyledParagraph>
+          <StyledLink href='mailto:miboruch@gmail.com'>
             miboruch@gmail.com
           </StyledLink>
         </StyledTextWrapper>
