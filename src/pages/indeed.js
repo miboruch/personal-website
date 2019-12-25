@@ -10,8 +10,8 @@ const StyledWrapper = styled.div`
   width: 100%;
   min-height: 100vh;
   padding-top: 70px;
-  // background-color: ${({ theme }) => theme.color.lightThemeBackground};
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.color.lightThemeBackground};
+  //background-color: #fff;
   margin: 0;
   overflow-y: hidden;
 `;

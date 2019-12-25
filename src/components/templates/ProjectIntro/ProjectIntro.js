@@ -56,6 +56,16 @@ const StyledImage = styled(GatsbyImage)`
   }
 `;
 
+const StyledLine = styled.div`
+  width: 0;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transition: width 1s ease;
+`;
+
 const PhotoWrapper = styled.div`
   width: 100%;
   height: 300px;
@@ -77,6 +87,10 @@ const PhotoWrapper = styled.div`
 
     &:hover ${StyledImage} {
       opacity: 0.25;
+    }
+
+    &:hover ${StyledLine} {
+      width: 100%;
     }
   }
 `;
@@ -133,12 +147,12 @@ const MobileLink = styled(Link)`
 `;
 
 const ProjectIntro = ({ data, image, reverse }) => {
-  console.log(data);
   return (
     <StyledWrapper reverse={reverse}>
       <PhotoWrapper>
+        <StyledLine />
         <StyledImage fluid={image.childImageSharp.fluid} />
-        <StyledLink to='/'>
+        <StyledLink to={data.pageLink}>
           <CircleWrapper>
             <OpenCircle />
           </CircleWrapper>
@@ -149,7 +163,9 @@ const ProjectIntro = ({ data, image, reverse }) => {
         <StyledParagraph small='true'>
           {data.primaryDescription}
         </StyledParagraph>
-        <MobileLink to='/'>Open project, link to another page here</MobileLink>
+        <MobileLink to={data.pageLink}>
+          Open project, link to another page here
+        </MobileLink>
       </ContentWrapper>
     </StyledWrapper>
   );

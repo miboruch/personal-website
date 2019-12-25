@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 import SliderContent from '../SliderContent/SliderContent';
 import SliderNavigation from '../../molecules/SliderNavigation/SliderNavigation';
 import SocialNavigation from '../../molecules/SocialNavigation/SocialNavigation';
-import Arrow from '../../../assets/icons/arrow-right.svg';
+import Arrow from '../../../assets/icons/arrow.svg';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
 
 const StyledWrapper = styled.div`
@@ -20,7 +20,7 @@ const StyledSlider = styled(Slider)`
   z-index: 0;
 `;
 
-const ArrowRight = styled(Arrow)`
+const ArrowLeft = styled(Arrow)`
   width: 60px;
   height: 30px;
   fill: #fff;
@@ -32,17 +32,17 @@ const ArrowRight = styled(Arrow)`
     fill: #000;
 
     &:hover {
-      transform: translateX(10px);
+      transform: translateX(-10px);
     }
   }
 `;
 
-const ArrowLeft = styled(ArrowRight)`
+const ArrowRight = styled(ArrowLeft)`
   transform: rotate(180deg);
 
   ${({ theme }) => theme.mq.standard} {
     &:hover {
-      transform: translateX(-10px) rotate(180deg);
+      transform: translateX(10px) rotate(180deg);
     }
   }
 `;

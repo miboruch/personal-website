@@ -103,7 +103,7 @@ const ProjectTemplate = ({ content, images }) => {
       <LinkWrapper>
         <LinkLabel>Link</LinkLabel>
         <StyledLink href={content.link} target='_blank' rel='noreferrer'>
-          {content.category}
+          {content.name}
         </StyledLink>
       </LinkWrapper>
       <Image image={images[1]} />

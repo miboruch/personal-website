@@ -29,7 +29,7 @@ const StyledHeader = styled.header`
       transition: all 1s 1s ease;
       background: ${({ headerTheme }) =>
         headerTheme === 'dark'
-          ? 'rgba(255, 255, 255, 0.9)'
+          ? 'rgba(241, 241, 241, 0.9)'
           : 'rgba(0,0,0,0.4)'};
     `}
 

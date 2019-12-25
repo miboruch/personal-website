@@ -15,8 +15,8 @@ const StyledWrapper = styled.div`
   width: 100%;
   min-height: 100vh;
   padding-top: 70px;
-  // background-color: ${({ theme }) => theme.color.lightThemeBackground};
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.color.lightThemeBackground};
+  //background-color: #fff;
   margin: 0;
   overflow-y: hidden;
 `;
@@ -31,6 +31,20 @@ const StyledParagraph = styled(Paragraph)`
   letter-spacing: 3px;
   padding-bottom: 1rem;
 `;
+
+// const NavigationBox = styled.div`
+//   width: 200px;
+//   height: 100px;
+//   background: #fff;
+//   position: fixed;
+//   bottom: 5px;
+//   left: 5px;
+//   z-index: 600;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   //background: rgb(241, 241, 241);
+// `;
 
 const StyledTitle = styled(Paragraph)`
   font-size: 34px !important;
@@ -54,6 +68,9 @@ const Projects = ({ data }) => {
           <StyledParagraph>2019/20</StyledParagraph>
           <StyledTitle>Projects</StyledTitle>
         </TextWrapper>
+        {/*<NavigationBox>*/}
+        {/*  <Paragraph small='true'>e-commerce</Paragraph>*/}
+        {/*</NavigationBox>*/}
         <Controller>
           {projects.map((item, index) => (
             <Scene triggerHook={0} duration={500} offset={-860} key={index}>
@@ -107,6 +124,7 @@ export const query = graphql`
       projects {
         name
         primaryDescription
+        pageLink
       }
     }
   }

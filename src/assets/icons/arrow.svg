@@ -1,7 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-	 viewBox="0 0 591.32 257.36" xml:space="preserve">
-<polygon points="517.45,134.31 84.09,134.31 134.07,85.61 133.37,84.9 82.65,134.31 83,134.67 82.65,135.03 133.37,184.44
-	134.07,183.72 84.38,135.31 517.45,135.31 "/>
+<svg xmlns="http://www.w3.org/2000/svg" width="434.8" height="99.54" viewBox="0 0 434.8 99.54">
+  <path id="arrow-graphic" d="M517.45,134.31,88.819,132.866l46.416-46.022L133.37,84.9,82.65,134.31l.35.36-.35.36,50.72,49.41,1.864-2.942L88.819,136.275l428.631.328Z" transform="translate(-82.65 -84.9)"/>
 </svg>
