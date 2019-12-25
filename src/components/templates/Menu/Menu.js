@@ -2,12 +2,12 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import AniLink from 'gatsby-plugin-transition-link/AniLink';
-import Paragraph from '../atoms/Paragraph/Paragraph';
+import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { animated } from 'react-spring';
-import { useScreenSize } from '../../utils/customHooks';
-import { menuItems } from '../../utils/items';
+import { useScreenSize } from '../../../utils/customHooks';
+import { menuItems } from '../../../utils/items';
 import { AnimatedMenu, MenuItems } from './menuAnimations';
-import SocialNavigation from '../molecules/SocialNavigation/SocialNavigation';
+import SocialNavigation from '../../molecules/SocialNavigation/SocialNavigation';
 
 const StyledMenuBox = styled(animated.div)`
   position: fixed;

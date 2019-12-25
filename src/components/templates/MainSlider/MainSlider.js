@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import SliderContent from '../SliderContent/SliderContent';
-import SliderNavigation from '../molecules/SliderNavigation/SliderNavigation';
-import SocialNavigation from '../molecules/SocialNavigation/SocialNavigation';
-import Arrow from '../../assets/icons/arrow-right.svg';
-import { CurrentSlideContext } from '../../providers/CurrentSlideContext';
+import SliderNavigation from '../../molecules/SliderNavigation/SliderNavigation';
+import SocialNavigation from '../../molecules/SocialNavigation/SocialNavigation';
+import Arrow from '../../../assets/icons/arrow-right.svg';
+import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
 
 const StyledWrapper = styled.div`
   width: 100%;

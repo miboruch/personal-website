@@ -6,7 +6,7 @@ import { Tween } from 'react-gsap';
 import Layout from '../components/templates/Layout';
 import SEO from '../components/seo';
 import { convertObjectToArray } from '../utils/functions';
-import ProjectIntro from '../components/ProjectIntro/ProjectIntro';
+import ProjectIntro from '../components/templates/ProjectIntro/ProjectIntro';
 import Paragraph from '../components/atoms/Paragraph/Paragraph';
 import Footer from '../components/molecules/Footer/Footer';
 import { easeQuadIn } from 'd3-ease';

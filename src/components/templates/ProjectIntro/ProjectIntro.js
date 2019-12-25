@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import GatsbyImage from 'gatsby-image';
-import Paragraph from '../atoms/Paragraph/Paragraph';
-import OpenCircle from '../atoms/OpenCircle/OpenCircle';
+import Paragraph from '../../atoms/Paragraph/Paragraph';
+import OpenCircle from '../../atoms/OpenCircle/OpenCircle';
 import { Link } from 'gatsby';
+import Image from '../../molecules/Image/Image';
 
 const StyledWrapper = styled.section`
   border-top: 1px solid rgba(141, 141, 141, 0.25);
@@ -132,6 +133,7 @@ const MobileLink = styled(Link)`
 `;
 
 const ProjectIntro = ({ data, image, reverse }) => {
+  console.log(data);
   return (
     <StyledWrapper reverse={reverse}>
       <PhotoWrapper>

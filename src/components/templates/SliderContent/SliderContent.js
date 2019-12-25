@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import BackgroundImage from 'gatsby-background-image';
-import Paragraph from '../atoms/Paragraph/Paragraph';
+import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { animated } from 'react-spring';
 import { Link } from 'gatsby';
-import { CurrentSlideContext } from '../../providers/CurrentSlideContext';
-import { createFade } from '../../utils/animations';
+import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
+import { createFade } from '../../../utils/animations';
 import { textWave, slideFadeDelayed } from './sliderContentAnimations';
-import SlidersAccents from '../molecules/SlidersAccents/SlidersAccents';
+import SlidersAccents from '../../molecules/SlidersAccents/SlidersAccents';
 
 const StyledWrapper = styled.div`
   width: 100%;

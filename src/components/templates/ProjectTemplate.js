@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import Paragraph from '../atoms/Paragraph/Paragraph';
 import ProjectContentBox from '../atoms/ProjectContentBox/ProjectContentBox';
 import GatsbyImage from 'gatsby-image';
+import Image from '../molecules/Image/Image';
+import ProjectFooter from '../molecules/ProjectFooter/ProjectFooter';
+import Footer from '../molecules/Footer/Footer';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -44,44 +47,6 @@ const ContentBox = styled.section`
   }
 `;
 
-const StyledImage = styled(GatsbyImage)`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 150%;
-  transition: opacity 1s ease;
-
-  ${({ theme }) => theme.mq.standard} {
-    width: 120%;
-  }
-
-  ${({ theme }) => theme.mq.desktop} {
-    width: 100%;
-  }
-`;
-
-const PhotoWrapper = styled.div`
-  width: 100%;
-  height: 300px;
-  background-color: ${({ theme }) => theme.color.background};
-  object-fit: cover;
-  position: relative;
-  overflow: hidden;
-
-  ${({ theme }) => theme.mq.tablet} {
-    height: 500px;
-  }
-
-  ${({ theme }) => theme.mq.standard} {
-    height: 550px;
-  }
-
-  ${({ theme }) => theme.mq.desktop} {
-    height: 650px;
-  }
-`;
-
 const Description = styled(Paragraph)`
   font-size: 16px;
   color: #8d8d8d;
@@ -114,7 +79,6 @@ const LinkLabel = styled(Paragraph)`
 const StyledLink = styled.a`
   color: #8d8d8d;
   font-size: 18px;
-  letter-spacing: 1px;
   padding: 1rem;
 `;
 
@@ -134,24 +98,17 @@ const ProjectTemplate = ({ content, images }) => {
         <ProjectContentBox title='STATUS' description={content.developStatus} />
         <ProjectContentBox title='DATE' description={content.date} />
       </ContentBox>
-      <PhotoWrapper>
-        <StyledImage fluid={images[0].childImageSharp.fluid} />
-      </PhotoWrapper>
+      <Image image={images[0]} />
       <Description>{content.primaryDescription}</Description>
-      <PhotoWrapper>
-        <StyledImage fluid={images[1].childImageSharp.fluid} />
-      </PhotoWrapper>
-      {images[2] ? (
-        <PhotoWrapper>
-          <StyledImage fluid={images[2].childImageSharp.fluid} />
-        </PhotoWrapper>
-      ) : null}
       <LinkWrapper>
         <LinkLabel>Link</LinkLabel>
         <StyledLink href={content.link} target='_blank' rel='noreferrer'>
           {content.category}
         </StyledLink>
       </LinkWrapper>
+      <Image image={images[1]} />
+      {images[2] ? <Image image={images[2]} /> : null}
+      <Footer />
     </StyledWrapper>
   );
 };

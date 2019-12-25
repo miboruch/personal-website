@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
-import Menu from '../Menu/Menu';
-import { useElementSize, useScrollPosition } from '../../utils/customHooks';
-import MenuButton from '../molecules/MenuButton/MenuButton';
-import Paragraph from '../atoms/Paragraph/Paragraph';
-import Logo from '../atoms/Logo/Logo';
+import Menu from '../../templates/Menu/Menu';
+import { useElementSize, useScrollPosition } from '../../../utils/customHooks';
+import MenuButton from '../MenuButton/MenuButton';
+import Paragraph from '../../atoms/Paragraph/Paragraph';
+import Logo from '../../atoms/Logo/Logo';
 
 const StyledHeader = styled.header`
   position: fixed;
