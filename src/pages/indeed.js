@@ -4,17 +4,6 @@ import Layout from '../components/templates/Layout';
 import SEO from '../components/seo';
 import { convertObjectToArray } from '../utils/functions';
 import ProjectTemplate from '../components/templates/ProjectTemplate';
-import styled from 'styled-components';
-
-const StyledWrapper = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  padding-top: 70px;
-  background-color: ${({ theme }) => theme.color.lightThemeBackground};
-  //background-color: #fff;
-  margin: 0;
-  overflow-y: hidden;
-`;
 
 const IndeedPage = ({ data }) => {
   const {
@@ -26,16 +15,12 @@ const IndeedPage = ({ data }) => {
     data.image3
   );
 
-  console.log(data);
-
   return (
     /* Three themes to choose from: light, dark, default.
     To have default, don't pass any props to Layout component  */
     <Layout headerTheme='dark'>
-      <SEO title='Projects' />
-      <StyledWrapper>
-        <ProjectTemplate content={projects[0]} images={imagesArray} />
-      </StyledWrapper>
+      <SEO title='Indeed' />
+      <ProjectTemplate content={projects[0]} images={imagesArray} />
     </Layout>
   );
 };

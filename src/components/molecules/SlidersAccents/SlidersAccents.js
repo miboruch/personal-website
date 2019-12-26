@@ -58,7 +58,7 @@ const CircleWrapper = styled(animated.div)`
   transform: translate(-50%, -50%);
 `;
 
-const SlidersAccents = ({ index }) => {
+const SlidersAccents = ({ index, link }) => {
   const { currentSlide } = useContext(CurrentSlideContext);
   const isCurrentSlide = currentSlide === index;
 
@@ -68,9 +68,11 @@ const SlidersAccents = ({ index }) => {
 
   return (
     <StyledLine style={line}>
-      <CircleWrapper style={circleFade}>
-        <OpenCircle />
-      </CircleWrapper>
+      <AniLink cover direction='down' to={link} duration={1.3} bg='#212121'>
+        <CircleWrapper style={circleFade}>
+          <OpenCircle />
+        </CircleWrapper>
+      </AniLink>
       <AniLink
         cover
         direction='down'

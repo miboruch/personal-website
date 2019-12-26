@@ -157,11 +157,11 @@ const SliderContent = ({ image, content, index }) => {
             <StyledDescription style={fade}>
               {content.description}
             </StyledDescription>
-            <Link to='/projects'>
+            <Link to={content.pageLink}>
               <StyledOpenCase style={slideDelayed}>Open project</StyledOpenCase>
             </Link>
           </TextWrapper>
-          <SlidersAccents index={index} />
+          <SlidersAccents index={index} link={content.pageLink}/>
         </ContentWrapper>
         {/*</ContentWrapper>*/}
       </StyledContextBox>

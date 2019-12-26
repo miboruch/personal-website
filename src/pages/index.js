@@ -10,7 +10,7 @@ import CurrentSlideContextProvider from '../providers/CurrentSlideContext';
 
 const IndexPage = ({ data }) => {
   const {
-    mainPageData: { sliderContents }
+    mainPageData: { projects }
   } = data;
   const imagesArray = convertObjectToArray(
     data.image1,
@@ -21,14 +21,14 @@ const IndexPage = ({ data }) => {
   return (
     /* Three themes to choose from: light, dark, default.
     To have default, don't pass any props to Layout component  */
-    <Div100vh>
-      <Layout>
-        <CurrentSlideContextProvider>
-          <SEO title='Home' />
-          <MainSlider images={imagesArray} data={sliderContents} />
-        </CurrentSlideContextProvider>
-      </Layout>
-    </Div100vh>
+    <Layout>
+      <CurrentSlideContextProvider>
+        <SEO title='Home' />
+        <Div100vh>
+          <MainSlider images={imagesArray} data={projects} />
+        </Div100vh>
+      </CurrentSlideContextProvider>
+    </Layout>
   );
 };
 
@@ -54,11 +54,12 @@ export const query = graphql`
       ...photoFragment
     }
     mainPageData: portfolio {
-      sliderContents {
+      projects {
         index
         name
         next
         description
+        pageLink
       }
     }
   }

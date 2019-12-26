@@ -9,11 +9,12 @@ const StyledNavigationBox = styled.div`
   left: 5px;
   display: flex;
   justify-content: space-between;
-  padding: 3rem;
+  padding: 2rem;
 
   ${({ theme }) => theme.mq.standard} {
     width: 500px;
     background: ${({ theme }) => theme.color.lightThemeBackground};
+    padding: 3rem;
   }
 `;
 

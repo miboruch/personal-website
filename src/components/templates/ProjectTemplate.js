@@ -11,6 +11,10 @@ import Footer from '../molecules/Footer/Footer';
 const StyledWrapper = styled.div`
   width: 100%;
   min-height: 100vh;
+  padding-top: 70px;
+  background-color: ${({ theme }) => theme.color.lightThemeBackground};
+  margin: 0;
+  overflow-y: hidden;
 `;
 
 const TextWrapper = styled.div`
