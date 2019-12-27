@@ -10,6 +10,8 @@ import ProjectIntro from '../components/templates/ProjectIntro/ProjectIntro';
 import Paragraph from '../components/atoms/Paragraph/Paragraph';
 import Footer from '../components/molecules/Footer/Footer';
 import { easeQuadIn } from 'd3-ease';
+import { useScrollPosition } from '../utils/customHooks';
+import ProjectNavigation from '../components/molecules/ProjectNavigation/ProjectNavigation';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -23,6 +25,11 @@ const StyledWrapper = styled.div`
 
 const TextWrapper = styled.div`
   margin: 3rem;
+
+  ${({ theme }) => theme.mq.standard} {
+    display: flex;
+    flex-direction: row;
+  }
 `;
 
 const StyledParagraph = styled(Paragraph)`
@@ -32,27 +39,18 @@ const StyledParagraph = styled(Paragraph)`
   padding-bottom: 1rem;
 `;
 
-// const NavigationBox = styled.div`
-//   width: 200px;
-//   height: 100px;
-//   background: #fff;
-//   position: fixed;
-//   bottom: 5px;
-//   left: 5px;
-//   z-index: 600;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   //background: rgb(241, 241, 241);
-// `;
-
 const StyledTitle = styled(Paragraph)`
   font-size: 34px !important;
   font-family: ${({ theme }) => theme.font.family.avanti};
   color: #1b1b1b;
+
+  ${({ theme }) => theme.mq.standard} {
+    padding: 0 4rem;
+  }
 `;
 
 const Projects = ({ data }) => {
+  const isOnTop = useScrollPosition();
   const imageArray = convertObjectToArray(
     data.image1,
     data.image2,
@@ -68,9 +66,7 @@ const Projects = ({ data }) => {
           <StyledParagraph>2019/20</StyledParagraph>
           <StyledTitle>Projects</StyledTitle>
         </TextWrapper>
-        {/*<NavigationBox>*/}
-        {/*  <Paragraph small='true'>e-commerce</Paragraph>*/}
-        {/*</NavigationBox>*/}
+        <ProjectNavigation isOnTop={isOnTop} />
         <Controller>
           {projects.map((item, index) => (
             <Scene triggerHook={0} duration={500} offset={-860} key={index}>

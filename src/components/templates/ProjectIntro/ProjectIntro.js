@@ -5,6 +5,9 @@ import Paragraph from '../../atoms/Paragraph/Paragraph';
 import OpenCircle from '../../atoms/OpenCircle/OpenCircle';
 import { Link } from 'gatsby';
 import Image from '../../molecules/Image/Image';
+import { Tween } from 'react-gsap';
+import { easeQuadIn } from 'd3-ease';
+import { Scene } from 'react-scrollmagic';
 
 const StyledWrapper = styled.section`
   border-top: 1px solid rgba(141, 141, 141, 0.25);

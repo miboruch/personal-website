@@ -22,6 +22,8 @@ const TextWrapper = styled.div`
 
   ${({ theme }) => theme.mq.standard} {
     margin: 3rem;
+    //display: flex;
+    //flex-direction: row;
   }
 `;
 
@@ -36,6 +38,10 @@ const StyledTitle = styled(Paragraph)`
   font-size: 34px !important;
   font-family: ${({ theme }) => theme.font.family.avanti};
   color: #1b1b1b;
+  
+  // ${({ theme }) => theme.mq.standard} {
+  //   padding: 0 4rem;
+  // }
 `;
 
 const ContentBox = styled.section`
