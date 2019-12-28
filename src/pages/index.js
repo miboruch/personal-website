@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { graphql } from 'gatsby';
-import Div100vh from 'react-div-100vh';
 import Layout from '../components/templates/Layout';
 import SEO from '../components/seo';
 import { convertObjectToArray } from '../utils/functions';
 import MainSlider from '../components/templates/MainSlider/MainSlider';
 import CurrentSlideContextProvider from '../providers/CurrentSlideContext';
+import Div100vh from 'react-div-100vh';
 import { TransitionState } from 'gatsby-plugin-transition-link';
 import TransitionProvider from '../providers/TransitionProvider';
 
@@ -27,7 +27,7 @@ const IndexPage = ({ data }) => {
       <CurrentSlideContextProvider>
         <SEO title='Home' />
         <Div100vh>
-          <MainSlider images={imagesArray} data={projects} />;
+          <MainSlider images={imagesArray} data={projects} />
         </Div100vh>
       </CurrentSlideContextProvider>
     </Layout>

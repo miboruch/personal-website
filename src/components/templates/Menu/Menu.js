@@ -115,7 +115,7 @@ const Menu = ({ isOpen, boxSize, headerTheme }) => {
 
   return (
     <>
-      {screenWidth === undefined ? (
+      {screenWidth === undefined || width === undefined ? (
         <p>Screen size is loading</p>
       ) : (
         <AnimatedMenu

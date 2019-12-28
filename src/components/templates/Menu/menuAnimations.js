@@ -7,14 +7,6 @@ export const AnimatedMenu = Keyframes.Spring({
     console.log(scaleWidth);
     console.log(scaleHeight);
     await next({
-      to: {
-        transform: `scale(${scaleWidth}, ${scaleHeight})`
-      },
-      config: {
-        duration: 0
-      }
-    });
-    await next({
       visibility: 'visible',
       transform: 'scale(1,1)',
       config: {
