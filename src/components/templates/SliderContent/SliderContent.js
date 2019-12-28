@@ -8,6 +8,7 @@ import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
 import { createFade } from '../../../utils/animations';
 import { textWave, slideFadeDelayed } from './sliderContentAnimations';
 import SlidersAccents from '../../molecules/SlidersAccents/SlidersAccents';
+import Div100vh from 'react-div-100vh';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -21,7 +22,7 @@ const StyledBackgroundImage = styled(BackgroundImage)`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   opacity: 0.5;
   background-color: transparent;
   background-position: center;
@@ -46,7 +47,7 @@ const StyledContextBox = styled.section`
 
 const ContentWrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -128,44 +129,48 @@ const SliderContent = ({ image, content, index }) => {
   const trail = textWave(content.name, isCurrentSlide);
 
   return (
-    <StyledWrapper>
-      <StyledBackgroundImage
-        preserveStackingContext={true}
-        fluid={image.childImageSharp.fluid}
-      />
-      <StyledContextBox>
-        <ContentWrapper>
-          <TextWrapper>
-            <StyledTitleWrapper>
-              {trail.map(({ x, height, ...rest }, index) => (
-                <animated.div
-                  key={index}
-                  style={{
-                    ...rest,
-                    transform: x.interpolate(
-                      x => `rotate(${x}px)`,
-                      `translate3d(0, ${x}px, 0)`
-                    )
-                  }}
-                >
-                  <StyledTitle title='true' style={{ height }}>
-                    {content.name[index]}
-                  </StyledTitle>
-                </animated.div>
-              ))}
-            </StyledTitleWrapper>
-            <StyledDescription style={fade}>
-              {content.description}
-            </StyledDescription>
-            <Link to={content.pageLink}>
-              <StyledOpenCase style={slideDelayed}>Open project</StyledOpenCase>
-            </Link>
-          </TextWrapper>
-          <SlidersAccents index={index} link={content.pageLink} />
-        </ContentWrapper>
-        {/*</ContentWrapper>*/}
-      </StyledContextBox>
-    </StyledWrapper>
+    <Div100vh>
+      <StyledWrapper>
+        <StyledBackgroundImage
+          preserveStackingContext={true}
+          fluid={image.childImageSharp.fluid}
+        />
+        <StyledContextBox>
+          <ContentWrapper>
+            <TextWrapper>
+              <StyledTitleWrapper>
+                {trail.map(({ x, height, ...rest }, index) => (
+                  <animated.div
+                    key={index}
+                    style={{
+                      ...rest,
+                      transform: x.interpolate(
+                        x => `rotate(${x}px)`,
+                        `translate3d(0, ${x}px, 0)`
+                      )
+                    }}
+                  >
+                    <StyledTitle title='true' style={{ height }}>
+                      {content.name[index]}
+                    </StyledTitle>
+                  </animated.div>
+                ))}
+              </StyledTitleWrapper>
+              <StyledDescription style={fade}>
+                {content.description}
+              </StyledDescription>
+              <Link to={content.pageLink}>
+                <StyledOpenCase style={slideDelayed}>
+                  Open project
+                </StyledOpenCase>
+              </Link>
+            </TextWrapper>
+            <SlidersAccents index={index} link={content.pageLink} />
+          </ContentWrapper>
+          {/*</ContentWrapper>*/}
+        </StyledContextBox>
+      </StyledWrapper>
+    </Div100vh>
   );
 };
 

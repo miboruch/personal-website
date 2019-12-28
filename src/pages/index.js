@@ -26,9 +26,7 @@ const IndexPage = ({ data }) => {
     <Layout>
       <CurrentSlideContextProvider>
         <SEO title='Home' />
-        <Div100vh>
-          <MainSlider images={imagesArray} data={projects} />
-        </Div100vh>
+        <MainSlider images={imagesArray} data={projects} />
       </CurrentSlideContextProvider>
     </Layout>
   );

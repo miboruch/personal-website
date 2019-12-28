@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from '../../styles/theme';
 import Header from '../molecules/Header/Header';
 import TransitionProvider from '../../providers/TransitionProvider';
+import Div100vh from 'react-div-100vh';
 
 import '../index.css';
 import { useScreenSize } from '../../utils/customHooks';
@@ -15,8 +16,10 @@ const Layout = ({ children, headerTheme }) => {
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <Header headerTheme={headerTheme} />
-        {children}
+        <Div100vh>
+          <Header headerTheme={headerTheme} />
+          {children}
+        </Div100vh>
       </ThemeProvider>
     </>
   );

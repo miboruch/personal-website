@@ -9,13 +9,14 @@ import { menuItems } from '../../../utils/items';
 import { AnimatedMenu, MenuItems } from './menuAnimations';
 import SocialNavigation from '../../molecules/SocialNavigation/SocialNavigation';
 import Loader from '../Loader/Loader';
+import Div100vh from 'react-div-100vh';
 
 const StyledMenuBox = styled(animated.div)`
   position: fixed;
   top: 5px;
   right: 5px;
   width: calc(100% - 10px);
-  height: calc(100vh - 10px);
+  height: calc(100% - 10px);
   display: flex;
   justify-content: center;
   align-items: center;
