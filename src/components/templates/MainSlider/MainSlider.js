@@ -11,14 +11,14 @@ import { Transition } from 'react-spring/renderprops-universal';
 
 const StyledWrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   position: relative;
   z-index: 10;
 `;
 
 const StyledSlider = styled(Slider)`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   z-index: 0;
 `;
 

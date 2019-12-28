@@ -15,7 +15,7 @@ const StyledMenuBox = styled(animated.div)`
   top: 5px;
   right: 5px;
   width: calc(100% - 10px);
-  height: calc(100vh - 10px);
+  height: calc(100% - 10px);
   display: flex;
   justify-content: center;
   align-items: center;

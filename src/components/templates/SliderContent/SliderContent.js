@@ -8,10 +8,11 @@ import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
 import { createFade } from '../../../utils/animations';
 import { textWave, slideFadeDelayed } from './sliderContentAnimations';
 import SlidersAccents from '../../molecules/SlidersAccents/SlidersAccents';
+import Div100vh from 'react-div-100vh';
 
 const StyledWrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   position: relative;
   background: ${({ theme }) => theme.color.backgroundGradient};
 `;
@@ -21,7 +22,7 @@ const StyledBackgroundImage = styled(BackgroundImage)`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   opacity: 0.5;
   background-color: transparent;
   background-position: center;
@@ -37,7 +38,7 @@ const StyledContextBox = styled.section`
   top: 40px;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
 
   ${({ theme }) => theme.mq.standard} {
     top: 0;
@@ -46,7 +47,7 @@ const StyledContextBox = styled.section`
 
 const ContentWrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -109,7 +110,7 @@ const StyledOpenCase = styled(Paragraph)`
 const TextWrapper = styled.div`
   height: 140px;
   position: absolute;
-  top: 50%;
+  top: 45%;
   transform: translateY(-50%);
 
   ${({ theme }) => theme.mq.standard} {
@@ -128,44 +129,48 @@ const SliderContent = ({ image, content, index }) => {
   const trail = textWave(content.name, isCurrentSlide);
 
   return (
-    <StyledWrapper>
-      <StyledBackgroundImage
-        preserveStackingContext={true}
-        fluid={image.childImageSharp.fluid}
-      />
-      <StyledContextBox>
-        <ContentWrapper>
-          <TextWrapper>
-            <StyledTitleWrapper>
-              {trail.map(({ x, height, ...rest }, index) => (
-                <animated.div
-                  key={index}
-                  style={{
-                    ...rest,
-                    transform: x.interpolate(
-                      x => `rotate(${x}px)`,
-                      `translate3d(0, ${x}px, 0)`
-                    )
-                  }}
-                >
-                  <StyledTitle title='true' style={{ height }}>
-                    {content.name[index]}
-                  </StyledTitle>
-                </animated.div>
-              ))}
-            </StyledTitleWrapper>
-            <StyledDescription style={fade}>
-              {content.description}
-            </StyledDescription>
-            <Link to={content.pageLink}>
-              <StyledOpenCase style={slideDelayed}>Open project</StyledOpenCase>
-            </Link>
-          </TextWrapper>
-          <SlidersAccents index={index} link={content.pageLink} />
-        </ContentWrapper>
-        {/*</ContentWrapper>*/}
-      </StyledContextBox>
-    </StyledWrapper>
+    <Div100vh>
+      <StyledWrapper>
+        <StyledBackgroundImage
+          preserveStackingContext={true}
+          fluid={image.childImageSharp.fluid}
+        />
+        <StyledContextBox>
+          <ContentWrapper>
+            <TextWrapper>
+              <StyledTitleWrapper>
+                {trail.map(({ x, height, ...rest }, index) => (
+                  <animated.div
+                    key={index}
+                    style={{
+                      ...rest,
+                      transform: x.interpolate(
+                        x => `rotate(${x}px)`,
+                        `translate3d(0, ${x}px, 0)`
+                      )
+                    }}
+                  >
+                    <StyledTitle title='true' style={{ height }}>
+                      {content.name[index]}
+                    </StyledTitle>
+                  </animated.div>
+                ))}
+              </StyledTitleWrapper>
+              <StyledDescription style={fade}>
+                {content.description}
+              </StyledDescription>
+              <Link to={content.pageLink}>
+                <StyledOpenCase style={slideDelayed}>
+                  Open project
+                </StyledOpenCase>
+              </Link>
+            </TextWrapper>
+            <SlidersAccents index={index} link={content.pageLink} />
+          </ContentWrapper>
+          {/*</ContentWrapper>*/}
+        </StyledContextBox>
+      </StyledWrapper>
+    </Div100vh>
   );
 };
 

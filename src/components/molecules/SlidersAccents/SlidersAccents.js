@@ -12,7 +12,7 @@ import { TransitionLink } from 'gatsby-plugin-transition-link';
 
 const StyledLine = styled(animated.div)`
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
