@@ -7,6 +7,8 @@ import SEO from '../components/seo';
 import { convertObjectToArray } from '../utils/functions';
 import MainSlider from '../components/templates/MainSlider/MainSlider';
 import CurrentSlideContextProvider from '../providers/CurrentSlideContext';
+import { TransitionState } from 'gatsby-plugin-transition-link';
+import TransitionProvider from '../providers/TransitionProvider';
 
 const IndexPage = ({ data }) => {
   const {
@@ -25,7 +27,7 @@ const IndexPage = ({ data }) => {
       <CurrentSlideContextProvider>
         <SEO title='Home' />
         <Div100vh>
-          <MainSlider images={imagesArray} data={projects} />
+          <MainSlider images={imagesArray} data={projects} />;
         </Div100vh>
       </CurrentSlideContextProvider>
     </Layout>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import AniLink from 'gatsby-plugin-transition-link/AniLink';
@@ -8,6 +8,7 @@ import { useScreenSize } from '../../../utils/customHooks';
 import { menuItems } from '../../../utils/items';
 import { AnimatedMenu, MenuItems } from './menuAnimations';
 import SocialNavigation from '../../molecules/SocialNavigation/SocialNavigation';
+import Loader from '../Loader/Loader';
 
 const StyledMenuBox = styled(animated.div)`
   position: fixed;
@@ -103,15 +104,19 @@ const StyledMenuItems = styled(Paragraph)`
 
 const Menu = ({ isOpen, boxSize, headerTheme }) => {
   const { screenWidth, screenHeight } = useScreenSize();
+  console.log(screenWidth, screenHeight);
   const { width, height } = boxSize;
+  console.log(width, height);
 
-  const scaleWidth = width / screenWidth;
-  const scaleHeight = height / screenHeight;
+  const scaleWidth = width / (screenWidth - 10);
+  const scaleHeight = height / (screenHeight - 10);
+  console.log(scaleWidth);
+  console.log(scaleHeight);
 
   return (
     <>
       {screenWidth === undefined ? (
-        <p>Screen width is loading</p>
+        <p>Screen size is loading</p>
       ) : (
         <AnimatedMenu
           state={isOpen ? 'in' : 'out'}

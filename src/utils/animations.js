@@ -18,3 +18,16 @@ export const createFade = (stateToggle, duration, delay, offDuration = 500) => {
     delay: stateToggle ? delay : 0
   });
 };
+
+export const createUpperFadeOut = (stateToggle, duration, delay = 0) => {
+  return useSpring({
+    config: {
+      duration: duration,
+      easing: easeExpOut
+    },
+    to: {
+      transform: `translateY(${stateToggle ? '-100%' : '0'})`
+    },
+    delay: delay
+  });
+};

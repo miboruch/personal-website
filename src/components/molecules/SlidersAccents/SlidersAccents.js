@@ -7,6 +7,8 @@ import { createFade } from '../../../utils/animations';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
 import AniLink from 'gatsby-plugin-transition-link/AniLink';
 import OpenCircle from '../../atoms/OpenCircle/OpenCircle';
+import Link from '../../atoms/Link/Link';
+import { TransitionLink } from 'gatsby-plugin-transition-link';
 
 const StyledLine = styled(animated.div)`
   position: absolute;
@@ -68,22 +70,16 @@ const SlidersAccents = ({ index, link }) => {
 
   return (
     <StyledLine style={line}>
-      <AniLink cover direction='down' to={link} duration={1.3} bg='#212121'>
+      <Link to={link}>
         <CircleWrapper style={circleFade}>
           <OpenCircle />
         </CircleWrapper>
-      </AniLink>
-      <AniLink
-        cover
-        direction='down'
-        to='/projects'
-        duration={1.3}
-        bg='#212121'
-      >
+      </Link>
+      <Link to='/projects'>
         <AllProjectCase small='true' style={projectsFade}>
           all projects
         </AllProjectCase>
-      </AniLink>
+      </Link>
     </StyledLine>
   );
 };

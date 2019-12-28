@@ -12,6 +12,9 @@ import Footer from '../components/molecules/Footer/Footer';
 import { easeQuadIn } from 'd3-ease';
 import { useScrollPosition } from '../utils/customHooks';
 import ProjectNavigation from '../components/molecules/ProjectNavigation/ProjectNavigation';
+import { Spring } from 'react-spring/renderprops-universal';
+import { animated } from 'react-spring';
+import TransitionProvider from '../providers/TransitionProvider';
 
 const StyledWrapper = styled.div`
   width: 100%;

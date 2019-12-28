@@ -6,6 +6,8 @@ import SliderNavigation from '../../molecules/SliderNavigation/SliderNavigation'
 import SocialNavigation from '../../molecules/SocialNavigation/SocialNavigation';
 import Arrow from '../../../assets/icons/arrow.svg';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
+import TransitionLink from 'gatsby-plugin-transition-link';
+import { Transition } from 'react-spring/renderprops-universal';
 
 const StyledWrapper = styled.div`
   width: 100%;

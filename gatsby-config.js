@@ -26,7 +26,12 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    `gatsby-plugin-transition-link`,
+    {
+      resolve: `gatsby-plugin-transition-link`,
+      options: {
+        injectPageProps: false
+      }
+    },
     `gatsby-plugin-eslint`,
     {
       resolve: `gatsby-plugin-manifest`,

@@ -1,23 +1,21 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
-export const useElementSize = () => {
-  const [size, setSize] = useState({ width: 220, height: 62 });
-  const ref = useRef();
-
+export const useElementSize = ref => {
+  const [size, setSize] = useState({ width: undefined, height: undefined });
   useLayoutEffect(() => {
     const updateSize = () => {
       return setSize({
-        width: ref.current.getBoundingClientRect().width,
-        height: ref.current.getBoundingClientRect().height
+        width: ref.current.clientWidth,
+        height: ref.current.clientHeight
       });
     };
 
-    updateSize();
     window.addEventListener('resize', updateSize);
+    updateSize();
 
     return () => window.removeEventListener('resize', updateSize);
   }, []);
-  return [size, ref];
+  return size;
 };
 
 export const useScreenSize = () => {
