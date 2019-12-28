@@ -12,12 +12,16 @@ import { TransitionLink } from 'gatsby-plugin-transition-link';
 
 const StyledLine = styled(animated.div)`
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
   height: 1px;
   background: rgba(255, 255, 255, 0.2);
+
+  ${({ theme }) => theme.mq.standard} {
+    top: 50%;
+  }
 `;
 
 const AllProjectCase = styled(Paragraph)`

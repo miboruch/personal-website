@@ -94,6 +94,7 @@ const Header = ({ headerTheme }) => {
   const [isOpen, setOpen] = useState(false);
   const size = useElementSize(menuButton);
   const pageY = useScrollPosition();
+  console.log(pageY);
 
   const toggleMenu = () => {
     setOpen(!isOpen);
@@ -118,11 +119,7 @@ const Header = ({ headerTheme }) => {
           />
         </StyledMenuButtonWrapper>
       </StyledHeader>
-      <Menu
-        isOpen={isOpen}
-        boxSize={size}
-        headerTheme={headerTheme}
-      />
+      <Menu isOpen={isOpen} boxSize={size} headerTheme={headerTheme} />
     </>
   );
 };

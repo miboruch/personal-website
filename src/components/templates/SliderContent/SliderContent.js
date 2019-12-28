@@ -38,7 +38,7 @@ const StyledContextBox = styled.section`
   top: 40px;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
 
   ${({ theme }) => theme.mq.standard} {
     top: 0;
@@ -51,8 +51,8 @@ const ContentWrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  //justify-content: center;
+  //align-items: center;
 `;
 
 const StyledTitleWrapper = styled(animated.div)`
@@ -110,13 +110,18 @@ const StyledOpenCase = styled(Paragraph)`
 const TextWrapper = styled.div`
   height: 140px;
   position: absolute;
-  top: 50%;
+  top: 40%;
   transform: translateY(-50%);
 
   ${({ theme }) => theme.mq.standard} {
+    top: 50%;
     left: 300px;
     transform: translateY(-70%);
   }
+`;
+
+const StyledLink = styled(Link)`
+  color: #fff;
 `;
 
 const SliderContent = ({ image, content, index }) => {
@@ -159,11 +164,9 @@ const SliderContent = ({ image, content, index }) => {
               <StyledDescription style={fade}>
                 {content.description}
               </StyledDescription>
-              <Link to={content.pageLink}>
-                <StyledOpenCase style={slideDelayed}>
-                  Open project
-                </StyledOpenCase>
-              </Link>
+              <StyledOpenCase style={slideDelayed}>
+                <StyledLink to={content.pageLink}>Open project</StyledLink>
+              </StyledOpenCase>
             </TextWrapper>
             <SlidersAccents index={index} link={content.pageLink} />
           </ContentWrapper>
