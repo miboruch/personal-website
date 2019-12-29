@@ -11,16 +11,22 @@ const StyledWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
+
+  &:first-child {
+    padding-left: 0;
+  }
 `;
 
 const StyledLink = styled(animated.a)`
   color: ${({ headerTheme }) => (headerTheme === 'light' ? '#000' : '#fff')};
   text-decoration: none;
-  padding: 2rem 2rem 0.5rem 2rem;
+  padding: ${({ noPadding }) =>
+    noPadding ? '2rem 4rem 0.5rem 0' : '2rem 2rem 0.5rem 2rem'};
   letter-spacing: 1px;
 
   ${({ theme }) => theme.mq.tablet} {
-    padding: 2rem 3rem 0.5rem 3rem;
+    padding: ${({ noPadding }) =>
+      noPadding ? '2rem 6rem 0.5rem 0' : '2rem 3rem 0.5rem 3rem'};
   }
 `;
 
@@ -45,7 +51,7 @@ const LinksFade = Keyframes.Spring({
   }
 });
 
-const SocialNavigation = ({ headerTheme, toggleState }) => {
+const SocialNavigation = ({ headerTheme, toggleState, noPadding = false }) => {
   // const {
   //   portfolio: { socialMenus }
   // } = useStaticQuery(graphql`
@@ -67,6 +73,7 @@ const SocialNavigation = ({ headerTheme, toggleState }) => {
             {mediaItems.map(item => (
               <StyledLink
                 style={props}
+                noPadding={noPadding}
                 key={item.id}
                 medium='true'
                 href={item.link}

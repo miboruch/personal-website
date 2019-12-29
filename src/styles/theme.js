@@ -35,6 +35,7 @@ export const theme = {
   },
   mq: {
     mobileL: '@media all and (min-width: 370px)',
+    tabletS: '@media all and (min-width: 512px)',
     tablet: '@media all and (min-width: 710px)',
     standard: '@media all and (min-width: 1024px)',
     desktop: '@media all and (min-width: 1440px)'
