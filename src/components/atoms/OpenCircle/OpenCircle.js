@@ -35,11 +35,11 @@ const StyledCircleText = styled(Paragraph)`
   text-transform: uppercase;
 `;
 
-const OpenCircle = ({ style }) => {
+const OpenCircle = ({ style, text }) => {
   return (
     <StyledCircle style={style}>
       <StyledCircleText small='true' style={style}>
-        open project
+        open {text}
       </StyledCircleText>
     </StyledCircle>
   );

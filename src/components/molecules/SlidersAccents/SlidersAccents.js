@@ -18,6 +18,10 @@ const StyledLine = styled(animated.div)`
   width: 100%;
   height: 1px;
   background: rgba(255, 255, 255, 0.2);
+
+  ${({ theme }) => theme.mq.standard} {
+    top: 50%;
+  }
 `;
 
 const AllProjectCase = styled(Paragraph)`
@@ -72,7 +76,7 @@ const SlidersAccents = ({ index, link }) => {
     <StyledLine style={line}>
       <Link to={link}>
         <CircleWrapper style={circleFade}>
-          <OpenCircle />
+          <OpenCircle text='project' />
         </CircleWrapper>
       </Link>
       <Link to='/projects'>

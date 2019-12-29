@@ -115,6 +115,7 @@ const TextWrapper = styled.div`
 
   ${({ theme }) => theme.mq.standard} {
     left: 300px;
+    top: 50%;
     transform: translateY(-70%);
   }
 `;
