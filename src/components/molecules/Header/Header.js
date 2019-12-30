@@ -33,7 +33,7 @@ const StyledHeader = styled(animated.header)`
       background: ${({ headerTheme }) =>
         headerTheme === 'dark'
           ? 'rgba(241, 241, 241, 0.9)'
-          : 'rgba(0,0,0,0.4)'};
+          : 'rgba(0,0,0,0.7)'};
     `}
 
   ${({ isOpen }) =>
@@ -118,11 +118,7 @@ const Header = ({ headerTheme }) => {
           />
         </StyledMenuButtonWrapper>
       </StyledHeader>
-      <Menu
-        isOpen={isOpen}
-        boxSize={size}
-        headerTheme={headerTheme}
-      />
+      <Menu isOpen={isOpen} boxSize={size} headerTheme={headerTheme} />
     </>
   );
 };

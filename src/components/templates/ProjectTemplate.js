@@ -78,7 +78,16 @@ const LinkWrapper = styled.section`
   align-items: center;
 `;
 
-const LinkLabel = styled(Paragraph)`
+const TechnologiesWrapper = styled.section`
+  width: 100%;
+  padding-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const TextLabel = styled(Paragraph)`
   font-weight: bold;
   font-size: 15px;
   letter-spacing: 2px;
@@ -110,8 +119,12 @@ const ProjectTemplate = ({ content, images }) => {
       </ContentBox>
       <Image image={images[0]} />
       <Description>{content.primaryDescription}</Description>
+      <TechnologiesWrapper>
+        <TextLabel>Technologies</TextLabel>
+        <Description>{content.secondaryDescription}</Description>
+      </TechnologiesWrapper>
       <LinkWrapper>
-        <LinkLabel>Link</LinkLabel>
+        <TextLabel>Link</TextLabel>
         <StyledLink href={content.link} target='_blank' rel='noreferrer'>
           {content.name}
         </StyledLink>
