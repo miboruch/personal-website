@@ -21,7 +21,7 @@ const StyledWrapper = styled.div`
 
 const StyledForm = styled.form`
   width: 90%;
-  height: 80%;
+  height: 90%;
   background: #fff;
   display: flex;
   text-align: center;
@@ -29,12 +29,20 @@ const StyledForm = styled.form`
   flex-direction: column;
   align-items: center;
   position: relative;
+
+  ${({ theme }) => theme.mq.tabletS} {
+    height: 80%;
+  }
 `;
 
 const FormLine = styled.div`
   position: relative;
-  width: 80%;
   margin-bottom: 3rem;
+  width: 85%;
+
+  ${({ theme }) => theme.mq.standard} {
+    width: 60%;
+  }
 `;
 
 const StyledLabel = styled.label`
@@ -65,6 +73,18 @@ const StyledInput = styled.input`
   &:focus ~ ${StyledLabel} {
     transform: scale(0.8) translateY(-20px);
   }
+
+  &:valid ~ ${StyledLabel} {
+    transform: scale(0.8) translateY(-20px);
+  }
+
+  &:valid {
+    border-bottom-color: lightgreen;
+  }
+
+  &:invalid {
+    border-bottom-color: tomato;
+  }
 `;
 
 const StyledTextArea = styled.textarea`
@@ -85,6 +105,18 @@ const StyledTextArea = styled.textarea`
 
   &:focus ~ ${StyledLabel} {
     transform: scale(0.8) translateY(-20px);
+  }
+
+  &:valid ~ ${StyledLabel} {
+    transform: scale(0.8) translateY(-20px);
+  }
+
+  &:valid {
+    border-bottom-color: lightgreen;
+  }
+
+  &:invalid {
+    border-bottom-color: tomato;
   }
 `;
 
@@ -114,18 +146,23 @@ const ContactForm = ({ isOpen, setFormState }) => {
         <CloseButton setFormState={setFormState} />
         <StyledTitle>Send me a message</StyledTitle>
         <FormLine>
-          <StyledInput type='name' name='name' />
+          <StyledInput type='name' name='name' required pattern='\S+.*' />
           <StyledLabel>name</StyledLabel>
         </FormLine>
         <FormLine>
-          <StyledInput type='email' name='email' />
+          <StyledInput
+            type='email'
+            name='email'
+            required
+            pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
+          />
           <StyledLabel>e-mail</StyledLabel>
         </FormLine>
         <FormLine>
-          <StyledTextArea type='message' name='message' />
+          <StyledTextArea name='message' required />
           <StyledLabel>message</StyledLabel>
         </FormLine>
-        <StyledSendMessage>send message</StyledSendMessage>
+        <StyledSendMessage type='submit'>send message</StyledSendMessage>
       </StyledForm>
     </StyledWrapper>
   );

@@ -117,6 +117,14 @@ const FooterWrapper = styled.div`
 
 const NavigationWrapper = styled.div`
   width: 70%;
+
+  ${({ theme }) => theme.mq.tablet} {
+    width: 60%;
+  }
+
+  ${({ theme }) => theme.mq.tablet} {
+    width: 50%;
+  }
 `;
 
 const StyledOpenCase = styled(Paragraph)`
