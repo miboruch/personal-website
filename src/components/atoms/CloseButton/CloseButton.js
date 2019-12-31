@@ -41,9 +41,9 @@ const InnerButton = styled.div`
   }
 `;
 
-const CloseButton = ({ setFormState }) => {
+const CloseButton = ({ setBoxState }) => {
   return (
-    <ButtonWrapper type='button' onClick={() => setFormState(false)}>
+    <ButtonWrapper type='button' onClick={() => setBoxState(false)}>
       <InnerButton />
     </ButtonWrapper>
   );

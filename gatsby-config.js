@@ -5,6 +5,13 @@ module.exports = {
     author: `@michalboruch`
   },
   plugins: [
+    {
+      resolve: 'gatsby-plugin-webpack-bundle-analyser-v2',
+      options: {
+        devMode: true,
+        analyzerPort: 8005
+      }
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,

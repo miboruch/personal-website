@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Footer from '../../molecules/Footer/Footer';
 import BackgroundImage from 'gatsby-background-image';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
+import { useScrollPosition } from '../../../utils/customHooks';
+import SkillsBox from '../../molecules/SkillsBox/SkillsBox';
 
 const StyledWrapper = styled.div`
   background: #fff;
@@ -65,6 +67,7 @@ const StyledSkillsOpen = styled(StyledName)`
   color: #000;
   padding-top: 2rem;
   text-align: center;
+  cursor: pointer;
 `;
 
 const TextWrapper = styled(ContentWrapper)`
@@ -85,7 +88,42 @@ const StyledPortfolioImage = styled(StyledImage)`
   }
 `;
 
+const SmallSkillsBox = styled.div`
+  width: 300px;
+  background: #1d1d1d;
+  position: fixed;
+  bottom: 5px;
+  left: 5px;
+  z-index: 600;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem;
+  opacity: ${({ isOnTop }) => (!isOnTop ? 1 : 0)};
+  transform: translateY(${({ isOnTop }) => (!isOnTop ? '0' : '20%')});
+  transition: transform 1s ease, opacity 1s ease;
+  text-transform: uppercase;
+  line-height: 1.7;
+  -webkit-box-shadow: 10px 10px 30px -15px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 10px 10px 30px -15px rgba(0, 0, 0, 1);
+  box-shadow: 10px 10px 30px -15px rgba(0, 0, 0, 1);
+
+  ${({ theme }) => theme.mq.tablet} {
+    display: flex;
+  }
+`;
+
+const SkillsBoxParagraph = styled(Paragraph)`
+  color: #adadad;
+  letter-spacing: 4px;
+  font-size: 10px;
+  cursor: pointer;
+`;
+
 const AboutTemplate = ({ images }) => {
+  const [isBoxOpened, setBoxState] = useState(false);
+  const isOnTop = useScrollPosition();
   return (
     <StyledWrapper>
       <StyledImage fluid={images[1].childImageSharp.fluid}>
@@ -93,7 +131,8 @@ const AboutTemplate = ({ images }) => {
         <StyledLine />
         <ContentWrapper>
           <StyledQuote>
-            dawdasdawdasdawdasd ad awd sd wd d frf gt rw
+            &quot;Anyone who has never made a mistake has never tried anything
+            new.&quot;
           </StyledQuote>
         </ContentWrapper>
         <StyledName>Michal Boruch</StyledName>
@@ -108,10 +147,29 @@ const AboutTemplate = ({ images }) => {
           ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
           irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
           fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-          sunt in culpa qui officia deserunt mollit anim id est laborum.
+          sunt in culpa qui officia deserunt mollit anim id est laborum. <br />
+          In addition I have basic knowledge of <strong>React-native</strong>, relational and
+          non-relational databases like <strong>PostreSQL</strong> or{' '}
+          <strong>mongooDB</strong>
         </StyledParagraph>
-        <StyledSkillsOpen>Click here to see my owned skills</StyledSkillsOpen>
+        <StyledSkillsOpen onClick={() => setBoxState(true)}>
+          Click here to see my owned skills
+        </StyledSkillsOpen>
       </TextWrapper>
+      <SmallSkillsBox isOnTop={isOnTop}>
+        <SkillsBoxParagraph onClick={() => setBoxState(true)}>
+          HTML, CSS
+          <br />
+          JavaScript
+          <br />
+          React, Redux
+          <br />
+          Gatsby.js, GraphQL
+          <br />
+          Node.js, Express
+        </SkillsBoxParagraph>
+      </SmallSkillsBox>
+      <SkillsBox isOpen={isBoxOpened} setBoxState={setBoxState} />
       <StyledPortfolioImage fluid={images[2].childImageSharp.fluid} />
       <Footer />
     </StyledWrapper>

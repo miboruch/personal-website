@@ -13,7 +13,8 @@ export const createFade = (stateToggle, duration, delay, offDuration = 500) => {
       opacity: 0
     },
     to: {
-      opacity: stateToggle ? 1 : 0
+      opacity: stateToggle ? 1 : 0,
+      visibility: stateToggle ? 'visible' : 'hidden'
     },
     delay: stateToggle ? delay : 0
   });

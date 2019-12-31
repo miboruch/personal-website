@@ -142,8 +142,14 @@ const StyledSendMessage = styled.button`
 const ContactForm = ({ isOpen, setFormState }) => {
   return (
     <StyledWrapper isOpen={isOpen}>
-      <StyledForm method='POST' data-netlify='true' action='/'>
-        <CloseButton setFormState={setFormState} />
+      <StyledForm
+        name='Contact Form'
+        method='POST'
+        data-netlify='true'
+        action='/'
+      >
+        <input type='hidden' name='form-name' value='Contact Form' />
+        <CloseButton setBoxState={setFormState} />
         <StyledTitle>Send me a message</StyledTitle>
         <FormLine>
           <StyledInput type='name' name='name' required pattern='\S+.*' />

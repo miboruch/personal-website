@@ -19,12 +19,12 @@ const NavigationBox = styled.div`
   padding: 2rem;
   opacity: ${({ isOnTop }) => (isOnTop ? 1 : 0)};
   transform: translateY(${({ isOnTop }) => (isOnTop ? '0' : '10%')});
-  transition: transform 1s ease, opacity 1s ease;
+  transition: transform 2s ease, opacity 2s ease;
   text-transform: uppercase;
   line-height: 1.7;
-  -webkit-box-shadow: 10px 10px 30px -15px rgba(199, 199, 199, 1);
-  -moz-box-shadow: 10px 10px 30px -15px rgba(199, 199, 199, 1);
-  box-shadow: 10px 10px 30px -15px rgba(199, 199, 199, 1);
+  -webkit-box-shadow: 10px 10px 30px -15px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 10px 10px 30px -15px rgba(0, 0, 0, 1);
+  box-shadow: 10px 10px 30px -15px rgba(0, 0, 0, 1);
 `;
 
 const NavigationParagraph = styled(Paragraph)`

@@ -62,6 +62,7 @@ const Description = styled(Paragraph)`
   color: #8d8d8d;
   letter-spacing: 0;
   margin: 2rem;
+  text-align: center;
 
   ${({ theme }) => theme.mq.standard} {
     width: 50%;
