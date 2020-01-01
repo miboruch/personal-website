@@ -55,3 +55,17 @@ export const useScrollPosition = () => {
 
   return isOnTop;
 };
+
+export const useMousePosition = () => {
+  const [position, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const setPosition = e => setMousePosition({ x: e.clientX, y: e.clientY });
+
+    window.addEventListener('mousemove', setPosition);
+
+    return () => window.removeEventListener('mousemove', setPosition);
+  }, []);
+
+  return position;
+};

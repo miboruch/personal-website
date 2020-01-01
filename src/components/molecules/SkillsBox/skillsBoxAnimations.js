@@ -8,16 +8,24 @@ export const AnimatedWrapper = Keyframes.Spring({
       visibility: 'visible',
       config: {
         duration: 500
-      }
+      },
+      delay: 0
     });
   },
   out: async next => {
     await next({
       opacity: 0,
+      config: {
+        duration: 1500
+      },
+      delay: 3000
+    });
+    await next({
       visibility: 'hidden',
       config: {
-        duration: 500
-      }
+        duration: 1
+      },
+      delay: 0
     });
   }
 });
@@ -29,7 +37,7 @@ export const AnimatedBox = Keyframes.Spring({
       opacity: 1,
       transform: 'translateY(0)',
       config: {
-        duration: 500,
+        duration: 1500,
         easing: easeExp
       },
       delay: 800
@@ -37,13 +45,21 @@ export const AnimatedBox = Keyframes.Spring({
   },
   out: async next => {
     await next({
-      transform: 'translateY(20%)',
+      transform: 'translateY(10%)',
       opacity: 0,
+      config: {
+        duration: 700,
+        easing: easeExp
+      },
+      delay: 2000
+    });
+    await next({
       visibility: 'hidden',
       config: {
-        duration: 500,
+        duration: 1,
         easing: easeExp
-      }
+      },
+      delay: 0
     });
   }
 });
@@ -53,13 +69,14 @@ export const BoxItems = Keyframes.Trail({
     await next({
       opacity: 1,
       transform: 'translateX(0px)',
-      delay: 200
+      delay: 50
     });
   },
   out: async next => {
     await next({
       opacity: 0,
-      transform: 'translateX(-20px)'
+      transform: 'translateX(-20px)',
+      delay: 0
     });
   }
 });

@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import CloseButton from '../../atoms/CloseButton/CloseButton';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
-import { createFade, createUpperFadeOut } from '../../../utils/animations';
 import { animated } from 'react-spring';
 import { AnimatedWrapper, AnimatedBox, BoxItems } from './skillsBoxAnimations';
+import { skillsItems } from '../../../utils/items';
 import AniLink from 'gatsby-plugin-transition-link/AniLink';
+import { useMousePosition } from '../../../utils/customHooks';
 
 const StyledWrapper = styled(animated.div)`
   width: 100%;
@@ -52,6 +53,34 @@ const StyledContentSection = styled(animated.section)`
   width: 90%;
   padding: 1rem 2rem;
   transition: all 1s ease;
+  cursor: default;
+
+  &::before{
+    content: '${({ value }) => value}';
+    position: absolute;
+    top: 100%;
+    right: -60%;
+    transform: translateY(-50%);
+    left: auto;
+    color: #fafafa;
+    text-transform: uppercase;
+    font-size: 80px;
+    letter-spacing: 5px;
+    z-index: -1;
+    text-align: left;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: transparent;
+    transition: all 1s ease;
+    display: none;
+    
+    ${({ theme }) => theme.mq.standard}{
+      display: block;
+    }
+  }
+  
+  &:hover::before{
+    -webkit-text-stroke-color: #ccc;
+  }
 
   ${({ theme }) => theme.mq.standard} {
     width: 45%;
@@ -95,34 +124,7 @@ const StyledDescription = styled(Paragraph)`
 `;
 
 const SkillsBox = ({ isOpen, setBoxState }) => {
-  const stack = [
-    {
-      name: 'HTML, CSS, SCSS',
-      description:
-        '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
-    },
-    {
-      name: 'JavaScript',
-      description:
-        '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
-    },
-    {
-      name: 'React',
-      description:
-        '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
-    },
-    {
-      name: 'Gatsby.js',
-      description:
-        '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
-    },
-    {
-      name: 'NodeJS, Express',
-      description:
-        '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
-    }
-  ];
-
+  const { x, y } = useMousePosition();
   return (
     <AnimatedWrapper state={isOpen ? 'in' : 'out'}>
       {wrapperProps => (
@@ -135,10 +137,13 @@ const SkillsBox = ({ isOpen, setBoxState }) => {
                   keys={item => item.name}
                   state={isOpen ? 'in' : 'out'}
                   reverse={!isOpen}
-                  items={stack}
+                  items={skillsItems}
                 >
                   {trailItem => trailProps => (
-                    <StyledContentSection style={trailProps}>
+                    <StyledContentSection
+                      style={trailProps}
+                      value={trailItem.name.split(',')[0]}
+                    >
                       <StyledDescription>
                         <StyledSpan>{trailItem.name}</StyledSpan>
                         {trailItem.description}

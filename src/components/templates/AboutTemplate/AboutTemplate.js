@@ -148,9 +148,9 @@ const AboutTemplate = ({ images }) => {
           irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
           fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
           sunt in culpa qui officia deserunt mollit anim id est laborum. <br />
-          In addition I have basic knowledge of <strong>React-native</strong>, relational and
-          non-relational databases like <strong>PostreSQL</strong> or{' '}
-          <strong>mongooDB</strong>
+          In addition I have basic knowledge of <strong>React-native</strong>,
+          relational and non-relational databases like{' '}
+          <strong>PostreSQL</strong> or <strong>mongooDB</strong>
         </StyledParagraph>
         <StyledSkillsOpen onClick={() => setBoxState(true)}>
           Click here to see my owned skills
