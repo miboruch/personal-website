@@ -60,6 +60,8 @@ const ParagraphBox = styled(animated.div)`
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: transparent;
+  transition: background-color 1s ease;
 
   &:last-child {
     border: none;
@@ -75,6 +77,11 @@ const ParagraphBox = styled(animated.div)`
     border-right: 1px solid rgba(255, 255, 255, 0.3);
     border-bottom: none;
     height: 100%;
+
+    &:hover {
+      background-color: ${({ headerTheme }) =>
+        headerTheme === 'light' ? '#ccc' : '#1b1b1b'};
+    }
 
     ${({ headerTheme }) =>
       headerTheme === 'light' &&
@@ -120,7 +127,7 @@ const StyledMenuItems = styled(Paragraph)`
     &:hover {
       color: rgba(255, 255, 255, 1);
     }
-    
+   
     &:hover::before{
       -webkit-text-stroke-color: #6f6f6f;
     }

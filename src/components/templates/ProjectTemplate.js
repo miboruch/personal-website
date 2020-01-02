@@ -52,7 +52,9 @@ const ContentBox = styled.section`
   margin: 1rem 0;
 
   ${({ theme }) => theme.mq.standard} {
-    width: 350px;
+    //width: 350px;
+    display: flex;
+    flex-direction: row;
     margin-left: 1rem;
   }
 `;
@@ -111,12 +113,12 @@ const ProjectTemplate = ({ content, images }) => {
       </TextWrapper>
       <ContentBox>
         <ProjectContentBox title='CATEGORY' description={content.category} />
+        <ProjectContentBox title='STATUS' description={content.developStatus} />
+        <ProjectContentBox title='DATE' description={content.date} />
         <ProjectContentBox
           title='TECHNOLOGIES'
           description={content.mainTechnology}
         />
-        <ProjectContentBox title='STATUS' description={content.developStatus} />
-        <ProjectContentBox title='DATE' description={content.date} />
       </ContentBox>
       <Image image={images[0]} />
       <Description>{content.primaryDescription}</Description>

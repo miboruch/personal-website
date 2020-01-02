@@ -156,22 +156,72 @@ const ContentWrapper = styled(animated.section)`
 
   ${({ theme }) => theme.mq.standard} {
     padding: 90px 2rem 2rem 3rem;
+    margin-left: 30px;
+  }
+`;
+
+const ContentInformation = styled.div`
+  margin-left: 0;
+
+  ${({ theme }) => theme.mq.standard} {
+    margin-left: 30px;
+  }
+`;
+
+const RowWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  ${({ theme }) => theme.mq.standard} {
+    flex-direction: row;
   }
 `;
 
 const StyledTitle = styled(Paragraph)`
   color: #fff;
   font-family: ${({ theme }) => theme.font.family.avanti};
+  position: relative;
   margin-top: 30px;
 
   ${({ theme }) => theme.mq.standard} {
     margin-top: 100px;
+    padding-left: 3rem;
+
+    &::before {
+      width: 50px;
+      font-family: ${({ theme }) => theme.font.family.futura};
+      font-weight: 500;
+      content: '2020';
+      font-size: 12px;
+      position: absolute;
+      left: 0;
+    }
   }
 `;
 
 const StyledBox = styled.section`
   color: #fff;
   margin-top: 2rem;
+  position: relative;
+  width: 200px;
+
+  ${({ theme }) => theme.mq.standard} {
+    &::before {
+      content: '';
+      position: absolute;
+      top: 7px;
+      left: -30px;
+      width: 0;
+      height: 1px;
+      background-color: #fff;
+      transform: translate(-50%, -50%);
+      transition: width 0.5s ease;
+    }
+
+    &:hover::before {
+      width: 30px;
+    }
+  }
 `;
 
 const StyledContentTitle = styled(Paragraph)`
@@ -232,6 +282,7 @@ const StyledLine = styled.div`
   width: 100%;
   height: 1px;
   background: rgba(255, 255, 255, 0.2);
+  margin: 3rem 0;
 `;
 
 const FooterWrapper = styled.div`
@@ -247,17 +298,12 @@ const StyledOpenCase = styled(Paragraph)`
   width: 200px;
   font-size: 14px;
   color: #fff;
-  padding-top: 3rem;
   font-weight: bold;
   letter-spacing: 3px;
   text-transform: uppercase;
   text-decoration: underline;
   cursor: pointer;
-  padding-left: 2rem;
-
-  ${({ theme }) => theme.mq.standard} {
-    padding-left: 3rem;
-  }
+  margin-bottom: 1rem;
 `;
 
 const NavigationWrapper = styled.div`
@@ -292,31 +338,44 @@ const ContactTemplate = ({ image }) => {
     <StyledWrapper>
       <ContentWrapper>
         <StyledTitle title>Contact</StyledTitle>
-        <StyledBox>
-          <StyledContentTitle>github</StyledContentTitle>
-          <StyledLink href={githubLink}>miboruch</StyledLink>
-        </StyledBox>
-        <StyledBox>
-          <StyledContentTitle>email</StyledContentTitle>
-          <StyledLink href='mailto:miboruch@gmail.com'>
-            miboruch@gmail.com
-          </StyledLink>
-        </StyledBox>
-        <StyledBox>
-          <StyledContentTitle>social links</StyledContentTitle>
-          <NavigationWrapper>
-            <SocialNavigation
-              toggleState={true}
-              headerTheme='dark'
-              noPadding={true}
-            />
-          </NavigationWrapper>
-        </StyledBox>
+        <ContentInformation>
+          <RowWrapper>
+            <StyledBox>
+              <StyledContentTitle>github</StyledContentTitle>
+              <StyledLink
+                href={githubLink}
+                target='_blank'
+                rel='noreferrer noopener'
+              >
+                miboruch
+              </StyledLink>
+            </StyledBox>
+            <StyledBox>
+              <StyledContentTitle>email</StyledContentTitle>
+              <StyledLink href='mailto:miboruch@gmail.com'>
+                miboruch@gmail.com
+              </StyledLink>
+            </StyledBox>
+          </RowWrapper>
+          <StyledBox>
+            <StyledContentTitle>social links</StyledContentTitle>
+            <NavigationWrapper>
+              <SocialNavigation
+                toggleState={true}
+                headerTheme='dark'
+                noPadding={true}
+              />
+            </NavigationWrapper>
+          </StyledBox>
+        </ContentInformation>
+        <StyledLine />
+        <ContentInformation>
+          <StyledOpenCase onClick={() => setFormState(true)}>
+            send message
+          </StyledOpenCase>
+          <StyledOpenCase>download my cv</StyledOpenCase>
+        </ContentInformation>
       </ContentWrapper>
-      <StyledLine />
-      <StyledOpenCase onClick={() => setFormState(true)}>
-        send message
-      </StyledOpenCase>
       <ImageWrapper>
         <StyledImage fluid={image.childImageSharp.fluid} />
       </ImageWrapper>

@@ -6,6 +6,11 @@ const StyledContentPiece = styled.div`
   display: flex;
   flex-direction: column;
   margin: 2rem;
+
+  ${({ theme }) => theme.mq.standard} {
+    width: 130px;
+    border-right: 1px solid rgba(63, 63, 63, 0.2);
+  }
 `;
 
 const StyledSmallHeading = styled(Paragraph)`
