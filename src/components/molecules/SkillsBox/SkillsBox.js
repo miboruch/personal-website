@@ -6,7 +6,6 @@ import { animated } from 'react-spring';
 import { AnimatedWrapper, AnimatedBox, BoxItems } from './skillsBoxAnimations';
 import { skillsItems } from '../../../utils/items';
 import AniLink from 'gatsby-plugin-transition-link/AniLink';
-import { useMousePosition } from '../../../utils/customHooks';
 
 const StyledWrapper = styled(animated.div)`
   width: 100%;
@@ -124,7 +123,6 @@ const StyledDescription = styled(Paragraph)`
 `;
 
 const SkillsBox = ({ isOpen, setBoxState }) => {
-  const { x, y } = useMousePosition();
   return (
     <AnimatedWrapper state={isOpen ? 'in' : 'out'}>
       {wrapperProps => (

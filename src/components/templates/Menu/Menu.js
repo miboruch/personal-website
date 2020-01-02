@@ -26,6 +26,10 @@ const StyledMenuBox = styled(animated.div)`
   transform-origin: top right;
   will-change: transform;
 
+  ${({ theme }) => theme.mq.standard} {
+    flex-direction: row;
+  }
+
   ${({ headerTheme }) =>
     headerTheme === 'light' &&
     css`
@@ -66,12 +70,38 @@ const ParagraphBox = styled(animated.div)`
     css`
       border-bottom: 1px solid rgba(0, 0, 0, 0.15);
     `}
+
+  ${({ theme }) => theme.mq.standard} {
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: none;
+    height: 100%;
+
+    ${({ headerTheme }) =>
+      headerTheme === 'light' &&
+      css`
+        border-right: 1px solid rgba(0, 0, 0, 0.15);
+      `}
+  }
 `;
 
 const StyledMenuItems = styled(Paragraph)`
   color: rgba(255, 255, 255, 0.8);
   transition: color 1s ease;
   font-family: ${({ theme }) => theme.font.family.avanti};
+  position: relative;
+
+  &::before {
+    content: '${({ beforeContent }) => beforeContent}';
+    position: absolute;
+    display: none;
+    font-size: 40px;
+    color: rgba(63,63,63,0.5);
+    top: -20px;
+    z-index: -1;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: transparent;
+    transition: all 1s ease;
+  }
 
   ${({ headerTheme }) =>
     headerTheme === 'light' &&
@@ -86,8 +116,17 @@ const StyledMenuItems = styled(Paragraph)`
   ${({ theme }) => theme.mq.standard} {
     color: rgba(255, 255, 255, 0.2);
     transition: color 1s ease;
+    
     &:hover {
       color: rgba(255, 255, 255, 1);
+    }
+    
+    &:hover::before{
+      -webkit-text-stroke-color: #6f6f6f;
+    }
+    
+    &::before {
+      display: block;
     }
 
     ${({ headerTheme }) =>
@@ -97,6 +136,14 @@ const StyledMenuItems = styled(Paragraph)`
 
         &:hover {
           color: rgba(0, 0, 0, 0.8);
+        }
+
+        &:hover::before {
+          -webkit-text-stroke-color: #3d3d3d;
+        }
+
+        &::before {
+          color: rgba(204, 204, 204, 0.5);
         }
       `}
   }
@@ -137,7 +184,11 @@ const Menu = ({ isOpen, boxSize, headerTheme }) => {
                 {trailItem => trailProps => (
                   <ParagraphBox style={trailProps} headerTheme={headerTheme}>
                     <AniLink to={trailItem.link}>
-                      <StyledMenuItems title='true' headerTheme={headerTheme}>
+                      <StyledMenuItems
+                        title='true'
+                        headerTheme={headerTheme}
+                        beforeContent={trailItem.before}
+                      >
                         {trailItem.name}
                       </StyledMenuItems>
                     </AniLink>

@@ -8,7 +8,7 @@ import { Keyframes } from 'react-spring/renderprops-universal';
 
 const StyledWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: ${({ noPadding }) => (noPadding ? 'left' : 'space-between')};
   align-items: center;
   flex-direction: row;
 
@@ -21,12 +21,12 @@ const StyledLink = styled(animated.a)`
   color: ${({ headerTheme }) => (headerTheme === 'light' ? '#000' : '#fff')};
   text-decoration: none;
   padding: ${({ noPadding }) =>
-    noPadding ? '2rem 4rem 0.5rem 0' : '2rem 2rem 0.5rem 2rem'};
+    noPadding ? '0 4rem 0.5rem 0' : '2rem 2rem 0.5rem 2rem'};
   letter-spacing: 1px;
 
   ${({ theme }) => theme.mq.tablet} {
     padding: ${({ noPadding }) =>
-      noPadding ? '2rem 6rem 0.5rem 0' : '2rem 3rem 0.5rem 3rem'};
+      noPadding ? '0 6rem 0.5rem 0' : '2rem 3rem 0.5rem 3rem'};
   }
 `;
 
@@ -69,7 +69,7 @@ const SocialNavigation = ({ headerTheme, toggleState, noPadding = false }) => {
     <>
       <LinksFade state={toggleState ? 'in' : 'out'}>
         {props => (
-          <StyledWrapper>
+          <StyledWrapper noPadding={noPadding}>
             {mediaItems.map(item => (
               <StyledLink
                 style={props}

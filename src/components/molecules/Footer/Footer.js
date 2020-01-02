@@ -25,7 +25,7 @@ const StyledSpan = styled.span`
 const Footer = ({ footerTheme }) => {
   return (
     <StyledFooter footerTheme={footerTheme}>
-      <StyledParagraph>2019</StyledParagraph>
+      <StyledParagraph>2020</StyledParagraph>
       <StyledParagraph>
         <StyledSpan footerTheme={footerTheme}>MICHAL</StyledSpan> BORUCH
       </StyledParagraph>

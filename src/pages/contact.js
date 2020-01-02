@@ -28,7 +28,7 @@ export const photoFragment = graphql`
 
 export const query = graphql`
   query {
-    image: file(name: { regex: "/about/" }) {
+    image: file(name: { regex: "/portret/" }) {
       ...photoFragment
     }
   }

@@ -1,16 +1,68 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useRef, useState } from 'react';
+import styled, { keyframes, css } from 'styled-components';
 import Footer from '../../molecules/Footer/Footer';
 import BackgroundImage from 'gatsby-background-image';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
-import { useScrollPosition } from '../../../utils/customHooks';
 import SkillsBox from '../../molecules/SkillsBox/SkillsBox';
+import CloseButton from '../../atoms/CloseButton/CloseButton';
+import {
+  useMousePosition,
+  useScrollPosition
+} from '../../../utils/customHooks';
+
+const pulse = keyframes`
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.9);
+  }
+`;
 
 const StyledWrapper = styled.div`
   background: #fff;
   width: 100%;
   height: 100%;
   position: relative;
+`;
+
+const CustomCursor = styled.div`
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border-radius: 50%;
+  border: 2px solid #8d8d8d;
+  z-index: 2000;
+  transform: translate(-50%, -50%);
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+  pointer-events: none;
+  display: none;
+  //animation: ${pulse} 0.5s infinite alternate;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  &::before {
+    width: 43px;
+    height: 43px;
+    border: 1px solid #5d5d5d;
+  }
+
+  &::after {
+    width: 33px;
+    height: 33px;
+    border: 1px solid #ededed;
+  }
+  
+  ${({ theme }) => theme.mq.desktop}{
+    display: block;
+  }
 `;
 
 const StyledImage = styled(BackgroundImage)`
@@ -68,6 +120,10 @@ const StyledSkillsOpen = styled(StyledName)`
   padding-top: 2rem;
   text-align: center;
   cursor: pointer;
+
+  &:hover ${CustomCursor} {
+    animation: ${pulse} 0.5s infinite alternate;
+  }
 `;
 
 const TextWrapper = styled(ContentWrapper)`
@@ -112,6 +168,13 @@ const SmallSkillsBox = styled.div`
   ${({ theme }) => theme.mq.tablet} {
     display: flex;
   }
+
+  ${({ isOpen }) =>
+    !isOpen &&
+    css`
+      opacity: 0 !important;
+      visibility: hidden !important;
+    `}
 `;
 
 const SkillsBoxParagraph = styled(Paragraph)`
@@ -123,9 +186,19 @@ const SkillsBoxParagraph = styled(Paragraph)`
 
 const AboutTemplate = ({ images }) => {
   const [isBoxOpened, setBoxState] = useState(false);
+  const [isSkillsVisible, setSkillsState] = useState(true);
+  const customCursorRef = useRef();
+  const { x, y } = useMousePosition();
   const isOnTop = useScrollPosition();
+
+  useEffect(() => {
+    customCursorRef.current.style.transform = `translate3d(${x - 20}px, ${y -
+      20}px, 0)`;
+  }, [x, y]);
+
   return (
     <StyledWrapper>
+      <CustomCursor ref={customCursorRef} />
       <StyledImage fluid={images[1].childImageSharp.fluid}>
         <StyledTitle title>About me</StyledTitle>
         <StyledLine />
@@ -156,7 +229,8 @@ const AboutTemplate = ({ images }) => {
           Click here to see my owned skills
         </StyledSkillsOpen>
       </TextWrapper>
-      <SmallSkillsBox isOnTop={isOnTop}>
+      <SmallSkillsBox isOnTop={isOnTop} isOpen={isSkillsVisible}>
+        <CloseButton lightTheme setBoxState={setSkillsState} />
         <SkillsBoxParagraph onClick={() => setBoxState(true)}>
           HTML, CSS
           <br />

@@ -6,7 +6,7 @@ import CloseButton from '../../atoms/CloseButton/CloseButton';
 const StyledWrapper = styled.div`
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.9);
   z-index: 1500;
   position: fixed;
   align-items: center;
@@ -63,7 +63,7 @@ const StyledInput = styled.input`
   background: transparent;
   border: none;
   border-bottom: 1px solid #ccc;
-  transition: border-bottom-color 1s ease;
+  transition: border-bottom-color 1s ease, text-decoration 1s ease;
 
   &:focus {
     outline: none;
@@ -84,6 +84,7 @@ const StyledInput = styled.input`
 
   &:invalid {
     border-bottom-color: tomato;
+    text-decoration: line-through;
   }
 `;
 

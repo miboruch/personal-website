@@ -24,9 +24,9 @@ const InnerButton = styled.div`
   ::before,
   ::after {
     content: '';
-    width: 24px;
+    width: ${({ lightTheme }) => (lightTheme ? '18px' : '24px')};
     height: 1px;
-    background: #000;
+    background: ${({ lightTheme }) => (lightTheme ? '#fff' : '#000')};
     position: absolute;
     left: 0;
     transition: all 0.5s ease;
@@ -41,10 +41,10 @@ const InnerButton = styled.div`
   }
 `;
 
-const CloseButton = ({ setBoxState }) => {
+const CloseButton = ({ setBoxState, lightTheme }) => {
   return (
     <ButtonWrapper type='button' onClick={() => setBoxState(false)}>
-      <InnerButton />
+      <InnerButton lightTheme={lightTheme} />
     </ButtonWrapper>
   );
 };

@@ -2,16 +2,19 @@ export const menuItems = [
   {
     id: 0,
     name: 'Projects',
+    before: 'see all my',
     link: '/projects'
   },
   {
     id: 1,
     name: 'About me',
+    before: 'find out something',
     link: '/about'
   },
   {
     id: 2,
     name: 'Contact',
+    before: 'be in',
     link: '/contact'
   }
 ];
