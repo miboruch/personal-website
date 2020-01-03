@@ -9,6 +9,7 @@ import { createFade } from '../../../utils/animations';
 import { textWave, slideFadeDelayed } from './sliderContentAnimations';
 import SlidersAccents from '../../molecules/SlidersAccents/SlidersAccents';
 import Div100vh from 'react-div-100vh';
+import OpenCircle from '../../atoms/OpenCircle/OpenCircle';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -120,6 +121,12 @@ const TextWrapper = styled.div`
   }
 `;
 
+const CircleWrapper = styled.div`
+  position: absolute;
+  top: 70%;
+  left: 200px;
+`;
+
 const SliderContent = ({ image, content, index }) => {
   const { currentSlide } = useContext(CurrentSlideContext);
   const isCurrentSlide = currentSlide === index;
@@ -170,6 +177,9 @@ const SliderContent = ({ image, content, index }) => {
           </ContentWrapper>
           {/*</ContentWrapper>*/}
         </StyledContextBox>
+        {/*<CircleWrapper>*/}
+        {/*  <OpenCircle text='project' />*/}
+        {/*</CircleWrapper>*/}
       </StyledWrapper>
     </Div100vh>
   );

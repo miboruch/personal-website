@@ -25,17 +25,27 @@ const StyledSlider = styled(Slider)`
 const ArrowLeft = styled(Arrow)`
   width: 60px;
   height: 30px;
-  fill: #fff;
+  fill: #000;
   margin: 0 1rem;
+  padding: 1rem;
   cursor: pointer;
   transition: all 0.5s ease;
 
   ${({ theme }) => theme.mq.standard} {
-    fill: #000;
+    fill: #fff;
 
-    &:hover {
-      transform: translateX(-10px);
-    }
+    width: 90px;
+    height: 90px;
+    position: absolute;
+    top: 50%;
+    left: 100px;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+
+    //&:hover {
+    //  transform: translateX(-10px);
+    //}
   }
 `;
 
@@ -43,9 +53,12 @@ const ArrowRight = styled(ArrowLeft)`
   transform: rotate(180deg);
 
   ${({ theme }) => theme.mq.standard} {
-    &:hover {
-      transform: translateX(10px) rotate(180deg);
-    }
+    transform: translate(-50%, -50%) rotate(180deg);
+    right: 100px;
+    left: auto;
+    //&:hover {
+    //  transform: translateX(10px) rotate(180deg);
+    //}
   }
 `;
 
@@ -93,6 +106,8 @@ const MainSlider = ({ images, data }) => {
         <ArrowLeft onClick={() => sliderRef.current.slickPrev()} />
         <ArrowRight onClick={() => sliderRef.current.slickNext()} />
       </SliderNavigation>
+      {/*<ArrowLeft onClick={() => sliderRef.current.slickPrev()} />*/}
+      {/*<ArrowRight onClick={() => sliderRef.current.slickNext()} />*/}
       <NavigationWrapper>
         <SocialNavigation toggleState={true} lightTheme={false} />
       </NavigationWrapper>

@@ -16,6 +16,10 @@ const ButtonWrapper = styled.button`
   :focus {
     outline: none;
   }
+
+  ${({ theme }) => theme.mq.standard} {
+    display: none;
+  }
 `;
 
 const InnerButton = styled.div`

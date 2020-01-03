@@ -9,136 +9,7 @@ import GatsbyImage from 'gatsby-image';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { mediaItems } from '../../../utils/items';
 import { createFade, createUpperFadeOut } from '../../../utils/animations';
-
-// const StyledWrapper = styled.div`
-//   background: #1b1b1b;
-//   width: 100%;
-//   height: 100%;
-// `;
-//
-// const StyledImage = styled(GatsbyImage)`
-//   z-index: 2;
-//
-//   ${({ theme }) => theme.mq.tabletS} {
-//     height: 50%;
-//   }
-//
-//   ${({ theme }) => theme.mq.standard} {
-//     position: absolute;
-//     top: 50%;
-//     left: 0;
-//     height: 60%;
-//     width: 60%;
-//     transform: translateY(-50%);
-//   }
-// `;
-//
-// const CircleWrapper = styled.div`
-//   position: absolute;
-//   top: 50%;
-//   right: -60px;
-//   transform: translate(-50%, -50%);
-//   display: none;
-//
-//   ${({ theme }) => theme.mq.standard} {
-//     display: block;
-//   }
-// `;
-//
-// const StyledLine = styled.div`
-//   width: 100%;
-//   height: 1px;
-//   background: rgba(255, 255, 255, 0.2);
-//   position: absolute;
-//   top: 50%;
-//   left: 0;
-//   z-index: 0;
-//   transform: translateY(-50%);
-//   display: none;
-//
-//   ${({ theme }) => theme.mq.standard} {
-//     display: block;
-//   }
-// `;
-//
-// const ContentWrapper = styled.div`
-//   margin: auto;
-//   padding: 2rem;
-//   display: flex;
-//   flex-direction: column;
-//
-//   ${({ theme }) => theme.mq.standard} {
-//     width: 300px;
-//     position: absolute;
-//     top: 45%;
-//     left: 60%;
-//     transform: translateY(-50%);
-//   }
-//
-//   ${({ theme }) => theme.mq.desktop} {
-//     left: 62%;
-//   }
-// `;
-//
-// const StyledMainText = styled(Paragraph)`
-//   font-size: 43px;
-//   font-family: ${({ theme }) => theme.font.family.avanti};
-//   padding: 2rem 0;
-// `;
-//
-// const StyledContentBox = styled.section`
-//   display: flex;
-//   flex-direction: row;
-//   flex-wrap: wrap;
-// `;
-//
-// const StyledContent = styled.div`
-//   width: 50%;
-//   padding-top: 2rem;
-//   padding-right: 2rem;
-// `;
-//
-// const StyledContentTitle = styled(Paragraph)`
-//   font-weight: bold;
-//   font-size: 13px;
-//   text-transform: uppercase;
-//   padding: 1rem 0;
-//   letter-spacing: 3px;
-// `;
-//
-// const StyledParagraph = styled(Paragraph)`
-//   font-size: 15px;
-// `;
-//
-// const FooterWrapper = styled.div`
-//   width: 100%;
-//   position: absolute;
-//   bottom: 0;
-//   left: 0;
-// `;
-//
-// const NavigationWrapper = styled.div`
-//   width: 70%;
-//
-//   ${({ theme }) => theme.mq.tablet} {
-//     width: 60%;
-//   }
-//
-//   ${({ theme }) => theme.mq.tablet} {
-//     width: 50%;
-//   }
-// `;
-//
-// const StyledOpenCase = styled(Paragraph)`
-//   width: 150px;
-//   font-size: 14px;
-//   padding-top: 3rem;
-//   font-weight: bold;
-//   letter-spacing: 3px;
-//   text-transform: uppercase;
-//   text-decoration: underline;
-//   cursor: pointer;
-// `;
+import Form from '../../molecules/Form/Form';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -150,13 +21,26 @@ const StyledWrapper = styled.div`
 
 const ContentWrapper = styled(animated.section)`
   width: 100%;
-  padding: 90px 2rem 2rem 2rem;
+  height: 100%;
+  //padding: 2rem;
   display: flex;
   flex-direction: column;
+  padding: 90px 2rem 2rem 2rem;
 
   ${({ theme }) => theme.mq.standard} {
-    padding: 90px 2rem 2rem 3rem;
-    margin-left: 30px;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 3rem;
+  }
+`;
+
+const FormWrapper = styled.div`
+  display: none;
+
+  ${({ theme }) => theme.mq.standard} {
+    display: block;
+    width: 50%;
   }
 `;
 
@@ -183,18 +67,19 @@ const StyledTitle = styled(Paragraph)`
   position: relative;
   margin-top: 30px;
 
-  ${({ theme }) => theme.mq.standard} {
-    margin-top: 100px;
-    padding-left: 3rem;
+  ${({ theme }) => theme.mq.tabletS} {
+    margin-bottom: 30px;
+  }
 
-    &::before {
-      width: 50px;
+  ${({ theme }) => theme.mq.standard} {
+    &::after {
       font-family: ${({ theme }) => theme.font.family.futura};
       font-weight: 500;
       content: '2020';
       font-size: 12px;
       position: absolute;
-      left: 0;
+      right: 0;
+      top: 50%;
     }
   }
 `;
@@ -204,6 +89,10 @@ const StyledBox = styled.section`
   margin-top: 2rem;
   position: relative;
   width: 200px;
+
+  ${({ theme }) => theme.mq.tabletS} {
+    margin-bottom: 2rem;
+  }
 
   ${({ theme }) => theme.mq.standard} {
     &::before {
@@ -257,7 +146,7 @@ const ImageWrapper = styled.div`
   ${({ theme }) => theme.mq.standard} {
     width: 30%;
     left: auto;
-    right: 0;
+    right: -100px;
   }
 `;
 
@@ -304,6 +193,13 @@ const StyledOpenCase = styled(Paragraph)`
   text-decoration: underline;
   cursor: pointer;
   margin-bottom: 1rem;
+  padding-top: 1rem;
+`;
+
+const StyledSendMessage = styled(StyledOpenCase)`
+  ${({ theme }) => theme.mq.standard} {
+    display: none;
+  }
 `;
 
 const NavigationWrapper = styled.div`
@@ -315,6 +211,17 @@ const NavigationWrapper = styled.div`
 
   ${({ theme }) => theme.mq.tablet} {
     width: 50%;
+  }
+`;
+
+const StyledVerticalLine = styled.div`
+  display: none;
+  width: 1px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+
+  ${({ theme }) => theme.mq.standard} {
+    display: block;
   }
 `;
 
@@ -337,8 +244,12 @@ const ContactTemplate = ({ image }) => {
   return (
     <StyledWrapper>
       <ContentWrapper>
-        <StyledTitle title>Contact</StyledTitle>
+        <FormWrapper>
+          <Form />
+        </FormWrapper>
+        <StyledVerticalLine />
         <ContentInformation>
+          <StyledTitle title>Contact</StyledTitle>
           <RowWrapper>
             <StyledBox>
               <StyledContentTitle>github</StyledContentTitle>
@@ -367,14 +278,19 @@ const ContactTemplate = ({ image }) => {
               />
             </NavigationWrapper>
           </StyledBox>
-        </ContentInformation>
-        <StyledLine />
-        <ContentInformation>
-          <StyledOpenCase onClick={() => setFormState(true)}>
-            send message
-          </StyledOpenCase>
           <StyledOpenCase>download my cv</StyledOpenCase>
+          <StyledSendMessage onClick={() => setFormState(true)}>
+            send message
+          </StyledSendMessage>
         </ContentInformation>
+        {/*<StyledLine />*/}
+
+        {/*<ContentInformation>*/}
+        {/*  <StyledOpenCase onClick={() => setFormState(true)}>*/}
+        {/*    send message*/}
+        {/*  </StyledOpenCase>*/}
+        {/*  <StyledOpenCase>download my cv</StyledOpenCase>*/}
+        {/*</ContentInformation>*/}
       </ContentWrapper>
       <ImageWrapper>
         <StyledImage fluid={image.childImageSharp.fluid} />
@@ -388,38 +304,3 @@ const ContactTemplate = ({ image }) => {
 };
 
 export default ContactTemplate;
-
-/*
-
-<StyledWrapper>
-      <StyledImage fluid={image.childImageSharp.fluid} />
-      <ContentWrapper>
-        <StyledMainText>Contact</StyledMainText>
-        <StyledContentBox>
-          {socialLinks.map((item, index) => (
-            <StyledContent key={index}>
-              <StyledContentTitle>{item.name}</StyledContentTitle>
-              <StyledParagraph>{item.value}</StyledParagraph>
-            </StyledContent>
-          ))}
-        </StyledContentBox>
-        <StyledOpenCase onClick={() => setFormState(true)}>
-          send message
-        </StyledOpenCase>
-        <NavigationWrapper>
-          <SocialNavigation toggleState={true} noPadding={true} />
-        </NavigationWrapper>
-      </ContentWrapper>
-      <FooterWrapper>
-        <Footer footerTheme='light' />
-      </FooterWrapper>
-      <a href={githubLink} target='_blank' rel='noopener noreferrer'>
-        <CircleWrapper>
-          <OpenCircle text='github' />
-        </CircleWrapper>
-      </a>
-      <StyledLine />
-      <ContactForm isOpen={isFormOpened} setFormState={setFormState} />
-    </StyledWrapper>
-
- */
