@@ -17,11 +17,18 @@ const StyledWrapper = styled.div`
   background: #272727;
   color: #000;
   position: relative;
+
+  ${({ theme }) => theme.mq.standard} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 `;
 
 const ContentWrapper = styled(animated.section)`
   width: 100%;
-  height: 100%;
+  //height: 100%;
   //padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -30,7 +37,7 @@ const ContentWrapper = styled(animated.section)`
   ${({ theme }) => theme.mq.standard} {
     flex-direction: row;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     padding: 0 3rem;
   }
 `;
@@ -69,6 +76,10 @@ const StyledTitle = styled(Paragraph)`
 
   ${({ theme }) => theme.mq.tabletS} {
     margin-bottom: 30px;
+  }
+
+  ${({ theme }) => theme.mq.standard} {
+    margin-top: 0;
   }
 
   ${({ theme }) => theme.mq.standard} {
@@ -144,9 +155,11 @@ const ImageWrapper = styled.div`
   }
 
   ${({ theme }) => theme.mq.standard} {
-    width: 30%;
+    width: 25%;
     left: auto;
-    right: -100px;
+    //right: -100px;
+    bottom: 0;
+    right: 0;
   }
 `;
 
@@ -219,6 +232,9 @@ const StyledVerticalLine = styled.div`
   width: 1px;
   height: 100%;
   background: rgba(255, 255, 255, 0.2);
+  position: absolute;
+  left: 50%;
+  top: 0;
 
   ${({ theme }) => theme.mq.standard} {
     display: block;
@@ -243,11 +259,11 @@ const ContactTemplate = ({ image }) => {
 
   return (
     <StyledWrapper>
+      <StyledVerticalLine />
       <ContentWrapper>
         <FormWrapper>
           <Form />
         </FormWrapper>
-        <StyledVerticalLine />
         <ContentInformation>
           <StyledTitle title>Contact</StyledTitle>
           <RowWrapper>

@@ -15,8 +15,8 @@ const StyledForm = styled.form`
   position: relative;
 
   ${({ theme }) => theme.mq.standard} {
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     text-align: left;
   }
 `;
@@ -166,11 +166,11 @@ const Form = ({ setFormState }) => {
       name='Contact Form'
       method='POST'
       data-netlify='true'
-      action='/'
+      action='/contact'
     >
       <input type='hidden' name='form-name' value='Contact Form' />
-      <CloseButton setBoxState={setFormState} />
-      <StyledTitle>Send me a message</StyledTitle>
+      <CloseButton setBoxState={setFormState} contactPage />
+      <StyledTitle>Send message</StyledTitle>
       <FormLine>
         <StyledInput type='name' name='name' required pattern='\S+.*' />
         <StyledLabel>name</StyledLabel>

@@ -8,6 +8,8 @@ import Arrow from '../../../assets/icons/arrow.svg';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
 import TransitionLink from 'gatsby-plugin-transition-link';
 import { Transition } from 'react-spring/renderprops-universal';
+import { animated } from 'react-spring';
+import { createFade } from '../../../utils/animations';
 
 const StyledWrapper = styled.div`
   width: 100%;

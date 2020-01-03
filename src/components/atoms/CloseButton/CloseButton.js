@@ -18,7 +18,7 @@ const ButtonWrapper = styled.button`
   }
 
   ${({ theme }) => theme.mq.standard} {
-    display: none;
+    display: ${({ contactPage }) => (contactPage ? 'none' : 'block')};
   }
 `;
 
@@ -45,9 +45,13 @@ const InnerButton = styled.div`
   }
 `;
 
-const CloseButton = ({ setBoxState, lightTheme }) => {
+const CloseButton = ({ setBoxState, lightTheme, contactPage = false }) => {
   return (
-    <ButtonWrapper type='button' onClick={() => setBoxState(false)}>
+    <ButtonWrapper
+      type='button'
+      onClick={() => setBoxState(false)}
+      contactPage={contactPage}
+    >
       <InnerButton lightTheme={lightTheme} />
     </ButtonWrapper>
   );
