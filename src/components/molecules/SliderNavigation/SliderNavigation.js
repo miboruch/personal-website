@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
+import { animationIn } from '../../../utils/animations';
 
 const StyledNavigationBox = styled.div`
   width: 100%;
   position: absolute;
   bottom: 5px;
-  left: 5px;
+  right: 5px;
   display: flex;
   justify-content: space-between;
   padding: 2rem;
@@ -24,6 +25,10 @@ const StyledNextLabel = styled(Paragraph)`
 
   ${({ theme }) => theme.mq.standard} {
     color: #000;
+    position: absolute;
+    font-size: 12px;
+    left: 10px;
+    font-weight: lighter;
   }
 `;
 
@@ -40,17 +45,31 @@ const StyledNextCase = styled(Paragraph)`
 const ArrowWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 1rem;
+  margin-left: 1rem;
+`;
+
+const StyledFlexWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+
+  ${({ theme }) => theme.mq.standard} {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 const SliderNavigation = ({ next, children }) => {
   return (
     <StyledNavigationBox>
-      <div>
+      <ArrowWrapper>{children}</ArrowWrapper>
+      <StyledFlexWrapper>
         <StyledNextLabel small='true'>Next</StyledNextLabel>
         <StyledNextCase large='true'>{next}</StyledNextCase>
-      </div>
-      <ArrowWrapper>{children}</ArrowWrapper>
+      </StyledFlexWrapper>
     </StyledNavigationBox>
   );
 };

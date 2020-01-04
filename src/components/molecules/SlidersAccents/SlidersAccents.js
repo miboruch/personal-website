@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { animated } from 'react-spring';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { lineSlide } from './slidersAccentsAnimations';
-import { createFade } from '../../../utils/animations';
+import { animationIn, createFade } from '../../../utils/animations';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
 import AniLink from 'gatsby-plugin-transition-link/AniLink';
 import OpenCircle from '../../atoms/OpenCircle/OpenCircle';
@@ -18,17 +18,26 @@ const StyledLine = styled(animated.div)`
   width: 100%;
   height: 1px;
   background: rgba(255, 255, 255, 0.2);
+  z-index: 5;
 
   ${({ theme }) => theme.mq.standard} {
     top: 50%;
   }
 `;
 
+const OverflowBox = styled.div`
+  overflow: hidden;
+`;
+
+const StyledLink = styled(Link)`
+  z-index: 10;
+  overflow: hidden;
+`;
+
 const AllProjectCase = styled(Paragraph)`
   position: absolute;
   top: 0;
-  left: auto;
-  right: 0;
+  left: 0;
   padding: 0 2rem;
   transform: translateY(-100%);
   font-weight: bold;
@@ -74,16 +83,18 @@ const SlidersAccents = ({ index, link }) => {
 
   return (
     <StyledLine style={line}>
-      <Link to={link}>
-        <CircleWrapper style={circleFade}>
-          <OpenCircle text='project' />
-        </CircleWrapper>
-      </Link>
-      <Link to='/projects'>
-        <AllProjectCase small='true' style={projectsFade}>
-          all projects
-        </AllProjectCase>
-      </Link>
+      {/*<Link to={link}>*/}
+      {/*  <CircleWrapper style={circleFade}>*/}
+      {/*    <OpenCircle text='project' />*/}
+      {/*  </CircleWrapper>*/}
+      {/*</Link>*/}
+      <OverflowBox>
+        <StyledLink to='/projects'>
+          <AllProjectCase small='true' style={projectsFade}>
+            all projects
+          </AllProjectCase>
+        </StyledLink>
+      </OverflowBox>
     </StyledLine>
   );
 };

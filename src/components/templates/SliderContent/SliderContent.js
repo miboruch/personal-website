@@ -5,7 +5,7 @@ import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { animated } from 'react-spring';
 import { Link } from 'gatsby';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
-import { createFade } from '../../../utils/animations';
+import { animationIn, createFade } from '../../../utils/animations';
 import { textWave, slideFadeDelayed } from './sliderContentAnimations';
 import SlidersAccents from '../../molecules/SlidersAccents/SlidersAccents';
 import Div100vh from 'react-div-100vh';
@@ -81,12 +81,12 @@ const StyledTitle = styled(Paragraph)`
 `;
 
 const StyledDescription = styled(Paragraph)`
-  text-align: center;
   font-size: 2rem;
   line-height: 1.6;
   letter-spacing: 0;
   margin-top: 2rem;
   padding: 0 2rem;
+  text-align: left;
 
   ${({ theme }) => theme.mq.standard} {
     margin-top: 0;
@@ -94,9 +94,8 @@ const StyledDescription = styled(Paragraph)`
   }
 `;
 
-const StyledOpenCase = styled(Paragraph)`
+const StyledOpenCase = styled(animated(Paragraph))`
   font-size: 14px;
-  padding: 2rem;
   text-align: center;
   font-weight: bold;
   letter-spacing: 3px;
@@ -104,7 +103,7 @@ const StyledOpenCase = styled(Paragraph)`
   text-decoration: underline;
 
   ${({ theme }) => theme.mq.standard} {
-    display: none;
+    text-align: left;
   }
 `;
 
@@ -127,6 +126,15 @@ const CircleWrapper = styled.div`
   left: 200px;
 `;
 
+const StyledLink = styled(Link)`
+  overflow: hidden;
+`;
+
+const OverflowBox = styled.div`
+  overflow: hidden;
+  margin-top: 2rem;
+`;
+
 const SliderContent = ({ image, content, index }) => {
   const { currentSlide } = useContext(CurrentSlideContext);
   const isCurrentSlide = currentSlide === index;
@@ -135,6 +143,7 @@ const SliderContent = ({ image, content, index }) => {
   const fade = createFade(isCurrentSlide, 2000, 1500);
   const slideDelayed = slideFadeDelayed(isCurrentSlide);
   const trail = textWave(content.name, isCurrentSlide);
+  const test = animationIn(isCurrentSlide, 1000, 3000, 0);
 
   return (
     <Div100vh>
@@ -167,19 +176,16 @@ const SliderContent = ({ image, content, index }) => {
               <StyledDescription style={fade}>
                 {content.description}
               </StyledDescription>
-              <Link to={content.pageLink}>
-                <StyledOpenCase style={slideDelayed}>
-                  Open project
-                </StyledOpenCase>
-              </Link>
+              <StyledLink to={content.pageLink}>
+                <OverflowBox>
+                  <StyledOpenCase style={test}>Open project</StyledOpenCase>
+                </OverflowBox>
+              </StyledLink>
             </TextWrapper>
             <SlidersAccents index={index} link={content.pageLink} />
           </ContentWrapper>
           {/*</ContentWrapper>*/}
         </StyledContextBox>
-        {/*<CircleWrapper>*/}
-        {/*  <OpenCircle text='project' />*/}
-        {/*</CircleWrapper>*/}
       </StyledWrapper>
     </Div100vh>
   );

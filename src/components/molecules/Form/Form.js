@@ -170,7 +170,7 @@ const Form = ({ setFormState }) => {
     >
       <input type='hidden' name='form-name' value='Contact Form' />
       <CloseButton setBoxState={setFormState} contactPage />
-      <StyledTitle>Send message</StyledTitle>
+      <StyledTitle>Send a message</StyledTitle>
       <FormLine>
         <StyledInput type='name' name='name' required pattern='\S+.*' />
         <StyledLabel>name</StyledLabel>

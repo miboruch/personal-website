@@ -52,19 +52,6 @@ const LinksFade = Keyframes.Spring({
 });
 
 const SocialNavigation = ({ headerTheme, toggleState, noPadding = false }) => {
-  // const {
-  //   portfolio: { socialMenus }
-  // } = useStaticQuery(graphql`
-  //   query {
-  //     portfolio {
-  //       socialMenus {
-  //         index
-  //         link
-  //         name
-  //       }
-  //     }
-  //   }
-  // `);
   return (
     <>
       <LinksFade state={toggleState ? 'in' : 'out'}>

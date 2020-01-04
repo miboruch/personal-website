@@ -8,8 +8,9 @@ const StyledContentPiece = styled.div`
   margin: 2rem;
 
   ${({ theme }) => theme.mq.standard} {
-    width: 130px;
-    border-right: 1px solid rgba(63, 63, 63, 0.2);
+    width: 150px;
+    border-left: 1px solid rgba(63, 63, 63, 0.2);
+    padding: 0 2rem;
   }
 `;
 
