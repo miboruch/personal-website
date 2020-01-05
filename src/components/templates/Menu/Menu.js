@@ -158,14 +158,10 @@ const StyledMenuItems = styled(Paragraph)`
 
 const Menu = ({ isOpen, boxSize, headerTheme }) => {
   const { screenWidth, screenHeight } = useScreenSize();
-  console.log(screenWidth, screenHeight);
   const { width, height } = boxSize;
-  console.log(width, height);
 
   const scaleWidth = width / (screenWidth - 10);
   const scaleHeight = height / (screenHeight - 10);
-  console.log(scaleWidth);
-  console.log(scaleHeight);
 
   return (
     <>

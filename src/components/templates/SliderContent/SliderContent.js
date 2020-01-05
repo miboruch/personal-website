@@ -86,11 +86,12 @@ const StyledDescription = styled(Paragraph)`
   letter-spacing: 0;
   margin-top: 2rem;
   padding: 0 2rem;
-  text-align: left;
+  text-align: center;
 
   ${({ theme }) => theme.mq.standard} {
     margin-top: 0;
     padding: 0;
+    text-align: left;
   }
 `;
 
@@ -135,13 +136,37 @@ const OverflowBox = styled.div`
   margin-top: 2rem;
 `;
 
+const StyledOverflow = styled(OverflowBox)`
+  margin: 0;
+  position: absolute;
+  bottom: 2rem;
+  left: auto;
+  right: 8rem;
+  display: none;
+
+  ${({ theme }) => theme.mq.standard} {
+    display: block;
+  }
+`;
+
+const StyledNextCase = styled(animated(Paragraph))`
+  font-family: Avanti;
+  transition: all 1s ease;
+  letter-spacing: 0;
+  display: none;
+
+  ${({ theme }) => theme.mq.standard} {
+    display: block;
+    color: #fff;
+  }
+`;
+
 const SliderContent = ({ image, content, index }) => {
   const { currentSlide } = useContext(CurrentSlideContext);
   const isCurrentSlide = currentSlide === index;
 
   /* Animations -> sliderContentAnimations.js*/
   const fade = createFade(isCurrentSlide, 2000, 1500);
-  const slideDelayed = slideFadeDelayed(isCurrentSlide);
   const trail = textWave(content.name, isCurrentSlide);
   const test = animationIn(isCurrentSlide, 1000, 3000, 0);
 
@@ -184,8 +209,12 @@ const SliderContent = ({ image, content, index }) => {
             </TextWrapper>
             <SlidersAccents index={index} link={content.pageLink} />
           </ContentWrapper>
-          {/*</ContentWrapper>*/}
         </StyledContextBox>
+        <StyledOverflow>
+          <StyledNextCase large style={test}>
+            {content.next}
+          </StyledNextCase>
+        </StyledOverflow>
       </StyledWrapper>
     </Div100vh>
   );

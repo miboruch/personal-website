@@ -24,7 +24,7 @@ const IndexPage = ({ data }) => {
     /* Three themes to choose from: light, dark, default.
     To have default, don't pass any props to Layout component  */
     <Div100vh>
-      <Layout>
+      <Layout headerTheme='light'>
         <CurrentSlideContextProvider>
           <SEO title='Home' />
           <MainSlider images={imagesArray} data={projects} />

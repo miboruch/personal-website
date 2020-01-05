@@ -12,6 +12,8 @@ import { Transition } from 'react-spring/renderprops-universal';
 import { animated } from 'react-spring';
 import { createFade } from '../../../utils/animations';
 import { useMousePosition } from '../../../utils/customHooks';
+import { mainPageProjectNavigation } from '../../../utils/items';
+import Paragraph from '../../atoms/Paragraph/Paragraph';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -49,7 +51,8 @@ const LeftArrowWrapper = styled.div`
   height: 80px;
   justify-content: center;
   align-items: center;
-  top: 200px;
+  top: 50%;
+  transform: translateY(-50%);
   right: 150px;
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 50%;
@@ -154,18 +157,48 @@ const VerticalBox = styled.div`
     -webkit-box-shadow: -11px 10px 19px 3px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: -11px 10px 19px 3px rgba(0, 0, 0, 0.75);
     box-shadow: -11px 10px 19px 3px rgba(0, 0, 0, 0.75);
+  }
+`;
 
-    &:hover {
-      //-webkit-box-shadow: -11px 10px 19px 3px rgba(0, 0, 0, 0.75);
-      //-moz-box-shadow: -11px 10px 19px 3px rgba(0, 0, 0, 0.75);
-      //box-shadow: -11px 10px 19px 3px rgba(0, 0, 0, 0.75);
-    }
+const StyledProjectSmallNavigation = styled.div`
+  position: absolute;
+  top: 70%;
+  right: 2rem;
+  left: auto;
+  justify-content: flex-end;
+  flex-direction: column;
+  display: none;
+
+  ${({ theme }) => theme.mq.standard} {
+    display: flex;
+  }
+`;
+
+const StyledParagraph = styled(Paragraph)`
+  text-align: right;
+  letter-spacing: 0;
+  cursor: pointer;
+`;
+
+const StyledNextLabel = styled(animated(Paragraph))`
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  display: none;
+
+  ${({ theme }) => theme.mq.standard} {
+    display: block;
+    color: #fff;
+    position: absolute;
+    font-size: 12px;
+    bottom: 2rem;
+    right: 2rem;
+    left: auto;
+    font-weight: lighter;
   }
 `;
 
 const MainSlider = ({ images, data }) => {
   const sliderRef = useRef();
-  const boxRef = useRef();
   const { currentSlide, setSlide } = useContext(CurrentSlideContext);
 
   const settings = {
@@ -199,10 +232,21 @@ const MainSlider = ({ images, data }) => {
       <RightArrowWrapper>
         <ArrowRightStandard onClick={() => sliderRef.current.slickNext()} />
       </RightArrowWrapper>
+      <StyledProjectSmallNavigation>
+        {mainPageProjectNavigation.map(item => (
+          <StyledParagraph
+            key={item.index}
+            onClick={() => sliderRef.current.slickGoTo(item.index)}
+          >
+            {item.name}
+          </StyledParagraph>
+        ))}
+      </StyledProjectSmallNavigation>
       <SliderNavigation next={data[currentSlide].next}>
         <ArrowLeft onClick={() => sliderRef.current.slickPrev()} />
         <ArrowRight onClick={() => sliderRef.current.slickNext()} />
       </SliderNavigation>
+      <StyledNextLabel>NEXT</StyledNextLabel>
       <NavigationWrapper>
         <SocialNavigation toggleState={true} lightTheme={false} noPadding />
       </NavigationWrapper>

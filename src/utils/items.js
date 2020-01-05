@@ -64,3 +64,18 @@ export const skillsItems = [
       '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
   }
 ];
+
+export const mainPageProjectNavigation = [
+  {
+    name: 'Indeed',
+    index: 0
+  },
+  {
+    name: 'Archicept',
+    index: 1
+  },
+  {
+    name: 'Weather',
+    index: 2
+  }
+];

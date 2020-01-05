@@ -108,6 +108,12 @@ const StyledParagraph = styled(Paragraph)`
   letter-spacing: 0;
 `;
 
+const StyledTitleParagraph = styled(StyledParagraph)`
+  text-align: center;
+  color: #000;
+  font-weight: 500;
+`;
+
 const StyledName = styled(Paragraph)`
   font-weight: bold;
   font-size: 12px;
@@ -118,7 +124,7 @@ const StyledName = styled(Paragraph)`
 const StyledSkillsOpen = styled(StyledName)`
   color: #000;
   padding-top: 2rem;
-  text-align: center;
+  text-align: left;
   cursor: pointer;
 
   &:hover ${CustomCursor} {
@@ -133,7 +139,7 @@ const TextWrapper = styled(ContentWrapper)`
   line-height: 1.5;
 
   ${({ theme }) => theme.mq.standard} {
-    width: 40%;
+    width: 50%;
   }
 `;
 
@@ -184,6 +190,30 @@ const SkillsBoxParagraph = styled(Paragraph)`
   cursor: pointer;
 `;
 
+const StyledList = styled.ul`
+  list-style-type: none;
+`;
+
+const StyledListItem = styled.li`
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -15px;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: transparent;
+    transition: background 1s ease;
+    border: 1px solid #8d8d8d;
+  }
+`;
+
 const AboutTemplate = ({ images }) => {
   const [isBoxOpened, setBoxState] = useState(false);
   const [isSkillsVisible, setSkillsState] = useState(true);
@@ -208,22 +238,39 @@ const AboutTemplate = ({ images }) => {
             new.&quot;
           </StyledQuote>
         </ContentWrapper>
-        <StyledName>Michal Boruch</StyledName>
       </StyledImage>
       <TextWrapper>
+        <StyledTitleParagraph title>Michal Boruch</StyledTitleParagraph>
         <StyledParagraph>
-          Hello, my name is Michal, I am 21 years old and I am aspiring junior
-          web developer. I am a computer science student in University of
-          Applied Sciences in Tarnow. Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-          fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-          sunt in culpa qui officia deserunt mollit anim id est laborum. <br />
-          In addition I have basic knowledge of <strong>React-native</strong>,
-          relational and non-relational databases like{' '}
-          <strong>PostreSQL</strong> or <strong>mongooDB</strong>
+          Hello, my name is Michal and I am a 21 years old aspiring junior web
+          developer. I am a computer science student at the University of
+          Applied Sciences in Tarnow. In 2019, may I started my journey with
+          Javascript, and since then I have been constantly increasing my skills
+          and knowledge of web development. My main goal is to create modern
+          design in combination with clean DRY code. <br />
+          What can I tell about myself? I am open to new technologies and always
+          happy to broaden my knowledge. In addition, I have an ability to learn
+          very fast, which I consider as an important value. At the university I
+          have done a few projects in groups, some of which were not connected
+          to web development. Teamwork made me aware of the fact that in order
+          to achieve your goal, it is crucial to listen to each other and
+          cooperate by finding compromises.
+          <br />
+          <br />
+          Technologies that I use:
+          <StyledList>
+            <StyledListItem>HTML, CSS/SCSS</StyledListItem>
+            <StyledListItem>Javascript, ES6</StyledListItem>
+            <StyledListItem>React, Redux</StyledListItem>
+            <StyledListItem>Gatsby.js, GraphQL</StyledListItem>
+            <StyledListItem>NodeJS, Express</StyledListItem>
+            <StyledListItem>GIT</StyledListItem>
+          </StyledList>
+          Moreover, I have basic knowledge of
+          <strong> React-native</strong>, relational and non-relational
+          databases like <strong>PostreSQL</strong> or <strong>mongooDB</strong>
+          <br />
+          If you want to read more about my skills, click the paragraph below:
         </StyledParagraph>
         <StyledSkillsOpen onClick={() => setBoxState(true)}>
           Click here to see my owned skills

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { animationIn } from '../../../utils/animations';
+import { animated } from 'react-spring';
 
 const StyledNavigationBox = styled.div`
   width: 100%;
@@ -13,32 +14,30 @@ const StyledNavigationBox = styled.div`
   padding: 2rem;
 
   ${({ theme }) => theme.mq.standard} {
-    width: 500px;
-    background: ${({ theme }) => theme.color.lightThemeBackground};
-    padding: 3rem;
+    display: none;
   }
 `;
 
-const StyledNextLabel = styled(Paragraph)`
+const StyledNextLabel = styled(animated(Paragraph))`
   text-transform: uppercase;
   letter-spacing: 5px;
 
   ${({ theme }) => theme.mq.standard} {
-    color: #000;
-    position: absolute;
+    color: #fff;
+    //position: absolute;
     font-size: 12px;
-    left: 10px;
+    //left: 30%;
     font-weight: lighter;
   }
 `;
 
-const StyledNextCase = styled(Paragraph)`
+const StyledNextCase = styled(animated(Paragraph))`
   font-family: Avanti;
   transition: all 1s ease;
   letter-spacing: 0;
 
   ${({ theme }) => theme.mq.standard} {
-    color: #000;
+    color: #fff;
   }
 `;
 
@@ -63,12 +62,15 @@ const StyledFlexWrapper = styled.div`
 `;
 
 const SliderNavigation = ({ next, children }) => {
+  const test = animationIn(true, 1000, 3000, 0);
   return (
     <StyledNavigationBox>
       <ArrowWrapper>{children}</ArrowWrapper>
       <StyledFlexWrapper>
         <StyledNextLabel small='true'>Next</StyledNextLabel>
-        <StyledNextCase large='true'>{next}</StyledNextCase>
+        <StyledNextCase large='true' style={test}>
+          {next}
+        </StyledNextCase>
       </StyledFlexWrapper>
     </StyledNavigationBox>
   );
