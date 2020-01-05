@@ -24,9 +24,7 @@ const StyledNextLabel = styled(animated(Paragraph))`
 
   ${({ theme }) => theme.mq.standard} {
     color: #fff;
-    //position: absolute;
     font-size: 12px;
-    //left: 30%;
     font-weight: lighter;
   }
 `;
@@ -62,13 +60,13 @@ const StyledFlexWrapper = styled.div`
 `;
 
 const SliderNavigation = ({ next, children }) => {
-  const test = animationIn(true, 1000, 3000, 0);
+  const bottomSlide = animationIn(true, 1000, 3000, 0);
   return (
     <StyledNavigationBox>
       <ArrowWrapper>{children}</ArrowWrapper>
       <StyledFlexWrapper>
         <StyledNextLabel small='true'>Next</StyledNextLabel>
-        <StyledNextCase large='true' style={test}>
+        <StyledNextCase large='true' style={bottomSlide}>
           {next}
         </StyledNextCase>
       </StyledFlexWrapper>

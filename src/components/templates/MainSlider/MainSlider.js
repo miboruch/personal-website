@@ -1,19 +1,14 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import styled from 'styled-components';
+import { animated } from 'react-spring';
 import Slider from 'react-slick';
 import SliderContent from '../SliderContent/SliderContent';
 import SliderNavigation from '../../molecules/SliderNavigation/SliderNavigation';
 import SocialNavigation from '../../molecules/SocialNavigation/SocialNavigation';
 import Arrow from '../../../assets/icons/arrow.svg';
-import Next from '../../../assets/icons/next.svg';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
-import TransitionLink from 'gatsby-plugin-transition-link';
-import { Transition } from 'react-spring/renderprops-universal';
-import { animated } from 'react-spring';
-import { createFade } from '../../../utils/animations';
-import { useMousePosition } from '../../../utils/customHooks';
-import { mainPageProjectNavigation } from '../../../utils/items';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
+import { graphql, useStaticQuery } from 'gatsby';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -57,6 +52,11 @@ const LeftArrowWrapper = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 50%;
   cursor: pointer;
+  transition: border 1s ease;
+
+  &:hover {
+    border: 1px solid rgba(255, 255, 255, 0.8);
+  }
 
   &::before {
     content: 'PREVIOUS';
@@ -108,27 +108,6 @@ const ArrowRight = styled(ArrowLeft)`
   transform: rotate(180deg);
 `;
 
-const StyledBox = styled.div`
-  display: none;
-
-  ${({ theme }) => theme.mq.standard} {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 200px;
-    background: #fff;
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    transition-duration: 200ms;
-    transition-timing-function: ease-out;
-    color: #000;
-  }
-`;
-
 const NavigationWrapper = styled.div`
   display: none;
   position: absolute;
@@ -176,8 +155,36 @@ const StyledProjectSmallNavigation = styled.div`
 
 const StyledParagraph = styled(Paragraph)`
   text-align: right;
-  letter-spacing: 0;
+  //letter-spacing: 0;
   cursor: pointer;
+  transition: all 1s ease;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 43%;
+    left: -25px;
+    width: 10px;
+    height: 10px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    background-color: ${({ isCurrent }) =>
+      isCurrent ? 'white' : 'transparent'};
+    transition: background-color 1s ease;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 5px;
+    width: ${({ isCurrent }) => (isCurrent ? '75%' : '0')};
+    height: 1px;
+    background: #fff;
+    transition: width 1s ease;
+  }
 `;
 
 const StyledNextLabel = styled(animated(Paragraph))`
@@ -198,6 +205,19 @@ const StyledNextLabel = styled(animated(Paragraph))`
 `;
 
 const MainSlider = ({ images, data }) => {
+  const {
+    portfolio: { projects }
+  } = useStaticQuery(graphql`
+    query ProjectQuery {
+      portfolio {
+        projects {
+          name
+          index
+        }
+      }
+    }
+  `);
+
   const sliderRef = useRef();
   const { currentSlide, setSlide } = useContext(CurrentSlideContext);
 
@@ -233,9 +253,10 @@ const MainSlider = ({ images, data }) => {
         <ArrowRightStandard onClick={() => sliderRef.current.slickNext()} />
       </RightArrowWrapper>
       <StyledProjectSmallNavigation>
-        {mainPageProjectNavigation.map(item => (
+        {projects.map(item => (
           <StyledParagraph
             key={item.index}
+            isCurrent={currentSlide === item.index}
             onClick={() => sliderRef.current.slickGoTo(item.index)}
           >
             {item.name}

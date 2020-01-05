@@ -6,10 +6,9 @@ import { animated } from 'react-spring';
 import { Link } from 'gatsby';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
 import { animationIn, createFade } from '../../../utils/animations';
-import { textWave, slideFadeDelayed } from './sliderContentAnimations';
+import { textWave } from './sliderContentAnimations';
 import SlidersAccents from '../../molecules/SlidersAccents/SlidersAccents';
 import Div100vh from 'react-div-100vh';
-import OpenCircle from '../../atoms/OpenCircle/OpenCircle';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -95,7 +94,7 @@ const StyledDescription = styled(Paragraph)`
   }
 `;
 
-const StyledOpenCase = styled(animated(Paragraph))`
+const StyledOpenCase = styled(Paragraph)`
   font-size: 14px;
   text-align: center;
   font-weight: bold;
@@ -149,7 +148,7 @@ const StyledOverflow = styled(OverflowBox)`
   }
 `;
 
-const StyledNextCase = styled(animated(Paragraph))`
+const StyledNextCase = styled(Paragraph)`
   font-family: Avanti;
   transition: all 1s ease;
   letter-spacing: 0;
@@ -168,7 +167,7 @@ const SliderContent = ({ image, content, index }) => {
   /* Animations -> sliderContentAnimations.js*/
   const fade = createFade(isCurrentSlide, 2000, 1500);
   const trail = textWave(content.name, isCurrentSlide);
-  const test = animationIn(isCurrentSlide, 1000, 3000, 0);
+  const bottomSlide = animationIn(isCurrentSlide, 1000, 3000, 0);
 
   return (
     <Div100vh>
@@ -203,7 +202,9 @@ const SliderContent = ({ image, content, index }) => {
               </StyledDescription>
               <StyledLink to={content.pageLink}>
                 <OverflowBox>
-                  <StyledOpenCase style={test}>Open project</StyledOpenCase>
+                  <StyledOpenCase style={bottomSlide}>
+                    Open project
+                  </StyledOpenCase>
                 </OverflowBox>
               </StyledLink>
             </TextWrapper>
@@ -211,7 +212,7 @@ const SliderContent = ({ image, content, index }) => {
           </ContentWrapper>
         </StyledContextBox>
         <StyledOverflow>
-          <StyledNextCase large style={test}>
+          <StyledNextCase large style={bottomSlide}>
             {content.next}
           </StyledNextCase>
         </StyledOverflow>

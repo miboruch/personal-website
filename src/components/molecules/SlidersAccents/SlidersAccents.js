@@ -3,12 +3,9 @@ import styled from 'styled-components';
 import { animated } from 'react-spring';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { lineSlide } from './slidersAccentsAnimations';
-import { animationIn, createFade } from '../../../utils/animations';
+import { animationIn } from '../../../utils/animations';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
-import AniLink from 'gatsby-plugin-transition-link/AniLink';
-import OpenCircle from '../../atoms/OpenCircle/OpenCircle';
 import Link from '../../atoms/Link/Link';
-import { TransitionLink } from 'gatsby-plugin-transition-link';
 
 const StyledLine = styled(animated.div)`
   position: absolute;
@@ -27,19 +24,16 @@ const StyledLine = styled(animated.div)`
 
 const OverflowBox = styled.div`
   overflow: hidden;
-`;
-
-const StyledLink = styled(Link)`
-  z-index: 10;
-  overflow: hidden;
-`;
-
-const AllProjectCase = styled(Paragraph)`
   position: absolute;
   top: 0;
   left: 0;
-  padding: 0 2rem;
   transform: translateY(-100%);
+  height: 16px;
+`;
+
+const AllProjectCase = styled(Paragraph)`
+  position: relative;
+  padding: 0 2rem;
   font-weight: bold;
   letter-spacing: 4px;
   text-transform: uppercase;
@@ -66,34 +60,21 @@ const AllProjectCase = styled(Paragraph)`
   }
 `;
 
-const CircleWrapper = styled(animated.div)`
-  position: absolute;
-  top: 100%;
-  left: 150px;
-  transform: translate(-50%, -50%);
-`;
-
-const SlidersAccents = ({ index, link }) => {
+const SlidersAccents = ({ index }) => {
   const { currentSlide } = useContext(CurrentSlideContext);
   const isCurrentSlide = currentSlide === index;
 
-  const projectsFade = createFade(isCurrentSlide, 1000, 4000, 0);
-  const circleFade = createFade(isCurrentSlide, 1000, 3600, 0);
+  const bottomSlide = animationIn(isCurrentSlide, 1000, 3300, 0);
   const line = lineSlide(isCurrentSlide);
 
   return (
     <StyledLine style={line}>
-      {/*<Link to={link}>*/}
-      {/*  <CircleWrapper style={circleFade}>*/}
-      {/*    <OpenCircle text='project' />*/}
-      {/*  </CircleWrapper>*/}
-      {/*</Link>*/}
       <OverflowBox>
-        <StyledLink to='/projects'>
-          <AllProjectCase small='true' style={projectsFade}>
+        <Link to='/projects'>
+          <AllProjectCase small='true' style={bottomSlide}>
             all projects
           </AllProjectCase>
-        </StyledLink>
+        </Link>
       </OverflowBox>
     </StyledLine>
   );

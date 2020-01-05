@@ -10,15 +10,6 @@ import {
   useScrollPosition
 } from '../../../utils/customHooks';
 
-const pulse = keyframes`
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(0.9);
-  }
-`;
-
 const StyledWrapper = styled.div`
   background: #fff;
   width: 100%;
@@ -39,7 +30,6 @@ const CustomCursor = styled.div`
   transition-timing-function: ease-out;
   pointer-events: none;
   display: none;
-  //animation: ${pulse} 0.5s infinite alternate;
 
   &::before,
   &::after {
@@ -59,8 +49,8 @@ const CustomCursor = styled.div`
     height: 33px;
     border: 1px solid #ededed;
   }
-  
-  ${({ theme }) => theme.mq.desktop}{
+
+  ${({ theme }) => theme.mq.desktop} {
     display: block;
   }
 `;
@@ -126,10 +116,6 @@ const StyledSkillsOpen = styled(StyledName)`
   padding-top: 2rem;
   text-align: left;
   cursor: pointer;
-
-  &:hover ${CustomCursor} {
-    animation: ${pulse} 0.5s infinite alternate;
-  }
 `;
 
 const TextWrapper = styled(ContentWrapper)`
@@ -229,7 +215,7 @@ const AboutTemplate = ({ images }) => {
   return (
     <StyledWrapper>
       <CustomCursor ref={customCursorRef} />
-      <StyledImage fluid={images[1].childImageSharp.fluid}>
+      <StyledImage fluid={images[0].childImageSharp.fluid}>
         <StyledTitle title>About me</StyledTitle>
         <StyledLine />
         <ContentWrapper>
@@ -243,11 +229,11 @@ const AboutTemplate = ({ images }) => {
         <StyledTitleParagraph title>Michal Boruch</StyledTitleParagraph>
         <StyledParagraph>
           Hello, my name is Michal and I am a 21 years old aspiring junior web
-          developer. I am a computer science student at the University of
-          Applied Sciences in Tarnow. In 2019, may I started my journey with
-          Javascript, and since then I have been constantly increasing my skills
-          and knowledge of web development. My main goal is to create modern
-          design in combination with clean DRY code. <br />
+          developer based in Tarnow. I am a computer science student at the
+          University of Applied Sciences in Tarnow. In 2019, may I started my
+          journey with Javascript, and since then I have been constantly
+          increasing my skills and knowledge of web development. My main goal is
+          to create modern design in combination with clean DRY code. <br />
           What can I tell about myself? I am open to new technologies and always
           happy to broaden my knowledge. In addition, I have an ability to learn
           very fast, which I consider as an important value. At the university I
@@ -270,6 +256,13 @@ const AboutTemplate = ({ images }) => {
           <strong> React-native</strong>, relational and non-relational
           databases like <strong>PostreSQL</strong> or <strong>mongooDB</strong>
           <br />
+          <br />
+          My personal 2020 front-end roadmap:
+          <StyledList>
+            <StyledListItem>React advanced concepts</StyledListItem>
+            <StyledListItem>Three.js</StyledListItem>
+            <StyledListItem>TypeScript</StyledListItem>
+          </StyledList>
           If you want to read more about my skills, click the paragraph below:
         </StyledParagraph>
         <StyledSkillsOpen onClick={() => setBoxState(true)}>
@@ -291,7 +284,7 @@ const AboutTemplate = ({ images }) => {
         </SkillsBoxParagraph>
       </SmallSkillsBox>
       <SkillsBox isOpen={isBoxOpened} setBoxState={setBoxState} />
-      <StyledPortfolioImage fluid={images[2].childImageSharp.fluid} />
+      <StyledPortfolioImage fluid={images[1].childImageSharp.fluid} />
       <Footer />
     </StyledWrapper>
   );

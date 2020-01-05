@@ -8,7 +8,6 @@ import { useScreenSize } from '../../../utils/customHooks';
 import { menuItems } from '../../../utils/items';
 import { AnimatedMenu, MenuItems } from './menuAnimations';
 import SocialNavigation from '../../molecules/SocialNavigation/SocialNavigation';
-import Loader from '../Loader/Loader';
 
 const StyledMenuBox = styled(animated.div)`
   position: fixed;

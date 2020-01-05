@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { graphql, useStaticQuery } from 'gatsby';
 import { mediaItems } from '../../../utils/items';
 import { animated } from 'react-spring';
 import { Keyframes } from 'react-spring/renderprops-universal';

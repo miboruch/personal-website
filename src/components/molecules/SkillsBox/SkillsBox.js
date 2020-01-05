@@ -5,7 +5,6 @@ import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { animated } from 'react-spring';
 import { AnimatedWrapper, AnimatedBox, BoxItems } from './skillsBoxAnimations';
 import { skillsItems } from '../../../utils/items';
-import AniLink from 'gatsby-plugin-transition-link/AniLink';
 
 const StyledWrapper = styled(animated.div)`
   width: 100%;
@@ -30,7 +29,7 @@ const HeaderParagraph = styled(Paragraph)`
 
 const StyledBox = styled(animated.div)`
   width: 90%;
-  height: 90%;
+  min-height: 90%;
   background: #fff;
   display: flex;
   text-align: center;
@@ -38,10 +37,6 @@ const StyledBox = styled(animated.div)`
   flex-direction: column;
   align-items: center;
   position: relative;
-
-  ${({ theme }) => theme.mq.tabletS} {
-    height: 80%;
-  }
 
   ${({ theme }) => theme.mq.standard} {
     flex-wrap: wrap;
@@ -120,6 +115,12 @@ const StyledSpan = styled.span`
 const StyledDescription = styled(Paragraph)`
   color: #8d8d8d;
   text-align: left;
+  letter-spacing: 0;
+  font-size: 16px;
+
+  ${({ theme }) => theme.mq.tablet} {
+    font-size: 16px;
+  }
 `;
 
 const SkillsBox = ({ isOpen, setBoxState }) => {
