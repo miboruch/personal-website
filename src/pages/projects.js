@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { graphql, Link } from 'gatsby';
 import { Scene, Controller } from 'react-scrollmagic';
@@ -9,19 +9,16 @@ import { convertObjectToArray } from '../utils/functions';
 import ProjectIntro from '../components/templates/ProjectIntro/ProjectIntro';
 import Paragraph from '../components/atoms/Paragraph/Paragraph';
 import Footer from '../components/molecules/Footer/Footer';
-import { easeQuadIn } from 'd3-ease';
+import { easeExpOut } from 'd3-ease';
 import { useScrollPosition } from '../utils/customHooks';
 import ProjectNavigation from '../components/molecules/ProjectNavigation/ProjectNavigation';
-import { Spring } from 'react-spring/renderprops-universal';
-import { animated } from 'react-spring';
-import TransitionProvider from '../providers/TransitionProvider';
+import { animationIn } from '../utils/animations';
 
 const StyledWrapper = styled.div`
   width: 100%;
   min-height: 100vh;
   padding-top: 70px;
   background-color: ${({ theme }) => theme.color.lightThemeBackground};
-  //background-color: #fff;
   margin: 0;
   overflow-y: hidden;
 `;
@@ -42,6 +39,10 @@ const StyledParagraph = styled(Paragraph)`
   padding-bottom: 1rem;
 `;
 
+const OverflowBox = styled.div`
+  overflow: hidden;
+`;
+
 const StyledTitle = styled(Paragraph)`
   font-size: 34px !important;
   font-family: ${({ theme }) => theme.font.family.avanti};
@@ -60,6 +61,7 @@ const Projects = ({ data }) => {
     data.image3
   );
   const { projects } = data.projectData;
+  const bottomSlide = animationIn(true, 1000, 1000, 0);
 
   return (
     <Layout headerTheme='dark'>
@@ -67,28 +69,54 @@ const Projects = ({ data }) => {
       <StyledWrapper>
         <TextWrapper>
           <StyledParagraph>2019/20</StyledParagraph>
-          <StyledTitle>Projects</StyledTitle>
+          <OverflowBox>
+            <StyledTitle style={bottomSlide}>Projects</StyledTitle>
+          </OverflowBox>
         </TextWrapper>
         <ProjectNavigation isOnTop={isOnTop} />
         <Controller>
           {projects.map((item, index) => (
-            <Scene triggerHook={0} duration={500} offset={-860} key={index}>
-              <Tween
-                from={{
-                  opacity: 0,
-                  ease: easeQuadIn
-                }}
-                to={{ opacity: 1, ease: easeQuadIn }}
-              >
-                <div>
-                  <ProjectIntro
-                    data={item}
-                    image={imageArray[index]}
-                    key={index}
-                    reverse={index % 2 !== 0 ? 'true' : null}
-                  />
-                </div>
-              </Tween>
+            <Scene
+              key={index}
+              offset={index === 0 ? -170 : -400}
+              triggerHook={0}
+              reverse={true}
+              duration={1}
+            >
+              {(progress, event) => {
+                console.log(event);
+                return (
+                  <div>
+                    <Tween
+                      from={{
+                        opacity: 0,
+                        x: '50px',
+                        ease: easeExpOut
+                      }}
+                      to={{ opacity: 1, x: 0, ease: easeExpOut }}
+                      paused={true}
+                      playState={
+                        event.type === 'enter' &&
+                        event.scrollDirection === 'FORWARD'
+                          ? 'play'
+                          : event.type === 'enter' &&
+                            event.scrollDirection === 'REVERSE'
+                          ? 'reverse'
+                          : null
+                      }
+                    >
+                      <div>
+                        <ProjectIntro
+                          data={item}
+                          image={imageArray[index]}
+                          key={index}
+                          reverse={index % 2 !== 0 ? 'true' : null}
+                        />
+                      </div>
+                    </Tween>
+                  </div>
+                );
+              }}
             </Scene>
           ))}
         </Controller>
@@ -124,6 +152,7 @@ export const query = graphql`
         name
         primaryDescription
         pageLink
+        link
       }
     }
   }

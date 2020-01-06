@@ -8,6 +8,7 @@ import Image from '../../molecules/Image/Image';
 import { Tween } from 'react-gsap';
 import { easeQuadIn } from 'd3-ease';
 import { Scene } from 'react-scrollmagic';
+import { animationIn } from '../../../utils/animations';
 
 const StyledWrapper = styled.section`
   border-top: 1px solid rgba(141, 141, 141, 0.25);
@@ -120,11 +121,15 @@ const ContentWrapper = styled.section`
   }
 `;
 
+const OverflowBox = styled.div`
+  overflow: hidden;
+  margin: 3rem 0;
+`;
+
 const StyledTitle = styled(Paragraph)`
   font-size: 34px !important;
   font-family: ${({ theme }) => theme.font.family.avanti};
   color: #1b1b1b;
-  margin: 3rem 0;
 `;
 
 const StyledParagraph = styled(Paragraph)`
@@ -137,7 +142,7 @@ const StyledLink = styled(Link)`
   border-radius: 50%;
 `;
 
-const MobileLink = styled(Link)`
+const MobileLink = styled.a`
   color: #000;
   font-family: ${({ theme }) => theme.font.family.avanti};
   letter-spacing: 2px;
@@ -150,6 +155,8 @@ const MobileLink = styled(Link)`
 `;
 
 const ProjectIntro = ({ data, image, reverse }) => {
+  const bottomSlide = animationIn(true, 1000, 1000, 0);
+
   return (
     <StyledWrapper reverse={reverse}>
       <PhotoWrapper>
@@ -162,12 +169,16 @@ const ProjectIntro = ({ data, image, reverse }) => {
         </StyledLink>
       </PhotoWrapper>
       <ContentWrapper>
-        <StyledTitle title='true'>{data.name}</StyledTitle>
+        <OverflowBox>
+          <StyledTitle title='true' style={bottomSlide}>
+            {data.name}
+          </StyledTitle>
+        </OverflowBox>
         <StyledParagraph small='true'>
           {data.primaryDescription}
         </StyledParagraph>
-        <MobileLink to={data.pageLink}>
-          Open project, link to another page here
+        <MobileLink href={data.link} target='_blank' rel='noreferrer noopener'>
+          Open {data.name}
         </MobileLink>
       </ContentWrapper>
     </StyledWrapper>

@@ -7,6 +7,11 @@ import GatsbyImage from 'gatsby-image';
 import Image from '../molecules/Image/Image';
 import ProjectFooter from '../molecules/ProjectFooter/ProjectFooter';
 import Footer from '../molecules/Footer/Footer';
+import { animationIn } from '../../utils/animations';
+import { Controller, Scene } from 'react-scrollmagic';
+import { Tween } from 'react-gsap';
+import { easeExpOut } from 'd3-ease';
+import ProjectIntro from './ProjectIntro/ProjectIntro';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -34,14 +39,14 @@ const StyledParagraph = styled(Paragraph)`
   padding-bottom: 1rem;
 `;
 
+const OverflowBox = styled.div`
+  overflow: hidden;
+`;
+
 const StyledTitle = styled(Paragraph)`
   font-size: 34px !important;
   font-family: ${({ theme }) => theme.font.family.avanti};
   color: #1b1b1b;
-  
-  // ${({ theme }) => theme.mq.standard} {
-  //   padding: 0 4rem;
-  // }
 `;
 
 const ContentBox = styled.section`
@@ -59,17 +64,20 @@ const ContentBox = styled.section`
   }
 `;
 
-const Description = styled(Paragraph)`
-  font-size: 16px;
-  color: #8d8d8d;
-  letter-spacing: 0;
+const OverflowDescriptionBox = styled(OverflowBox)`
   margin: 2rem;
-  text-align: center;
 
   ${({ theme }) => theme.mq.standard} {
     width: 50%;
     margin: 3rem auto;
   }
+`;
+
+const Description = styled(Paragraph)`
+  font-size: 16px;
+  color: #8d8d8d;
+  letter-spacing: 0;
+  text-align: center;
 `;
 
 const LinkWrapper = styled.section`
@@ -105,11 +113,15 @@ const StyledLink = styled.a`
 `;
 
 const ProjectTemplate = ({ content, images }) => {
+  const bottomSlide = animationIn(true, 1000, 1000, 0);
+
   return (
     <StyledWrapper>
       <TextWrapper>
         <StyledParagraph>{content.date}</StyledParagraph>
-        <StyledTitle>{content.name}</StyledTitle>
+        <OverflowBox>
+          <StyledTitle style={bottomSlide}>{content.name}</StyledTitle>
+        </OverflowBox>
       </TextWrapper>
       <ContentBox>
         <ProjectContentBox title='CATEGORY' description={content.category} />
@@ -121,7 +133,40 @@ const ProjectTemplate = ({ content, images }) => {
         />
       </ContentBox>
       <Image image={images[0]} />
-      <Description>{content.primaryDescription}</Description>
+      <OverflowDescriptionBox>
+        <Controller>
+          <Scene offset={250} triggerHook={0} duration={1} reverse={false}>
+            {(progress, event) => {
+              console.log(event);
+              return (
+                <Tween
+                  from={{
+                    opacity: 0,
+                    transform: 'matrix(0.99, 0.1, 0, 1, 0, 100)',
+                    ease: easeExpOut
+                  }}
+                  to={{
+                    opacity: 1,
+                    transform: 'matrix(1,0,0,1,0,0)',
+                    ease: easeExpOut
+                  }}
+                  paused={true}
+                  playState={
+                    event.type === 'enter' &&
+                    event.scrollDirection === 'FORWARD'
+                      ? 'play'
+                      : null
+                  }
+                >
+                  <div>
+                    <Description>{content.primaryDescription}</Description>
+                  </div>
+                </Tween>
+              );
+            }}
+          </Scene>
+        </Controller>
+      </OverflowDescriptionBox>
       <TechnologiesWrapper>
         <TextLabel>Technologies</TextLabel>
         <Description>{content.secondaryDescription}</Description>

@@ -114,16 +114,10 @@ const TextWrapper = styled.div`
   transform: translateY(-50%);
 
   ${({ theme }) => theme.mq.standard} {
-    left: 300px;
+    left: 166px;
     top: 50%;
     transform: translateY(-70%);
   }
-`;
-
-const CircleWrapper = styled.div`
-  position: absolute;
-  top: 70%;
-  left: 200px;
 `;
 
 const StyledLink = styled(Link)`

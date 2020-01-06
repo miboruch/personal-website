@@ -121,7 +121,6 @@ const NavigationWrapper = styled.div`
 
 const VerticalBox = styled.div`
   display: none;
-  z-index: 0;
 
   ${({ theme }) => theme.mq.standard} {
     display: block;
@@ -141,12 +140,15 @@ const VerticalBox = styled.div`
 
 const StyledProjectSmallNavigation = styled.div`
   position: absolute;
-  top: 70%;
-  right: 2rem;
-  left: auto;
+  //top:70%;
+  bottom: 2rem;
+  //right: 2rem;
+  //left: auto;
+  left: 50%;
   justify-content: flex-end;
-  flex-direction: column;
+  flex-direction: row;
   display: none;
+  transform: translateX(-50%);
 
   ${({ theme }) => theme.mq.standard} {
     display: flex;
@@ -159,32 +161,34 @@ const StyledParagraph = styled(Paragraph)`
   cursor: pointer;
   transition: all 1s ease;
   position: relative;
+  margin: 0 1rem;
+  letter-spacing: 0;
 
   &::before {
     content: '';
     position: absolute;
-    top: 43%;
-    left: -25px;
+    top: -20px;
+    left: 50%;
     width: 10px;
     height: 10px;
     border: 1px solid #fff;
     border-radius: 50%;
-    transform: translateY(-50%);
+    transform: translateX(-50%);
     background-color: ${({ isCurrent }) =>
       isCurrent ? 'white' : 'transparent'};
     transition: background-color 1s ease;
   }
-
-  &::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    bottom: 5px;
-    width: ${({ isCurrent }) => (isCurrent ? '75%' : '0')};
-    height: 1px;
-    background: #fff;
-    transition: width 1s ease;
-  }
+  //
+  // &::after {
+  //   content: '';
+  //   position: absolute;
+  //   right: 0;
+  //   bottom: 5px;
+  //   width: ${({ isCurrent }) => (isCurrent ? '75%' : '0')};
+  //   height: 1px;
+  //   background: #fff;
+  //   transition: width 1s ease;
+  // }
 `;
 
 const StyledNextLabel = styled(animated(Paragraph))`

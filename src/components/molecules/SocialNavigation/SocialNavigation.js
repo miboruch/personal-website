@@ -22,11 +22,6 @@ const StyledLink = styled(animated.a)`
   padding: ${({ noPadding }) =>
     noPadding ? '0 4rem 0.5rem 0' : '2rem 2rem 0.5rem 2rem'};
   letter-spacing: 1px;
-
-  ${({ theme }) => theme.mq.tablet} {
-    padding: ${({ noPadding }) =>
-      noPadding ? '0 6rem 0.5rem 0' : '2rem 3rem 0.5rem 3rem'};
-  }
 `;
 
 const LinksFade = Keyframes.Spring({
