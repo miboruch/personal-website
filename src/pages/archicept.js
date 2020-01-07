@@ -25,26 +25,16 @@ const ArchiceptPage = ({ data }) => {
   );
 };
 
-export const photoFragment = graphql`
-  fragment photoFragment on File {
-    childImageSharp {
-      fluid(maxWidth: 1500, quality: 100) {
-        ...GatsbyImageSharpFluid_noBase64
-      }
-    }
-  }
-`;
-
 export const query = graphql`
   query {
     image1: file(name: { regex: "/archicept-mobile/" }) {
-      ...photoFragment
+      ...mockUpFragment
     }
     image2: file(name: { regex: "/archicept-main/" }) {
-      ...photoFragment
+      ...mockUpFragment
     }
     image3: file(name: { regex: "/archicept-standard/" }) {
-      ...photoFragment
+      ...mockUpFragment
     }
     indeedData: portfolio {
       projects(where: { name: "archicept" }) {

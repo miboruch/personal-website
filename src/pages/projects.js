@@ -84,7 +84,6 @@ const Projects = ({ data }) => {
               duration={1}
             >
               {(progress, event) => {
-                console.log(event);
                 return (
                   <div>
                     <Tween
@@ -126,33 +125,22 @@ const Projects = ({ data }) => {
   );
 };
 
-export const photoFragment = graphql`
-  fragment photoFragment on File {
-    childImageSharp {
-      fluid(maxWidth: 1500, quality: 100) {
-        ...GatsbyImageSharpFluid_noBase64
-      }
-    }
-  }
-`;
-
 export const query = graphql`
   query {
     image1: file(name: { regex: "/indeed-main-mobile/" }) {
-      ...photoFragment
+      ...mockUpFragment
     }
     image2: file(name: { regex: "/archicept-mobile/" }) {
-      ...photoFragment
+      ...mockUpFragment
     }
     image3: file(name: { regex: "/weather-mobile/" }) {
-      ...photoFragment
+      ...mockUpFragment
     }
     projectData: portfolio {
       projects {
         name
         primaryDescription
         pageLink
-        link
       }
     }
   }

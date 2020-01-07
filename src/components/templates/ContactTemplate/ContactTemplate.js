@@ -3,12 +3,11 @@ import styled from 'styled-components';
 import { animated } from 'react-spring';
 import SocialNavigation from '../../molecules/SocialNavigation/SocialNavigation';
 import Footer from '../../molecules/Footer/Footer';
-import OpenCircle from '../../atoms/OpenCircle/OpenCircle';
 import ContactForm from '../ContactForm/ContactForm';
 import GatsbyImage from 'gatsby-image';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { mediaItems } from '../../../utils/items';
-import { createFade, createUpperFadeOut } from '../../../utils/animations';
+import { createFade } from '../../../utils/animations';
 import Form from '../../molecules/Form/Form';
 
 const StyledWrapper = styled.div`
@@ -28,8 +27,6 @@ const StyledWrapper = styled.div`
 
 const ContentWrapper = styled(animated.section)`
   width: 100%;
-  //height: 100%;
-  //padding: 2rem;
   display: flex;
   flex-direction: column;
   padding: 90px 2rem 2rem 2rem;
@@ -42,7 +39,7 @@ const ContentWrapper = styled(animated.section)`
   }
 `;
 
-const FormWrapper = styled.div`
+const FormWrapper = styled(animated.div)`
   display: none;
 
   ${({ theme }) => theme.mq.standard} {
@@ -51,7 +48,7 @@ const FormWrapper = styled.div`
   }
 `;
 
-const ContentInformation = styled.div`
+const ContentInformation = styled(animated.div)`
   margin-left: 0;
 
   ${({ theme }) => theme.mq.standard} {
@@ -141,10 +138,6 @@ const ImageWrapper = styled.div`
   bottom: 0;
   width: 70%;
   left: 50%;
-  //background: #000;
-  //background: #fff;
-  //background: #272727;
-  //transform: translateX(-50%);
 
   ${({ theme }) => theme.mq.tabletS} {
     width: 50%;
@@ -157,27 +150,15 @@ const ImageWrapper = styled.div`
   ${({ theme }) => theme.mq.standard} {
     width: 25%;
     left: auto;
-    //right: -100px;
     bottom: 0;
     right: 0;
   }
 `;
 
 const StyledImage = styled(GatsbyImage)`
-  //z-index: 2; /* change to 2 */
   width: 100%;
   background: transparent;
   background-blend-mode: overlay;
-
-  //&::before {
-  //  content: 'kill me';
-  //  font-weight: bold;
-  //  position: absolute;
-  //  font-size: 100px;
-  //  word-spacing: 100px;
-  //  top: 30%;
-  //  color: #393939;
-  //}
 `;
 
 const StyledLine = styled.div`
@@ -243,28 +224,19 @@ const StyledVerticalLine = styled.div`
 
 const ContactTemplate = ({ image }) => {
   const [isFormOpened, setFormState] = useState(false);
-  const fade = createFade(!isFormOpened, 1000, 0);
+  const fade = createFade(true, 1500, 1000);
+  const fadeDelayed = createFade(true, 1500, 2000);
 
-  const githubLink = mediaItems[1].link;
-  const socialLinks = [
-    {
-      name: 'github',
-      value: 'miboruch'
-    },
-    {
-      name: 'email',
-      value: 'miboruch@gmail.com'
-    }
-  ];
+  const githubLink = mediaItems[0].link;
 
   return (
     <StyledWrapper>
       <StyledVerticalLine />
       <ContentWrapper>
-        <FormWrapper>
+        <FormWrapper style={fade}>
           <Form />
         </FormWrapper>
-        <ContentInformation>
+        <ContentInformation style={fadeDelayed}>
           <StyledTitle title>Contact</StyledTitle>
           <RowWrapper>
             <StyledBox>
@@ -299,14 +271,6 @@ const ContactTemplate = ({ image }) => {
             send message
           </StyledSendMessage>
         </ContentInformation>
-        {/*<StyledLine />*/}
-
-        {/*<ContentInformation>*/}
-        {/*  <StyledOpenCase onClick={() => setFormState(true)}>*/}
-        {/*    send message*/}
-        {/*  </StyledOpenCase>*/}
-        {/*  <StyledOpenCase>download my cv</StyledOpenCase>*/}
-        {/*</ContentInformation>*/}
       </ContentWrapper>
       <ImageWrapper>
         <StyledImage fluid={image.childImageSharp.fluid} />

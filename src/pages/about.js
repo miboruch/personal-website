@@ -16,23 +16,13 @@ const AboutPage = ({ data }) => {
   );
 };
 
-export const photoFragmentLowerQuality = graphql`
-  fragment photoFragmentLowerQuality on File {
-    childImageSharp {
-      fluid(maxWidth: 1500, quality: 80) {
-        ...GatsbyImageSharpFluid_noBase64
-      }
-    }
-  }
-`;
-
 export const query = graphql`
   query {
     image1: file(name: { regex: "/portfolio1/" }) {
-      ...photoFragmentLowerQuality
+      ...photoFragment
     }
     image2: file(name: { regex: "/portfolio2/" }) {
-      ...photoFragmentLowerQuality
+      ...photoFragment
     }
   }
 `;

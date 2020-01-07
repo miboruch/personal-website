@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import styled, { keyframes, css } from 'styled-components';
+import styled, { css } from 'styled-components';
 import Footer from '../../molecules/Footer/Footer';
 import BackgroundImage from 'gatsby-background-image';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
@@ -9,6 +9,7 @@ import {
   useMousePosition,
   useScrollPosition
 } from '../../../utils/customHooks';
+import { animationIn, createFade } from '../../../utils/animations';
 
 const StyledWrapper = styled.div`
   background: #fff;
@@ -67,10 +68,14 @@ const StyledImage = styled(BackgroundImage)`
   background-blend-mode: overlay;
 `;
 
+const TitleOverflowWrapper = styled.div`
+  overflow: hidden;
+  margin-top: 5rem;
+`;
+
 const StyledTitle = styled(Paragraph)`
   font-family: ${({ theme }) => theme.font.family.avanti};
   padding: 2rem;
-  margin-top: 5rem;
 `;
 
 const StyledLine = styled.div`
@@ -176,6 +181,10 @@ const SkillsBoxParagraph = styled(Paragraph)`
   cursor: pointer;
 `;
 
+const OverflowBox = styled.div`
+  overflow: hidden;
+`;
+
 const StyledList = styled.ul`
   list-style-type: none;
 `;
@@ -204,6 +213,10 @@ const AboutTemplate = ({ images }) => {
   const [isBoxOpened, setBoxState] = useState(false);
   const [isSkillsVisible, setSkillsState] = useState(true);
   const customCursorRef = useRef();
+  const bottomSlide = animationIn(true, 1000, 1000, 0);
+  const bottomSlideDelayed = animationIn(true, 1000, 1800, 0);
+  const fadeIn = createFade(true, 1000, 1300, 0);
+  const fadeInDelayed = createFade(true, 1000, 1800, 0);
   const { x, y } = useMousePosition();
   const isOnTop = useScrollPosition();
 
@@ -216,17 +229,25 @@ const AboutTemplate = ({ images }) => {
     <StyledWrapper>
       <CustomCursor ref={customCursorRef} />
       <StyledImage fluid={images[0].childImageSharp.fluid}>
-        <StyledTitle title>About me</StyledTitle>
+        <TitleOverflowWrapper>
+          <StyledTitle title style={bottomSlide}>
+            About me
+          </StyledTitle>
+        </TitleOverflowWrapper>
         <StyledLine />
         <ContentWrapper>
-          <StyledQuote>
+          <StyledQuote style={fadeIn}>
             &quot;Anyone who has never made a mistake has never tried anything
             new.&quot;
           </StyledQuote>
         </ContentWrapper>
       </StyledImage>
       <TextWrapper>
-        <StyledTitleParagraph title>Michal Boruch</StyledTitleParagraph>
+        <OverflowBox>
+          <StyledTitleParagraph title style={fadeInDelayed}>
+            Michal Boruch
+          </StyledTitleParagraph>
+        </OverflowBox>
         <StyledParagraph>
           Hello, my name is Michal and I am a 21 years old aspiring junior web
           developer based in Tarnow. I am a computer science student at the

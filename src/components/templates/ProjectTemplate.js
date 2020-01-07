@@ -1,17 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import Paragraph from '../atoms/Paragraph/Paragraph';
 import ProjectContentBox from '../atoms/ProjectContentBox/ProjectContentBox';
-import GatsbyImage from 'gatsby-image';
 import Image from '../molecules/Image/Image';
-import ProjectFooter from '../molecules/ProjectFooter/ProjectFooter';
 import Footer from '../molecules/Footer/Footer';
 import { animationIn } from '../../utils/animations';
 import { Controller, Scene } from 'react-scrollmagic';
 import { Tween } from 'react-gsap';
 import { easeExpOut } from 'd3-ease';
-import ProjectIntro from './ProjectIntro/ProjectIntro';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -27,8 +23,6 @@ const TextWrapper = styled.div`
 
   ${({ theme }) => theme.mq.standard} {
     margin: 3rem;
-    //display: flex;
-    //flex-direction: row;
   }
 `;
 
@@ -113,7 +107,7 @@ const StyledLink = styled.a`
 `;
 
 const ProjectTemplate = ({ content, images }) => {
-  const bottomSlide = animationIn(true, 1000, 1000, 0);
+  const bottomSlide = animationIn(true, 1000, 2000, 0);
 
   return (
     <StyledWrapper>
@@ -135,9 +129,8 @@ const ProjectTemplate = ({ content, images }) => {
       <Image image={images[0]} />
       <OverflowDescriptionBox>
         <Controller>
-          <Scene offset={250} triggerHook={0} duration={1} reverse={false}>
+          <Scene offset={250} triggerHook={0} duration={1}>
             {(progress, event) => {
-              console.log(event);
               return (
                 <Tween
                   from={{
@@ -155,11 +148,18 @@ const ProjectTemplate = ({ content, images }) => {
                     event.type === 'enter' &&
                     event.scrollDirection === 'FORWARD'
                       ? 'play'
+                      : event.type === 'enter' &&
+                        event.scrollDirection === 'REVERSE'
+                      ? 'reverse'
                       : null
                   }
                 >
                   <div>
                     <Description>{content.primaryDescription}</Description>
+                    <TechnologiesWrapper>
+                      <TextLabel>Technologies</TextLabel>
+                      <Description>{content.secondaryDescription}</Description>
+                    </TechnologiesWrapper>
                   </div>
                 </Tween>
               );
@@ -167,10 +167,6 @@ const ProjectTemplate = ({ content, images }) => {
           </Scene>
         </Controller>
       </OverflowDescriptionBox>
-      <TechnologiesWrapper>
-        <TextLabel>Technologies</TextLabel>
-        <Description>{content.secondaryDescription}</Description>
-      </TechnologiesWrapper>
       <LinkWrapper>
         <TextLabel>Link</TextLabel>
         <StyledLink href={content.link} target='_blank' rel='noreferrer'>

@@ -24,6 +24,7 @@ const IndexPage = ({ data }) => {
     /* Three themes to choose from: light, dark, default.
     To have default, don't pass any props to Layout component  */
     <Div100vh>
+      <TransitionProvider />
       <Layout headerTheme='light'>
         <CurrentSlideContextProvider>
           <SEO title='Home' />
@@ -33,6 +34,16 @@ const IndexPage = ({ data }) => {
     </Div100vh>
   );
 };
+
+export const mockUpFragment = graphql`
+  fragment mockUpFragment on File {
+    childImageSharp {
+      fluid(maxWidth: 1500, quality: 100) {
+        ...GatsbyImageSharpFluid_noBase64
+      }
+    }
+  }
+`;
 
 export const photoFragment = graphql`
   fragment photoFragment on File {
@@ -47,13 +58,13 @@ export const photoFragment = graphql`
 export const query = graphql`
   query {
     image1: file(name: { regex: "/indeed-main-mobile/" }) {
-      ...photoFragment
+      ...mockUpFragment
     }
     image2: file(name: { regex: "/archicept-mobile/" }) {
-      ...photoFragment
+      ...mockUpFragment
     }
     image3: file(name: { regex: "/weather-mobile/" }) {
-      ...photoFragment
+      ...mockUpFragment
     }
     mainPageData: portfolio {
       projects {

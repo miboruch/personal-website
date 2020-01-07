@@ -16,16 +16,6 @@ const ContactPage = ({ data: { image } }) => {
   );
 };
 
-export const photoFragment = graphql`
-  fragment photoFragment on File {
-    childImageSharp {
-      fluid(maxWidth: 1500, quality: 100) {
-        ...GatsbyImageSharpFluid_noBase64
-      }
-    }
-  }
-`;
-
 export const query = graphql`
   query {
     image: file(name: { regex: "/portret/" }) {

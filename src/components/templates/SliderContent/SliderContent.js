@@ -101,9 +101,11 @@ const StyledOpenCase = styled(Paragraph)`
   letter-spacing: 3px;
   text-transform: uppercase;
   text-decoration: underline;
+  margin: auto;
 
   ${({ theme }) => theme.mq.standard} {
     text-align: left;
+    margin: unset;
   }
 `;
 
@@ -120,13 +122,13 @@ const TextWrapper = styled.div`
   }
 `;
 
-const StyledLink = styled(Link)`
-  overflow: hidden;
-`;
-
 const OverflowBox = styled.div`
   overflow: hidden;
   margin-top: 2rem;
+
+  ${({ theme }) => theme.mq.standard} {
+    width: 200px;
+  }
 `;
 
 const StyledOverflow = styled(OverflowBox)`
@@ -194,13 +196,13 @@ const SliderContent = ({ image, content, index }) => {
               <StyledDescription style={fade}>
                 {content.description}
               </StyledDescription>
-              <StyledLink to={content.pageLink}>
-                <OverflowBox>
+              <OverflowBox>
+                <Link to={content.pageLink}>
                   <StyledOpenCase style={bottomSlide}>
                     Open project
                   </StyledOpenCase>
-                </OverflowBox>
-              </StyledLink>
+                </Link>
+              </OverflowBox>
             </TextWrapper>
             <SlidersAccents index={index} link={content.pageLink} />
           </ContentWrapper>

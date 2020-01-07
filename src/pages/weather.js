@@ -21,23 +21,13 @@ const IndeedPage = ({ data }) => {
   );
 };
 
-export const photoFragment = graphql`
-  fragment photoFragment on File {
-    childImageSharp {
-      fluid(maxWidth: 1500, quality: 100) {
-        ...GatsbyImageSharpFluid_noBase64
-      }
-    }
-  }
-`;
-
 export const query = graphql`
   query {
     image1: file(name: { regex: "/weather-mobile/" }) {
-      ...photoFragment
+      ...mockUpFragment
     }
     image2: file(name: { regex: "/weather-standard/" }) {
-      ...photoFragment
+      ...mockUpFragment
     }
     indeedData: portfolio {
       projects(where: { name: "weather" }) {

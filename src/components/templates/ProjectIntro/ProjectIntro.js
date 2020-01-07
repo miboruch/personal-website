@@ -142,7 +142,7 @@ const StyledLink = styled(Link)`
   border-radius: 50%;
 `;
 
-const MobileLink = styled.a`
+const MobileLink = styled(Link)`
   color: #000;
   font-family: ${({ theme }) => theme.font.family.avanti};
   letter-spacing: 2px;
@@ -177,9 +177,7 @@ const ProjectIntro = ({ data, image, reverse }) => {
         <StyledParagraph small='true'>
           {data.primaryDescription}
         </StyledParagraph>
-        <MobileLink href={data.link} target='_blank' rel='noreferrer noopener'>
-          Open {data.name}
-        </MobileLink>
+        <MobileLink to={data.pageLink}>Open {data.name}</MobileLink>
       </ContentWrapper>
     </StyledWrapper>
   );

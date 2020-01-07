@@ -25,26 +25,16 @@ const IndeedPage = ({ data }) => {
   );
 };
 
-export const photoFragment = graphql`
-  fragment photoFragment on File {
-    childImageSharp {
-      fluid(maxWidth: 1500, quality: 100) {
-        ...GatsbyImageSharpFluid_noBase64
-      }
-    }
-  }
-`;
-
 export const query = graphql`
   query {
     image1: file(name: { regex: "/indeed-main-mobile/" }) {
-      ...photoFragment
+      ...mockUpFragment
     }
     image2: file(name: { regex: "/indeed-standard/" }) {
-      ...photoFragment
+      ...mockUpFragment
     }
     image3: file(name: { regex: "/indeed-mobile/" }) {
-      ...photoFragment
+      ...mockUpFragment
     }
     indeedData: portfolio {
       projects(where: { name: "indeed" }) {

@@ -30,9 +30,13 @@ const ArrowLeft = styled(Arrow)`
   border-radius: 50%;
   fill: #fff;
   margin: 0 1rem;
-  padding: 1rem;
+  padding: 0.5rem;
   cursor: pointer;
   transition: all 0.5s ease;
+
+  ${({ theme }) => theme.mq.tablet} {
+    padding: 0.3rem;
+  }
 
   ${({ theme }) => theme.mq.standard} {
     display: none;

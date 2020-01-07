@@ -46,7 +46,7 @@ const AnimatedBox = Keyframes.Spring({
   }
 });
 
-const TransitionProvider = ({ children }) => {
+const TransitionProvider = () => {
   return (
     <TransitionState>
       {({ transitionStatus, mount }) => {
@@ -59,9 +59,8 @@ const TransitionProvider = ({ children }) => {
             <AnimatedBox
               state={isMount ? 'exitPageAnimation' : 'enterPageAnimation'}
             >
-              {props => <StyledBox style={props}></StyledBox>}
+              {props => <StyledBox style={props}>asd</StyledBox>}
             </AnimatedBox>
-            {children}
           </>
         );
       }}
