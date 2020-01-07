@@ -73,7 +73,8 @@ const SocialNavigation = ({ headerTheme, toggleState, noPadding = false }) => {
 };
 
 SocialNavigation.propTypes = {
-  headerTheme: PropTypes.oneOf(['dark, light'])
+  headerTheme: PropTypes.oneOf(['dark, light']),
+  noPadding: PropTypes.bool
 };
 
 export default SocialNavigation;

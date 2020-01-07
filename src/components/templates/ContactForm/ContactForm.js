@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import Form from '../../molecules/Form/Form';
-import Paragraph from '../../atoms/Paragraph/Paragraph';
-import CloseButton from '../../atoms/CloseButton/CloseButton';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -37,6 +36,11 @@ const ContactForm = ({ isOpen, setFormState }) => {
       </FormWrapper>
     </StyledWrapper>
   );
+};
+
+ContactForm.propTypes = {
+  isOpen: PropTypes.bool,
+  setFormState: PropTypes.func.isRequired
 };
 
 export default ContactForm;

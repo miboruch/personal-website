@@ -144,10 +144,7 @@ const VerticalBox = styled.div`
 
 const StyledProjectSmallNavigation = styled.div`
   position: absolute;
-  //top:70%;
   bottom: 2rem;
-  //right: 2rem;
-  //left: auto;
   left: 50%;
   justify-content: flex-end;
   flex-direction: row;
@@ -182,17 +179,6 @@ const StyledParagraph = styled(Paragraph)`
       isCurrent ? 'white' : 'transparent'};
     transition: background-color 1s ease;
   }
-  //
-  // &::after {
-  //   content: '';
-  //   position: absolute;
-  //   right: 0;
-  //   bottom: 5px;
-  //   width: ${({ isCurrent }) => (isCurrent ? '75%' : '0')};
-  //   height: 1px;
-  //   background: #fff;
-  //   transition: width 1s ease;
-  // }
 `;
 
 const StyledNextLabel = styled(animated(Paragraph))`

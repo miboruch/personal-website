@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import CloseButton from '../../atoms/CloseButton/CloseButton';
 
@@ -124,12 +125,10 @@ const StyledTitle = styled(Paragraph)`
   font-size: 43px;
   font-family: ${({ theme }) => theme.font.family.avanti};
   padding-bottom: 3rem;
-
   ${({ theme }) => theme.mq.standard} {
     color: #fff;
     font-size: 58px;
   }
-
   ${({ theme }) => theme.mq.desktop} {
     font-size: 89px;
   }
@@ -150,13 +149,6 @@ const StyledSendMessage = styled.button`
   ${({ theme }) => theme.mq.standard} {
     color: #fff;
     padding-top: 1rem;
-    //font-weight: 500;
-    //width: 200px;
-    //height: 40px;
-    //padding: 0;
-    //background: transparent;
-    //border: 1px solid #fff;
-    //text-decoration: none;
   }
 `;
 
@@ -167,6 +159,7 @@ const Form = ({ setFormState }) => {
       method='POST'
       data-netlify='true'
       action='/contact'
+      data-netlify-recaptcha='true'
     >
       <input type='hidden' name='form-name' value='Contact Form' />
       <CloseButton setBoxState={setFormState} contactPage />
@@ -188,9 +181,14 @@ const Form = ({ setFormState }) => {
         <StyledTextArea name='message' required />
         <StyledLabel>message</StyledLabel>
       </FormLine>
+      <div data-netlify-recaptcha='true' />
       <StyledSendMessage type='submit'>send message</StyledSendMessage>
     </StyledForm>
   );
+};
+
+Form.propTypes = {
+  setFormState: PropTypes.func
 };
 
 export default Form;

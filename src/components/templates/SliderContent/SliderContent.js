@@ -153,6 +153,7 @@ const StyledNextCase = styled(Paragraph)`
   ${({ theme }) => theme.mq.standard} {
     display: block;
     color: #fff;
+    text-align: right;
   }
 `;
 

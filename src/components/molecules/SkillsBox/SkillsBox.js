@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import CloseButton from '../../atoms/CloseButton/CloseButton';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { animated } from 'react-spring';
@@ -158,6 +159,11 @@ const SkillsBox = ({ isOpen, setBoxState }) => {
       )}
     </AnimatedWrapper>
   );
+};
+
+SkillsBox.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  setBoxState: PropTypes.func.isRequired
 };
 
 export default SkillsBox;

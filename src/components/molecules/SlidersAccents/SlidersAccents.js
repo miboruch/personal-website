@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { animated } from 'react-spring';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { lineSlide } from './slidersAccentsAnimations';
@@ -78,6 +79,10 @@ const SlidersAccents = ({ index }) => {
       </OverflowBox>
     </StyledLine>
   );
+};
+
+SlidersAccents.propTypes = {
+  index: PropTypes.number.isRequired
 };
 
 export default SlidersAccents;

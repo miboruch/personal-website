@@ -9,9 +9,6 @@ const StyledBox = styled(animated.div)`
   text-align: right;
   width: 200px;
   height: 62px;
-  //margin-top: 5px;
-  //margin-right: 5px;
-  //margin-bottom: 5px;
   position: absolute;
   top: 5px;
   right: 5px;

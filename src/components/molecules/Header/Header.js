@@ -6,9 +6,7 @@ import { useElementSize, useScrollPosition } from '../../../utils/customHooks';
 import MenuButton from '../MenuButton/MenuButton';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Logo from '../../atoms/Logo/Logo';
-import { createUpperFadeOut } from '../../../utils/animations';
 import { animated } from 'react-spring';
-import { TransitionState } from 'gatsby-plugin-transition-link';
 
 const StyledHeader = styled(animated.header)`
   position: fixed;

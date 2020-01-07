@@ -1,5 +1,6 @@
 import React from 'react';
 import AniLink from 'gatsby-plugin-transition-link/AniLink';
+import PropTypes from 'prop-types';
 
 const Link = ({ to, children }) => {
   return (
@@ -7,6 +8,11 @@ const Link = ({ to, children }) => {
       {children}
     </AniLink>
   );
+};
+
+Link.propTypes = {
+  to: PropTypes.string,
+  children: PropTypes.node.isRequired
 };
 
 export default Link;

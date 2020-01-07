@@ -17,6 +17,7 @@ const Paragraph = styled(animated.p)`
   ${({ medium }) =>
     medium &&
     css`
+      font-size: ${({ theme }) => theme.font.size.mobile.s};
       ${({ theme }) => theme.mq.mobileL} {
         font-size: ${({ theme }) => theme.font.size.mobile.m};
       }
@@ -28,6 +29,7 @@ const Paragraph = styled(animated.p)`
   ${({ large }) =>
     large &&
     css`
+      font-size: ${({ theme }) => theme.font.size.mobile.m};
       ${({ theme }) => theme.mq.mobileL} {
         font-size: ${({ theme }) => theme.font.size.mobile.l};
       }
@@ -52,6 +54,7 @@ const Paragraph = styled(animated.p)`
     titleMenu &&
     css`
       font-family: Avanti;
+      font-size: 38px;
       ${({ theme }) => theme.mq.mobileL} {
         font-size: ${({ theme }) => theme.font.size.mobile.title};
       }

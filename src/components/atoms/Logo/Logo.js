@@ -2,7 +2,6 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { Link } from 'gatsby';
 import LogoLine from '../../../assets/icons/logo-line.svg';
-import LogoSquare from '../../../assets/icons/logo.svg';
 
 const StyledLogo = styled(LogoLine)`
   width: 110px;

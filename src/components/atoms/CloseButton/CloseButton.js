@@ -57,4 +57,10 @@ const CloseButton = ({ setBoxState, lightTheme, contactPage = false }) => {
   );
 };
 
+CloseButton.propTypes = {
+  setBoxState: PropTypes.func.isRequired,
+  lightTheme: PropTypes.bool,
+  contactPage: PropTypes.bool
+};
+
 export default CloseButton;

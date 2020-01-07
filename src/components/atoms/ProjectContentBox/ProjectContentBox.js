@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import Paragraph from '../Paragraph/Paragraph';
 
 const StyledContentPiece = styled.div`
@@ -37,6 +38,11 @@ const ProjectContentBox = ({ title, description }) => {
       <StyledAnswerParagraph>{description}</StyledAnswerParagraph>
     </StyledContentPiece>
   );
+};
+
+ProjectContentBox.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string
 };
 
 export default ProjectContentBox;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { animationIn } from '../../../utils/animations';
 import { animated } from 'react-spring';
@@ -72,6 +73,11 @@ const SliderNavigation = ({ next, children }) => {
       </StyledFlexWrapper>
     </StyledNavigationBox>
   );
+};
+
+SliderNavigation.propTypes = {
+  next: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired
 };
 
 export default SliderNavigation;

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
+import PropTypes from 'prop-types';
 import Footer from '../../molecules/Footer/Footer';
 import BackgroundImage from 'gatsby-background-image';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
@@ -213,10 +214,11 @@ const AboutTemplate = ({ images }) => {
   const [isBoxOpened, setBoxState] = useState(false);
   const [isSkillsVisible, setSkillsState] = useState(true);
   const customCursorRef = useRef();
+
   const bottomSlide = animationIn(true, 1000, 1000, 0);
-  const bottomSlideDelayed = animationIn(true, 1000, 1800, 0);
   const fadeIn = createFade(true, 1000, 1300, 0);
   const fadeInDelayed = createFade(true, 1000, 1800, 0);
+
   const { x, y } = useMousePosition();
   const isOnTop = useScrollPosition();
 
@@ -309,6 +311,10 @@ const AboutTemplate = ({ images }) => {
       <Footer />
     </StyledWrapper>
   );
+};
+
+AboutTemplate.propTypes = {
+  images: PropTypes.array.isRequired
 };
 
 export default AboutTemplate;
