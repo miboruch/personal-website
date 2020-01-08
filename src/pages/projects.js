@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { graphql, Link } from 'gatsby';
+import { graphql } from 'gatsby';
 import { Scene, Controller } from 'react-scrollmagic';
 import { Tween } from 'react-gsap';
+import { easeExpInOut } from 'd3-ease';
 import Layout from '../components/templates/Layout';
 import SEO from '../components/seo';
 import { convertObjectToArray } from '../utils/functions';
 import ProjectIntro from '../components/templates/ProjectIntro/ProjectIntro';
 import Paragraph from '../components/atoms/Paragraph/Paragraph';
 import Footer from '../components/molecules/Footer/Footer';
-import { easeExpOut } from 'd3-ease';
 import { useScrollPosition } from '../utils/customHooks';
 import ProjectNavigation from '../components/molecules/ProjectNavigation/ProjectNavigation';
 import { animationIn } from '../utils/animations';
+import ScrollIcon from '../assets/icons/next.svg';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -21,6 +22,7 @@ const StyledWrapper = styled.div`
   background-color: ${({ theme }) => theme.color.lightThemeBackground};
   margin: 0;
   overflow-y: hidden;
+  position: relative;
 `;
 
 const TextWrapper = styled.div`
@@ -53,6 +55,35 @@ const StyledTitle = styled(Paragraph)`
   }
 `;
 
+const MiddleInfoBox = styled.div`
+  position: absolute;
+  top: 400px;
+  left: 50%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transform: translate(-50%);
+  display: flex;
+  visibility: ${({ isOnTop }) => (isOnTop ? 'visible' : 'hidden')};
+  opacity: ${({ isOnTop }) => (isOnTop ? 1 : 0)};
+  transition: visibility 1s ease, opacity 1s ease;
+`;
+
+const StyledOverflowBox = styled.div`
+  overflow: hidden;
+`;
+
+const StyledScrollInfo = styled(Paragraph)`
+  color: rgba(63, 63, 63, 0.4);
+`;
+
+const StyledIcon = styled(ScrollIcon)`
+  transform: rotate(90deg);
+  width: 30px;
+  height: 30px;
+  fill: rgba(63, 63, 63, 0.4);
+`;
+
 const Projects = ({ data }) => {
   const isOnTop = useScrollPosition();
   const imageArray = convertObjectToArray(
@@ -62,18 +93,26 @@ const Projects = ({ data }) => {
   );
   const { projects } = data.projectData;
   const bottomSlide = animationIn(true, 1000, 1000, 0);
+  const bottomSlideDelayed = animationIn(isOnTop, 1000, 1200, 0);
 
   return (
     <Layout headerTheme='dark'>
       <SEO title='Projects' />
       <StyledWrapper>
+        <MiddleInfoBox isOnTop={isOnTop}>
+          <StyledOverflowBox>
+            <StyledScrollInfo style={bottomSlideDelayed}>
+              scroll down
+            </StyledScrollInfo>
+          </StyledOverflowBox>
+          <StyledIcon />
+        </MiddleInfoBox>
         <TextWrapper>
           <StyledParagraph>2019/20</StyledParagraph>
           <OverflowBox>
             <StyledTitle style={bottomSlide}>Projects</StyledTitle>
           </OverflowBox>
         </TextWrapper>
-        <ProjectNavigation isOnTop={isOnTop} />
         <Controller>
           {projects.map((item, index) => (
             <Scene
@@ -89,10 +128,16 @@ const Projects = ({ data }) => {
                     <Tween
                       from={{
                         opacity: 0,
+                        visibility: 'hidden',
                         x: '50px',
-                        ease: easeExpOut
+                        ease: easeExpInOut
                       }}
-                      to={{ opacity: 1, x: 0, ease: easeExpOut }}
+                      to={{
+                        opacity: 1,
+                        x: 0,
+                        visibility: 'visible',
+                        ease: easeExpInOut
+                      }}
                       paused={true}
                       playState={
                         event.type === 'enter' &&
@@ -119,6 +164,7 @@ const Projects = ({ data }) => {
             </Scene>
           ))}
         </Controller>
+        <ProjectNavigation isOnTop={isOnTop} />
         <Footer />
       </StyledWrapper>
     </Layout>

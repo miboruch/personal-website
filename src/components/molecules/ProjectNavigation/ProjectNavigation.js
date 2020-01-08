@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import styled from 'styled-components';
-import AniLink from 'gatsby-plugin-transition-link/AniLink';
+import Link from '../../atoms/Link/Link';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 
 const NavigationBox = styled.div`
@@ -50,18 +50,9 @@ const ProjectNavigation = ({ isOnTop }) => {
   return (
     <NavigationBox isOnTop={isOnTop}>
       {projects.map((item, index) => (
-        <AniLink
-          cover
-          direction='down'
-          to={item.pageLink}
-          duration={1.3}
-          bg='#212121'
-          key={index}
-        >
-          <NavigationParagraph small='true' key={index}>
-            {item.name}
-          </NavigationParagraph>
-        </AniLink>
+        <Link to={item.pageLink} key={index}>
+          <NavigationParagraph small='true'>{item.name}</NavigationParagraph>
+        </Link>
       ))}
     </NavigationBox>
   );

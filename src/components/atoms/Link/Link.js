@@ -1,10 +1,16 @@
 import React from 'react';
-import AniLink from 'gatsby-plugin-transition-link/AniLink';
 import PropTypes from 'prop-types';
+import AniLink from 'gatsby-plugin-transition-link/AniLink';
 
-const Link = ({ to, children }) => {
+const Link = ({ to, children, lightTheme }) => {
   return (
-    <AniLink cover direction='down' to={to} duration={1.3} bg='#212121'>
+    <AniLink
+      cover
+      direction='down'
+      to={to}
+      duration={1.3}
+      bg={lightTheme ? '#f1f1f1' : '#212121'}
+    >
       {children}
     </AniLink>
   );
@@ -12,7 +18,8 @@ const Link = ({ to, children }) => {
 
 Link.propTypes = {
   to: PropTypes.string,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  lightTheme: PropTypes.bool
 };
 
 export default Link;

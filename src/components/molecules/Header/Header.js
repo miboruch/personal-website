@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
+import { animated } from 'react-spring';
 import Menu from '../../templates/Menu/Menu';
 import { useElementSize, useScrollPosition } from '../../../utils/customHooks';
 import MenuButton from '../MenuButton/MenuButton';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Logo from '../../atoms/Logo/Logo';
-import { animated } from 'react-spring';
 
 const StyledHeader = styled(animated.header)`
   position: fixed;

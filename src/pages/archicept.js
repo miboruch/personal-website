@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import Layout from '../components/templates/Layout';
 import SEO from '../components/seo';
 import { convertObjectToArray } from '../utils/functions';
-import ProjectTemplate from '../components/templates/ProjectTemplate';
+import ProjectTemplate from '../components/templates/ProjectTemplate/ProjectTemplate';
 
 const ArchiceptPage = ({ data }) => {
   const {

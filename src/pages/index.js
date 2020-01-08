@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { graphql } from 'gatsby';
 import Div100vh from 'react-div-100vh';
 import Layout from '../components/templates/Layout';
@@ -7,8 +6,6 @@ import SEO from '../components/seo';
 import { convertObjectToArray } from '../utils/functions';
 import MainSlider from '../components/templates/MainSlider/MainSlider';
 import CurrentSlideContextProvider from '../providers/CurrentSlideContext';
-import { TransitionState } from 'gatsby-plugin-transition-link';
-import TransitionProvider from '../providers/TransitionProvider';
 
 const IndexPage = ({ data }) => {
   const {
@@ -24,7 +21,6 @@ const IndexPage = ({ data }) => {
     /* Three themes to choose from: light, dark, default.
     To have default, don't pass any props to Layout component  */
     <Div100vh>
-      <TransitionProvider />
       <Layout headerTheme='light'>
         <CurrentSlideContextProvider>
           <SEO title='Home' />

@@ -158,7 +158,6 @@ const StyledProjectSmallNavigation = styled.div`
 
 const StyledParagraph = styled(Paragraph)`
   text-align: right;
-  //letter-spacing: 0;
   cursor: pointer;
   transition: all 1s ease;
   position: relative;

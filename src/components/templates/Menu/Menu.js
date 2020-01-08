@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
-import AniLink from 'gatsby-plugin-transition-link/AniLink';
+import Link from '../../atoms/Link/Link';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { animated } from 'react-spring';
 import { useScreenSize } from '../../../utils/customHooks';
@@ -185,7 +185,7 @@ const Menu = ({ isOpen, boxSize, headerTheme }) => {
               >
                 {trailItem => trailProps => (
                   <ParagraphBox style={trailProps} headerTheme={headerTheme}>
-                    <AniLink to={trailItem.link}>
+                    <Link to={trailItem.link}>
                       <StyledMenuItems
                         title='true'
                         headerTheme={headerTheme}
@@ -193,7 +193,7 @@ const Menu = ({ isOpen, boxSize, headerTheme }) => {
                       >
                         {trailItem.name}
                       </StyledMenuItems>
-                    </AniLink>
+                    </Link>
                   </ParagraphBox>
                 )}
               </MenuItems>

@@ -3,11 +3,7 @@ import styled from 'styled-components';
 import GatsbyImage from 'gatsby-image';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import OpenCircle from '../../atoms/OpenCircle/OpenCircle';
-import { Link } from 'gatsby';
-import Image from '../../molecules/Image/Image';
-import { Tween } from 'react-gsap';
-import { easeQuadIn } from 'd3-ease';
-import { Scene } from 'react-scrollmagic';
+import Link from '../../atoms/Link/Link';
 import { animationIn } from '../../../utils/animations';
 
 const StyledWrapper = styled.section`
@@ -142,9 +138,10 @@ const StyledLink = styled(Link)`
   border-radius: 50%;
 `;
 
-const MobileLink = styled(Link)`
-  color: #000;
+const MobileLink = styled(Paragraph)`
+  color: #000 !important;
   font-family: ${({ theme }) => theme.font.family.avanti};
+  font-weight: bold;
   letter-spacing: 2px;
   display: block;
   margin-top: 3rem;
@@ -162,7 +159,7 @@ const ProjectIntro = ({ data, image, reverse }) => {
       <PhotoWrapper>
         <StyledLine />
         <StyledImage fluid={image.childImageSharp.fluid} />
-        <StyledLink to={data.pageLink}>
+        <StyledLink to={data.pageLink} lightTheme>
           <CircleWrapper>
             <OpenCircle />
           </CircleWrapper>
@@ -177,7 +174,9 @@ const ProjectIntro = ({ data, image, reverse }) => {
         <StyledParagraph small='true'>
           {data.primaryDescription}
         </StyledParagraph>
-        <MobileLink to={data.pageLink}>Open {data.name}</MobileLink>
+        <Link to={data.pageLink}>
+          <MobileLink>Open {data.name}</MobileLink>
+        </Link>
       </ContentWrapper>
     </StyledWrapper>
   );

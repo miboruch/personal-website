@@ -252,11 +252,12 @@ const AboutTemplate = ({ images }) => {
         </OverflowBox>
         <StyledParagraph>
           Hello, my name is Michal and I am a 21 years old aspiring junior web
-          developer based in Tarnow. I am a computer science student at the
-          University of Applied Sciences in Tarnow. In 2019, may I started my
-          journey with Javascript, and since then I have been constantly
-          increasing my skills and knowledge of web development. My main goal is
-          to create modern design in combination with clean DRY code. <br />
+          developer based in <strong>Tarnow</strong> and <strong>Krakow</strong>
+          . I am a computer science student at the University of Applied
+          Sciences in Tarnow. In 2019, may I started my journey with Javascript,
+          and since then I have been constantly increasing my skills and
+          knowledge of web development. My main goal is to create modern design
+          in combination with clean DRY code. <br />
           What can I tell about myself? I am open to new technologies and always
           happy to broaden my knowledge. In addition, I have an ability to learn
           very fast, which I consider as an important value. At the university I

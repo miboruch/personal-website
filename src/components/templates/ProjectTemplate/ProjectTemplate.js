@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import Paragraph from '../atoms/Paragraph/Paragraph';
-import ProjectContentBox from '../atoms/ProjectContentBox/ProjectContentBox';
-import Image from '../molecules/Image/Image';
-import Footer from '../molecules/Footer/Footer';
-import { animationIn } from '../../utils/animations';
 import { Controller, Scene } from 'react-scrollmagic';
 import { Tween } from 'react-gsap';
 import { easeExpOut } from 'd3-ease';
+import Paragraph from '../../atoms/Paragraph/Paragraph';
+import ProjectContentBox from '../../atoms/ProjectContentBox/ProjectContentBox';
+import Image from '../../molecules/Image/Image';
+import Footer from '../../molecules/Footer/Footer';
+import { animationIn } from '../../../utils/animations';
 
 const StyledWrapper = styled.div`
   width: 100%;
