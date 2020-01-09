@@ -2,13 +2,14 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import BackgroundImage from 'gatsby-background-image';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
-import { animated } from 'react-spring';
+import { animated, useSpring } from 'react-spring';
 import Link from '../../atoms/Link/Link';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
 import { animationIn, createFade } from '../../../utils/animations';
 import { textWave } from './sliderContentAnimations';
 import SlidersAccents from '../../molecules/SlidersAccents/SlidersAccents';
 import Div100vh from 'react-div-100vh';
+import { easeExpOut } from 'd3-ease';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -77,6 +78,7 @@ const StyledTitle = styled(Paragraph)`
   overflow: hidden;
   letter-spacing: 0;
   margin: 0;
+  transition: all 0.5s ease;
 `;
 
 const StyledDescription = styled(Paragraph)`
@@ -86,6 +88,7 @@ const StyledDescription = styled(Paragraph)`
   margin-top: 2rem;
   padding: 0 2rem;
   text-align: center;
+  transition: all 1s ease;
 
   ${({ theme }) => theme.mq.standard} {
     margin-top: 0;
@@ -162,7 +165,7 @@ const SliderContent = ({ image, content, index }) => {
   const isCurrentSlide = currentSlide === index;
 
   /* Animations -> sliderContentAnimations.js*/
-  const fade = createFade(isCurrentSlide, 2000, 1500);
+  const fade = createFade(isCurrentSlide, 2000, 1500, 0);
   const trail = textWave(content.name, isCurrentSlide);
   const bottomSlide = animationIn(isCurrentSlide, 1000, 3000, 0);
 

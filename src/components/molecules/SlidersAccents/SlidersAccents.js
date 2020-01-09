@@ -17,6 +17,7 @@ const StyledLine = styled(animated.div)`
   height: 1px;
   background: rgba(255, 255, 255, 0.2);
   z-index: 5;
+  transition: all 0.5s ease;
 
   ${({ theme }) => theme.mq.standard} {
     top: 50%;

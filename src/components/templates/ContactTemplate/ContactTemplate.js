@@ -41,6 +41,7 @@ const ContentWrapper = styled(animated.section)`
 
 const FormWrapper = styled(animated.div)`
   display: none;
+  transition: all 1s ease;
 
   ${({ theme }) => theme.mq.standard} {
     display: block;
@@ -50,6 +51,7 @@ const FormWrapper = styled(animated.div)`
 
 const ContentInformation = styled(animated.div)`
   margin-left: 0;
+  transition: all 1s ease;
 
   ${({ theme }) => theme.mq.standard} {
     margin-left: 30px;
@@ -159,13 +161,6 @@ const StyledImage = styled(GatsbyImage)`
   width: 100%;
   background: transparent;
   background-blend-mode: overlay;
-`;
-
-const StyledLine = styled.div`
-  width: 100%;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.2);
-  margin: 3rem 0;
 `;
 
 const FooterWrapper = styled.div`

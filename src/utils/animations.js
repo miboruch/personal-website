@@ -45,11 +45,9 @@ export const animationIn = (
       easing: easeExpOut
     },
     from: {
-      opacity: 0,
       transform: 'matrix(0.99, 0.33, 0, 1, 0, 100)'
     },
     to: {
-      opacity: stateToggle ? 1 : 0,
       transform: stateToggle
         ? 'matrix(1,0,0,1,0,0)'
         : 'matrix(0.99, 0.33, 1, 1, 0, 100)'
