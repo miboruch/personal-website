@@ -102,7 +102,7 @@ const Header = ({ headerTheme }) => {
       <StyledHeader isOnTop={pageY} isOpen={isOpen} headerTheme={headerTheme}>
         <Logo headerTheme={headerTheme} isOpen={isOpen} />
         <StyledTextWrapper headerTheme={headerTheme} isOpen={isOpen}>
-          <StyledParagraph>Krakow, Poland</StyledParagraph>
+          {/*<StyledParagraph>Krakow, Poland</StyledParagraph>*/}
           <StyledLink href='mailto:miboruch@gmail.com'>
             miboruch@gmail.com
           </StyledLink>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import BackgroundImage from 'gatsby-background-image';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { animated } from 'react-spring';
-import { Link } from 'gatsby';
+import Link from '../../atoms/Link/Link';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
 import { animationIn, createFade } from '../../../utils/animations';
 import { textWave } from './sliderContentAnimations';
