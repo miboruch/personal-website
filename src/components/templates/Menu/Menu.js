@@ -79,7 +79,7 @@ const ParagraphBox = styled(animated.div)`
 
     &:hover {
       background-color: ${({ headerTheme }) =>
-        headerTheme === 'light' ? '#ccc' : '#1b1b1b'};
+        headerTheme === 'light' ? '#e1e1e1' : '#1b1b1b'};
     }
 
     ${({ headerTheme }) =>
