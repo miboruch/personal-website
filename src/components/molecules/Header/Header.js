@@ -5,7 +5,6 @@ import { animated } from 'react-spring';
 import Menu from '../../templates/Menu/Menu';
 import { useElementSize, useScrollPosition } from '../../../utils/customHooks';
 import MenuButton from '../MenuButton/MenuButton';
-import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Logo from '../../atoms/Logo/Logo';
 
 const StyledHeader = styled(animated.header)`
@@ -75,12 +74,6 @@ const StyledTextWrapper = styled.div`
   }
 `;
 
-const StyledParagraph = styled(Paragraph)`
-  margin-right: 3rem;
-  letter-spacing: 0;
-  color: inherit;
-`;
-
 const StyledLink = styled.a`
   margin-right: 3rem;
   letter-spacing: 0;
@@ -102,7 +95,6 @@ const Header = ({ headerTheme }) => {
       <StyledHeader isOnTop={pageY} isOpen={isOpen} headerTheme={headerTheme}>
         <Logo headerTheme={headerTheme} isOpen={isOpen} />
         <StyledTextWrapper headerTheme={headerTheme} isOpen={isOpen}>
-          {/*<StyledParagraph>Krakow, Poland</StyledParagraph>*/}
           <StyledLink href='mailto:miboruch@gmail.com'>
             miboruch@gmail.com
           </StyledLink>
