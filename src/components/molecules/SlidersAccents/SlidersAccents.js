@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { animated } from 'react-spring';
+import { animated, useSpring } from 'react-spring';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { lineSlide } from './slidersAccentsAnimations';
 import { animationIn } from '../../../utils/animations';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
 import Link from '../../atoms/Link/Link';
+import { easeExpOut } from 'd3-ease';
 
 const StyledLine = styled(animated.div)`
   position: absolute;
@@ -17,7 +18,7 @@ const StyledLine = styled(animated.div)`
   height: 1px;
   background: rgba(255, 255, 255, 0.2);
   z-index: 5;
-  transition: all 0.5s ease;
+  transition: all 1s ease;
 
   ${({ theme }) => theme.mq.standard} {
     top: 50%;
@@ -66,7 +67,7 @@ const SlidersAccents = ({ index }) => {
   const { currentSlide } = useContext(CurrentSlideContext);
   const isCurrentSlide = currentSlide === index;
 
-  const bottomSlide = animationIn(isCurrentSlide, 1000, 3300, 0);
+  const bottomSlide = animationIn(isCurrentSlide, 900, 2500, 0);
   const line = lineSlide(isCurrentSlide);
 
   return (

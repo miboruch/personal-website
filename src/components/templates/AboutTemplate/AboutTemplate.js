@@ -136,7 +136,6 @@ const TextWrapper = styled(ContentWrapper)`
 `;
 
 const StyledPortfolioImage = styled(StyledImage)`
-  transition: all 1s ease;
   &:hover {
     background-blend-mode: normal;
   }
@@ -215,9 +214,9 @@ const AboutTemplate = ({ images }) => {
   const [isSkillsVisible, setSkillsState] = useState(true);
   const customCursorRef = useRef();
 
-  const bottomSlide = animationIn(true, 1000, 1000, 0);
-  const fadeIn = createFade(true, 1000, 1300, 0);
-  const fadeInDelayed = createFade(true, 1000, 1800, 0);
+  const bottomSlide = animationIn(true, 1000, 0, 0);
+  const fadeIn = createFade(true, 1000, 300, 0);
+  const fadeInDelayed = createFade(true, 1000, 500, 0);
 
   const { x, y } = useMousePosition();
   const isOnTop = useScrollPosition();

@@ -7,6 +7,6 @@ export const textWave = (text, stateToggle) => {
     opacity: stateToggle ? 1 : 0,
     x: stateToggle ? 0 : 50,
     from: { opacity: 0, x: 50 },
-    delay: stateToggle ? 1500 : 0
+    delay: stateToggle ? 1000 : 0
   });
 };

@@ -31,6 +31,7 @@ const StyledBackgroundImage = styled(BackgroundImage)`
   ${({ theme }) => theme.mq.standard} {
     width: 100%;
     transform: translateX(15%);
+    opacity: 0.8;
   }
 `;
 
@@ -130,33 +131,7 @@ const OverflowBox = styled.div`
   margin-top: 2rem;
 
   ${({ theme }) => theme.mq.standard} {
-    width: 200px;
-  }
-`;
-
-const StyledOverflow = styled(OverflowBox)`
-  margin: 0;
-  position: absolute;
-  bottom: 2rem;
-  left: auto;
-  right: 8rem;
-  display: none;
-
-  ${({ theme }) => theme.mq.standard} {
-    display: block;
-  }
-`;
-
-const StyledNextCase = styled(Paragraph)`
-  font-family: Avanti;
-  transition: all 1s ease;
-  letter-spacing: 0;
-  display: none;
-
-  ${({ theme }) => theme.mq.standard} {
-    display: block;
-    color: #fff;
-    text-align: right;
+    width: 150px;
   }
 `;
 
@@ -165,9 +140,9 @@ const SliderContent = ({ image, content, index }) => {
   const isCurrentSlide = currentSlide === index;
 
   /* Animations -> sliderContentAnimations.js*/
-  const fade = createFade(isCurrentSlide, 2000, 1500, 0);
+  const fade = createFade(isCurrentSlide, 2000, 900, 0);
   const trail = textWave(content.name, isCurrentSlide);
-  const bottomSlide = animationIn(isCurrentSlide, 1000, 3000, 0);
+  const bottomSlide = animationIn(isCurrentSlide, 1000, 1200, 0);
 
   return (
     <Div100vh>
@@ -211,11 +186,6 @@ const SliderContent = ({ image, content, index }) => {
             <SlidersAccents index={index} link={content.pageLink} />
           </ContentWrapper>
         </StyledContextBox>
-        <StyledOverflow>
-          <StyledNextCase large style={bottomSlide}>
-            {content.next}
-          </StyledNextCase>
-        </StyledOverflow>
       </StyledWrapper>
     </Div100vh>
   );

@@ -14,7 +14,7 @@ const Paragraph = styled(animated.p)`
     css`
       font-size: ${({ theme }) => theme.font.size.mobile.s};
     `}
-  
+
   ${({ medium }) =>
     medium &&
     css`
@@ -25,8 +25,8 @@ const Paragraph = styled(animated.p)`
       ${({ theme }) => theme.mq.desktop} {
         font-size: ${({ theme }) => theme.font.size.desktop.m};
       }
-    `}
-  
+    `};
+
   ${({ large }) =>
     large &&
     css`
@@ -37,8 +37,8 @@ const Paragraph = styled(animated.p)`
       ${({ theme }) => theme.mq.desktop} {
         font-size: ${({ theme }) => theme.font.size.desktop.l};
       }
-    `}
-  
+    `};
+
   ${({ title }) =>
     title &&
     css`
@@ -50,7 +50,7 @@ const Paragraph = styled(animated.p)`
       }
       font-weight: 700;
     `}
-  
+
   ${({ titleMenu }) =>
     titleMenu &&
     css`

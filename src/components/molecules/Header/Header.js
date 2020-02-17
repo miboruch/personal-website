@@ -47,9 +47,9 @@ const StyledMenuButtonWrapper = styled.div`
   align-items: center;
 `;
 
-const StyledTextWrapper = styled.div`
+const StyledLink = styled.a`
   position: absolute;
-  right: 315px;
+  right: 345px;
   display: none;
   justify-content: center;
   flex-direction: row;
@@ -74,12 +74,6 @@ const StyledTextWrapper = styled.div`
   }
 `;
 
-const StyledLink = styled.a`
-  margin-right: 3rem;
-  letter-spacing: 0;
-  color: inherit;
-`;
-
 const Header = ({ headerTheme }) => {
   const menuButton = useRef();
   const [isOpen, setOpen] = useState(false);
@@ -94,11 +88,13 @@ const Header = ({ headerTheme }) => {
     <>
       <StyledHeader isOnTop={pageY} isOpen={isOpen} headerTheme={headerTheme}>
         <Logo headerTheme={headerTheme} isOpen={isOpen} />
-        <StyledTextWrapper headerTheme={headerTheme} isOpen={isOpen}>
-          <StyledLink href='mailto:miboruch@gmail.com'>
-            miboruch@gmail.com
-          </StyledLink>
-        </StyledTextWrapper>
+        <StyledLink
+          href='mailto:miboruch@gmail.com'
+          headerTheme={headerTheme}
+          isOpen={isOpen}
+        >
+          miboruch@gmail.com
+        </StyledLink>
         <StyledMenuButtonWrapper>
           <MenuButton
             isOpen={isOpen}

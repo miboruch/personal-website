@@ -34,7 +34,7 @@ const IndexPage = ({ data }) => {
 export const mockUpFragment = graphql`
   fragment mockUpFragment on File {
     childImageSharp {
-      fluid(maxWidth: 1500, quality: 100) {
+      fluid(maxWidth: 1100, quality: 100) {
         ...GatsbyImageSharpFluid_noBase64
       }
     }
@@ -44,7 +44,7 @@ export const mockUpFragment = graphql`
 export const photoFragment = graphql`
   fragment photoFragment on File {
     childImageSharp {
-      fluid(maxWidth: 1500, quality: 100) {
+      fluid(maxWidth: 1200, quality: 100) {
         ...GatsbyImageSharpFluid_noBase64
       }
     }
