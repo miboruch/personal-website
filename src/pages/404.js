@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Div100vh from 'react-div-100vh';
-import Link from '../components/atoms/Link/Link';
+import { Link } from 'gatsby';
 import Layout from '../components/templates/Layout';
 import SEO from '../components/seo';
 import Paragraph from '../components/atoms/Paragraph/Paragraph';

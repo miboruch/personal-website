@@ -20,9 +20,10 @@ module.exports = {
         path: `${__dirname}/src/images`
       }
     },
-    {
-      resolve: `gatsby-plugin-styled-components`
-    },
+    // {
+    //   resolve: `gatsby-plugin-styled-components`
+    // },
+    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-plugin-react-svg`,
       options: {

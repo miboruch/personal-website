@@ -67,11 +67,16 @@ const StyledOverflow = styled.div`
 `;
 
 const StyledNextCase = styled(Paragraph)`
-  font-family: Avanti;
+  font-family: 'Avanti';
   transition: all 1s ease;
   letter-spacing: 0;
   color: #2d2d2d;
   text-align: left;
+`;
+
+const StyledNumber = styled(StyledNextCase)`
+  font-family: ${({ theme }) => theme.font.family.futura};
+  font-weight: 500;
 `;
 
 const SliderBoxInfo = ({ nextProjectName, allProjectsLength }) => {
@@ -81,9 +86,9 @@ const SliderBoxInfo = ({ nextProjectName, allProjectsLength }) => {
   return (
     <TimeoutBoxWrapper style={fade}>
       <BarWrapper>
-        <StyledNextCase>0{currentSlide + 1}</StyledNextCase>
+        <StyledNumber>0{currentSlide + 1}</StyledNumber>
         <TimeoutBar allProjectsLength={allProjectsLength} />
-        <StyledNextCase>0{allProjectsLength}</StyledNextCase>
+        <StyledNumber>0{allProjectsLength}</StyledNumber>
       </BarWrapper>
       <NextStandardWrapper>
         <StyledOverflow>

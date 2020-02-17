@@ -3,13 +3,12 @@ import styled from 'styled-components';
 import BackgroundImage from 'gatsby-background-image';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { animated, useSpring } from 'react-spring';
-import Link from '../../atoms/Link/Link';
+import { Link } from 'gatsby';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
 import { animationIn, createFade } from '../../../utils/animations';
 import { textWave } from './sliderContentAnimations';
 import SlidersAccents from '../../molecules/SlidersAccents/SlidersAccents';
 import Div100vh from 'react-div-100vh';
-import { easeExpOut } from 'd3-ease';
 
 const StyledWrapper = styled.div`
   width: 100%;

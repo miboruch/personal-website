@@ -6,8 +6,7 @@ import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { lineSlide } from './slidersAccentsAnimations';
 import { animationIn } from '../../../utils/animations';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
-import Link from '../../atoms/Link/Link';
-import { easeExpOut } from 'd3-ease';
+import { Link } from 'gatsby';
 
 const StyledLine = styled(animated.div)`
   position: absolute;

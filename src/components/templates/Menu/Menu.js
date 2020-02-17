@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
-import Link from '../../atoms/Link/Link';
+import { Link } from 'gatsby';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { animated } from 'react-spring';
 import { useScreenSize } from '../../../utils/customHooks';
@@ -97,7 +97,7 @@ const StyledMenuItems = styled(Paragraph)`
   position: relative;
 
   &::before {
-    content: '${({ beforeContent }) => beforeContent}';
+    content: '${({ before }) => before}';
     position: absolute;
     display: none;
     font-size: 40px;
@@ -203,7 +203,7 @@ const Menu = ({ isOpen, boxSize, headerTheme }) => {
                       <StyledMenuItems
                         title='true'
                         headerTheme={headerTheme}
-                        beforeContent={trailItem.before}
+                        before={trailItem.before}
                       >
                         {trailItem.name}
                       </StyledMenuItems>

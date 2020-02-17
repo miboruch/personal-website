@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+  @import '../components/index.css';
 
   *, *::before, *::after{
     box-sizing: border-box;
@@ -28,6 +29,10 @@ const GlobalStyle = createGlobalStyle`
   
   h1{
     margin: 0;
+  }
+  
+  a {
+    text-decoration: none !important;
   }
 `;
 
