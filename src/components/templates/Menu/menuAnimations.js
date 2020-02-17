@@ -4,8 +4,6 @@ import { easeExpInOut } from 'd3-ease';
 export const AnimatedMenu = Keyframes.Spring({
   in: async (next, ...props) => {
     const { scaleWidth, scaleHeight } = props[1].scale;
-    console.log(scaleWidth);
-    console.log(scaleHeight);
     await next({
       to: {
         transform: `scale(${scaleWidth}, ${scaleHeight})`

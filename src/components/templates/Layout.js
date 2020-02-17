@@ -21,7 +21,7 @@ const Layout = ({ children, headerTheme }) => {
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-  headerTheme: PropTypes.oneOf(['dark, light'])
+  headerTheme: PropTypes.oneOf(['dark', 'light'])
 };
 
 export default Layout;

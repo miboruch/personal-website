@@ -1,15 +1,15 @@
 export const menuItems = [
   {
     id: 0,
-    name: 'Projects',
-    before: 'see all my',
-    link: '/projects'
-  },
-  {
-    id: 1,
     name: 'About me',
     before: 'find out something',
     link: '/about'
+  },
+  {
+    id: 1,
+    name: 'Projects',
+    before: 'see all of my',
+    link: '/projects'
   },
   {
     id: 2,
@@ -20,11 +20,6 @@ export const menuItems = [
 ];
 
 export const mediaItems = [
-  // {
-  //   id: 0,
-  //   name: '.Facebook',
-  //   link: 'https://www.facebook.com/profile.php?id=100002301981552'
-  // },
   {
     id: 1,
     name: '.Github',
@@ -45,7 +40,7 @@ export const skillsItems = [
   },
   {
     name: 'React',
-    description: `My journey with React started in july 2019 and we are good friends right now. I mainly use React in my projects using hooks, custom hooks and much more.`
+    description: `My journey with React started in july 2019 and we are good friends right now. I mainly use React in my projects using hooks, custom hooks, render props and much more`
   },
   {
     name: 'Gatsby.js',

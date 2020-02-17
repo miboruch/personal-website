@@ -69,14 +69,10 @@ const StyledImage = styled(BackgroundImage)`
   background-blend-mode: overlay;
 `;
 
-const TitleOverflowWrapper = styled.div`
-  overflow: hidden;
-  margin-top: 5rem;
-`;
-
 const StyledTitle = styled(Paragraph)`
   font-family: ${({ theme }) => theme.font.family.avanti};
   padding: 2rem;
+  margin-top: 5rem;
 `;
 
 const StyledLine = styled.div`
@@ -214,7 +210,7 @@ const AboutTemplate = ({ images }) => {
   const [isSkillsVisible, setSkillsState] = useState(true);
   const customCursorRef = useRef();
 
-  const bottomSlide = animationIn(true, 1000, 0, 0);
+  // const bottomSlide = animationIn(true, 1000, 0, 0);
   const fadeIn = createFade(true, 1000, 300, 0);
   const fadeInDelayed = createFade(true, 1000, 500, 0);
 
@@ -230,11 +226,7 @@ const AboutTemplate = ({ images }) => {
     <StyledWrapper>
       <CustomCursor ref={customCursorRef} />
       <StyledImage fluid={images[0].childImageSharp.fluid}>
-        <TitleOverflowWrapper>
-          <StyledTitle title style={bottomSlide}>
-            About me
-          </StyledTitle>
-        </TitleOverflowWrapper>
+        <StyledTitle title>About me</StyledTitle>
         <StyledLine />
         <ContentWrapper>
           <StyledQuote style={fadeIn}>
@@ -276,8 +268,9 @@ const AboutTemplate = ({ images }) => {
             <StyledListItem>GIT</StyledListItem>
           </StyledList>
           Moreover, I have basic knowledge of
-          <strong> React-native</strong>, relational and non-relational
-          databases like <strong>PostreSQL</strong> or <strong>mongooDB</strong>
+          <strong> React-native</strong>, <strong>Typescript</strong>,
+          relational and non-relational databases like{' '}
+          <strong>PostreSQL</strong> and <strong>mongooDB</strong>
           <br />
           <br />
           My personal 2020 front-end roadmap:

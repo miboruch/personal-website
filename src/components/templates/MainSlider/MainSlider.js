@@ -11,6 +11,7 @@ import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { graphql, useStaticQuery } from 'gatsby';
 import { animationIn } from '../../../utils/animations';
 import TimeoutBar from '../../atoms/TimeoutBar/TimeoutBar';
+import SliderBoxInfo from '../../molecules/SliderBoxInfo/SliderBoxInfo';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -182,68 +183,6 @@ const StyledParagraph = styled(Paragraph)`
   }
 `;
 
-const TimeoutBoxWrapper = styled.div`
-  position: absolute;
-  display: none;
-  justify-content: flex-end;
-  padding: 0 2rem;
-  align-items: center;
-  flex-direction: row;
-  bottom: 5px;
-  left: 5px;
-  height: 62px;
-  background-color: #fff;
-
-  ${({ theme }) => theme.mq.standard} {
-    display: flex;
-  }
-`;
-
-const BarWrapper = styled.div`
-  width: 150px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-right: 2rem;
-`;
-
-const NextStandardWrapper = styled.div`
-  display: none;
-  flex-direction: row;
-
-  ${({ theme }) => theme.mq.standard} {
-    display: flex;
-  }
-`;
-
-const StyledNextLabel = styled(animated(Paragraph))`
-  align-items: center;
-  text-transform: uppercase;
-  letter-spacing: 5px;
-  color: #2d2d2d;
-  font-size: 12px;
-  font-weight: lighter;
-  display: none;
-
-  ${({ theme }) => theme.mq.standard} {
-    display: flex;
-  }
-`;
-
-const StyledOverflow = styled.div`
-  overflow: hidden;
-  margin-bottom: 0.25rem;
-  padding-right: 1rem;
-`;
-
-const StyledNextCase = styled(Paragraph)`
-  font-family: Avanti;
-  transition: all 1s ease;
-  letter-spacing: 0;
-  color: #2d2d2d;
-  text-align: left;
-`;
-
 const MainSlider = ({ images, data }) => {
   const {
     portfolio: { projects }
@@ -307,19 +246,10 @@ const MainSlider = ({ images, data }) => {
         <ArrowLeft onClick={() => sliderRef.current.slickPrev()} />
         <ArrowRight onClick={() => sliderRef.current.slickNext()} />
       </SliderNavigation>
-      <TimeoutBoxWrapper>
-        <BarWrapper>
-          <StyledNextCase>0{currentSlide + 1}</StyledNextCase>
-          <TimeoutBar allProjectsLength={data.length} />
-          <StyledNextCase>0{data.length}</StyledNextCase>
-        </BarWrapper>
-        <NextStandardWrapper>
-          <StyledOverflow>
-            <StyledNextCase large>{data[currentSlide].next}</StyledNextCase>
-          </StyledOverflow>
-          <StyledNextLabel>NEXT</StyledNextLabel>
-        </NextStandardWrapper>
-      </TimeoutBoxWrapper>
+      <SliderBoxInfo
+        nextProjectName={data[currentSlide].next}
+        allProjectsLength={data.length}
+      />
       <NavigationWrapper>
         <SocialNavigation toggleState={true} lightTheme={false} noPadding />
       </NavigationWrapper>

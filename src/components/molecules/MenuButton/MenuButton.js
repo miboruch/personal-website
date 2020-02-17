@@ -68,7 +68,7 @@ const MenuButton = React.forwardRef(
 MenuButton.displayName = 'MenuButton';
 
 MenuButton.propTypes = {
-  headerTheme: PropTypes.oneOf(['dark, light'])
+  headerTheme: PropTypes.oneOf(['dark', 'light'])
 };
 
 export default MenuButton;

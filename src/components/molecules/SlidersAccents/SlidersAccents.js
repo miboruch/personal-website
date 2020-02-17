@@ -67,7 +67,7 @@ const SlidersAccents = ({ index }) => {
   const { currentSlide } = useContext(CurrentSlideContext);
   const isCurrentSlide = currentSlide === index;
 
-  const bottomSlide = animationIn(isCurrentSlide, 900, 2500, 0);
+  const bottomSlide = animationIn(isCurrentSlide, 900, 3000, 0);
   const line = lineSlide(isCurrentSlide);
 
   return (

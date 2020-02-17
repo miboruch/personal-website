@@ -41,12 +41,6 @@ const StyledHeader = styled(animated.header)`
     `}
 `;
 
-const StyledMenuButtonWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
 const StyledLink = styled.a`
   position: absolute;
   right: 345px;
@@ -95,14 +89,12 @@ const Header = ({ headerTheme }) => {
         >
           miboruch@gmail.com
         </StyledLink>
-        <StyledMenuButtonWrapper>
-          <MenuButton
-            isOpen={isOpen}
-            toggleMenu={toggleMenu}
-            ref={menuButton}
-            headerTheme={headerTheme}
-          />
-        </StyledMenuButtonWrapper>
+        <MenuButton
+          isOpen={isOpen}
+          toggleMenu={toggleMenu}
+          ref={menuButton}
+          headerTheme={headerTheme}
+        />
       </StyledHeader>
       <Menu isOpen={isOpen} boxSize={size} headerTheme={headerTheme} />
     </>
@@ -110,7 +102,7 @@ const Header = ({ headerTheme }) => {
 };
 
 Header.propTypes = {
-  headerTheme: PropTypes.oneOf(['dark, light'])
+  headerTheme: PropTypes.oneOf(['dark', 'light'])
 };
 
 export default Header;

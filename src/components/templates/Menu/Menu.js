@@ -102,11 +102,14 @@ const StyledMenuItems = styled(Paragraph)`
     display: none;
     font-size: 40px;
     color: rgba(63,63,63,0.5);
-    top: -20px;
+    top: 60px;
     z-index: -1;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: transparent;
     transition: all 1s ease;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    text-align: right;
   }
 
   ${({ headerTheme }) =>
@@ -119,6 +122,7 @@ const StyledMenuItems = styled(Paragraph)`
       }
     `}
 
+  /* Styles for standard window size */
   ${({ theme }) => theme.mq.standard} {
     color: rgba(255, 255, 255, 0.2);
     transition: color 1s ease;
@@ -145,13 +149,23 @@ const StyledMenuItems = styled(Paragraph)`
         }
 
         &:hover::before {
-          -webkit-text-stroke-color: #3d3d3d;
+          -webkit-text-stroke-color: rgba(0, 0, 0, 0.2);
         }
 
         &::before {
           color: rgba(204, 204, 204, 0.5);
         }
       `}
+  }
+  
+  /* Styles for desktop window size */
+  ${({ theme }) => theme.mq.desktop}{
+    &::before{
+      top: -20px;
+      writing-mode: horizontal-tb;
+      transform: rotate(0);
+      text-align: left;
+    }
   }
 `;
 
@@ -214,7 +228,7 @@ const Menu = ({ isOpen, boxSize, headerTheme }) => {
 Menu.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   boxSize: PropTypes.object.isRequired,
-  headerTheme: PropTypes.oneOf(['dark, light'])
+  headerTheme: PropTypes.oneOf(['dark', 'light'])
 };
 
 export default Menu;
