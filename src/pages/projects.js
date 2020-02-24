@@ -87,6 +87,7 @@ const StyledIcon = styled(ScrollIcon)`
 const Projects = ({ data }) => {
   const isOnTop = useScrollPosition();
   const imageArray = convertObjectToArray(
+    data.image4,
     data.image1,
     data.image2,
     data.image3
@@ -182,8 +183,11 @@ export const query = graphql`
     image3: file(name: { regex: "/weather-mobile/" }) {
       ...mockUpFragment
     }
+    image4: file(name: { regex: "/buyit-main/" }) {
+      ...mockUpFragment
+    }
     projectData: portfolio {
-      projects {
+      projects(orderBy: index_ASC) {
         name
         primaryDescription
         pageLink

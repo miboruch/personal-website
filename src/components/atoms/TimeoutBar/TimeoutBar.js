@@ -18,7 +18,7 @@ const StyledBar = styled.div`
     background-color: #2d2d2d;
     width: calc(
       ${({ currentSlide, allProjectsLength }) =>
-        `(100% / ${allProjectsLength}) * ${currentSlide} + 33%`}
+        `(100% / ${allProjectsLength}) * ${currentSlide + 1}`}
     );
     height: 2px;
     transition: width 0.5s ease;

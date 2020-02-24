@@ -69,9 +69,10 @@ const StyledOverflow = styled.div`
 const StyledNextCase = styled(Paragraph)`
   font-family: 'Avanti';
   transition: all 1s ease;
+  text-transform: capitalize;
   letter-spacing: 0;
   color: #2d2d2d;
-  text-align: left;
+  text-align: right;
 `;
 
 const StyledNumber = styled(StyledNextCase)`
@@ -91,10 +92,10 @@ const SliderBoxInfo = ({ nextProjectName, allProjectsLength }) => {
         <StyledNumber>0{allProjectsLength}</StyledNumber>
       </BarWrapper>
       <NextStandardWrapper>
+        <StyledNextLabel>NEXT</StyledNextLabel>
         <StyledOverflow>
           <StyledNextCase large>{nextProjectName}</StyledNextCase>
         </StyledOverflow>
-        <StyledNextLabel>NEXT</StyledNextLabel>
       </NextStandardWrapper>
     </TimeoutBoxWrapper>
   );

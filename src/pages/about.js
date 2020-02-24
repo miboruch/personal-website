@@ -6,7 +6,6 @@ import AboutTemplate from '../components/templates/AboutTemplate/AboutTemplate';
 import { convertObjectToArray } from '../utils/functions';
 
 const AboutPage = ({ data }) => {
-  console.log(data);
   const imagesArray = convertObjectToArray(data.image1, data.image2);
   return (
     <Layout headerTheme='light'>

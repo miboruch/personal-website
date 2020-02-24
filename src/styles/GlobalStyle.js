@@ -1,8 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-  @import '../components/index.css';
-
   *, *::before, *::after{
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;

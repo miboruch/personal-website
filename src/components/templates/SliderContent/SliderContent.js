@@ -70,7 +70,6 @@ const StyledTitleWrapper = styled(animated.div)`
 `;
 
 const StyledTitle = styled(Paragraph)`
-  font-size: 58px;
   font-family: ${({ theme }) => theme.font.family.avanti};
   font-weight: bold;
   opacity: 1 !important;

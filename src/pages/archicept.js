@@ -44,6 +44,7 @@ export const query = graphql`
         developStatus
         mainTechnology
         link
+        githubLink
         name
         next
         primaryDescription

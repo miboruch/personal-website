@@ -5,9 +5,9 @@ import SEO from '../components/seo';
 import { convertObjectToArray } from '../utils/functions';
 import ProjectTemplate from '../components/templates/ProjectTemplate/ProjectTemplate';
 
-const IndeedPage = ({ data }) => {
+const BuyItPage = ({ data }) => {
   const {
-    indeedData: { projects }
+    buyItData: { projects }
   } = data;
   const imagesArray = convertObjectToArray(
     data.image1,
@@ -19,7 +19,7 @@ const IndeedPage = ({ data }) => {
     /* Three themes to choose from: light, dark, default.
     To have default, don't pass any props to Layout component  */
     <Layout headerTheme='dark'>
-      <SEO title='Indeed' />
+      <SEO title='Buy IT' />
       <ProjectTemplate content={projects[0]} images={imagesArray} />
     </Layout>
   );
@@ -27,17 +27,17 @@ const IndeedPage = ({ data }) => {
 
 export const query = graphql`
   query {
-    image1: file(name: { regex: "/indeed-main-mobile/" }) {
+    image1: file(name: { regex: "/buyit-main/" }) {
       ...mockUpFragment
     }
-    image2: file(name: { regex: "/indeed-standard/" }) {
+    image2: file(name: { regex: "/buyit-mobile/" }) {
       ...mockUpFragment
     }
-    image3: file(name: { regex: "/indeed-mobile/" }) {
+    image3: file(name: { regex: "/buyit-standard/" }) {
       ...mockUpFragment
     }
-    indeedData: portfolio {
-      projects(where: { name: "indeed" }) {
+    buyItData: portfolio {
+      projects(where: { name: "Buy IT" }) {
         id
         category
         date
@@ -54,4 +54,4 @@ export const query = graphql`
   }
 `;
 
-export default IndeedPage;
+export default BuyItPage;

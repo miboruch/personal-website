@@ -82,7 +82,7 @@ const Hamburger = ({ isOpen, headerTheme }) => {
 
 Hamburger.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  headerTheme: PropTypes.oneOf(['dark, light'])
+  headerTheme: PropTypes.oneOf(['dark', 'light'])
 };
 
 export default Hamburger;

@@ -45,7 +45,7 @@ const Paragraph = styled(animated.p)`
       ${({ theme }) => theme.mq.mobileL} {
         font-size: ${({ theme }) => theme.font.size.mobile.title};
       }
-      ${({ theme }) => theme.mq.desktop} {
+      ${({ theme }) => theme.mq.standard} {
         font-size: ${({ theme }) => theme.font.size.desktop.title};
       }
       font-weight: 700;

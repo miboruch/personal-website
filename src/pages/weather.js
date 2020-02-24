@@ -5,7 +5,7 @@ import SEO from '../components/seo';
 import { convertObjectToArray } from '../utils/functions';
 import ProjectTemplate from '../components/templates/ProjectTemplate/ProjectTemplate';
 
-const IndeedPage = ({ data }) => {
+const WeatherPage = ({ data }) => {
   const {
     indeedData: { projects }
   } = data;
@@ -37,6 +37,7 @@ export const query = graphql`
         developStatus
         mainTechnology
         link
+        githubLink
         name
         next
         primaryDescription
@@ -46,4 +47,4 @@ export const query = graphql`
   }
 `;
 
-export default IndeedPage;
+export default WeatherPage;

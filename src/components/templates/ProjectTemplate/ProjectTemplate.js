@@ -76,7 +76,6 @@ const Description = styled(Paragraph)`
 
 const LinkWrapper = styled.section`
   width: 100%;
-  height: 110px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -103,7 +102,15 @@ const TextLabel = styled(Paragraph)`
 const StyledLink = styled.a`
   color: #8d8d8d;
   font-size: 18px;
-  padding: 1rem;
+  padding-bottom: 1rem;
+`;
+
+const LinkContentWrapper = styled.section`
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const ProjectTemplate = ({ content, images }) => {
@@ -160,6 +167,28 @@ const ProjectTemplate = ({ content, images }) => {
                       <TextLabel>Technologies</TextLabel>
                       <Description>{content.secondaryDescription}</Description>
                     </TechnologiesWrapper>
+                    <LinkWrapper>
+                      <LinkContentWrapper>
+                        <TextLabel>Link - Live</TextLabel>
+                        <StyledLink
+                          href={content.link}
+                          target='_blank'
+                          rel='noreferrer'
+                        >
+                          {content.name}
+                        </StyledLink>
+                      </LinkContentWrapper>
+                      <LinkContentWrapper>
+                        <TextLabel>Link - Github</TextLabel>
+                        <StyledLink
+                          href={content.githubLink}
+                          target='_blank'
+                          rel='noreferrer'
+                        >
+                          {content.name} - github.com
+                        </StyledLink>
+                      </LinkContentWrapper>
+                    </LinkWrapper>
                   </div>
                 </Tween>
               );
@@ -167,12 +196,6 @@ const ProjectTemplate = ({ content, images }) => {
           </Scene>
         </Controller>
       </OverflowDescriptionBox>
-      <LinkWrapper>
-        <TextLabel>Link</TextLabel>
-        <StyledLink href={content.link} target='_blank' rel='noreferrer'>
-          {content.name}
-        </StyledLink>
-      </LinkWrapper>
       <Image image={images[1]} />
       {images[2] ? <Image image={images[2]} /> : null}
       <Footer />

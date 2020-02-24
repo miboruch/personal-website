@@ -184,19 +184,6 @@ const StyledParagraph = styled(Paragraph)`
 `;
 
 const MainSlider = ({ images, data }) => {
-  const {
-    portfolio: { projects }
-  } = useStaticQuery(graphql`
-    query ProjectQuery {
-      portfolio {
-        projects {
-          name
-          index
-        }
-      }
-    }
-  `);
-
   const sliderRef = useRef();
   const { currentSlide, setSlide } = useContext(CurrentSlideContext);
 
@@ -232,10 +219,10 @@ const MainSlider = ({ images, data }) => {
         <ArrowRightStandard onClick={() => sliderRef.current.slickNext()} />
       </RightArrowWrapper>
       <StyledProjectSmallNavigation>
-        {projects.map(item => (
+        {data.map((item, index) => (
           <StyledParagraph
-            key={item.index}
-            isCurrent={currentSlide === item.index}
+            key={index}
+            isCurrent={currentSlide === index}
             onClick={() => sliderRef.current.slickGoTo(item.index)}
           >
             {item.name}
