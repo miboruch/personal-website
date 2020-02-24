@@ -94,7 +94,7 @@ const SliderBoxInfo = ({ nextProjectName, allProjectsLength }) => {
       <NextStandardWrapper>
         <StyledNextLabel>NEXT</StyledNextLabel>
         <StyledOverflow>
-          <StyledNextCase large>{nextProjectName}</StyledNextCase>
+          <StyledNextCase large='true'>{nextProjectName}</StyledNextCase>
         </StyledOverflow>
       </NextStandardWrapper>
     </TimeoutBoxWrapper>

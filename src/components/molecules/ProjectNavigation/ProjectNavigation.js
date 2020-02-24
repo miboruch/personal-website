@@ -6,16 +6,15 @@ import Paragraph from '../../atoms/Paragraph/Paragraph';
 
 const NavigationBox = styled.div`
   width: 200px;
-  height: 90px;
   background: #fff;
   position: fixed;
   bottom: 5px;
-  left: 5px;
+  right: 5px;
   z-index: 600;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: flex-end;
   padding: 2rem;
   opacity: ${({ isOnTop }) => (isOnTop ? 1 : 0)};
   transform: translateY(${({ isOnTop }) => (isOnTop ? '0' : '10%')});
@@ -39,7 +38,7 @@ const ProjectNavigation = ({ isOnTop }) => {
   } = useStaticQuery(graphql`
     query NavigationQuery {
       portfolio {
-        projects {
+        projects(orderBy: index_ASC) {
           pageLink
           name
         }

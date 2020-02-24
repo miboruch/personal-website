@@ -11,6 +11,7 @@ import {
   useScrollPosition
 } from '../../../utils/customHooks';
 import { animationIn, createFade } from '../../../utils/animations';
+import { skills } from '../../../utils/skills';
 
 const StyledWrapper = styled.div`
   background: #fff;
@@ -260,11 +261,9 @@ const AboutTemplate = ({ images }) => {
           <br />
           Technologies that I use:
           <StyledList>
-            <StyledListItem>HTML, CSS/SCSS</StyledListItem>
-            <StyledListItem>Javascript, ES6</StyledListItem>
-            <StyledListItem>React, Redux</StyledListItem>
-            <StyledListItem>Gatsby.js, GraphQL</StyledListItem>
-            <StyledListItem>NodeJS, Express</StyledListItem>
+            {skills.map(item => (
+              <StyledListItem key={item.name}>{item.name}</StyledListItem>
+            ))}
             <StyledListItem>GIT</StyledListItem>
           </StyledList>
           Moreover, I have basic knowledge of
@@ -277,7 +276,7 @@ const AboutTemplate = ({ images }) => {
           <StyledList>
             <StyledListItem>React advanced concepts</StyledListItem>
             <StyledListItem>Three.js</StyledListItem>
-            <StyledListItem>TypeScript</StyledListItem>
+            <StyledListItem>TypeScript advanced</StyledListItem>
           </StyledList>
           If you want to read more about my skills, click the paragraph below:
         </StyledParagraph>
@@ -288,15 +287,12 @@ const AboutTemplate = ({ images }) => {
       <SmallSkillsBox isOnTop={isOnTop} isOpen={isSkillsVisible}>
         <CloseButton lightTheme setBoxState={setSkillsState} />
         <SkillsBoxParagraph onClick={() => setBoxState(true)}>
-          HTML, CSS
-          <br />
-          JavaScript
-          <br />
-          React, Redux
-          <br />
-          Gatsby.js, GraphQL
-          <br />
-          Node.js, Express
+          {skills.map(item => (
+            <>
+              {item.name}
+              <br />
+            </>
+          ))}
         </SkillsBoxParagraph>
       </SmallSkillsBox>
       <SkillsBox isOpen={isBoxOpened} setBoxState={setBoxState} />

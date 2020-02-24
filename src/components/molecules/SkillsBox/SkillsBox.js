@@ -5,7 +5,7 @@ import CloseButton from '../../atoms/CloseButton/CloseButton';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { animated } from 'react-spring';
 import { AnimatedWrapper, AnimatedBox, BoxItems } from './skillsBoxAnimations';
-import { skillsItems } from '../../../utils/items';
+import { skillsItems } from '../../../utils/skills';
 
 const StyledWrapper = styled(animated.div)`
   width: 100%;
