@@ -22,4 +22,8 @@ Link.propTypes = {
   lightTheme: PropTypes.bool
 };
 
+Link.defaultProps = {
+  lightTheme: false
+};
+
 export default Link;

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { Link } from 'gatsby';
+import Link from '../Link/Link';
 import LogoLine from '../../../assets/icons/logo-line.svg';
 
 const StyledLogo = styled(LogoLine)`

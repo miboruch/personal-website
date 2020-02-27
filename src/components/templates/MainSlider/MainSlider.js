@@ -1,6 +1,5 @@
 import React, { useContext, useRef } from 'react';
 import styled from 'styled-components';
-import { animated } from 'react-spring';
 import Slider from 'react-slick';
 import SliderContent from '../SliderContent/SliderContent';
 import SliderNavigation from '../../molecules/SliderNavigation/SliderNavigation';
@@ -8,9 +7,6 @@ import SocialNavigation from '../../molecules/SocialNavigation/SocialNavigation'
 import Arrow from '../../../assets/icons/arrow.svg';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
-import { graphql, useStaticQuery } from 'gatsby';
-import { animationIn } from '../../../utils/animations';
-import TimeoutBar from '../../atoms/TimeoutBar/TimeoutBar';
 import SliderBoxInfo from '../../molecules/SliderBoxInfo/SliderBoxInfo';
 
 const StyledWrapper = styled.div`

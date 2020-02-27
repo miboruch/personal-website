@@ -45,7 +45,17 @@ export const mockUpFragment = graphql`
 export const photoFragment = graphql`
   fragment photoFragment on File {
     childImageSharp {
-      fluid(maxWidth: 1200, quality: 100) {
+      fluid(maxWidth: 1060, quality: 100) {
+        ...GatsbyImageSharpFluid_noBase64
+      }
+    }
+  }
+`;
+
+export const smallPhotoFragment = graphql`
+  fragment smallPhotoFragment on File {
+    childImageSharp {
+      fluid(maxWidth: 550, quality: 100) {
         ...GatsbyImageSharpFluid_noBase64
       }
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import styled from 'styled-components';
-import { Link } from 'gatsby';
+import Link from '../../atoms/Link/Link';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 
 const NavigationBox = styled.div`
@@ -14,8 +14,8 @@ const NavigationBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
-  padding: 2rem;
+  align-items: flex-start;
+  padding: 2rem 3rem;
   opacity: ${({ isOnTop }) => (isOnTop ? 1 : 0)};
   transform: translateY(${({ isOnTop }) => (isOnTop ? '0' : '10%')});
   transition: transform 2s ease, opacity 2s ease;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import GatsbyImage from 'gatsby-image';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import OpenCircle from '../../atoms/OpenCircle/OpenCircle';
-import { Link } from 'gatsby';
+import Link from '../../atoms/Link/Link';
 import { animationIn } from '../../../utils/animations';
 
 const StyledWrapper = styled.section`

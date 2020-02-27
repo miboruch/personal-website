@@ -19,7 +19,7 @@ const ContactPage = ({ data: { image } }) => {
 export const query = graphql`
   query {
     image: file(name: { regex: "/portret/" }) {
-      ...photoFragment
+      ...smallPhotoFragment
     }
   }
 `;

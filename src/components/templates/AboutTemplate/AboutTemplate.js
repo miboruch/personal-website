@@ -10,7 +10,7 @@ import {
   useMousePosition,
   useScrollPosition
 } from '../../../utils/customHooks';
-import { animationIn, createFade } from '../../../utils/animations';
+import { createFade } from '../../../utils/animations';
 import { skills } from '../../../utils/skills';
 
 const StyledWrapper = styled.div`
@@ -101,12 +101,6 @@ const StyledParagraph = styled(Paragraph)`
   letter-spacing: 0;
 `;
 
-const StyledTitleParagraph = styled(StyledParagraph)`
-  text-align: center;
-  color: #000;
-  font-weight: 500;
-`;
-
 const StyledName = styled(Paragraph)`
   font-weight: bold;
   font-size: 12px;
@@ -178,10 +172,6 @@ const SkillsBoxParagraph = styled(Paragraph)`
   cursor: pointer;
 `;
 
-const OverflowBox = styled.div`
-  overflow: hidden;
-`;
-
 const StyledList = styled.ul`
   list-style-type: none;
 `;
@@ -211,9 +201,7 @@ const AboutTemplate = ({ images }) => {
   const [isSkillsVisible, setSkillsState] = useState(true);
   const customCursorRef = useRef();
 
-  // const bottomSlide = animationIn(true, 1000, 0, 0);
   const fadeIn = createFade(true, 1000, 300, 0);
-  const fadeInDelayed = createFade(true, 1000, 500, 0);
 
   const { x, y } = useMousePosition();
   const isOnTop = useScrollPosition();
@@ -237,11 +225,6 @@ const AboutTemplate = ({ images }) => {
         </ContentWrapper>
       </StyledImage>
       <TextWrapper>
-        <OverflowBox>
-          <StyledTitleParagraph title style={fadeInDelayed}>
-            Michal Boruch
-          </StyledTitleParagraph>
-        </OverflowBox>
         <StyledParagraph>
           Hello, my name is Michal and I am a 21 years old aspiring junior web
           developer based in <strong>Tarnow</strong> and <strong>Krakow</strong>
@@ -269,7 +252,7 @@ const AboutTemplate = ({ images }) => {
           Moreover, I have basic knowledge of
           <strong> React-native</strong>, <strong>Typescript</strong>,
           relational and non-relational databases like{' '}
-          <strong>PostreSQL</strong> and <strong>mongooDB</strong>
+          <strong>PostgreSQL</strong> and <strong>MongoDB</strong>
           <br />
           <br />
           My personal 2020 front-end roadmap:
@@ -281,7 +264,7 @@ const AboutTemplate = ({ images }) => {
           If you want to read more about my skills, click the paragraph below:
         </StyledParagraph>
         <StyledSkillsOpen onClick={() => setBoxState(true)}>
-          Click here to see my owned skills
+          Click here to see my owned skills &#10003;
         </StyledSkillsOpen>
       </TextWrapper>
       <SmallSkillsBox isOnTop={isOnTop} isOpen={isSkillsVisible}>
