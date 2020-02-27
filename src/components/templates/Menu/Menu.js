@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
-import Link from '../../atoms/Link/Link';
+import { Link } from 'gatsby';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { animated } from 'react-spring';
 import { useScreenSize } from '../../../utils/customHooks';

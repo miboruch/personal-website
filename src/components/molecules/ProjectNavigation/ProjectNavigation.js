@@ -1,7 +1,7 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
 import styled from 'styled-components';
-import Link from '../../atoms/Link/Link';
+import { graphql, useStaticQuery } from 'gatsby';
+import { Link } from 'gatsby';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 
 const NavigationBox = styled.div`

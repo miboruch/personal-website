@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { animated } from 'react-spring';
+import { Link } from 'gatsby';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { lineSlide } from './slidersAccentsAnimations';
 import { animationIn } from '../../../utils/animations';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
-import Link from '../../atoms/Link/Link';
 
 const StyledLine = styled(animated.div)`
   position: absolute;
