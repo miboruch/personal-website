@@ -84,6 +84,12 @@ const StyledIcon = styled(ScrollIcon)`
   fill: rgba(63, 63, 63, 0.4);
 `;
 
+const StyledDiv = styled.div`
+  width: 500px;
+  height: 500px;
+  background-color: red;
+`;
+
 const Projects = ({ data }) => {
   const isOnTop = useScrollPosition();
   const imageArray = convertObjectToArray(

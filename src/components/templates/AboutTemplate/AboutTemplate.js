@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import Footer from '../../molecules/Footer/Footer';
@@ -6,10 +6,7 @@ import BackgroundImage from 'gatsby-background-image';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import SkillsBox from '../../molecules/SkillsBox/SkillsBox';
 import CloseButton from '../../atoms/CloseButton/CloseButton';
-import {
-  useMousePosition,
-  useScrollPosition
-} from '../../../utils/customHooks';
+import { useScrollPosition } from '../../../utils/customHooks';
 import { createFade } from '../../../utils/animations';
 import { skills } from '../../../utils/skills';
 
@@ -18,44 +15,6 @@ const StyledWrapper = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-`;
-
-const CustomCursor = styled.div`
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  background: none;
-  border-radius: 50%;
-  border: 2px solid #8d8d8d;
-  z-index: 2000;
-  transform: translate(-50%, -50%);
-  transition-duration: 200ms;
-  transition-timing-function: ease-out;
-  pointer-events: none;
-  display: none;
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-  }
-
-  &::before {
-    width: 43px;
-    height: 43px;
-    border: 1px solid #5d5d5d;
-  }
-
-  &::after {
-    width: 33px;
-    height: 33px;
-    border: 1px solid #ededed;
-  }
-
-  ${({ theme }) => theme.mq.desktop} {
-    display: block;
-  }
 `;
 
 const StyledImage = styled(BackgroundImage)`
@@ -199,21 +158,13 @@ const StyledListItem = styled.li`
 const AboutTemplate = ({ images }) => {
   const [isBoxOpened, setBoxState] = useState(false);
   const [isSkillsVisible, setSkillsState] = useState(true);
-  const customCursorRef = useRef();
 
   const fadeIn = createFade(true, 1000, 300, 0);
 
-  const { x, y } = useMousePosition();
   const isOnTop = useScrollPosition();
-
-  useEffect(() => {
-    customCursorRef.current.style.transform = `translate3d(${x - 20}px, ${y -
-      20}px, 0)`;
-  }, [x, y]);
 
   return (
     <StyledWrapper>
-      <CustomCursor ref={customCursorRef} />
       <StyledImage fluid={images[0].childImageSharp.fluid}>
         <StyledTitle title>About me</StyledTitle>
         <StyledLine />

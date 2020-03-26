@@ -125,6 +125,7 @@ const StyledTitle = styled(Paragraph)`
   font-size: 43px;
   font-family: ${({ theme }) => theme.font.family.avanti};
   padding-bottom: 3rem;
+
   ${({ theme }) => theme.mq.standard} {
     color: #fff;
     font-size: 58px;

@@ -79,9 +79,8 @@ const StyledTitle = styled(Paragraph)`
 
   ${({ theme }) => theme.mq.standard} {
     margin-top: 0;
-  }
+    font-size: 58px;
 
-  ${({ theme }) => theme.mq.standard} {
     &::after {
       font-family: ${({ theme }) => theme.font.family.futura};
       font-weight: 500;
@@ -91,6 +90,10 @@ const StyledTitle = styled(Paragraph)`
       right: 0;
       top: 50%;
     }
+  }
+
+  ${({ theme }) => theme.mq.desktop} {
+    font-size: 89px;
   }
 `;
 
