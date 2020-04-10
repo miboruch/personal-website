@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
@@ -10,12 +10,12 @@ import { menuItems } from '../../../utils/items';
 import SocialNavigation from '../../molecules/SocialNavigation/SocialNavigation';
 import { easeExpInOut } from 'd3-ease';
 
-const StyledMenuBox = styled(animated.div)`
+const StyledMenuBox = styled.div`
   position: fixed;
   top: 5px;
   right: 5px;
-  width: calc(100% - 10px);
-  height: calc(100% - 10px);
+  width: 200px;
+  height: 62px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,7 +24,14 @@ const StyledMenuBox = styled(animated.div)`
   z-index: 900;
   opacity: 1;
   transform-origin: top right;
-  will-change: transform;
+
+  ${({ theme }) => theme.mq.mobileL} {
+    width: 220px;
+  }
+
+  ${({ theme }) => theme.mq.tablet} {
+    width: 300px;
+  }
 
   ${({ theme }) => theme.mq.standard} {
     flex-direction: row;
@@ -174,47 +181,39 @@ const MenuItems = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+
+  ${({ theme }) => theme.mq.standard} {
+    flex-direction: row;
+  }
 `;
 
 const Menu = ({ isOpen, boxSize, headerTheme }) => {
-  const { screenWidth, screenHeight } = useScreenSize();
-  const { width, height } = boxSize;
-
   const [tl] = useState(gsap.timeline({ defaults: { ease: easeExpInOut } }));
   const menuRef = useRef();
   const paragraphWrapperRef = useRef();
 
   useEffect(() => {
-    if (screenWidth && screenHeight) {
-      const menuBox = menuRef.current;
-      const menuItems = paragraphWrapperRef.current;
+    const menuBox = menuRef.current;
+    const menuItems = paragraphWrapperRef.current;
 
-      gsap.set(menuBox, {
-        transform: `scale(${width / (screenWidth - 10)}, ${height /
-          (screenHeight - 10)})`
-      });
+    gsap.set(menuItems.children, { autoAlpha: 0 });
 
-      tl.fromTo(
-        menuBox,
-        {
-          transform: `scale(${width / (screenWidth - 10)}, ${height /
-            (screenHeight - 10)})`
-        },
-        { transform: 'scale(1,1)', duration: 0.8 }
-      )
-        .to(menuBox, {
-          outline: '5px solid #fff',
-          duration: 0.4
-        })
-        .fromTo(
-          menuItems.children,
-          { x: '-=30', autoAlpha: 0 },
-          { x: '0', autoAlpha: 1, duration: 1, stagger: 0.3 }
-        );
-    }
-    /* Multiple re-renders - fix it */
-  }, [screenWidth, screenHeight]);
+    tl.to(menuBox, {
+      width: '100vw',
+      height: '100vh',
+      duration: 0.8
+    })
+      .to(menuBox, {
+        outline: '5px solid #fff',
+        duration: 0.4
+      })
+      .fromTo(
+        menuItems.children,
+        { x: '-=30' },
+        { x: '0', autoAlpha: 1, duration: 1, stagger: 0.3 }
+      );
+  }, []);
 
   useEffect(() => {
     isOpen ? tl.play() : tl.reverse();

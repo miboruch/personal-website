@@ -1,11 +1,10 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
-import { animated } from 'react-spring';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Hamburger from '../../atoms/Hamburger/Hamburger';
 
-const StyledBox = styled(animated.div)`
+const StyledBox = styled.div`
   text-align: right;
   width: 200px;
   height: 62px;
@@ -17,7 +16,6 @@ const StyledBox = styled(animated.div)`
   flex-direction: row;
   z-index: 901;
   cursor: pointer;
-  transition: all 1s ease;
 
   ${({ headerTheme }) =>
     headerTheme === 'light' &&
