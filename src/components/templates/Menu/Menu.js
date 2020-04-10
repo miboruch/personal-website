@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
@@ -7,8 +7,8 @@ import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { animated } from 'react-spring';
 import { useScreenSize } from '../../../utils/customHooks';
 import { menuItems } from '../../../utils/items';
-import { AnimatedMenu, MenuItems } from './menuAnimations';
 import SocialNavigation from '../../molecules/SocialNavigation/SocialNavigation';
+import { easeExpInOut } from 'd3-ease';
 
 const StyledMenuBox = styled(animated.div)`
   position: fixed;
@@ -170,58 +170,78 @@ const StyledMenuItems = styled(Paragraph)`
   }
 `;
 
+const MenuItems = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+`;
+
 const Menu = ({ isOpen, boxSize, headerTheme }) => {
   const { screenWidth, screenHeight } = useScreenSize();
   const { width, height } = boxSize;
 
-  const scaleWidth = width / (screenWidth - 10);
-  const scaleHeight = height / (screenHeight - 10);
+  const [tl] = useState(gsap.timeline({ defaults: { ease: easeExpInOut } }));
+  const menuRef = useRef();
+  const paragraphWrapperRef = useRef();
+
+  useEffect(() => {
+    if (screenWidth && screenHeight) {
+      const menuBox = menuRef.current;
+      const menuItems = paragraphWrapperRef.current;
+
+      gsap.set(menuBox, {
+        transform: `scale(${width / (screenWidth - 10)}, ${height /
+          (screenHeight - 10)})`
+      });
+
+      tl.fromTo(
+        menuBox,
+        {
+          transform: `scale(${width / (screenWidth - 10)}, ${height /
+            (screenHeight - 10)})`
+        },
+        { transform: 'scale(1,1)', duration: 0.8 }
+      )
+        .to(menuBox, {
+          outline: '5px solid #fff',
+          duration: 0.4
+        })
+        .fromTo(
+          menuItems.children,
+          { x: '-=30', autoAlpha: 0 },
+          { x: '0', autoAlpha: 1, duration: 1, stagger: 0.3 }
+        );
+    }
+    /* Multiple re-renders - fix it */
+  }, [screenWidth, screenHeight]);
+
+  useEffect(() => {
+    isOpen ? tl.play() : tl.reverse();
+  }, [isOpen]);
 
   return (
     <>
-      {screenWidth === undefined ? (
-        <p>Screen size is loading</p>
-      ) : (
-        <AnimatedMenu
-          state={isOpen ? 'in' : 'out'}
-          scale={{ scaleWidth, scaleHeight }}
-        >
-          {props => (
-            <StyledMenuBox
-              headerTheme={headerTheme}
-              style={props}
-              isOpen={isOpen}
-            >
-              <MenuItems
-                keys={item => item.id}
-                state={isOpen ? 'in' : 'out'}
-                reverse={!isOpen}
-                items={menuItems}
-              >
-                {trailItem => trailProps => (
-                  <ParagraphBox style={trailProps} headerTheme={headerTheme}>
-                    <Link to={trailItem.link}>
-                      <StyledMenuItems
-                        title='true'
-                        headerTheme={headerTheme}
-                        before={trailItem.before}
-                      >
-                        {trailItem.name}
-                      </StyledMenuItems>
-                    </Link>
-                  </ParagraphBox>
-                )}
-              </MenuItems>
-              <NavigationWrapper>
-                <SocialNavigation
-                  toggleState={isOpen}
+      <StyledMenuBox ref={menuRef} headerTheme={headerTheme} isOpen={isOpen}>
+        <MenuItems ref={paragraphWrapperRef}>
+          {menuItems.map(item => (
+            <ParagraphBox headerTheme={headerTheme} key={item.id}>
+              <Link to={item.link}>
+                <StyledMenuItems
+                  title='true'
                   headerTheme={headerTheme}
-                />
-              </NavigationWrapper>
-            </StyledMenuBox>
-          )}
-        </AnimatedMenu>
-      )}
+                  before={item.before}
+                >
+                  {item.name}
+                </StyledMenuItems>
+              </Link>
+            </ParagraphBox>
+          ))}
+        </MenuItems>
+        <NavigationWrapper>
+          <SocialNavigation toggleState={isOpen} headerTheme={headerTheme} />
+        </NavigationWrapper>
+      </StyledMenuBox>
     </>
   );
 };

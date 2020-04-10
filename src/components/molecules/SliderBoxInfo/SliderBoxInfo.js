@@ -11,15 +11,16 @@ const TimeoutBoxWrapper = styled(animated.div)`
   position: absolute;
   display: none;
   width: 350px;
+  height: 62px;
   justify-content: flex-end;
-  padding: 0 2rem;
+  padding: 1rem 3rem;
   align-items: center;
   flex-direction: row;
   bottom: 5px;
   left: 5px;
-  height: 62px;
   background-color: #f1f1f1;
   transition: all 1s ease;
+  box-sizing: content-box;
 
   ${({ theme }) => theme.mq.standard} {
     display: flex;
