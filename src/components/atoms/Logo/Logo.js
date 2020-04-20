@@ -6,7 +6,7 @@ import LogoLine from '../../../assets/icons/logo-line.svg';
 const StyledLogo = styled(LogoLine)`
   width: 110px;
   height: 50px;
-  margin-left: 2rem;
+  margin: 0 2rem;
   fill: #fff;
   transition: fill 1s ease;
   display: block;

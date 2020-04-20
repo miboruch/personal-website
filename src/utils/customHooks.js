@@ -26,7 +26,6 @@ export const useScreenSize = () => {
 
   useLayoutEffect(() => {
     const setSize = () => {
-      setScreenSize({ screenWidth: undefined, screenHeight: undefined });
       setScreenSize({
         screenWidth: window.innerWidth,
         screenHeight: window.innerHeight

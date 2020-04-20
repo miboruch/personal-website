@@ -11,23 +11,11 @@ const StyledHamburger = styled.button`
   z-index: 901;
   position: absolute;
   top: 50%;
-  right: 2rem;
+  right: 1rem;
   transform: translateY(-50%);
-  margin-left: 1rem;
-  
+
   :focus {
     outline: none;
-  }
-
-  &::after {
-    content: '${({ isOpen }) => (isOpen ? 'close' : 'open')}';
-    font-size: 13px;
-    color: ${({ headerTheme }) => (headerTheme === 'light' ? '#000' : '#fff')};
-    position: absolute;
-    font-family: ${({ theme }) => theme.font.family.futura};
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
   }
 `;
 
@@ -43,7 +31,6 @@ const InnerHamburger = styled.div`
   &::before,
   &::after {
     content: '';
-    width: 32px; /* 44 */
     height: 1px;
     background: ${({ headerTheme }) =>
       headerTheme === 'light' ? '#000' : '#fff'};
@@ -53,11 +40,13 @@ const InnerHamburger = styled.div`
   }
 
   ::before {
-    top: ${({ isOpen }) => (isOpen ? '0' : '-2px')}; /* -3 */
+    width: ${({ isOpen }) => (isOpen ? '32px' : '26px')};
+    top: ${({ isOpen }) => (isOpen ? '0' : '-2px')};
     transform: rotate(${({ isOpen }) => (isOpen ? '40deg' : '0deg')});
   }
   ::after {
-    top: ${({ isOpen }) => (isOpen ? '0' : '2px')}; /* 3 */
+    width: 32px;
+    top: ${({ isOpen }) => (isOpen ? '0' : '2px')};
     transform: rotate(${({ isOpen }) => (isOpen ? '-40deg' : '0deg')});
   }
 

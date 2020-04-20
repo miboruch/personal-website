@@ -81,7 +81,12 @@ const Header = ({ headerTheme }) => {
   return (
     <>
       <StyledHeader isOnTop={pageY} isOpen={isOpen} headerTheme={headerTheme}>
-        <Logo headerTheme={headerTheme} isOpen={isOpen} />
+        <MenuButton
+          isOpen={isOpen}
+          toggleMenu={toggleMenu}
+          ref={menuButton}
+          headerTheme={headerTheme}
+        />
         <StyledLink
           href='mailto:miboruch@gmail.com'
           headerTheme={headerTheme}
@@ -89,12 +94,7 @@ const Header = ({ headerTheme }) => {
         >
           miboruch@gmail.com
         </StyledLink>
-        <MenuButton
-          isOpen={isOpen}
-          toggleMenu={toggleMenu}
-          ref={menuButton}
-          headerTheme={headerTheme}
-        />
+        <Logo headerTheme={headerTheme} isOpen={isOpen} />
       </StyledHeader>
       <Menu isOpen={isOpen} boxSize={size} headerTheme={headerTheme} />
     </>

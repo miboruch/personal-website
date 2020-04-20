@@ -15,6 +15,9 @@ const StyledNavigationBox = styled.div`
   padding: 2rem;
 
   ${({ theme }) => theme.mq.standard} {
+    top: 50%;
+    transform: translateY(-50%);
+    right: 150px;
     display: none;
   }
 `;
@@ -57,6 +60,7 @@ const StyledFlexWrapper = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    display: none;
   }
 `;
 

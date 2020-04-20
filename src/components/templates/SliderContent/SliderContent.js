@@ -29,7 +29,7 @@ const StyledBackgroundImage = styled(BackgroundImage)`
 
   ${({ theme }) => theme.mq.standard} {
     width: 100%;
-    transform: translateX(15%);
+    transform: translateX(-15%);
     opacity: 0.8;
   }
 `;
@@ -63,9 +63,9 @@ const StyledTitleWrapper = styled(animated.div)`
   margin-bottom: 2rem;
 
   ${({ theme }) => theme.mq.standard} {
-    width: 80%;
+    width: 100%;
     margin-bottom: 1rem;
-    justify-content: flex-start;
+    justify-content: flex-end;
   }
 `;
 
@@ -78,6 +78,7 @@ const StyledTitle = styled(Paragraph)`
   letter-spacing: 0;
   margin: 0;
   transition: all 0.5s ease;
+  text-align: inherit;
 `;
 
 const StyledDescription = styled(Paragraph)`
@@ -92,7 +93,7 @@ const StyledDescription = styled(Paragraph)`
   ${({ theme }) => theme.mq.standard} {
     margin-top: 0;
     padding: 0;
-    text-align: left;
+    text-align: right;
   }
 `;
 
@@ -106,7 +107,7 @@ const StyledOpenCase = styled(Paragraph)`
   margin: auto;
 
   ${({ theme }) => theme.mq.standard} {
-    text-align: left;
+    text-align: right;
     margin: unset;
   }
 `;
@@ -116,9 +117,10 @@ const TextWrapper = styled.div`
   position: absolute;
   top: 45%;
   transform: translateY(-50%);
+  text-align: right;
 
   ${({ theme }) => theme.mq.standard} {
-    left: 166px;
+    right: 166px;
     top: 50%;
     transform: translateY(-70%);
   }
@@ -127,10 +129,6 @@ const TextWrapper = styled.div`
 const OverflowBox = styled.div`
   overflow: hidden;
   margin-top: 2rem;
-
-  ${({ theme }) => theme.mq.standard} {
-    width: 150px;
-  }
 `;
 
 const SliderContent = ({ image, content, index }) => {

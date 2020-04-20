@@ -51,7 +51,7 @@ const LeftArrowWrapper = styled.div`
   align-items: center;
   top: 50%;
   transform: translateY(-50%);
-  right: 150px;
+  left: 10px;
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 50%;
   cursor: pointer;
@@ -61,14 +61,14 @@ const LeftArrowWrapper = styled.div`
     border: 1px solid rgba(255, 255, 255, 0.8);
   }
 
-  &::before {
-    content: 'PREVIOUS';
-    position: absolute;
-    left: -100%;
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: #fff;
-  }
+  //&::before {
+  //  content: 'PREVIOUS';
+  //  position: absolute;
+  //  left: -100%;
+  //  font-size: 11px;
+  //  letter-spacing: 3px;
+  //  color: #fff;
+  //}
 
   ${({ theme }) => theme.mq.standard} {
     display: flex;
@@ -76,20 +76,20 @@ const LeftArrowWrapper = styled.div`
 `;
 
 const RightArrowWrapper = styled(LeftArrowWrapper)`
-  right: 10px;
+  left: 150px;
 
   &::before {
     content: '';
   }
 
-  &::after {
-    content: 'NEXT';
-    position: absolute;
-    right: 100%;
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: #fff;
-  }
+  //&::after {
+  //  content: 'NEXT';
+  //  position: absolute;
+  //  right: 100%;
+  //  font-size: 11px;
+  //  letter-spacing: 3px;
+  //  color: #fff;
+  //}
 `;
 
 const ArrowLeftStandard = styled(Arrow)`
@@ -115,7 +115,7 @@ const NavigationWrapper = styled.div`
   display: none;
   position: absolute;
   bottom: 2rem;
-  right: -10px;
+  right: 2rem;
 
   ${({ theme }) => theme.mq.standard} {
     display: block;
@@ -129,7 +129,7 @@ const VerticalBox = styled.div`
     display: block;
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
     width: 320px;
     height: 100%;
     background: transparent;

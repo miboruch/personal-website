@@ -37,7 +37,6 @@ const StyledParagraph = styled(Paragraph)`
   padding-left: 2rem;
   width: 120px;
   margin: auto 0;
-  z-index: 901;
   text-transform: uppercase;
   color: #fff;
 

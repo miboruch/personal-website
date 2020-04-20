@@ -15,7 +15,7 @@ const StyledMenuBox = styled.div`
   top: 5px;
   right: 5px;
   width: 200px;
-  height: 62px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -192,6 +192,7 @@ const Menu = ({ isOpen, boxSize, headerTheme }) => {
   const [tl] = useState(gsap.timeline({ defaults: { ease: easeExpInOut } }));
   const menuRef = useRef();
   const paragraphWrapperRef = useRef();
+  const { screenWidth, screenHeight } = useScreenSize();
 
   useEffect(() => {
     const menuBox = menuRef.current;
@@ -200,8 +201,8 @@ const Menu = ({ isOpen, boxSize, headerTheme }) => {
     gsap.set(menuItems.children, { autoAlpha: 0 });
 
     tl.to(menuBox, {
-      width: '100vw',
-      height: '100vh',
+      width: 'calc(100vw - 10px)',
+      height: 'calc(100vh - 10px)',
       duration: 0.8
     })
       .to(menuBox, {

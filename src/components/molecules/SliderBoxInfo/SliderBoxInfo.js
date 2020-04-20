@@ -34,7 +34,7 @@ const BarWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-right: 2rem;
+  margin: 0 2rem;
   transform: translateY(-50%);
 `;
 

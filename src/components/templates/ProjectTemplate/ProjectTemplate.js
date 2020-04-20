@@ -44,7 +44,7 @@ const StyledTitle = styled(Paragraph)`
 `;
 
 const ContentBox = styled.section`
-  width: 80%;
+  width: 100%;
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
@@ -54,7 +54,9 @@ const ContentBox = styled.section`
     //width: 350px;
     display: flex;
     flex-direction: row;
-    margin-left: 1rem;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 3rem;
   }
 `;
 

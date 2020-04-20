@@ -28,7 +28,7 @@ const OverflowBox = styled.div`
   overflow: hidden;
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   transform: translateY(-100%);
   height: 16px;
 `;
