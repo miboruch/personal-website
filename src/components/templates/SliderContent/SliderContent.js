@@ -15,6 +15,10 @@ const StyledWrapper = styled.div`
   height: 100%;
   position: relative;
   background: ${({ theme }) => theme.color.backgroundGradient};
+  // background-image: linear-gradient(to left, #222 50%, #f4f4f4 50% );
+  // background-size: 200% 100%;
+  // background-position: ${({ isEven }) => (isEven ? '100% 0' : '0 0')};
+  transition: background-position 1s 2s ease;
 `;
 
 const StyledBackgroundImage = styled(BackgroundImage)`
@@ -142,7 +146,7 @@ const SliderContent = ({ image, content, index }) => {
 
   return (
     <Div100vh>
-      <StyledWrapper>
+      <StyledWrapper isEven={currentSlide % 2 === 0}>
         <StyledBackgroundImage
           preserveStackingContext={true}
           fluid={image.childImageSharp.fluid}

@@ -188,6 +188,7 @@ const MainSlider = ({ images, data }) => {
     infinite: true,
     autoplay: false,
     speed: 2000,
+    // fade: true,
     slidesToShow: 1,
     slidesToScroll: 1,
     cssEase: 'cubic-bezier(.84, 0, .08, .99)',

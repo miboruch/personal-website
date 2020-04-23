@@ -9,8 +9,8 @@ const StyledBox = styled.div`
   width: 200px;
   height: 62px;
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 0;
+  right: 0;
   background-color: ${({ theme }) => theme.color.menuBox};
   display: flex;
   flex-direction: row;

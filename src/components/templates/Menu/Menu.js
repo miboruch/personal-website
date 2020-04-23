@@ -12,10 +12,10 @@ import { easeExpInOut } from 'd3-ease';
 
 const StyledMenuBox = styled.div`
   position: fixed;
-  top: 5px;
-  right: 5px;
-  width: 200px;
-  height: 60px;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,13 +24,25 @@ const StyledMenuBox = styled.div`
   z-index: 900;
   opacity: 1;
   transform-origin: top right;
+  will-change: transform;
+  transform: ${({ isOpen }) =>
+    isOpen
+      ? 'translate(0,0)'
+      : 'translate(calc(100% - 200px), calc(-100% + 60px))'};
+  transition: transform 0.6s ease;
 
   ${({ theme }) => theme.mq.mobileL} {
-    width: 220px;
+    transform: ${({ isOpen }) =>
+      isOpen
+        ? 'translate(0,0)'
+        : 'translate(calc(100% - 220px), calc(-100% + 60px))'};
   }
 
   ${({ theme }) => theme.mq.tablet} {
-    width: 300px;
+    transform: ${({ isOpen }) =>
+      isOpen
+        ? 'translate(0,0)'
+        : 'translate(calc(100% - 300px), calc(-100% + 60px))'};
   }
 
   ${({ theme }) => theme.mq.standard} {
@@ -189,35 +201,25 @@ const MenuItems = styled.div`
 `;
 
 const Menu = ({ isOpen, boxSize, headerTheme }) => {
-  const [tl] = useState(gsap.timeline({ defaults: { ease: easeExpInOut } }));
+  const [tlIn] = useState(gsap.timeline({ defaults: { ease: easeExpInOut } }));
+  const [tlOut] = useState(gsap.timeline({ defaults: { ease: easeExpInOut } }));
   const menuRef = useRef();
   const paragraphWrapperRef = useRef();
-  const { screenWidth, screenHeight } = useScreenSize();
 
   useEffect(() => {
     const menuBox = menuRef.current;
     const menuItems = paragraphWrapperRef.current;
-
     gsap.set(menuItems.children, { autoAlpha: 0 });
 
-    tl.to(menuBox, {
-      width: 'calc(100vw - 10px)',
-      height: 'calc(100vh - 10px)',
-      duration: 0.8
-    })
-      .to(menuBox, {
-        outline: '5px solid #fff',
-        duration: 0.4
-      })
-      .fromTo(
-        menuItems.children,
-        { x: '-=30' },
-        { x: '0', autoAlpha: 1, duration: 1, stagger: 0.3 }
-      );
+    tlIn.fromTo(
+      menuItems.children,
+      { x: '-=30' },
+      { x: '0', autoAlpha: 1, duration: 1, stagger: 0.3, delay: 1 }
+    );
   }, []);
 
   useEffect(() => {
-    isOpen ? tl.play() : tl.reverse();
+    isOpen ? tlIn.play() : tlIn.reverse();
   }, [isOpen]);
 
   return (

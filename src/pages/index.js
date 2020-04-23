@@ -22,12 +22,12 @@ const IndexPage = ({ data }) => {
     /* Three themes to choose from: light, dark, default.
     To have default, don't pass any props to Layout component  */
     <Div100vh>
-      <Layout headerTheme='light'>
-        <CurrentSlideContextProvider>
+      <CurrentSlideContextProvider>
+        <Layout headerTheme='light'>
           <SEO title='Home' />
           <MainSlider images={imagesArray} data={projects} />
-        </CurrentSlideContextProvider>
-      </Layout>
+        </Layout>
+      </CurrentSlideContextProvider>
     </Div100vh>
   );
 };
