@@ -14,10 +14,21 @@ const StyledWrapper = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-  background: linear-gradient(to left, #222 50%, #e7e5e1 50%);
-  background-size: 200% 100%;
-  background-position: ${({ isEven }) => (isEven ? '-100% 0' : '0 0')};
-  transition: background-position 1s 2s ease;
+  background-color: #222;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #e7e5e1;
+    transform: ${({ isEven }) =>
+      isEven ? 'translateX(-100%)' : 'translateX(0)'};
+    transition: transform 1s 2s cubic-bezier(0.66, 0.24, 0, 0.82);
+  }
 `;
 
 const StyledBackgroundImage = styled(BackgroundImage)`
@@ -26,9 +37,7 @@ const StyledBackgroundImage = styled(BackgroundImage)`
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.5;
-  // opacity: ${({ isDarkTheme }) => (isDarkTheme ? 0.5 : 1)};
-  background-color: transparent;
+  opacity: 0.7;
   background-position: center;
 
   ${({ theme }) => theme.mq.standard} {
