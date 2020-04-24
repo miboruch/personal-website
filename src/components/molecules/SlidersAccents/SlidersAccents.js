@@ -7,6 +7,7 @@ import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { lineSlide } from './slidersAccentsAnimations';
 import { animationIn } from '../../../utils/animations';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
+import PageTransitionProvider from '../../../providers/PageTransitionProvider';
 
 const StyledLine = styled(animated.div)`
   position: absolute;
@@ -78,7 +79,7 @@ const SlidersAccents = ({ index, isDarkTheme }) => {
   return (
     <StyledLine style={line} isDarkTheme={isDarkTheme}>
       <OverflowBox>
-        <StyledLink to='/projects'>
+        <PageTransitionProvider to='/projects' dark={true}>
           <AllProjectCase
             small='true'
             style={bottomSlide}
@@ -86,7 +87,7 @@ const SlidersAccents = ({ index, isDarkTheme }) => {
           >
             all projects
           </AllProjectCase>
-        </StyledLink>
+        </PageTransitionProvider>
       </OverflowBox>
     </StyledLine>
   );

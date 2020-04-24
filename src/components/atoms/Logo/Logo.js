@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { Link } from 'gatsby';
 import LogoLine from '../../../assets/icons/logo-line.svg';
+import PageTransitionProvider from '../../../providers/PageTransitionProvider';
 
 const StyledLogo = styled(LogoLine)`
   width: 110px;
@@ -31,9 +32,9 @@ const StyledLogo = styled(LogoLine)`
 
 const Logo = ({ headerTheme, isOpen }) => {
   return (
-    <Link to='/'>
+    <PageTransitionProvider to='/' dark={true}>
       <StyledLogo headerTheme={headerTheme} isOpen={isOpen} />
-    </Link>
+    </PageTransitionProvider>
   );
 };
 

@@ -125,6 +125,11 @@ const StyledTitle = styled(Paragraph)`
   font-size: 43px;
   font-family: ${({ theme }) => theme.font.family.avanti};
   padding-bottom: 3rem;
+  transition: transform 0.5s ease;
+
+  &:hover {
+    transform: translateY(-10px);
+  }
 
   ${({ theme }) => theme.mq.standard} {
     color: #fff;

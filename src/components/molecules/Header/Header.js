@@ -13,7 +13,7 @@ const StyledHeader = styled(animated.header)`
   left: 0;
   width: 100%;
   margin-bottom: 10px;
-  height: 72px;
+  height: 62px;
   background: transparent;
   display: flex;
   flex-direction: row;

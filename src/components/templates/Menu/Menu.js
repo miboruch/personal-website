@@ -9,6 +9,7 @@ import { useScreenSize } from '../../../utils/customHooks';
 import { menuItems } from '../../../utils/items';
 import SocialNavigation from '../../molecules/SocialNavigation/SocialNavigation';
 import { easeExpInOut } from 'd3-ease';
+import PageTransitionProvider from '../../../providers/PageTransitionProvider';
 
 const StyledMenuBox = styled.div`
   position: fixed;
@@ -228,7 +229,7 @@ const Menu = ({ isOpen, boxSize, headerTheme }) => {
         <MenuItems ref={paragraphWrapperRef}>
           {menuItems.map(item => (
             <ParagraphBox headerTheme={headerTheme} key={item.id}>
-              <Link to={item.link}>
+              <PageTransitionProvider to={item.link} dark={true}>
                 <StyledMenuItems
                   title='true'
                   headerTheme={headerTheme}
@@ -236,7 +237,7 @@ const Menu = ({ isOpen, boxSize, headerTheme }) => {
                 >
                   {item.name}
                 </StyledMenuItems>
-              </Link>
+              </PageTransitionProvider>
             </ParagraphBox>
           ))}
         </MenuItems>

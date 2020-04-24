@@ -5,6 +5,7 @@ import { Link } from 'gatsby';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import OpenCircle from '../../atoms/OpenCircle/OpenCircle';
 import { animationIn } from '../../../utils/animations';
+import PageTransitionProvider from '../../../providers/PageTransitionProvider';
 
 const StyledWrapper = styled.section`
   border-top: 1px solid rgba(141, 141, 141, 0.25);
@@ -159,11 +160,11 @@ const ProjectIntro = ({ data, image, reverse }) => {
       <PhotoWrapper>
         <StyledLine />
         <StyledImage fluid={image.childImageSharp.fluid} />
-        <StyledLink to={data.pageLink} lightTheme>
+        <PageTransitionProvider to={data.pageLink}>
           <CircleWrapper>
             <OpenCircle />
           </CircleWrapper>
-        </StyledLink>
+        </PageTransitionProvider>
       </PhotoWrapper>
       <ContentWrapper>
         <OverflowBox>

@@ -84,12 +84,6 @@ const StyledIcon = styled(ScrollIcon)`
   fill: rgba(63, 63, 63, 0.4);
 `;
 
-const StyledDiv = styled.div`
-  width: 500px;
-  height: 500px;
-  background-color: red;
-`;
-
 const Projects = ({ data }) => {
   const isOnTop = useScrollPosition();
   const imageArray = convertObjectToArray(
@@ -124,7 +118,7 @@ const Projects = ({ data }) => {
           {projects.map((item, index) => (
             <Scene
               key={index}
-              offset={index === 0 ? -170 : -400}
+              offset={index === 0 ? -200 : -440}
               triggerHook={0}
               reverse={true}
               duration={1}
@@ -136,19 +130,21 @@ const Projects = ({ data }) => {
                       from={{
                         opacity: 0,
                         visibility: 'hidden',
-                        x: '50px',
+                        y: '50px',
                         ease: easeExpInOut
                       }}
                       to={{
                         opacity: 1,
-                        x: 0,
+                        y: 0,
                         visibility: 'visible',
                         ease: easeExpInOut
                       }}
-                      paused={true}
+                      paused={index !== 0}
                       playState={
-                        event.type === 'enter' &&
-                        event.scrollDirection === 'FORWARD'
+                        index === 0
+                          ? null
+                          : event.type === 'enter' &&
+                            event.scrollDirection === 'FORWARD'
                           ? 'play'
                           : event.type === 'enter' &&
                             event.scrollDirection === 'REVERSE'

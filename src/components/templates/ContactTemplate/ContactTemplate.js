@@ -72,6 +72,11 @@ const StyledTitle = styled(Paragraph)`
   font-family: ${({ theme }) => theme.font.family.avanti};
   position: relative;
   margin-top: 30px;
+  transition: transform 0.5s ease;
+
+  &:hover {
+    transform: translateY(-10px);
+  }
 
   ${({ theme }) => theme.mq.tabletS} {
     margin-bottom: 30px;

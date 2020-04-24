@@ -9,6 +9,7 @@ import { animationIn, createFade } from '../../../utils/animations';
 import { textWave } from './sliderContentAnimations';
 import SlidersAccents from '../../molecules/SlidersAccents/SlidersAccents';
 import Div100vh from 'react-div-100vh';
+import PageTransitionProvider from '../../../providers/PageTransitionProvider';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -200,11 +201,11 @@ const SliderContent = ({ image, content, index, isDarkTheme }) => {
                 {content.description}
               </StyledDescription>
               <OverflowBox>
-                <StyledLink to={content.pageLink}>
+                <PageTransitionProvider to={content.pageLink}>
                   <StyledOpenCase style={bottomSlide}>
                     Open project
                   </StyledOpenCase>
-                </StyledLink>
+                </PageTransitionProvider>
               </OverflowBox>
             </TextWrapper>
             <SlidersAccents
