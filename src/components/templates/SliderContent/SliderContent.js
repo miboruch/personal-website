@@ -14,10 +14,10 @@ const StyledWrapper = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-  background: ${({ theme }) => theme.color.backgroundGradient};
-  // background-image: linear-gradient(to left, #222 50%, #f4f4f4 50% );
-  // background-size: 200% 100%;
-  // background-position: ${({ isEven }) => (isEven ? '100% 0' : '0 0')};
+  // background: ${({ theme }) => theme.color.backgroundGradient};
+  background-image: linear-gradient(to left, #222 50%, #e7e5e1 50% );
+  background-size: 200% 100%;
+  background-position: ${({ isEven }) => (isEven ? '100% 0' : '0 0')};
   transition: background-position 1s 2s ease;
 `;
 
@@ -28,13 +28,14 @@ const StyledBackgroundImage = styled(BackgroundImage)`
   width: 100%;
   height: 100%;
   opacity: 0.5;
+  // opacity: ${({ isDarkTheme }) => (isDarkTheme ? 0.5 : 1)};
   background-color: transparent;
   background-position: center;
 
   ${({ theme }) => theme.mq.standard} {
     width: 100%;
     transform: translateX(-15%);
-    opacity: 0.8;
+    opacity: 1;
   }
 `;
 
@@ -44,6 +45,7 @@ const StyledContextBox = styled.section`
   left: 0;
   width: 100%;
   height: 100%;
+  color: ${({ isDarkTheme }) => (isDarkTheme ? '#222' : '#e7e5e1')};
 
   ${({ theme }) => theme.mq.standard} {
     top: 0;
@@ -65,6 +67,11 @@ const StyledTitleWrapper = styled(animated.div)`
   flex-direction: row;
   justify-content: center;
   margin-bottom: 2rem;
+  transition: transform 0.5s ease;
+
+  &:hover {
+    transform: translateY(-10px);
+  }
 
   ${({ theme }) => theme.mq.standard} {
     width: 100%;
@@ -83,6 +90,7 @@ const StyledTitle = styled(Paragraph)`
   margin: 0;
   transition: all 0.5s ease;
   text-align: inherit;
+  color: inherit;
 `;
 
 const StyledDescription = styled(Paragraph)`
@@ -93,6 +101,7 @@ const StyledDescription = styled(Paragraph)`
   padding: 0 2rem;
   text-align: center;
   transition: all 1s ease;
+  color: inherit;
 
   ${({ theme }) => theme.mq.standard} {
     margin-top: 0;
@@ -109,11 +118,16 @@ const StyledOpenCase = styled(Paragraph)`
   text-transform: uppercase;
   text-decoration: underline;
   margin: auto;
+  color: inherit;
 
   ${({ theme }) => theme.mq.standard} {
     text-align: right;
     margin: unset;
   }
+`;
+
+const StyledLink = styled(Link)`
+  color: inherit;
 `;
 
 const TextWrapper = styled.div`
@@ -135,7 +149,7 @@ const OverflowBox = styled.div`
   margin-top: 2rem;
 `;
 
-const SliderContent = ({ image, content, index }) => {
+const SliderContent = ({ image, content, index, isDarkTheme }) => {
   const { currentSlide } = useContext(CurrentSlideContext);
   const isCurrentSlide = currentSlide === index;
 
@@ -150,8 +164,9 @@ const SliderContent = ({ image, content, index }) => {
         <StyledBackgroundImage
           preserveStackingContext={true}
           fluid={image.childImageSharp.fluid}
+          isDarkTheme={isDarkTheme}
         />
-        <StyledContextBox>
+        <StyledContextBox isDarkTheme={isDarkTheme}>
           <ContentWrapper>
             <TextWrapper>
               <StyledTitleWrapper>
@@ -176,14 +191,18 @@ const SliderContent = ({ image, content, index }) => {
                 {content.description}
               </StyledDescription>
               <OverflowBox>
-                <Link to={content.pageLink}>
+                <StyledLink to={content.pageLink}>
                   <StyledOpenCase style={bottomSlide}>
                     Open project
                   </StyledOpenCase>
-                </Link>
+                </StyledLink>
               </OverflowBox>
             </TextWrapper>
-            <SlidersAccents index={index} link={content.pageLink} />
+            <SlidersAccents
+              index={index}
+              link={content.pageLink}
+              isDarkTheme={isDarkTheme}
+            />
           </ContentWrapper>
         </StyledContextBox>
       </StyledWrapper>

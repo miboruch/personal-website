@@ -16,8 +16,14 @@ const Layout = ({ children, headerTheme }) => {
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <Header
-          // headerTheme={currentSlide % 2 === 0 ? 'light' : 'dark' || headerTheme}
-          headerTheme={headerTheme}
+          headerTheme={
+            headerTheme
+              ? headerTheme
+              : currentSlide % 2 === 0
+              ? 'light'
+              : 'dark'
+          }
+          // headerTheme={headerTheme}
         />
         {children}
       </ThemeProvider>

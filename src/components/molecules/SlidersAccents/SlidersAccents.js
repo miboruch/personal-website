@@ -14,8 +14,9 @@ const StyledLine = styled(animated.div)`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.2);
+  height: 2px;
+  background: ${({ isDarkTheme }) =>
+    isDarkTheme ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 255, 255, 0.2)'};
   z-index: 5;
   transition: all 1s ease;
 
@@ -41,6 +42,7 @@ const AllProjectCase = styled(Paragraph)`
   text-transform: uppercase;
   display: none;
   cursor: pointer;
+  color: ${({ isDarkTheme }) => (isDarkTheme ? '#222' : '#fff')} !important;
 
   &::after {
     content: '';
@@ -49,7 +51,7 @@ const AllProjectCase = styled(Paragraph)`
     left: 0;
     width: 0;
     height: 2px;
-    background: #fff;
+    background: ${({ isDarkTheme }) => (isDarkTheme ? '#222' : '#fff')};
     transition: all 1s cubic-bezier(0.66, 0.24, 0, 0.82);
   }
 
@@ -62,7 +64,11 @@ const AllProjectCase = styled(Paragraph)`
   }
 `;
 
-const SlidersAccents = ({ index }) => {
+const StyledLink = styled(Link)`
+  ${({ isDarkTheme }) => (isDarkTheme ? '#222' : '#fff')}
+`;
+
+const SlidersAccents = ({ index, isDarkTheme }) => {
   const { currentSlide } = useContext(CurrentSlideContext);
   const isCurrentSlide = currentSlide === index;
 
@@ -70,13 +76,17 @@ const SlidersAccents = ({ index }) => {
   const line = lineSlide(isCurrentSlide);
 
   return (
-    <StyledLine style={line}>
+    <StyledLine style={line} isDarkTheme={isDarkTheme}>
       <OverflowBox>
-        <Link to='/projects'>
-          <AllProjectCase small='true' style={bottomSlide}>
+        <StyledLink to='/projects'>
+          <AllProjectCase
+            small='true'
+            style={bottomSlide}
+            isDarkTheme={isDarkTheme}
+          >
             all projects
           </AllProjectCase>
-        </Link>
+        </StyledLink>
       </OverflowBox>
     </StyledLine>
   );

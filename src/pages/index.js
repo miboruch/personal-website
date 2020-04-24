@@ -23,7 +23,7 @@ const IndexPage = ({ data }) => {
     To have default, don't pass any props to Layout component  */
     <Div100vh>
       <CurrentSlideContextProvider>
-        <Layout headerTheme='light'>
+        <Layout>
           <SEO title='Home' />
           <MainSlider images={imagesArray} data={projects} />
         </Layout>

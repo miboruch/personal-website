@@ -18,7 +18,7 @@ const TimeoutBoxWrapper = styled(animated.div)`
   flex-direction: row;
   bottom: 5px;
   left: 5px;
-  background-color: #f1f1f1;
+  background-color: ${({ isDarkTheme }) => (isDarkTheme ? '#222' : '#f1f1f1')};
   transition: all 1s ease;
   box-sizing: content-box;
 
@@ -36,11 +36,13 @@ const BarWrapper = styled.div`
   align-items: center;
   margin: 0 2rem;
   transform: translateY(-50%);
+  color: ${({ isDarkTheme }) => (isDarkTheme ? '#f1f1f1' : '#222')};
 `;
 
 const NextStandardWrapper = styled.div`
   display: none;
   flex-direction: row;
+  color: ${({ isDarkTheme }) => (isDarkTheme ? '#f1f1f1' : '#222')};
 
   ${({ theme }) => theme.mq.standard} {
     display: flex;
@@ -51,10 +53,11 @@ const StyledNextLabel = styled(animated(Paragraph))`
   align-items: center;
   text-transform: uppercase;
   letter-spacing: 5px;
-  color: #2d2d2d;
+  //color: #2d2d2d;
   font-size: 12px;
   font-weight: lighter;
   display: none;
+  color: inherit !important;
 
   ${({ theme }) => theme.mq.standard} {
     display: flex;
@@ -72,8 +75,8 @@ const StyledNextCase = styled(Paragraph)`
   transition: all 1s ease;
   text-transform: capitalize;
   letter-spacing: 0;
-  color: #2d2d2d;
   text-align: right;
+  color: inherit !important;
 `;
 
 const StyledNumber = styled(StyledNextCase)`
@@ -81,18 +84,21 @@ const StyledNumber = styled(StyledNextCase)`
   font-weight: 500;
 `;
 
-const SliderBoxInfo = ({ nextProjectName, allProjectsLength }) => {
+const SliderBoxInfo = ({ nextProjectName, allProjectsLength, isDarkTheme }) => {
   const { currentSlide } = useContext(CurrentSlideContext);
   const fade = createFade(true, 1000, 1000, 0);
 
   return (
-    <TimeoutBoxWrapper style={fade}>
-      <BarWrapper>
+    <TimeoutBoxWrapper style={fade} isDarkTheme={isDarkTheme}>
+      <BarWrapper isDarkTheme={isDarkTheme}>
         <StyledNumber>0{currentSlide + 1}</StyledNumber>
-        <TimeoutBar allProjectsLength={allProjectsLength} />
+        <TimeoutBar
+          allProjectsLength={allProjectsLength}
+          isDarkTheme={isDarkTheme}
+        />
         <StyledNumber>0{allProjectsLength}</StyledNumber>
       </BarWrapper>
-      <NextStandardWrapper>
+      <NextStandardWrapper isDarkTheme={isDarkTheme}>
         <StyledNextLabel>NEXT</StyledNextLabel>
         <StyledOverflow>
           <StyledNextCase large='true'>{nextProjectName}</StyledNextCase>

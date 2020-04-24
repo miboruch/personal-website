@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { animated } from 'react-spring';
 import { Keyframes } from 'react-spring/renderprops-universal';
@@ -22,6 +22,12 @@ const StyledLink = styled(animated.a)`
   padding: ${({ noPadding }) =>
     noPadding ? '0 4rem 0.5rem 0' : '2rem 2rem 0.5rem 2rem'};
   letter-spacing: 1px;
+
+  ${({ isDarkTheme }) =>
+    isDarkTheme &&
+    css`
+      color: ${({ isDarkTheme }) => (isDarkTheme ? '#222' : '#e7e5e1')};
+    `}
 `;
 
 const LinksFade = Keyframes.Spring({
@@ -45,7 +51,12 @@ const LinksFade = Keyframes.Spring({
   }
 });
 
-const SocialNavigation = ({ headerTheme, toggleState, noPadding = false }) => {
+const SocialNavigation = ({
+  headerTheme,
+  toggleState,
+  noPadding,
+  isDarkTheme
+}) => {
   return (
     <>
       <LinksFade state={toggleState ? 'in' : 'out'}>
@@ -61,6 +72,7 @@ const SocialNavigation = ({ headerTheme, toggleState, noPadding = false }) => {
                 target='_blank'
                 rel='noreferrer'
                 headerTheme={headerTheme}
+                isDarkTheme={isDarkTheme}
               >
                 {item.name}
               </StyledLink>
@@ -75,6 +87,10 @@ const SocialNavigation = ({ headerTheme, toggleState, noPadding = false }) => {
 SocialNavigation.propTypes = {
   headerTheme: PropTypes.oneOf(['dark', 'light']),
   noPadding: PropTypes.bool
+};
+
+SocialNavigation.defaultProps = {
+  noPadding: false
 };
 
 export default SocialNavigation;

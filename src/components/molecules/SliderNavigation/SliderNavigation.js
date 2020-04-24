@@ -25,9 +25,9 @@ const StyledNavigationBox = styled.div`
 const StyledNextLabel = styled(animated(Paragraph))`
   text-transform: uppercase;
   letter-spacing: 5px;
+  color: inherit !important;
 
   ${({ theme }) => theme.mq.standard} {
-    color: #fff;
     font-size: 12px;
     font-weight: lighter;
   }
@@ -37,10 +37,8 @@ const StyledNextCase = styled(animated(Paragraph))`
   font-family: Avanti;
   transition: all 1s ease;
   letter-spacing: 0;
-
-  ${({ theme }) => theme.mq.standard} {
-    color: #fff;
-  }
+  text-transform: capitalize;
+  color: inherit !important;
 `;
 
 const ArrowWrapper = styled.div`
@@ -55,6 +53,7 @@ const StyledFlexWrapper = styled.div`
   align-items: flex-end;
   justify-content: center;
   overflow: hidden;
+  color: ${({ isDarkTheme }) => (isDarkTheme ? '#222' : '#e7e5e1')};
 
   ${({ theme }) => theme.mq.standard} {
     flex-direction: row;
@@ -64,14 +63,18 @@ const StyledFlexWrapper = styled.div`
   }
 `;
 
-const SliderNavigation = ({ next, children }) => {
+const SliderNavigation = ({ next, children, isDarkTheme }) => {
   const bottomSlide = animationIn(true, 1000, 3000, 0);
   return (
     <StyledNavigationBox>
       <ArrowWrapper>{children}</ArrowWrapper>
-      <StyledFlexWrapper>
+      <StyledFlexWrapper isDarkTheme={isDarkTheme}>
         <StyledNextLabel small='true'>Next</StyledNextLabel>
-        <StyledNextCase large='true' style={bottomSlide}>
+        <StyledNextCase
+          large='true'
+          style={bottomSlide}
+          isDarkTheme={isDarkTheme}
+        >
           {next}
         </StyledNextCase>
       </StyledFlexWrapper>
@@ -81,7 +84,8 @@ const SliderNavigation = ({ next, children }) => {
 
 SliderNavigation.propTypes = {
   next: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  isDarkTheme: PropTypes.bool
 };
 
 export default SliderNavigation;

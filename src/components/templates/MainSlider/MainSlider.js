@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import SliderContent from '../SliderContent/SliderContent';
@@ -25,9 +25,12 @@ const StyledSlider = styled(Slider)`
 const ArrowLeft = styled(Arrow)`
   width: 60px;
   height: 60px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? '1px solid rgba(0, 0, 0, 0.5)'
+      : '1px solid rgba(255, 255, 255, 0.2)'};
   border-radius: 50%;
-  fill: #fff;
+  fill: ${({ isDarkTheme }) => (isDarkTheme ? '#222' : '#fff')};
   margin: 0 1rem;
   padding: 0.5rem;
   cursor: pointer;
@@ -42,61 +45,49 @@ const ArrowLeft = styled(Arrow)`
   }
 `;
 
-const LeftArrowWrapper = styled.div`
-  display: none;
+const StandardArrowWrapper = styled.div`
   position: absolute;
+  justify-content: flex-end;
+  align-items: center;
+  width: 200px;
+  height: 70px;
+  display: none;
+  bottom: 200px;
+
+  ${({ theme }) => theme.mq.standard} {
+    display: flex;
+    right: 166px;
+  }
+`;
+
+const ArrowWrapper = styled.div`
+  display: none;
   width: 80px;
   height: 80px;
   justify-content: center;
   align-items: center;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? '1px solid rgba(34, 34, 34, 0.6)'
+      : '1px solid rgba(231, 229, 225, 0.4)'};
   border-radius: 50%;
   cursor: pointer;
   transition: border 1s ease;
-
-  &:hover {
-    border: 1px solid rgba(255, 255, 255, 0.8);
-  }
-
-  //&::before {
-  //  content: 'PREVIOUS';
-  //  position: absolute;
-  //  left: -100%;
-  //  font-size: 11px;
-  //  letter-spacing: 3px;
-  //  color: #fff;
-  //}
 
   ${({ theme }) => theme.mq.standard} {
     display: flex;
   }
 `;
 
-const RightArrowWrapper = styled(LeftArrowWrapper)`
-  left: 150px;
-
-  &::before {
-    content: '';
-  }
-
-  //&::after {
-  //  content: 'NEXT';
-  //  position: absolute;
-  //  right: 100%;
-  //  font-size: 11px;
-  //  letter-spacing: 3px;
-  //  color: #fff;
-  //}
+const ArrowRightWrapper = styled(ArrowWrapper)`
+  margin-left: 2rem;
 `;
 
 const ArrowLeftStandard = styled(Arrow)`
   padding: 1rem;
   display: none;
   border: none;
-  fill: #fff;
+  fill: ${({ isDarkTheme }) => (isDarkTheme ? '#222' : '#e7e5e1')};
 
   ${({ theme }) => theme.mq.standard} {
     display: block;
@@ -182,6 +173,11 @@ const StyledParagraph = styled(Paragraph)`
 const MainSlider = ({ images, data }) => {
   const sliderRef = useRef();
   const { currentSlide, setSlide } = useContext(CurrentSlideContext);
+  const [isDarkTheme, setDarkTheme] = useState(currentSlide % 2 !== 0);
+
+  useEffect(() => {
+    setDarkTheme(currentSlide % 2 !== 0);
+  }, [currentSlide]);
 
   const settings = {
     dots: false,
@@ -205,16 +201,25 @@ const MainSlider = ({ images, data }) => {
             key={index}
             content={data[index]}
             index={index}
+            isDarkTheme={isDarkTheme}
           />
         ))}
       </StyledSlider>
       <VerticalBox />
-      <LeftArrowWrapper>
-        <ArrowLeftStandard onClick={() => sliderRef.current.slickPrev()} />
-      </LeftArrowWrapper>
-      <RightArrowWrapper>
-        <ArrowRightStandard onClick={() => sliderRef.current.slickNext()} />
-      </RightArrowWrapper>
+      <StandardArrowWrapper>
+        <ArrowWrapper isDarkTheme={isDarkTheme}>
+          <ArrowLeftStandard
+            onClick={() => sliderRef.current.slickPrev()}
+            isDarkTheme={isDarkTheme}
+          />
+        </ArrowWrapper>
+        <ArrowRightWrapper isDarkTheme={isDarkTheme}>
+          <ArrowRightStandard
+            onClick={() => sliderRef.current.slickNext()}
+            isDarkTheme={isDarkTheme}
+          />
+        </ArrowRightWrapper>
+      </StandardArrowWrapper>
       <StyledProjectSmallNavigation>
         {data.map((item, index) => (
           <StyledParagraph
@@ -226,16 +231,31 @@ const MainSlider = ({ images, data }) => {
           </StyledParagraph>
         ))}
       </StyledProjectSmallNavigation>
-      <SliderNavigation next={data[currentSlide].next}>
-        <ArrowLeft onClick={() => sliderRef.current.slickPrev()} />
-        <ArrowRight onClick={() => sliderRef.current.slickNext()} />
+      <SliderNavigation
+        next={data[currentSlide].next}
+        isDarkTheme={isDarkTheme}
+      >
+        <ArrowLeft
+          onClick={() => sliderRef.current.slickPrev()}
+          isDarkTheme={isDarkTheme}
+        />
+        <ArrowRight
+          onClick={() => sliderRef.current.slickNext()}
+          isDarkTheme={isDarkTheme}
+        />
       </SliderNavigation>
       <SliderBoxInfo
         nextProjectName={data[currentSlide].next}
         allProjectsLength={data.length}
+        isDarkTheme={isDarkTheme}
       />
       <NavigationWrapper>
-        <SocialNavigation toggleState={true} lightTheme={false} noPadding />
+        <SocialNavigation
+          toggleState={true}
+          lightTheme={false}
+          noPadding
+          isDarkTheme={isDarkTheme}
+        />
       </NavigationWrapper>
     </StyledWrapper>
   );

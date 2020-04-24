@@ -6,7 +6,7 @@ import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
 const StyledBar = styled.div`
   width: 100px;
   height: 2px;
-  background: #ccc;
+  background: ${({ isDarkTheme }) => (isDarkTheme ? '#000' : '#ccc')};
   margin: 0 0.7rem;
   position: relative;
 
@@ -15,7 +15,7 @@ const StyledBar = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    background-color: #2d2d2d;
+    background-color: ${({ isDarkTheme }) => (isDarkTheme ? '#ccc' : '#000')};
     width: calc(
       ${({ currentSlide, allProjectsLength }) =>
         `(100% / ${allProjectsLength}) * ${currentSlide + 1}`}
@@ -25,12 +25,13 @@ const StyledBar = styled.div`
   }
 `;
 
-const TimeoutBar = ({ allProjectsLength }) => {
+const TimeoutBar = ({ allProjectsLength, isDarkTheme }) => {
   const { currentSlide } = useContext(CurrentSlideContext);
   return (
     <StyledBar
       currentSlide={currentSlide}
       allProjectsLength={allProjectsLength}
+      isDarkTheme={isDarkTheme}
     />
   );
 };
