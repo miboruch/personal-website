@@ -14,10 +14,9 @@ const StyledWrapper = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-  // background: ${({ theme }) => theme.color.backgroundGradient};
-  background-image: linear-gradient(to left, #222 50%, #e7e5e1 50% );
+  background: linear-gradient(to left, #222 50%, #e7e5e1 50%);
   background-size: 200% 100%;
-  background-position: ${({ isEven }) => (isEven ? '100% 0' : '0 0')};
+  background-position: ${({ isEven }) => (isEven ? '-100% 0' : '0 0')};
   transition: background-position 1s 2s ease;
 `;
 
@@ -147,6 +146,7 @@ const TextWrapper = styled.div`
 const OverflowBox = styled.div`
   overflow: hidden;
   margin-top: 2rem;
+  z-index: 1000;
 `;
 
 const SliderContent = ({ image, content, index, isDarkTheme }) => {

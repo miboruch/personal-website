@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Slider from 'react-slick';
 import SliderContent from '../SliderContent/SliderContent';
 import SliderNavigation from '../../molecules/SliderNavigation/SliderNavigation';
@@ -72,15 +72,23 @@ const ArrowWrapper = styled.div`
       : '1px solid rgba(231, 229, 225, 0.4)'};
   border-radius: 50%;
   cursor: pointer;
-  transition: border 1s ease;
+  transition: all 0.4s ease;
 
   ${({ theme }) => theme.mq.standard} {
     display: flex;
+  }
+
+  &:hover {
+    transform: translateX(-10px);
   }
 `;
 
 const ArrowRightWrapper = styled(ArrowWrapper)`
   margin-left: 2rem;
+
+  &:hover {
+    transform: translateX(10px);
+  }
 `;
 
 const ArrowLeftStandard = styled(Arrow)`
@@ -153,20 +161,31 @@ const StyledParagraph = styled(Paragraph)`
   position: relative;
   margin: 0 1rem;
   letter-spacing: 0;
+  color: #878787;
+
+  ${({ isCurrent }) =>
+    isCurrent &&
+    css`
+      color: ${({ isDarkTheme }) => (isDarkTheme ? '#000' : '#fff')};
+    `}
 
   &::before {
     content: '';
     position: absolute;
-    top: -20px;
+    top: -10px;
     left: 50%;
-    width: 10px;
-    height: 10px;
-    border: 1px solid #fff;
-    border-radius: 50%;
+    width: 25px;
+    height: 1px;
     transform: translateX(-50%);
-    background-color: ${({ isCurrent }) =>
-      isCurrent ? 'white' : 'transparent'};
+    background-color: #878787;
     transition: background-color 1s ease;
+
+    ${({ isCurrent }) =>
+      isCurrent &&
+      css`
+        background-color: ${({ isDarkTheme }) =>
+          isDarkTheme ? '#000' : '#fff'};
+      `}
   }
 `;
 
@@ -224,6 +243,7 @@ const MainSlider = ({ images, data }) => {
         {data.map((item, index) => (
           <StyledParagraph
             key={index}
+            isDarkTheme={isDarkTheme}
             isCurrent={currentSlide === index}
             onClick={() => sliderRef.current.slickGoTo(item.index)}
           >

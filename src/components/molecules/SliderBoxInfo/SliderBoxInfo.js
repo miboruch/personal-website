@@ -10,7 +10,7 @@ import { createFade } from '../../../utils/animations';
 const TimeoutBoxWrapper = styled(animated.div)`
   position: absolute;
   display: none;
-  width: 350px;
+  width: 300px;
   height: 62px;
   justify-content: flex-end;
   padding: 1rem 3rem;
@@ -24,6 +24,10 @@ const TimeoutBoxWrapper = styled(animated.div)`
 
   ${({ theme }) => theme.mq.standard} {
     display: flex;
+  }
+
+  ${({ theme }) => theme.mq.desktop} {
+    width: 350px;
   }
 `;
 

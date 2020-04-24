@@ -16,7 +16,7 @@ const StyledLine = styled(animated.div)`
   width: 100%;
   height: 2px;
   background: ${({ isDarkTheme }) =>
-    isDarkTheme ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 255, 255, 0.2)'};
+    isDarkTheme ? 'rgba(214, 212, 208, 0.6)' : 'rgba(214, 212, 208, 0.2)'};
   z-index: 5;
   transition: all 1s ease;
 
