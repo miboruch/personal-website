@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Formik } from 'formik';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import CloseButton from '../../atoms/CloseButton/CloseButton';
+import { ContactFormValidation } from '../../../utils/formValidation';
 
 const StyledForm = styled.form`
   width: 100%;
@@ -93,6 +95,7 @@ const StyledTextArea = styled.textarea`
   border: none;
   border-bottom: 1px solid #ccc;
   transition: border-bottom-color 1s ease;
+  resize: none;
 
   &:focus {
     outline: none;
@@ -160,36 +163,66 @@ const StyledSendMessage = styled.button`
 
 const Form = ({ setFormState }) => {
   return (
-    <StyledForm
-      name='Contact Form'
-      method='POST'
-      data-netlify='true'
-      action='/contact'
-      data-netlify-recaptcha='true'
+    <Formik
+      initialValues={{ name: '', email: '', message: '' }}
+      validationSchema={ContactFormValidation}
+      onSubmit={({ name, email, message }, { setSubmitting, resetForm }) => {
+        console.log(name, email, message);
+        setTimeout(() => {
+          setSubmitting(false);
+          resetForm();
+          setFormState();
+        }, 400);
+      }}
     >
-      <input type='hidden' name='form-name' value='Contact Form' />
-      <CloseButton setBoxState={setFormState} contactPage />
-      <StyledTitle>Send message</StyledTitle>
-      <FormLine>
-        <StyledInput type='name' name='name' required pattern='\S+.*' />
-        <StyledLabel>name</StyledLabel>
-      </FormLine>
-      <FormLine>
-        <StyledInput
-          type='email'
-          name='email'
-          required
-          pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
-        />
-        <StyledLabel>e-mail</StyledLabel>
-      </FormLine>
-      <FormLine>
-        <StyledTextArea name='message' required />
-        <StyledLabel>message</StyledLabel>
-      </FormLine>
-      <div data-netlify-recaptcha='true' />
-      <StyledSendMessage type='submit'>send message</StyledSendMessage>
-    </StyledForm>
+      {({
+        values,
+        errors,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        isSubmitting
+      }) => (
+        <StyledForm onSubmit={handleSubmit} autoComplete={'off'}>
+          <CloseButton setBoxState={setFormState} contactPage />
+          <StyledTitle>Send message</StyledTitle>
+          <FormLine>
+            <StyledInput
+              autoComplete={'off'}
+              type='text'
+              name='name'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.name}
+            />
+            <StyledLabel>{errors.name ? errors.name : 'name'}</StyledLabel>
+          </FormLine>
+          <FormLine>
+            <StyledInput
+              type='email'
+              name='email'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.email}
+            />
+            <StyledLabel>e-mail</StyledLabel>
+          </FormLine>
+          <FormLine>
+            <StyledTextArea
+              name='message'
+              type='text'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.message}
+            />
+            <StyledLabel>message</StyledLabel>
+          </FormLine>
+          <StyledSendMessage type='submit' disabled={isSubmitting}>
+            send message
+          </StyledSendMessage>
+        </StyledForm>
+      )}
+    </Formik>
   );
 };
 

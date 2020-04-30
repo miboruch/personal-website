@@ -7,6 +7,7 @@
   "dependencies": {
     "babel-plugin-styled-components": "^1.10.6",
     "d3-ease": "^1.0.6",
+    "formik": "^2.1.4",
     "gatsby": "^2.18.4",
     "gatsby-background-image": "^0.9.11",
     "gatsby-image": "^2.2.34",
@@ -33,7 +34,8 @@
     "react-svg": "^11.0.3",
     "react-waypoint": "^9.0.2",
     "slick-carousel": "^1.8.1",
-    "styled-components": "^4.4.1"
+    "styled-components": "^4.4.1",
+    "yup": "^0.28.4"
   },
   "devDependencies": {
     "eslint": "^6.7.2",
