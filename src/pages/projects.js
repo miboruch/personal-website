@@ -89,6 +89,7 @@ const Projects = ({ data }) => {
   const imageArray = convertObjectToArray(
     data.image4,
     data.image1,
+    data.image5,
     data.image2,
     data.image3
   );
@@ -186,6 +187,9 @@ export const query = graphql`
       ...mockUpFragment
     }
     image4: file(name: { regex: "/buyit-main/" }) {
+      ...mockUpFragment
+    }
+    image5: file(name: { regex: "/wallpapers-mobile/" }) {
       ...mockUpFragment
     }
     projectData: portfolio {

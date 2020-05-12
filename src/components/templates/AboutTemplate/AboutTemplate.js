@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import Footer from '../../molecules/Footer/Footer';
@@ -11,10 +11,11 @@ import { createFade } from '../../../utils/animations';
 import { skills } from '../../../utils/skills';
 
 const StyledWrapper = styled.div`
-  background: #fff;
+  background: #f3f3f3;
   width: 100%;
   height: 100%;
   position: relative;
+  overflow: hidden;
 `;
 
 const StyledImage = styled(BackgroundImage)`
@@ -158,13 +159,14 @@ const StyledListItem = styled.li`
 const AboutTemplate = ({ images }) => {
   const [isBoxOpened, setBoxState] = useState(false);
   const [isSkillsVisible, setSkillsState] = useState(true);
+  const wrapper = useRef(null);
 
   const fadeIn = createFade(true, 1000, 300, 0);
 
   const isOnTop = useScrollPosition();
 
   return (
-    <StyledWrapper>
+    <StyledWrapper ref={wrapper}>
       <StyledImage fluid={images[0].childImageSharp.fluid}>
         <StyledTitle title>About me</StyledTitle>
         <StyledLine />

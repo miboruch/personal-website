@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import gsap from 'gsap';
 import CloseButton from '../../atoms/CloseButton/CloseButton';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
-import { animated } from 'react-spring';
-import { AnimatedWrapper, AnimatedBox, BoxItems } from './skillsBoxAnimations';
 import { skillsItems } from '../../../utils/skills';
 
-const StyledWrapper = styled(animated.div)`
+const StyledWrapper = styled.div`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.9);
@@ -19,16 +18,21 @@ const StyledWrapper = styled(animated.div)`
   left: 0;
   display: flex;
   flex-direction: column;
-  opacity: 0;
-  visibility: hidden;
+  color: #2d2d2d;
 `;
 
 const HeaderParagraph = styled(Paragraph)`
   margin: 0;
-  color: #000;
+  color: #2d2d2d;
+  font-weight: bold;
+
+  ${({ theme }) => theme.mq.standard} {
+    font-weight: bold;
+    font-size: 42px;
+  }
 `;
 
-const StyledBox = styled(animated.div)`
+const StyledBox = styled.div`
   width: 90%;
   min-height: 90%;
   background: #fff;
@@ -44,10 +48,9 @@ const StyledBox = styled(animated.div)`
   }
 `;
 
-const StyledContentSection = styled(animated.section)`
+const StyledContentSection = styled.section`
   width: 90%;
   padding: 1rem 2rem;
-  transition: all 1s ease;
   cursor: default;
 
   &::before{
@@ -124,40 +127,60 @@ const StyledDescription = styled(Paragraph)`
   }
 `;
 
+const ItemsWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
 const SkillsBox = ({ isOpen, setBoxState }) => {
+  const wrapperRef = useRef(null);
+  const wrapperBox = useRef(null);
+  const itemsRef = useRef(null);
+  const [tl] = useState(gsap.timeline({ defaults: { ease: 'power3.inOut' } }));
+
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+    const box = wrapperBox.current;
+    const items = itemsRef.current;
+
+    gsap.set([wrapper, box], { autoAlpha: 0 });
+    gsap.set([...items.children], { autoAlpha: 0 });
+
+    tl.to(wrapper, { autoAlpha: 1, duration: 0.5 })
+      .fromTo(box, { y: '+=50' }, { y: '0', autoAlpha: 1, duration: 0.7 })
+      .fromTo(
+        items.children,
+        { y: '+=30' },
+        { y: '0', autoAlpha: 1, duration: 1, stagger: 0.2 }
+      );
+  }, []);
+
+  useEffect(() => {
+    isOpen ? tl.play() : tl.reverse();
+  }, [isOpen]);
+
   return (
-    <AnimatedWrapper state={isOpen ? 'in' : 'out'}>
-      {wrapperProps => (
-        <StyledWrapper style={wrapperProps}>
-          <AnimatedBox state={isOpen ? 'in' : 'out'}>
-            {props => (
-              <StyledBox style={props}>
-                <HeaderParagraph>Skills:</HeaderParagraph>
-                <BoxItems
-                  keys={item => item.name}
-                  state={isOpen ? 'in' : 'out'}
-                  reverse={!isOpen}
-                  items={skillsItems}
-                >
-                  {trailItem => trailProps => (
-                    <StyledContentSection
-                      style={trailProps}
-                      value={trailItem.name.split(',')[0]}
-                    >
-                      <StyledDescription>
-                        <StyledSpan>{trailItem.name}</StyledSpan>
-                        {trailItem.description}
-                      </StyledDescription>
-                    </StyledContentSection>
-                  )}
-                </BoxItems>
-                <CloseButton setBoxState={setBoxState} />
-              </StyledBox>
-            )}
-          </AnimatedBox>
-        </StyledWrapper>
-      )}
-    </AnimatedWrapper>
+    <StyledWrapper ref={wrapperRef}>
+      <StyledBox ref={wrapperBox}>
+        <HeaderParagraph>Skills:</HeaderParagraph>
+        <ItemsWrapper ref={itemsRef}>
+          {skillsItems.map(skill => (
+            <StyledContentSection
+              value={skill.name.split(',')[0]}
+              key={skill.name}
+            >
+              <StyledDescription>
+                <StyledSpan>{skill.name}</StyledSpan>
+                {skill.description}
+              </StyledDescription>
+            </StyledContentSection>
+          ))}
+        </ItemsWrapper>
+        <CloseButton setBoxState={setBoxState} />
+      </StyledBox>
+    </StyledWrapper>
   );
 };
 

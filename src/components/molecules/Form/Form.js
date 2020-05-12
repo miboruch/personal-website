@@ -166,13 +166,10 @@ const Form = ({ setFormState }) => {
     <Formik
       initialValues={{ name: '', email: '', message: '' }}
       validationSchema={ContactFormValidation}
-      onSubmit={({ name, email, message }, { setSubmitting, resetForm }) => {
-        console.log(name, email, message);
-        setTimeout(() => {
-          setSubmitting(false);
-          resetForm();
-          setFormState();
-        }, 400);
+      onSubmit={(values, { setSubmitting, resetForm }) => {
+        setSubmitting(false);
+        resetForm();
+        setFormState && setFormState();
       }}
     >
       {({
@@ -188,12 +185,12 @@ const Form = ({ setFormState }) => {
           <StyledTitle>Send message</StyledTitle>
           <FormLine>
             <StyledInput
-              autoComplete={'off'}
               type='text'
               name='name'
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.name}
+              required
             />
             <StyledLabel>{errors.name ? errors.name : 'name'}</StyledLabel>
           </FormLine>
@@ -204,6 +201,7 @@ const Form = ({ setFormState }) => {
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.email}
+              required
             />
             <StyledLabel>e-mail</StyledLabel>
           </FormLine>
@@ -214,6 +212,7 @@ const Form = ({ setFormState }) => {
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.message}
+              required
             />
             <StyledLabel>message</StyledLabel>
           </FormLine>

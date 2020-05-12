@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Link } from 'gatsby';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
+import PageTransitionProvider from '../../../providers/PageTransitionProvider';
 
 const NavigationBox = styled.div`
   width: 200px;
@@ -49,9 +50,9 @@ const ProjectNavigation = ({ isOnTop }) => {
   return (
     <NavigationBox isOnTop={isOnTop}>
       {projects.map((item, index) => (
-        <Link to={item.pageLink} key={index}>
+        <PageTransitionProvider to={item.pageLink} key={index} dark={false}>
           <NavigationParagraph small='true'>{item.name}</NavigationParagraph>
-        </Link>
+        </PageTransitionProvider>
       ))}
     </NavigationBox>
   );
