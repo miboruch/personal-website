@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useStaticQuery, graphql } from 'gatsby';
 import { animated } from 'react-spring';
 import SocialNavigation from '../../molecules/SocialNavigation/SocialNavigation';
 import Footer from '../../molecules/Footer/Footer';
@@ -176,12 +177,10 @@ const FooterWrapper = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
-  //background: #272727;
   z-index: 10;
 `;
 
 const StyledOpenCase = styled(Paragraph)`
-  width: 200px;
   font-size: 14px;
   color: #fff;
   font-weight: bold;
@@ -191,6 +190,17 @@ const StyledOpenCase = styled(Paragraph)`
   cursor: pointer;
   margin-bottom: 1rem;
   padding-top: 1rem;
+`;
+
+const CVLink = styled.a`
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: underline !important;
+  cursor: pointer;
+  margin-bottom: 1rem;
 `;
 
 const StyledSendMessage = styled(StyledOpenCase)`
@@ -211,6 +221,11 @@ const NavigationWrapper = styled.div`
   }
 `;
 
+const StyledCVWrapper = styled.section`
+  display: flex;
+  flex-direction: column;
+`;
+
 const StyledVerticalLine = styled.div`
   display: none;
   width: 1px;
@@ -226,6 +241,21 @@ const StyledVerticalLine = styled.div`
 `;
 
 const ContactTemplate = ({ image }) => {
+  const {
+    allFile: { edges }
+  } = useStaticQuery(graphql`
+    {
+      allFile(filter: { extension: { eq: "pdf" } }) {
+        edges {
+          node {
+            publicURL
+            name
+          }
+        }
+      }
+    }
+  `);
+
   const [isFormOpened, setFormState] = useState(false);
   const fade = createFade(true, 1500, 1000);
   const fadeDelayed = createFade(true, 1500, 2000);
@@ -269,7 +299,13 @@ const ContactTemplate = ({ image }) => {
               />
             </NavigationWrapper>
           </StyledBox>
-          <StyledOpenCase>download my cv</StyledOpenCase>
+          <StyledCVWrapper>
+            {edges.map((file, index) => (
+              <CVLink href={file.node.publicURL} key={`CV${index}`} download>
+                download {file.node.name} cv
+              </CVLink>
+            ))}
+          </StyledCVWrapper>
           <StyledSendMessage onClick={() => setFormState(true)}>
             send message
           </StyledSendMessage>
