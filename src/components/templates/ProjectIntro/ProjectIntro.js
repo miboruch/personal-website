@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import gsap from 'gsap';
 import GatsbyImage from 'gatsby-image';
 import { Link } from 'gatsby';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import OpenCircle from '../../atoms/OpenCircle/OpenCircle';
-import { animationIn } from '../../../utils/animations';
 import PageTransitionProvider from '../../../providers/PageTransitionProvider';
 
 const StyledWrapper = styled.section`
@@ -135,10 +135,6 @@ const StyledParagraph = styled(Paragraph)`
   letter-spacing: 0;
 `;
 
-const StyledLink = styled(Link)`
-  border-radius: 50%;
-`;
-
 const MobileLink = styled(Paragraph)`
   color: #000 !important;
   font-family: ${({ theme }) => theme.font.family.avanti};
@@ -153,7 +149,23 @@ const MobileLink = styled(Paragraph)`
 `;
 
 const ProjectIntro = ({ data, image, reverse }) => {
-  const bottomSlide = animationIn(true, 1000, 1000, 0);
+  const headerRef = useRef(null);
+  const descriptionRef = useRef(null);
+
+  useEffect(() => {
+    const header = headerRef.current;
+    const description = descriptionRef.current;
+
+    const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
+
+    gsap.set([description], { autoAlpha: 0 });
+
+    tl.fromTo(
+      header,
+      { transform: 'matrix(0.99, 0.33, 0, 1, 0, 100)' },
+      { transform: 'matrix(1,0,0,1,0,0)', duration: 1, delay: 1 }
+    ).to(description, { autoAlpha: 1, duration: 1.2 });
+  }, []);
 
   return (
     <StyledWrapper reverse={reverse}>
@@ -168,11 +180,11 @@ const ProjectIntro = ({ data, image, reverse }) => {
       </PhotoWrapper>
       <ContentWrapper>
         <OverflowBox>
-          <StyledTitle title='true' style={bottomSlide}>
+          <StyledTitle title='true' ref={headerRef}>
             {data.name}
           </StyledTitle>
         </OverflowBox>
-        <StyledParagraph small='true'>
+        <StyledParagraph small='true' ref={descriptionRef}>
           {data.primaryDescription}
         </StyledParagraph>
         <Link to={data.pageLink}>

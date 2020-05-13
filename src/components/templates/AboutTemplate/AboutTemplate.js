@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
+import gsap from 'gsap';
 import PropTypes from 'prop-types';
 import Footer from '../../molecules/Footer/Footer';
 import BackgroundImage from 'gatsby-background-image';
@@ -136,6 +137,10 @@ const StyledList = styled.ul`
   list-style-type: none;
 `;
 
+const OverflowBox = styled.div`
+  overflow: hidden;
+`;
+
 const StyledListItem = styled.li`
   text-decoration: none;
   font-weight: bold;
@@ -157,28 +162,60 @@ const StyledListItem = styled.li`
 `;
 
 const AboutTemplate = ({ images }) => {
+  const titleRef = useRef(null);
+  const textRef = useRef(null);
+  const quoteRef = useRef(null);
+  const textWrapperRef = useRef(null);
   const [isBoxOpened, setBoxState] = useState(false);
   const [isSkillsVisible, setSkillsState] = useState(true);
-  const wrapper = useRef(null);
 
   const fadeIn = createFade(true, 1000, 300, 0);
 
   const isOnTop = useScrollPosition();
 
+  useEffect(() => {
+    const title = titleRef.current;
+    const text = textRef.current;
+    const quote = quoteRef.current;
+    const textWrapper = textWrapperRef.current;
+
+    const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
+
+    gsap.set([title, quote, textWrapper, ...text.children], { autoAlpha: 0 });
+
+    tl.fromTo(title, { y: '+=40' }, { y: '0', autoAlpha: 1, delay: 1 })
+      .fromTo(
+        quote,
+        { y: '+=20' },
+        { y: '0', autoAlpha: 1, duration: 1 },
+        '-=0.55'
+      )
+      .to(textWrapper, { autoAlpha: 1, duration: 1 })
+      .fromTo(
+        text.children,
+        { y: '+=10' },
+        { y: '0', autoAlpha: 1, stagger: 0.3 }
+      );
+  }, []);
+
   return (
-    <StyledWrapper ref={wrapper}>
+    <StyledWrapper>
       <StyledImage fluid={images[0].childImageSharp.fluid}>
-        <StyledTitle title>About me</StyledTitle>
+        <OverflowBox>
+          <StyledTitle ref={titleRef} title>
+            About me
+          </StyledTitle>
+        </OverflowBox>
         <StyledLine />
         <ContentWrapper>
-          <StyledQuote style={fadeIn}>
+          <StyledQuote ref={quoteRef}>
             &quot;Anyone who has never made a mistake has never tried anything
             new.&quot;
           </StyledQuote>
         </ContentWrapper>
       </StyledImage>
-      <TextWrapper>
-        <StyledParagraph>
+      <TextWrapper ref={textWrapperRef}>
+        <StyledParagraph ref={textRef}>
           Hello, my name is Michal and I am a 21 years old aspiring junior web
           developer based in <strong>Tarnow</strong> and <strong>Krakow</strong>
           . I am a computer science student at the University of Applied

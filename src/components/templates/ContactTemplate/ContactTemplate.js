@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useStaticQuery, graphql } from 'gatsby';
+import gsap from 'gsap';
 import { animated } from 'react-spring';
 import SocialNavigation from '../../molecules/SocialNavigation/SocialNavigation';
 import Footer from '../../molecules/Footer/Footer';
@@ -8,7 +9,6 @@ import ContactForm from '../ContactForm/ContactForm';
 import GatsbyImage from 'gatsby-image';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { mediaItems } from '../../../utils/items';
-import { createFade } from '../../../utils/animations';
 import Form from '../../molecules/Form/Form';
 
 const StyledWrapper = styled.div`
@@ -256,20 +256,44 @@ const ContactTemplate = ({ image }) => {
     }
   `);
 
+  const formRef = useRef(null);
+  const contactInfoRef = useRef(null);
+
   const [isFormOpened, setFormState] = useState(false);
-  const fade = createFade(true, 1500, 1000);
-  const fadeDelayed = createFade(true, 1500, 2000);
 
   const githubLink = mediaItems[0].link;
+
+  useEffect(() => {
+    const form = formRef.current;
+    const contact = contactInfoRef.current;
+
+    const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
+
+    gsap.set([form, ...contact.children], { autoAlpha: 0 });
+
+    tl.fromTo(
+      form,
+      { y: '+=30' },
+      { y: '0', autoAlpha: 1, stagger: 0.2, duration: 0.8 }
+    ).fromTo(
+      contact.children,
+      { y: '+=30' },
+      {
+        y: '0',
+        autoAlpha: 1,
+        stagger: 0.3
+      }
+    );
+  }, []);
 
   return (
     <StyledWrapper>
       <StyledVerticalLine />
       <ContentWrapper>
-        <FormWrapper style={fade}>
+        <FormWrapper ref={formRef}>
           <Form />
         </FormWrapper>
-        <ContentInformation style={fadeDelayed}>
+        <ContentInformation ref={contactInfoRef}>
           <StyledTitle title>Contact</StyledTitle>
           <RowWrapper>
             <StyledBox>

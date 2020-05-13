@@ -7,7 +7,6 @@ import { Link } from 'gatsby';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
 import { animationIn, createFade } from '../../../utils/animations';
 import { textWave } from './sliderContentAnimations';
-import SlidersAccents from '../../molecules/SlidersAccents/SlidersAccents';
 import Div100vh from 'react-div-100vh';
 import PageTransitionProvider from '../../../providers/PageTransitionProvider';
 
@@ -65,10 +64,10 @@ const ContentWrapper = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  //display: flex;
+  //flex-direction: column;
+  //justify-content: center;
+  //align-items: center;
 `;
 
 const StyledTitleWrapper = styled(animated.div)`
@@ -83,7 +82,6 @@ const StyledTitleWrapper = styled(animated.div)`
   }
 
   ${({ theme }) => theme.mq.standard} {
-    width: 100%;
     margin-bottom: 1rem;
     justify-content: flex-end;
   }
@@ -126,7 +124,6 @@ const StyledOpenCase = styled(Paragraph)`
   letter-spacing: 3px;
   text-transform: uppercase;
   text-decoration: underline;
-  margin: auto;
   color: inherit;
 
   ${({ theme }) => theme.mq.standard} {
@@ -135,28 +132,88 @@ const StyledOpenCase = styled(Paragraph)`
   }
 `;
 
-const StyledLink = styled(Link)`
-  color: inherit;
-`;
-
 const TextWrapper = styled.div`
-  height: 140px;
+  width: 100%;
   position: absolute;
   top: 45%;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: right;
 
   ${({ theme }) => theme.mq.standard} {
-    right: 166px;
+    display: flex;
+    align-items: flex-end;
+    left: auto;
+    flex-direction: column;
+    width: 80%;
+    right: 176px;
     top: 50%;
-    transform: translateY(-70%);
+    transform: translateY(-57%);
+  }
+
+  ${({ theme }) => theme.mq.desktop} {
+    width: 50%;
+  }
+`;
+
+const StyledLine = styled(animated.div)`
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 1px;
+  background: ${({ isDarkTheme }) =>
+    isDarkTheme ? 'rgba(214, 212, 208, 0.6)' : 'rgba(214, 212, 208, 0.2)'};
+  z-index: 5;
+  transition: all 1s ease;
+
+  ${({ theme }) => theme.mq.standard} {
+    top: 50%;
   }
 `;
 
 const OverflowBox = styled.div`
   overflow: hidden;
   margin-top: 2rem;
-  z-index: 1000;
+`;
+
+const AllProjectOverflow = styled.div`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-100%);
+  right: 0.7rem;
+  overflow: hidden;
+`;
+
+const AllProjectCase = styled(Paragraph)`
+  position: relative;
+  padding: 0 2rem;
+  font-weight: bold;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  display: none;
+  cursor: pointer;
+  color: ${({ isDarkTheme }) => (isDarkTheme ? '#222' : '#fff')} !important;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: ${({ isDarkTheme }) => (isDarkTheme ? '#222' : '#fff')};
+    transition: all 1s cubic-bezier(0.66, 0.24, 0, 0.82);
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+
+  ${({ theme }) => theme.mq.standard} {
+    display: block;
+  }
 `;
 
 const SliderContent = ({ image, content, index, isDarkTheme }) => {
@@ -180,22 +237,7 @@ const SliderContent = ({ image, content, index, isDarkTheme }) => {
           <ContentWrapper>
             <TextWrapper>
               <StyledTitleWrapper>
-                {trail.map(({ x, height, ...rest }, index) => (
-                  <animated.div
-                    key={index}
-                    style={{
-                      ...rest,
-                      transform: x.interpolate(
-                        x => `rotate(${x}px)`,
-                        `translate3d(0, ${x}px, 0)`
-                      )
-                    }}
-                  >
-                    <StyledTitle title='true' style={{ height }}>
-                      {content.name[index]}
-                    </StyledTitle>
-                  </animated.div>
-                ))}
+                <StyledTitle title='true'>{content.name}</StyledTitle>
               </StyledTitleWrapper>
               <StyledDescription style={fade}>
                 {content.description}
@@ -208,11 +250,14 @@ const SliderContent = ({ image, content, index, isDarkTheme }) => {
                 </PageTransitionProvider>
               </OverflowBox>
             </TextWrapper>
-            <SlidersAccents
-              index={index}
-              link={content.pageLink}
-              isDarkTheme={isDarkTheme}
-            />
+            <StyledLine isDarkTheme={isDarkTheme} />
+            <AllProjectOverflow>
+              <PageTransitionProvider to='/projects' dark={true}>
+                <AllProjectCase small='true' isDarkTheme={isDarkTheme}>
+                  all projects
+                </AllProjectCase>
+              </PageTransitionProvider>
+            </AllProjectOverflow>
           </ContentWrapper>
         </StyledContextBox>
       </StyledWrapper>
