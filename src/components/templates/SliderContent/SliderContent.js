@@ -1,12 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import gsap from 'gsap';
 import BackgroundImage from 'gatsby-background-image';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { animated } from 'react-spring';
-import { Link } from 'gatsby';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
-import { animationIn, createFade } from '../../../utils/animations';
-import { textWave } from './sliderContentAnimations';
 import Div100vh from 'react-div-100vh';
 import PageTransitionProvider from '../../../providers/PageTransitionProvider';
 
@@ -64,10 +62,6 @@ const ContentWrapper = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-  //display: flex;
-  //flex-direction: column;
-  //justify-content: center;
-  //align-items: center;
 `;
 
 const StyledTitleWrapper = styled(animated.div)`
@@ -90,13 +84,9 @@ const StyledTitleWrapper = styled(animated.div)`
 const StyledTitle = styled(Paragraph)`
   font-family: ${({ theme }) => theme.font.family.avanti};
   font-weight: bold;
-  opacity: 1 !important;
-  will-change: transform, opacity;
   overflow: hidden;
   letter-spacing: 0;
   margin: 0;
-  transition: all 0.5s ease;
-  text-align: inherit;
   color: inherit;
 `;
 
@@ -166,7 +156,6 @@ const StyledLine = styled(animated.div)`
   background: ${({ isDarkTheme }) =>
     isDarkTheme ? 'rgba(214, 212, 208, 0.6)' : 'rgba(214, 212, 208, 0.2)'};
   z-index: 5;
-  transition: all 1s ease;
 
   ${({ theme }) => theme.mq.standard} {
     top: 50%;
@@ -217,13 +206,51 @@ const AllProjectCase = styled(Paragraph)`
 `;
 
 const SliderContent = ({ image, content, index, isDarkTheme }) => {
-  const { currentSlide } = useContext(CurrentSlideContext);
-  const isCurrentSlide = currentSlide === index;
+  const titleRef = useRef(null);
+  const descriptionRef = useRef(null);
+  const openProjectRef = useRef(null);
+  const lineRef = useRef(null);
+  const allProjectRef = useRef(null);
 
-  /* Animations -> sliderContentAnimations.js*/
-  const fade = createFade(isCurrentSlide, 2000, 900, 0);
-  const trail = textWave(content.name, isCurrentSlide);
-  const bottomSlide = animationIn(isCurrentSlide, 1000, 1200, 0);
+  const { currentSlide } = useContext(CurrentSlideContext);
+
+  const [tl] = useState(gsap.timeline({ defaults: { ease: 'power3.inOut' } }));
+
+  useEffect(() => {
+    const title = titleRef.current;
+    const description = descriptionRef.current;
+    const openProject = openProjectRef.current;
+    const allProject = allProjectRef.current;
+    const line = lineRef.current;
+
+    gsap.set([title, description], { autoAlpha: 0 });
+    gsap.set([line], { width: 0 });
+
+    tl.to(title, { autoAlpha: 1, duration: 1.5, delay: 1 })
+      .to(line, { width: '100%', duration: 1.8 }, '-=0.4')
+      .fromTo(
+        description,
+        { y: '+=20' },
+        { y: '0', autoAlpha: 1, duration: 0.4 },
+        '-=0.4'
+      )
+      .fromTo(
+        allProject,
+        { transform: 'matrix(0.99, 0.33, 0, 1, 0, 100)' },
+        { transform: 'matrix(1,0,0,1,0,0)', duration: 2 },
+        '-=0.3'
+      )
+      .fromTo(
+        openProject,
+        { transform: 'matrix(0.99, 0.33, 0, 1, 0, 100)' },
+        { transform: 'matrix(1,0,0,1,0,0)', duration: 2 },
+        '-=1.7'
+      );
+  }, []);
+
+  useEffect(() => {
+    currentSlide === index ? tl.play() : tl.reverse();
+  }, [currentSlide]);
 
   return (
     <Div100vh>
@@ -237,23 +264,29 @@ const SliderContent = ({ image, content, index, isDarkTheme }) => {
           <ContentWrapper>
             <TextWrapper>
               <StyledTitleWrapper>
-                <StyledTitle title='true'>{content.name}</StyledTitle>
+                <StyledTitle title='true' ref={titleRef}>
+                  {content.name}
+                </StyledTitle>
               </StyledTitleWrapper>
-              <StyledDescription style={fade}>
+              <StyledDescription ref={descriptionRef}>
                 {content.description}
               </StyledDescription>
               <OverflowBox>
                 <PageTransitionProvider to={content.pageLink}>
-                  <StyledOpenCase style={bottomSlide}>
+                  <StyledOpenCase ref={openProjectRef}>
                     Open project
                   </StyledOpenCase>
                 </PageTransitionProvider>
               </OverflowBox>
             </TextWrapper>
-            <StyledLine isDarkTheme={isDarkTheme} />
+            <StyledLine isDarkTheme={isDarkTheme} ref={lineRef} />
             <AllProjectOverflow>
               <PageTransitionProvider to='/projects' dark={true}>
-                <AllProjectCase small='true' isDarkTheme={isDarkTheme}>
+                <AllProjectCase
+                  small='true'
+                  isDarkTheme={isDarkTheme}
+                  ref={allProjectRef}
+                >
                   all projects
                 </AllProjectCase>
               </PageTransitionProvider>

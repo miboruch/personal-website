@@ -7,7 +7,6 @@ const Paragraph = styled(animated.p)`
   letter-spacing: 2px;
   color: #fff;
   font-weight: 500;
-  transition: all 1s ease;
 
   ${({ small }) =>
     small &&

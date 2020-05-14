@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import gsap from 'gsap';
 import { Controller, Scene } from 'react-scrollmagic';
 import { Tween } from 'react-gsap';
 import { easeExpOut } from 'd3-ease';
@@ -7,7 +8,6 @@ import Paragraph from '../../atoms/Paragraph/Paragraph';
 import ProjectContentBox from '../../atoms/ProjectContentBox/ProjectContentBox';
 import Image from '../../molecules/Image/Image';
 import Footer from '../../molecules/Footer/Footer';
-import { animationIn } from '../../../utils/animations';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -115,7 +115,17 @@ const LinkContentWrapper = styled.section`
 `;
 
 const PortfolioProjectTemplate = ({ content, images }) => {
-  const bottomSlide = animationIn(true, 1000, 2000, 0);
+  const titleRef = useRef(null);
+
+  useEffect(() => {
+    const title = titleRef.current;
+
+    gsap.set(title, { transform: 'matrix(0.99, 0.33, 0, 1, 0, 100)' });
+
+    const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
+
+    tl.to(title, { transform: 'matrix(1,0,0,1,0,0)', duration: 2 });
+  }, []);
 
   return (
     <StyledWrapper>
@@ -124,7 +134,7 @@ const PortfolioProjectTemplate = ({ content, images }) => {
           <TextWrapper>
             <StyledParagraph>{content.date}</StyledParagraph>
             <OverflowBox>
-              <StyledTitle style={bottomSlide}>{content.name}</StyledTitle>
+              <StyledTitle ref={titleRef}>{content.name}</StyledTitle>
             </OverflowBox>
           </TextWrapper>
           <ContentBox>
