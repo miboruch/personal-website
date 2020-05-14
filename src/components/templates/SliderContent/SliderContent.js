@@ -184,6 +184,7 @@ const AllProjectCase = styled(Paragraph)`
   display: none;
   cursor: pointer;
   color: ${({ isDarkTheme }) => (isDarkTheme ? '#222' : '#fff')} !important;
+  transition: color 1s ease;
 
   &::after {
     content: '';
