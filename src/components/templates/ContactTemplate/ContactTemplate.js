@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useStaticQuery, graphql } from 'gatsby';
 import gsap from 'gsap';
-import { animated } from 'react-spring';
 import SocialNavigation from '../../molecules/SocialNavigation/SocialNavigation';
 import Footer from '../../molecules/Footer/Footer';
 import ContactForm from '../ContactForm/ContactForm';
@@ -26,7 +25,7 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const ContentWrapper = styled(animated.section)`
+const ContentWrapper = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -40,7 +39,7 @@ const ContentWrapper = styled(animated.section)`
   }
 `;
 
-const FormWrapper = styled(animated.div)`
+const FormWrapper = styled.div`
   display: none;
   transition: all 1s ease;
 
@@ -50,7 +49,7 @@ const FormWrapper = styled(animated.div)`
   }
 `;
 
-const ContentInformation = styled(animated.div)`
+const ContentInformation = styled.div`
   margin-left: 0;
   transition: all 1s ease;
 
@@ -274,14 +273,14 @@ const ContactTemplate = ({ image }) => {
     tl.fromTo(
       form,
       { y: '+=30' },
-      { y: '0', autoAlpha: 1, stagger: 0.2, duration: 0.8 }
+      { y: '0', autoAlpha: 1, stagger: 0.4, duration: 0.8 }
     ).fromTo(
       contact.children,
       { y: '+=30' },
       {
         y: '0',
         autoAlpha: 1,
-        stagger: 0.3
+        stagger: 0.7
       }
     );
   }, []);

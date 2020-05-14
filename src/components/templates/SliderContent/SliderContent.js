@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import gsap from 'gsap';
 import BackgroundImage from 'gatsby-background-image';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
-import { animated } from 'react-spring';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
 import Div100vh from 'react-div-100vh';
 import PageTransitionProvider from '../../../providers/PageTransitionProvider';
@@ -64,7 +63,7 @@ const ContentWrapper = styled.div`
   position: relative;
 `;
 
-const StyledTitleWrapper = styled(animated.div)`
+const StyledTitleWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -146,7 +145,7 @@ const TextWrapper = styled.div`
   }
 `;
 
-const StyledLine = styled(animated.div)`
+const StyledLine = styled.div`
   position: absolute;
   top: 50%;
   left: 0;
@@ -156,9 +155,11 @@ const StyledLine = styled(animated.div)`
   background: ${({ isDarkTheme }) =>
     isDarkTheme ? 'rgba(214, 212, 208, 0.6)' : 'rgba(214, 212, 208, 0.2)'};
   z-index: 5;
+  display: none;
 
   ${({ theme }) => theme.mq.standard} {
     top: 50%;
+    display: block;
   }
 `;
 
@@ -230,7 +231,7 @@ const SliderContent = ({ image, content, index, isDarkTheme }) => {
       .to(line, { width: '100%', duration: 1.8 }, '-=0.4')
       .fromTo(
         description,
-        { y: '+=20' },
+        { y: '+=10' },
         { y: '0', autoAlpha: 1, duration: 0.4 },
         '-=0.4'
       )

@@ -116,15 +116,24 @@ const LinkContentWrapper = styled.section`
 
 const PortfolioProjectTemplate = ({ content, images }) => {
   const titleRef = useRef(null);
+  const projectInfoRef = useRef(null);
 
   useEffect(() => {
     const title = titleRef.current;
+    const projectInfo = projectInfoRef.current;
 
-    gsap.set(title, { transform: 'matrix(0.99, 0.33, 0, 1, 0, 100)' });
+    gsap.set(title, {
+      transform: 'matrix(0.99, 0.33, 0, 1, 0, 100)'
+    });
+
+    gsap.set([...projectInfo.children], { autoAlpha: 0 });
 
     const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
 
-    tl.to(title, { transform: 'matrix(1,0,0,1,0,0)', duration: 2 });
+    tl.to(title, {
+      transform: 'matrix(1,0,0,1,0,0)',
+      duration: 2
+    }).to(projectInfo.children, { autoAlpha: 1, stagger: 0.4 });
   }, []);
 
   return (
@@ -137,7 +146,7 @@ const PortfolioProjectTemplate = ({ content, images }) => {
               <StyledTitle ref={titleRef}>{content.name}</StyledTitle>
             </OverflowBox>
           </TextWrapper>
-          <ContentBox>
+          <ContentBox ref={projectInfoRef}>
             <ProjectContentBox
               title='CATEGORY'
               description={content.category}
