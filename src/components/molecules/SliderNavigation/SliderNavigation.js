@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import gsap from 'gsap';
 import PropTypes from 'prop-types';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
-import { animationIn } from '../../../utils/animations';
-import { animated } from 'react-spring';
 
 const StyledNavigationBox = styled.div`
   width: 100%;
@@ -22,7 +21,7 @@ const StyledNavigationBox = styled.div`
   }
 `;
 
-const StyledNextLabel = styled(animated(Paragraph))`
+const StyledNextLabel = styled(Paragraph)`
   text-transform: uppercase;
   letter-spacing: 5px;
   color: inherit !important;
@@ -33,7 +32,7 @@ const StyledNextLabel = styled(animated(Paragraph))`
   }
 `;
 
-const StyledNextCase = styled(animated(Paragraph))`
+const StyledNextCase = styled(Paragraph)`
   font-family: Avanti;
   transition: all 1s ease;
   letter-spacing: 0;
@@ -64,17 +63,28 @@ const StyledFlexWrapper = styled.div`
 `;
 
 const SliderNavigation = ({ next, children, isDarkTheme }) => {
-  const bottomSlide = animationIn(true, 1000, 3000, 0);
+  const textRef = useRef(null);
+
+  useEffect(() => {
+    const text = textRef.current;
+    const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
+
+    gsap.set(text, {
+      transform: 'matrix(0.99, 0.33, 0, 1, 0, 100)'
+    });
+
+    tl.to(text, {
+      transform: 'matrix(1,0,0,1,0,0)',
+      duration: 2
+    });
+  }, []);
+
   return (
     <StyledNavigationBox>
       <ArrowWrapper>{children}</ArrowWrapper>
       <StyledFlexWrapper isDarkTheme={isDarkTheme}>
         <StyledNextLabel small='true'>Next</StyledNextLabel>
-        <StyledNextCase
-          large='true'
-          style={bottomSlide}
-          isDarkTheme={isDarkTheme}
-        >
+        <StyledNextCase large='true' ref={textRef} isDarkTheme={isDarkTheme}>
           {next}
         </StyledNextCase>
       </StyledFlexWrapper>

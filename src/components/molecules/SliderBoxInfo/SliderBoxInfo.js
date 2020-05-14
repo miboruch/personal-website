@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import gsap from 'gsap';
 import styled from 'styled-components';
 import TimeoutBar from '../../atoms/TimeoutBar/TimeoutBar';
 import { animated } from 'react-spring';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
-import { createFade } from '../../../utils/animations';
 
 const TimeoutBoxWrapper = styled(animated.div)`
   position: absolute;
@@ -19,7 +19,6 @@ const TimeoutBoxWrapper = styled(animated.div)`
   bottom: 5px;
   left: 5px;
   background-color: ${({ isDarkTheme }) => (isDarkTheme ? '#222' : '#f1f1f1')};
-  transition: all 1s ease;
   box-sizing: content-box;
 
   ${({ theme }) => theme.mq.standard} {
@@ -90,10 +89,23 @@ const StyledNumber = styled(StyledNextCase)`
 
 const SliderBoxInfo = ({ nextProjectName, allProjectsLength, isDarkTheme }) => {
   const { currentSlide } = useContext(CurrentSlideContext);
-  const fade = createFade(true, 1000, 1000, 0);
+  const boxRef = useRef(null);
+
+  useEffect(() => {
+    const box = boxRef.current;
+    const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
+
+    gsap.set([box, ...box.children], { autoAlpha: 0 });
+
+    tl.to(box, { autoAlpha: 1, duration: 1.2, delay: 1 }).fromTo(
+      box.children,
+      { y: '+=20' },
+      { y: '0', autoAlpha: 1, duration: 1.5, stagger: 0.6, delay: 2.2 }
+    );
+  }, []);
 
   return (
-    <TimeoutBoxWrapper style={fade} isDarkTheme={isDarkTheme}>
+    <TimeoutBoxWrapper ref={boxRef} isDarkTheme={isDarkTheme}>
       <BarWrapper isDarkTheme={isDarkTheme}>
         <StyledNumber>0{currentSlide + 1}</StyledNumber>
         <TimeoutBar

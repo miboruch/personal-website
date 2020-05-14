@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { animated } from 'react-spring';
+import { useStaticQuery, graphql } from 'gatsby';
+import gsap from 'gsap';
 import SocialNavigation from '../../molecules/SocialNavigation/SocialNavigation';
 import Footer from '../../molecules/Footer/Footer';
 import ContactForm from '../ContactForm/ContactForm';
 import GatsbyImage from 'gatsby-image';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { mediaItems } from '../../../utils/items';
-import { createFade } from '../../../utils/animations';
 import Form from '../../molecules/Form/Form';
 
 const StyledWrapper = styled.div`
@@ -25,7 +25,7 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const ContentWrapper = styled(animated.section)`
+const ContentWrapper = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -39,7 +39,7 @@ const ContentWrapper = styled(animated.section)`
   }
 `;
 
-const FormWrapper = styled(animated.div)`
+const FormWrapper = styled.div`
   display: none;
   transition: all 1s ease;
 
@@ -49,7 +49,7 @@ const FormWrapper = styled(animated.div)`
   }
 `;
 
-const ContentInformation = styled(animated.div)`
+const ContentInformation = styled.div`
   margin-left: 0;
   transition: all 1s ease;
 
@@ -176,12 +176,10 @@ const FooterWrapper = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
-  //background: #272727;
   z-index: 10;
 `;
 
 const StyledOpenCase = styled(Paragraph)`
-  width: 200px;
   font-size: 14px;
   color: #fff;
   font-weight: bold;
@@ -191,6 +189,17 @@ const StyledOpenCase = styled(Paragraph)`
   cursor: pointer;
   margin-bottom: 1rem;
   padding-top: 1rem;
+`;
+
+const CVLink = styled.a`
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: underline !important;
+  cursor: pointer;
+  margin-bottom: 1rem;
 `;
 
 const StyledSendMessage = styled(StyledOpenCase)`
@@ -211,6 +220,11 @@ const NavigationWrapper = styled.div`
   }
 `;
 
+const StyledCVWrapper = styled.section`
+  display: flex;
+  flex-direction: column;
+`;
+
 const StyledVerticalLine = styled.div`
   display: none;
   width: 1px;
@@ -226,20 +240,59 @@ const StyledVerticalLine = styled.div`
 `;
 
 const ContactTemplate = ({ image }) => {
+  const {
+    allFile: { edges }
+  } = useStaticQuery(graphql`
+    {
+      allFile(filter: { extension: { eq: "pdf" } }) {
+        edges {
+          node {
+            publicURL
+            name
+          }
+        }
+      }
+    }
+  `);
+
+  const formRef = useRef(null);
+  const contactInfoRef = useRef(null);
+
   const [isFormOpened, setFormState] = useState(false);
-  const fade = createFade(true, 1500, 1000);
-  const fadeDelayed = createFade(true, 1500, 2000);
 
   const githubLink = mediaItems[0].link;
+
+  useEffect(() => {
+    const form = formRef.current;
+    const contact = contactInfoRef.current;
+
+    const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
+
+    gsap.set([form, ...contact.children], { autoAlpha: 0 });
+
+    tl.fromTo(
+      form,
+      { y: '+=30' },
+      { y: '0', autoAlpha: 1, stagger: 0.4, duration: 0.8 }
+    ).fromTo(
+      contact.children,
+      { y: '+=30' },
+      {
+        y: '0',
+        autoAlpha: 1,
+        stagger: 0.7
+      }
+    );
+  }, []);
 
   return (
     <StyledWrapper>
       <StyledVerticalLine />
       <ContentWrapper>
-        <FormWrapper style={fade}>
+        <FormWrapper ref={formRef}>
           <Form />
         </FormWrapper>
-        <ContentInformation style={fadeDelayed}>
+        <ContentInformation ref={contactInfoRef}>
           <StyledTitle title>Contact</StyledTitle>
           <RowWrapper>
             <StyledBox>
@@ -269,7 +322,13 @@ const ContactTemplate = ({ image }) => {
               />
             </NavigationWrapper>
           </StyledBox>
-          <StyledOpenCase>download my cv</StyledOpenCase>
+          <StyledCVWrapper>
+            {edges.map((file, index) => (
+              <CVLink href={file.node.publicURL} key={`CV${index}`} download>
+                download {file.node.name} cv
+              </CVLink>
+            ))}
+          </StyledCVWrapper>
           <StyledSendMessage onClick={() => setFormState(true)}>
             send message
           </StyledSendMessage>

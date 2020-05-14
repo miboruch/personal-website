@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
+import gsap from 'gsap';
 import Slider from 'react-slick';
 import SliderContent from '../SliderContent/SliderContent';
 import SliderNavigation from '../../molecules/SliderNavigation/SliderNavigation';
@@ -157,7 +158,6 @@ const StyledProjectSmallNavigation = styled.div`
 const StyledParagraph = styled(Paragraph)`
   text-align: right;
   cursor: pointer;
-  transition: all 1s ease;
   position: relative;
   margin: 0 1rem;
   letter-spacing: 0;
@@ -191,6 +191,8 @@ const StyledParagraph = styled(Paragraph)`
 
 const MainSlider = ({ images, data }) => {
   const sliderRef = useRef();
+  const navigationRef = useRef(null);
+  const arrowWrapperRef = useRef(null);
   const { currentSlide, setSlide } = useContext(CurrentSlideContext);
   const [isDarkTheme, setDarkTheme] = useState(currentSlide % 2 !== 0);
 
@@ -198,12 +200,32 @@ const MainSlider = ({ images, data }) => {
     setDarkTheme(currentSlide % 2 !== 0);
   }, [currentSlide]);
 
+  useEffect(() => {
+    const navigation = navigationRef.current;
+    const arrowWrapper = arrowWrapperRef.current;
+    const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
+
+    gsap.set([...navigation.children, ...arrowWrapper.children], {
+      autoAlpha: 0
+    });
+
+    tl.fromTo(
+      navigation.children,
+      { y: '+=20' },
+      { y: '0', autoAlpha: 1, duration: 2, stagger: 0.3, delay: 1.6 }
+    ).fromTo(
+      arrowWrapper.children,
+      { y: '+=30' },
+      { autoAlpha: 1, y: '0', stagger: 0.3, duration: 1 },
+      '-=1'
+    );
+  }, []);
+
   const settings = {
     dots: false,
     infinite: true,
     autoplay: false,
     speed: 2000,
-    // fade: true,
     slidesToShow: 1,
     slidesToScroll: 1,
     cssEase: 'cubic-bezier(.84, 0, .08, .99)',
@@ -225,7 +247,7 @@ const MainSlider = ({ images, data }) => {
         ))}
       </StyledSlider>
       <VerticalBox />
-      <StandardArrowWrapper>
+      <StandardArrowWrapper ref={arrowWrapperRef}>
         <ArrowWrapper isDarkTheme={isDarkTheme}>
           <ArrowLeftStandard
             onClick={() => sliderRef.current.slickPrev()}
@@ -239,7 +261,7 @@ const MainSlider = ({ images, data }) => {
           />
         </ArrowRightWrapper>
       </StandardArrowWrapper>
-      <StyledProjectSmallNavigation>
+      <StyledProjectSmallNavigation ref={navigationRef}>
         {data.map((item, index) => (
           <StyledParagraph
             key={index}
@@ -251,6 +273,7 @@ const MainSlider = ({ images, data }) => {
           </StyledParagraph>
         ))}
       </StyledProjectSmallNavigation>
+      {/*Mobile*/}
       <SliderNavigation
         next={data[currentSlide].next}
         isDarkTheme={isDarkTheme}
@@ -271,7 +294,6 @@ const MainSlider = ({ images, data }) => {
       />
       <NavigationWrapper>
         <SocialNavigation
-          toggleState={true}
           lightTheme={false}
           noPadding
           isDarkTheme={isDarkTheme}
