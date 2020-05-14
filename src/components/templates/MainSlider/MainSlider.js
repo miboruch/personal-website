@@ -270,7 +270,6 @@ const MainSlider = ({ images, data }) => {
       />
       <NavigationWrapper>
         <SocialNavigation
-          toggleState={true}
           lightTheme={false}
           noPadding
           isDarkTheme={isDarkTheme}
