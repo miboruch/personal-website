@@ -41,7 +41,7 @@ const SocialNavigation = ({ headerTheme, noPadding, isDarkTheme }) => {
     tl.fromTo(
       links.children,
       { y: '+=20' },
-      { y: '0', autoAlpha: 1, stagger: 0.6, delay: 1.2 }
+      { y: '0', autoAlpha: 1, stagger: 0.6, duration: 2, delay: 2.2 }
     );
   }, []);
 

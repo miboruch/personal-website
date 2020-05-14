@@ -96,7 +96,6 @@ const StyledDescription = styled(Paragraph)`
   margin-top: 2rem;
   padding: 0 2rem;
   text-align: center;
-  transition: all 1s ease;
   color: inherit;
 
   ${({ theme }) => theme.mq.standard} {
@@ -232,7 +231,7 @@ const SliderContent = ({ image, content, index, isDarkTheme }) => {
       .fromTo(
         description,
         { y: '+=10' },
-        { y: '0', autoAlpha: 1, duration: 0.4 },
+        { y: '0', autoAlpha: 1, duration: 0.6 },
         '-=0.4'
       )
       .fromTo(
