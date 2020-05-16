@@ -8,7 +8,6 @@ import Paragraph from '../../atoms/Paragraph/Paragraph';
 import SkillsBox from '../../molecules/SkillsBox/SkillsBox';
 import CloseButton from '../../atoms/CloseButton/CloseButton';
 import { useScrollPosition } from '../../../utils/customHooks';
-import { createFade } from '../../../utils/animations';
 import { skills } from '../../../utils/skills';
 
 const StyledWrapper = styled.div`
@@ -166,10 +165,9 @@ const AboutTemplate = ({ images }) => {
   const textRef = useRef(null);
   const quoteRef = useRef(null);
   const textWrapperRef = useRef(null);
+
   const [isBoxOpened, setBoxState] = useState(false);
   const [isSkillsVisible, setSkillsState] = useState(true);
-
-  const fadeIn = createFade(true, 1000, 300, 0);
 
   const isOnTop = useScrollPosition();
 
