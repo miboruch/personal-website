@@ -1,5 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
+import gsap from 'gsap';
 import PropTypes from 'prop-types';
 import { animated } from 'react-spring';
 import Menu from '../../templates/Menu/Menu';
@@ -70,6 +71,7 @@ const StyledLink = styled.a`
 
 const Header = ({ headerTheme }) => {
   const menuButton = useRef();
+  const headerRef = useRef(null);
   const [isOpen, setOpen] = useState(false);
   const size = useElementSize(menuButton);
   const pageY = useScrollPosition();
@@ -78,9 +80,27 @@ const Header = ({ headerTheme }) => {
     setOpen(!isOpen);
   };
 
+  useEffect(() => {
+    const header = headerRef.current;
+    const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
+
+    gsap.set([...header.children], { autoAlpha: 0 });
+
+    tl.fromTo(
+      header.children,
+      { y: '-=15' },
+      { y: '0', autoAlpha: 1, duration: 1.2, stagger: 0.3, delay: 1 }
+    );
+  }, []);
+
   return (
     <>
-      <StyledHeader isOnTop={pageY} isOpen={isOpen} headerTheme={headerTheme}>
+      <StyledHeader
+        isOnTop={pageY}
+        isOpen={isOpen}
+        headerTheme={headerTheme}
+        ref={headerRef}
+      >
         <MenuButton
           isOpen={isOpen}
           toggleMenu={toggleMenu}

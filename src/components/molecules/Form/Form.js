@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import CloseButton from '../../atoms/CloseButton/CloseButton';
 import { ContactFormValidation } from '../../../utils/formValidation';
+import gsap from 'gsap';
 
 const StyledForm = styled.form`
   width: 100%;
@@ -128,7 +129,6 @@ const StyledTitle = styled(Paragraph)`
   font-size: 43px;
   font-family: ${({ theme }) => theme.font.family.avanti};
   padding-bottom: 3rem;
-  transition: transform 0.5s ease;
 
   &:hover {
     transform: translateY(-10px);
@@ -162,6 +162,21 @@ const StyledSendMessage = styled.button`
 `;
 
 const Form = ({ setFormState }) => {
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    const form = formRef.current;
+    const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
+
+    gsap.set([...form.children], { autoAlpha: 0 });
+
+    tl.fromTo(
+      form.children,
+      { y: '+=30' },
+      { y: '0', autoAlpha: 1, duration: 1.2, stagger: 0.3, delay: 1 }
+    );
+  }, []);
+
   return (
     <Formik
       initialValues={{ name: '', email: '', message: '' }}
@@ -180,7 +195,7 @@ const Form = ({ setFormState }) => {
         handleSubmit,
         isSubmitting
       }) => (
-        <StyledForm onSubmit={handleSubmit} autoComplete={'off'}>
+        <StyledForm onSubmit={handleSubmit} autoComplete={'off'} ref={formRef}>
           <CloseButton setBoxState={setFormState} contactPage />
           <StyledTitle>Send message</StyledTitle>
           <FormLine>

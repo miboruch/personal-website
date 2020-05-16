@@ -97,7 +97,11 @@ const SliderBoxInfo = ({ nextProjectName, allProjectsLength, isDarkTheme }) => {
 
     gsap.set([box, ...box.children], { autoAlpha: 0 });
 
-    tl.to(box, { autoAlpha: 1, duration: 1.2, delay: 1 }).fromTo(
+    tl.fromTo(
+      box,
+      { y: '+=50' },
+      { y: '0', autoAlpha: 1, duration: 1.2, delay: 1.6 }
+    ).fromTo(
       box.children,
       { y: '+=20' },
       { y: '0', autoAlpha: 1, duration: 1.5, stagger: 0.6, delay: 2.2 }

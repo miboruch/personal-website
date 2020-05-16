@@ -73,7 +73,6 @@ const ArrowWrapper = styled.div`
       : '1px solid rgba(231, 229, 225, 0.4)'};
   border-radius: 50%;
   cursor: pointer;
-  transition: all 0.4s ease;
 
   ${({ theme }) => theme.mq.standard} {
     display: flex;

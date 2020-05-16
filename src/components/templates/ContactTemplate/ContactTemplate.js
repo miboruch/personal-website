@@ -41,7 +41,6 @@ const ContentWrapper = styled.section`
 
 const FormWrapper = styled.div`
   display: none;
-  transition: all 1s ease;
 
   ${({ theme }) => theme.mq.standard} {
     display: block;
@@ -50,11 +49,10 @@ const FormWrapper = styled.div`
 `;
 
 const ContentInformation = styled.div`
-  margin-left: 0;
-  transition: all 1s ease;
+  margin-left: 2rem;
 
   ${({ theme }) => theme.mq.standard} {
-    margin-left: 30px;
+    margin-left: 100px;
   }
 `;
 
@@ -72,7 +70,6 @@ const StyledTitle = styled(Paragraph)`
   font-family: ${({ theme }) => theme.font.family.avanti};
   position: relative;
   margin-top: 30px;
-  transition: transform 0.5s ease;
 
   &:hover {
     transform: translateY(-10px);
@@ -223,6 +220,7 @@ const NavigationWrapper = styled.div`
 const StyledCVWrapper = styled.section`
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
 `;
 
 const StyledVerticalLine = styled.div`
@@ -273,7 +271,7 @@ const ContactTemplate = ({ image }) => {
     tl.fromTo(
       form,
       { y: '+=30' },
-      { y: '0', autoAlpha: 1, stagger: 0.4, duration: 0.8 }
+      { y: '0', autoAlpha: 1, stagger: 0.3, duration: 1.2 }
     ).fromTo(
       contact.children,
       { y: '+=30' },
