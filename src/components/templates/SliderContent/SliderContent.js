@@ -39,8 +39,8 @@ const StyledBackgroundImage = styled(BackgroundImage)`
 
   ${({ theme }) => theme.mq.standard} {
     width: 100%;
-    transform: translateX(-15%);
     opacity: 1;
+    transform: translateX(-15%);
   }
 `;
 
