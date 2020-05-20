@@ -284,7 +284,7 @@ const ContactTemplate = ({ image }) => {
   }, []);
 
   return (
-    <StyledWrapper>
+    <StyledWrapper className={'transition-wrapper'}>
       <StyledVerticalLine />
       <ContentWrapper>
         <FormWrapper ref={formRef}>

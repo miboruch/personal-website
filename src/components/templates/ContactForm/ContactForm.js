@@ -17,6 +17,10 @@ const StyledWrapper = styled.div`
   opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
   visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
   transition: opacity 1s ease, visibility 1s ease;
+
+  ${({ theme }) => theme.mq.standard} {
+    display: none;
+  }
 `;
 
 const FormWrapper = styled.div`

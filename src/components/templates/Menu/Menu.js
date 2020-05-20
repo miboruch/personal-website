@@ -1,15 +1,13 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
-import { Link } from 'gatsby';
 import gsap from 'gsap';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { animated } from 'react-spring';
-import { useScreenSize } from '../../../utils/customHooks';
 import { menuItems } from '../../../utils/items';
 import SocialNavigation from '../../molecules/SocialNavigation/SocialNavigation';
 import { easeExpInOut } from 'd3-ease';
-import PageTransitionProvider from '../../../providers/PageTransitionProvider';
+import SlidePageTransitionProvider from '../../../providers/SlidePageTransitionProvider';
 
 const StyledMenuBox = styled.div`
   position: fixed;
@@ -229,7 +227,7 @@ const Menu = ({ isOpen, boxSize, headerTheme }) => {
         <MenuItems ref={paragraphWrapperRef}>
           {menuItems.map(item => (
             <ParagraphBox headerTheme={headerTheme} key={item.id}>
-              <PageTransitionProvider to={item.link} dark={true}>
+              <SlidePageTransitionProvider to={item.link} isDark={true}>
                 <StyledMenuItems
                   title='true'
                   headerTheme={headerTheme}
@@ -237,7 +235,7 @@ const Menu = ({ isOpen, boxSize, headerTheme }) => {
                 >
                   {item.name}
                 </StyledMenuItems>
-              </PageTransitionProvider>
+              </SlidePageTransitionProvider>
             </ParagraphBox>
           ))}
         </MenuItems>

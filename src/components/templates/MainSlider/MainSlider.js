@@ -234,7 +234,11 @@ const MainSlider = ({ images, data }) => {
 
   return (
     <StyledWrapper>
-      <StyledSlider {...settings} ref={sliderRef}>
+      <StyledSlider
+        {...settings}
+        ref={sliderRef}
+        className={'transition-wrapper'}
+      >
         {images.map((item, index) => (
           <SliderContent
             image={item}

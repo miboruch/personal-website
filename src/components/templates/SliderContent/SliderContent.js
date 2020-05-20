@@ -5,7 +5,7 @@ import BackgroundImage from 'gatsby-background-image';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
 import Div100vh from 'react-div-100vh';
-import PageTransitionProvider from '../../../providers/PageTransitionProvider';
+import SlidePageTransitionProvider from '../../../providers/SlidePageTransitionProvider';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -273,16 +273,16 @@ const SliderContent = ({ image, content, index, isDarkTheme }) => {
                 {content.description}
               </StyledDescription>
               <OverflowBox>
-                <PageTransitionProvider to={content.pageLink}>
+                <SlidePageTransitionProvider to={content.pageLink}>
                   <StyledOpenCase ref={openProjectRef}>
                     Open project
                   </StyledOpenCase>
-                </PageTransitionProvider>
+                </SlidePageTransitionProvider>
               </OverflowBox>
             </TextWrapper>
             <StyledLine isDarkTheme={isDarkTheme} ref={lineRef} />
             <AllProjectOverflow>
-              <PageTransitionProvider to='/projects' dark={true}>
+              <SlidePageTransitionProvider to='/projects'>
                 <AllProjectCase
                   small='true'
                   isDarkTheme={isDarkTheme}
@@ -290,7 +290,7 @@ const SliderContent = ({ image, content, index, isDarkTheme }) => {
                 >
                   all projects
                 </AllProjectCase>
-              </PageTransitionProvider>
+              </SlidePageTransitionProvider>
             </AllProjectOverflow>
           </ContentWrapper>
         </StyledContextBox>

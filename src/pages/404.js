@@ -68,7 +68,7 @@ const NotFoundPage = () => {
     <Layout headerTheme='dark'>
       <SEO title='Not found' />
       <Div100vh>
-        <StyledWrapper>
+        <StyledWrapper className={'transition-wrapper'}>
           <ContentWrapper ref={contentRef}>
             <StyledTitle title>Page not found</StyledTitle>
             <OverflowBox>

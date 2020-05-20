@@ -85,7 +85,7 @@ const Projects = ({ data }) => {
   return (
     <Layout headerTheme='dark'>
       <SEO title='Projects' />
-      <StyledWrapper>
+      <StyledWrapper className={'transition-wrapper'}>
         <TextWrapper>
           <StyledParagraph>2019/20</StyledParagraph>
           <OverflowBox>

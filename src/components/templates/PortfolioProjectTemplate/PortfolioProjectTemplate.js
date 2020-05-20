@@ -137,7 +137,7 @@ const PortfolioProjectTemplate = ({ content, images }) => {
   }, []);
 
   return (
-    <StyledWrapper>
+    <StyledWrapper className={'transition-wrapper'}>
       {content && images && (
         <>
           <TextWrapper>
