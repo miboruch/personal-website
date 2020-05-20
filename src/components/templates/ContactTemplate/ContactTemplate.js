@@ -82,16 +82,6 @@ const StyledTitle = styled(Paragraph)`
   ${({ theme }) => theme.mq.standard} {
     margin-top: 0;
     font-size: 58px;
-
-    &::after {
-      font-family: ${({ theme }) => theme.font.family.futura};
-      font-weight: 500;
-      content: '2020';
-      font-size: 12px;
-      position: absolute;
-      right: 0;
-      top: 50%;
-    }
   }
 
   ${({ theme }) => theme.mq.desktop} {
