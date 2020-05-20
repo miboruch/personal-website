@@ -61,6 +61,12 @@ const StyledParagraph = styled(Paragraph)`
   letter-spacing: 0;
 `;
 
+const StyledMain = styled.main`
+  font-size: 16px;
+  color: #8d8d8d;
+  letter-spacing: 0;
+`;
+
 const StyledName = styled(Paragraph)`
   font-weight: bold;
   font-size: 12px;
@@ -197,7 +203,7 @@ const AboutTemplate = ({ images }) => {
   }, []);
 
   return (
-    <StyledWrapper>
+    <StyledWrapper className={'main-wrapper'}>
       <StyledImage fluid={images[0].childImageSharp.fluid}>
         <OverflowBox>
           <StyledTitle ref={titleRef} title>
@@ -213,7 +219,7 @@ const AboutTemplate = ({ images }) => {
         </ContentWrapper>
       </StyledImage>
       <TextWrapper ref={textWrapperRef}>
-        <StyledParagraph ref={textRef}>
+        <StyledMain ref={textRef}>
           Hello, my name is Michal and I am a 21 years old aspiring junior web
           developer based in <strong>Tarnow</strong> and <strong>Krakow</strong>
           . I am a computer science student at the University of Applied
@@ -250,7 +256,7 @@ const AboutTemplate = ({ images }) => {
             <StyledListItem>TypeScript advanced</StyledListItem>
           </StyledList>
           If you want to read more about my skills, click the paragraph below:
-        </StyledParagraph>
+        </StyledMain>
         <StyledSkillsOpen onClick={() => setBoxState(true)}>
           Click here to see my owned skills &#10003;
         </StyledSkillsOpen>

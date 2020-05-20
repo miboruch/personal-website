@@ -7,10 +7,8 @@ import PortfolioProjectTemplate from '../components/templates/PortfolioProjectTe
 const ProjectTemplate = ({ pageContext: { data }, data: { allFile } }) => {
   return (
     <Layout headerTheme='dark'>
-      <>
-        <SEO title={data.name} />
-        <PortfolioProjectTemplate content={data} images={allFile.edges} />
-      </>
+      <SEO title={data.name} />
+      <PortfolioProjectTemplate content={data} images={allFile.edges} />
     </Layout>
   );
 };
