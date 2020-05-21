@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import gsap from 'gsap';
 import Div100vh from 'react-div-100vh';
-import { Link } from 'gatsby';
 import Layout from '../components/templates/Layout';
 import SEO from '../components/seo';
 import Paragraph from '../components/atoms/Paragraph/Paragraph';
 import Footer from '../components/molecules/Footer/Footer';
-import { animationIn, createFade } from '../utils/animations';
+import PageTransitionProvider from '../providers/PageTransitionProvider';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -48,27 +48,35 @@ const FooterWrapper = styled.div`
 `;
 
 const NotFoundPage = () => {
-  const fadeIn = createFade(true, 1500, 2000, 0);
-  const fadeInDelayed = createFade(true, 1500, 3000, 0);
-  const bottomSlide = animationIn(true, 1500, 1000, 0);
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    const content = contentRef.current;
+
+    const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
+
+    gsap.set([...content.children], { autoAlpha: 0 });
+
+    tl.fromTo(
+      content.children,
+      { y: '-=30' },
+      { y: '0', autoAlpha: 1, stagger: 0.3, duration: 1.6, delay: 1 }
+    );
+  }, []);
 
   return (
     <Layout headerTheme='dark'>
-      <SEO title='404: Not found' />
+      <SEO title='Not found' />
       <Div100vh>
-        <StyledWrapper>
-          <ContentWrapper>
-            <StyledTitle style={fadeIn} title>
-              Page not found
-            </StyledTitle>
+        <StyledWrapper className={'transition-wrapper'}>
+          <ContentWrapper ref={contentRef}>
+            <StyledTitle title>Page not found</StyledTitle>
             <OverflowBox>
-              <StyledSubtitle style={bottomSlide}>404</StyledSubtitle>
+              <StyledSubtitle>404</StyledSubtitle>
             </OverflowBox>
-            <Link to='/'>
-              <StyledParagraph style={fadeInDelayed} large>
-                Go back
-              </StyledParagraph>
-            </Link>
+            <PageTransitionProvider to='/'>
+              <StyledParagraph>Go back</StyledParagraph>
+            </PageTransitionProvider>
           </ContentWrapper>
           <FooterWrapper>
             <Footer />

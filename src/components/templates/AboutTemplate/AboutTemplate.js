@@ -8,7 +8,6 @@ import Paragraph from '../../atoms/Paragraph/Paragraph';
 import SkillsBox from '../../molecules/SkillsBox/SkillsBox';
 import CloseButton from '../../atoms/CloseButton/CloseButton';
 import { useScrollPosition } from '../../../utils/customHooks';
-import { createFade } from '../../../utils/animations';
 import { skills } from '../../../utils/skills';
 
 const StyledWrapper = styled.div`
@@ -17,6 +16,17 @@ const StyledWrapper = styled.div`
   height: 100%;
   position: relative;
   overflow: hidden;
+`;
+
+const HeaderParagraph = styled(Paragraph)`
+  margin-bottom: 2rem;
+  color: #2d2d2d;
+  font-weight: bold;
+  font-size: 32px;
+
+  ${({ theme }) => theme.mq.standard} {
+    font-size: 42px;
+  }
 `;
 
 const StyledImage = styled(BackgroundImage)`
@@ -35,6 +45,16 @@ const StyledTitle = styled(Paragraph)`
   font-family: ${({ theme }) => theme.font.family.avanti};
   padding: 2rem;
   margin-top: 5rem;
+`;
+
+const StyledHeading = styled.h2`
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #4d4d4d;
+  font-weight: bold;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e3e3e3;
 `;
 
 const StyledLine = styled.div`
@@ -57,6 +77,12 @@ const StyledQuote = styled(Paragraph)`
 `;
 
 const StyledParagraph = styled(Paragraph)`
+  font-size: 16px;
+  color: #8d8d8d;
+  letter-spacing: 0;
+`;
+
+const StyledMain = styled.main`
   font-size: 16px;
   color: #8d8d8d;
   letter-spacing: 0;
@@ -123,6 +149,7 @@ const SmallSkillsBox = styled.div`
     css`
       opacity: 0 !important;
       visibility: hidden !important;
+      transition: opacity 1s ease, visibility 1s ease;
     `}
 `;
 
@@ -166,10 +193,8 @@ const AboutTemplate = ({ images }) => {
   const textRef = useRef(null);
   const quoteRef = useRef(null);
   const textWrapperRef = useRef(null);
-  const [isBoxOpened, setBoxState] = useState(false);
-  const [isSkillsVisible, setSkillsState] = useState(true);
 
-  const fadeIn = createFade(true, 1000, 300, 0);
+  const [isSkillsVisible, setSkillsState] = useState(true);
 
   const isOnTop = useScrollPosition();
 
@@ -199,7 +224,7 @@ const AboutTemplate = ({ images }) => {
   }, []);
 
   return (
-    <StyledWrapper>
+    <StyledWrapper className={'transition-wrapper'}>
       <StyledImage fluid={images[0].childImageSharp.fluid}>
         <OverflowBox>
           <StyledTitle ref={titleRef} title>
@@ -215,11 +240,12 @@ const AboutTemplate = ({ images }) => {
         </ContentWrapper>
       </StyledImage>
       <TextWrapper ref={textWrapperRef}>
-        <StyledParagraph ref={textRef}>
+        <StyledHeading>About</StyledHeading>
+        <StyledMain ref={textRef}>
           Hello, my name is Michal and I am a 21 years old aspiring junior web
           developer based in <strong>Tarnow</strong> and <strong>Krakow</strong>
-          . I am a computer science student at the University of Applied
-          Sciences in Tarnow. In 2019, may I started my journey with Javascript,
+          . I am a computer science student at the State Higher Vocational
+          School in Tarnow. In 2019, may I started my journey with Javascript,
           and since then I have been constantly increasing my skills and
           knowledge of web development. My main goal is to create modern design
           in combination with clean DRY code. <br />
@@ -247,19 +273,17 @@ const AboutTemplate = ({ images }) => {
           <br />
           My personal 2020 front-end roadmap:
           <StyledList>
-            <StyledListItem>React advanced concepts</StyledListItem>
-            <StyledListItem>Three.js</StyledListItem>
+            <StyledListItem>
+              Testing - JEST/React Testing Library
+            </StyledListItem>
             <StyledListItem>TypeScript advanced</StyledListItem>
           </StyledList>
-          If you want to read more about my skills, click the paragraph below:
-        </StyledParagraph>
-        <StyledSkillsOpen onClick={() => setBoxState(true)}>
-          Click here to see my owned skills &#10003;
-        </StyledSkillsOpen>
+        </StyledMain>
+        <SkillsBox />
       </TextWrapper>
       <SmallSkillsBox isOnTop={isOnTop} isOpen={isSkillsVisible}>
         <CloseButton lightTheme setBoxState={setSkillsState} />
-        <SkillsBoxParagraph onClick={() => setBoxState(true)}>
+        <SkillsBoxParagraph>
           {skills.map(item => (
             <>
               {item.name}
@@ -268,7 +292,6 @@ const AboutTemplate = ({ images }) => {
           ))}
         </SkillsBoxParagraph>
       </SmallSkillsBox>
-      <SkillsBox isOpen={isBoxOpened} setBoxState={setBoxState} />
       <StyledPortfolioImage fluid={images[1].childImageSharp.fluid} />
       <Footer />
     </StyledWrapper>

@@ -12,11 +12,12 @@ const IndexPage = ({ data }) => {
     mainPageData: { projects }
   } = data;
   const imagesArray = convertObjectToArray(
-    data.image4,
+    data.image0,
     data.image1,
-    data.image5,
     data.image2,
-    data.image3
+    data.image3,
+    data.image4,
+    data.image5
   );
 
   return (
@@ -36,7 +37,7 @@ const IndexPage = ({ data }) => {
 export const mockUpFragment = graphql`
   fragment mockUpFragment on File {
     childImageSharp {
-      fluid(maxWidth: 1100, quality: 100) {
+      fluid(maxWidth: 1300, quality: 100) {
         ...GatsbyImageSharpFluid_noBase64
       }
     }
@@ -65,19 +66,22 @@ export const smallPhotoFragment = graphql`
 
 export const query = graphql`
   query {
-    image1: file(name: { regex: "/indeed-main-mobile/" }) {
+    image0: file(name: { regex: "/grades-main/" }) {
       ...mockUpFragment
     }
-    image2: file(name: { regex: "/archicept-mobile/" }) {
+    image1: file(name: { regex: "/chat-main/" }) {
       ...mockUpFragment
     }
-    image3: file(name: { regex: "/weather-mobile/" }) {
+    image2: file(name: { regex: "/buyit-main/" }) {
       ...mockUpFragment
     }
-    image4: file(name: { regex: "/buyit-main/" }) {
+    image3: file(name: { regex: "/indeed-main-mobile/" }) {
       ...mockUpFragment
     }
-    image5: file(name: { regex: "/wallpapers-mobile/" }) {
+    image4: file(name: { regex: "/wallpapers-mobile/" }) {
+      ...mockUpFragment
+    }
+    image5: file(name: { regex: "/weather-mobile/" }) {
       ...mockUpFragment
     }
     mainPageData: portfolio {

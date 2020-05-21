@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import gsap from 'gsap';
 import GatsbyImage from 'gatsby-image';
-import { Link } from 'gatsby';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import OpenCircle from '../../atoms/OpenCircle/OpenCircle';
 import PageTransitionProvider from '../../../providers/PageTransitionProvider';
@@ -123,6 +122,12 @@ const OverflowBox = styled.div`
   margin: 3rem 0;
 `;
 
+const ImageWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+`;
+
 const StyledTitle = styled(Paragraph)`
   font-size: 34px !important;
   font-family: ${({ theme }) => theme.font.family.avanti};
@@ -136,7 +141,7 @@ const StyledParagraph = styled(Paragraph)`
 `;
 
 const MobileLink = styled(Paragraph)`
-  color: #000 !important;
+  color: #000;
   font-family: ${({ theme }) => theme.font.family.avanti};
   font-weight: bold;
   letter-spacing: 2px;
@@ -170,26 +175,30 @@ const ProjectIntro = ({ data, image, reverse }) => {
   return (
     <StyledWrapper reverse={reverse}>
       <PhotoWrapper>
-        <StyledLine />
-        <StyledImage fluid={image.childImageSharp.fluid} />
         <PageTransitionProvider to={data.pageLink}>
+          <StyledLine />
+          <ImageWrapper>
+            <StyledImage fluid={image.childImageSharp.fluid} />
+          </ImageWrapper>
           <CircleWrapper>
             <OpenCircle />
           </CircleWrapper>
         </PageTransitionProvider>
       </PhotoWrapper>
       <ContentWrapper>
-        <OverflowBox>
-          <StyledTitle title='true' ref={headerRef}>
-            {data.name}
-          </StyledTitle>
-        </OverflowBox>
+        <PageTransitionProvider to={data.pageLink}>
+          <OverflowBox>
+            <StyledTitle title='true' ref={headerRef}>
+              {data.name}
+            </StyledTitle>
+          </OverflowBox>
+        </PageTransitionProvider>
         <StyledParagraph small='true' ref={descriptionRef}>
           {data.primaryDescription}
         </StyledParagraph>
-        <Link to={data.pageLink}>
+        <PageTransitionProvider to={data.pageLink}>
           <MobileLink>Open {data.name}</MobileLink>
-        </Link>
+        </PageTransitionProvider>
       </ContentWrapper>
     </StyledWrapper>
   );

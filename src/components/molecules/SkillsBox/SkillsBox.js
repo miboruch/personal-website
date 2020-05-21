@@ -8,23 +8,20 @@ import { skillsItems } from '../../../utils/skills';
 
 const StyledWrapper = styled.div`
   width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.9);
-  z-index: 1500;
-  position: fixed;
-  align-items: center;
-  justify-content: center;
-  top: 0;
-  left: 0;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   color: #2d2d2d;
+  margin: 3rem 0;
 `;
 
 const HeaderParagraph = styled(Paragraph)`
-  margin: 0;
+  margin-bottom: 2rem;
   color: #2d2d2d;
   font-weight: bold;
+  font-size: 32px;
+  border-top: 1px solid #2d2d2d;
+  padding-top: 1rem;
 
   ${({ theme }) => theme.mq.standard} {
     font-weight: bold;
@@ -32,37 +29,21 @@ const HeaderParagraph = styled(Paragraph)`
   }
 `;
 
-const StyledBox = styled.div`
-  width: 90%;
-  min-height: 90%;
-  background: #fff;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-
-  ${({ theme }) => theme.mq.standard} {
-    flex-wrap: wrap;
-  }
-`;
-
 const StyledContentSection = styled.section`
-  width: 90%;
-  padding: 1rem 2rem;
+  width: 100%;
   cursor: default;
+  padding-bottom: 3rem;
 
   &::before{
     content: '${({ value }) => value}';
     position: absolute;
-    top: 100%;
-    right: -60%;
+    top: 90%;
+    right: -20%;
     transform: translateY(-50%);
     left: auto;
-    color: #fafafa;
+    color: #ededed;
     text-transform: uppercase;
-    font-size: 80px;
+    font-size: 60px;
     letter-spacing: 5px;
     z-index: -1;
     text-align: left;
@@ -79,40 +60,18 @@ const StyledContentSection = styled.section`
   &:hover::before{
     -webkit-text-stroke-color: #ccc;
   }
-
-  ${({ theme }) => theme.mq.standard} {
-    width: 45%;
-  }
 `;
 
 const StyledSpan = styled.span`
-  font-size: 18px;
+  font-size: 16px;
   color: #4d4d4d;
-  font-weight: lighter;
+  font-weight: bold;
   padding-right: 2rem;
   position: relative;
-  transition: all 1s ease;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: -15px;
-    transform: translate(-50%, -50%);
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: transparent;
-    transition: background 1s ease;
-    border: 1px solid #000;
-
-    ${StyledContentSection}:hover & {
-      background: #000;
-    }
   }
 
   ${({ theme }) => theme.mq.standard} {
-    font-size: 24px;
+    font-size: 16px;
   }
 `;
 
@@ -121,10 +80,14 @@ const StyledDescription = styled(Paragraph)`
   text-align: left;
   letter-spacing: 0;
   font-size: 16px;
+`;
 
-  ${({ theme }) => theme.mq.tablet} {
-    font-size: 16px;
-  }
+const SkillDescription = styled(Paragraph)`
+  color: #5d5d5d;
+  font-size: 13px;
+  letter-spacing: 0;
+  font-weight: 500;
+  padding-top: 1.5rem;
 `;
 
 const ItemsWrapper = styled.div`
@@ -134,59 +97,53 @@ const ItemsWrapper = styled.div`
   flex-direction: column;
 `;
 
-const SkillsBox = ({ isOpen, setBoxState }) => {
-  const wrapperRef = useRef(null);
-  const wrapperBox = useRef(null);
+const StyledHeading = styled.h2`
+  font-family: ${({ theme }) => theme.font.family.futura};
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #4d4d4d;
+  font-weight: bold;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e3e3e3;
+`;
+
+const SkillsBox = () => {
   const itemsRef = useRef(null);
   const [tl] = useState(gsap.timeline({ defaults: { ease: 'power3.inOut' } }));
 
   useEffect(() => {
-    const wrapper = wrapperRef.current;
-    const box = wrapperBox.current;
     const items = itemsRef.current;
 
-    gsap.set([wrapper, box], { autoAlpha: 0 });
     gsap.set([...items.children], { autoAlpha: 0 });
 
-    tl.to(wrapper, { autoAlpha: 1, duration: 0.5 })
-      .fromTo(box, { y: '+=50' }, { y: '0', autoAlpha: 1, duration: 0.7 })
-      .fromTo(
-        items.children,
-        { y: '+=30' },
-        { y: '0', autoAlpha: 1, duration: 1, stagger: 0.2 }
-      );
+    tl.fromTo(
+      items.children,
+      { y: '+=30' },
+      { y: '0', autoAlpha: 1, duration: 1, stagger: 0.2 }
+    );
   }, []);
 
-  useEffect(() => {
-    isOpen ? tl.play() : tl.reverse();
-  }, [isOpen]);
-
   return (
-    <StyledWrapper ref={wrapperRef}>
-      <StyledBox ref={wrapperBox}>
-        <HeaderParagraph>Skills:</HeaderParagraph>
-        <ItemsWrapper ref={itemsRef}>
-          {skillsItems.map(skill => (
-            <StyledContentSection
-              value={skill.name.split(',')[0]}
-              key={skill.name}
-            >
-              <StyledDescription>
-                <StyledSpan>{skill.name}</StyledSpan>
-                {skill.description}
-              </StyledDescription>
-            </StyledContentSection>
-          ))}
-        </ItemsWrapper>
-        <CloseButton setBoxState={setBoxState} />
-      </StyledBox>
+    <StyledWrapper>
+      <StyledHeading>Skills</StyledHeading>
+      <ItemsWrapper ref={itemsRef}>
+        {skillsItems.map(skill => (
+          <StyledContentSection
+            value={skill.name.split(',')[0]}
+            key={skill.name}
+          >
+            <StyledDescription>
+              <StyledSpan>{skill.name}</StyledSpan>
+              <br />
+              {skill.description}
+              <SkillDescription>{skill.skills}</SkillDescription>
+            </StyledDescription>
+          </StyledContentSection>
+        ))}
+      </ItemsWrapper>
     </StyledWrapper>
   );
-};
-
-SkillsBox.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  setBoxState: PropTypes.func.isRequired
 };
 
 export default SkillsBox;

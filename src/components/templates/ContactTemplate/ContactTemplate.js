@@ -13,9 +13,8 @@ import Form from '../../molecules/Form/Form';
 const StyledWrapper = styled.div`
   width: 100%;
   height: 100%;
-  background: #272727;
-  color: #000;
   position: relative;
+  background-image: ${({ theme }) => theme.color.backgroundDarkGradient};
 
   ${({ theme }) => theme.mq.standard} {
     display: flex;
@@ -41,7 +40,6 @@ const ContentWrapper = styled.section`
 
 const FormWrapper = styled.div`
   display: none;
-  transition: all 1s ease;
 
   ${({ theme }) => theme.mq.standard} {
     display: block;
@@ -50,11 +48,10 @@ const FormWrapper = styled.div`
 `;
 
 const ContentInformation = styled.div`
-  margin-left: 0;
-  transition: all 1s ease;
+  margin-left: 2rem;
 
   ${({ theme }) => theme.mq.standard} {
-    margin-left: 30px;
+    margin-left: 100px;
   }
 `;
 
@@ -72,7 +69,6 @@ const StyledTitle = styled(Paragraph)`
   font-family: ${({ theme }) => theme.font.family.avanti};
   position: relative;
   margin-top: 30px;
-  transition: transform 0.5s ease;
 
   &:hover {
     transform: translateY(-10px);
@@ -85,16 +81,6 @@ const StyledTitle = styled(Paragraph)`
   ${({ theme }) => theme.mq.standard} {
     margin-top: 0;
     font-size: 58px;
-
-    &::after {
-      font-family: ${({ theme }) => theme.font.family.futura};
-      font-weight: 500;
-      content: '2020';
-      font-size: 12px;
-      position: absolute;
-      right: 0;
-      top: 50%;
-    }
   }
 
   ${({ theme }) => theme.mq.desktop} {
@@ -223,6 +209,7 @@ const NavigationWrapper = styled.div`
 const StyledCVWrapper = styled.section`
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
 `;
 
 const StyledVerticalLine = styled.div`
@@ -273,7 +260,7 @@ const ContactTemplate = ({ image }) => {
     tl.fromTo(
       form,
       { y: '+=30' },
-      { y: '0', autoAlpha: 1, stagger: 0.4, duration: 0.8 }
+      { y: '0', autoAlpha: 1, stagger: 0.3, duration: 1.2 }
     ).fromTo(
       contact.children,
       { y: '+=30' },
@@ -286,7 +273,7 @@ const ContactTemplate = ({ image }) => {
   }, []);
 
   return (
-    <StyledWrapper>
+    <StyledWrapper className={'transition-wrapper'}>
       <StyledVerticalLine />
       <ContentWrapper>
         <FormWrapper ref={formRef}>

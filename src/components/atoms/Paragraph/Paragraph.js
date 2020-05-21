@@ -1,13 +1,11 @@
 import styled, { css } from 'styled-components';
-import { animated } from 'react-spring';
 
-const Paragraph = styled(animated.p)`
+const Paragraph = styled.p`
   margin: 0;
   left: 0;
   letter-spacing: 2px;
   color: #fff;
   font-weight: 500;
-  transition: color 1s ease;
 
   ${({ small }) =>
     small &&
