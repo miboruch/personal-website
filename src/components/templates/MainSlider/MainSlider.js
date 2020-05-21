@@ -35,7 +35,6 @@ const ArrowLeft = styled(Arrow)`
   margin: 0 1rem;
   padding: 0.5rem;
   cursor: pointer;
-  transition: all 0.5s ease;
 
   ${({ theme }) => theme.mq.tablet} {
     padding: 0.3rem;
@@ -53,7 +52,7 @@ const StandardArrowWrapper = styled.div`
   width: 200px;
   height: 70px;
   display: none;
-  bottom: 200px;
+  bottom: 150px;
 
   ${({ theme }) => theme.mq.standard} {
     display: flex;
@@ -73,6 +72,7 @@ const ArrowWrapper = styled.div`
       : '1px solid rgba(231, 229, 225, 0.4)'};
   border-radius: 50%;
   cursor: pointer;
+  transition: transform 0.7s ease;
 
   ${({ theme }) => theme.mq.standard} {
     display: flex;
@@ -118,25 +118,6 @@ const NavigationWrapper = styled.div`
 
   ${({ theme }) => theme.mq.standard} {
     display: block;
-  }
-`;
-
-const VerticalBox = styled.div`
-  display: none;
-
-  ${({ theme }) => theme.mq.standard} {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 320px;
-    height: 100%;
-    background: transparent;
-    border-left: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 1s ease;
-    -webkit-box-shadow: -11px 10px 19px 3px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: -11px 10px 19px 3px rgba(0, 0, 0, 0.75);
-    box-shadow: -11px 10px 19px 3px rgba(0, 0, 0, 0.75);
   }
 `;
 
@@ -249,7 +230,6 @@ const MainSlider = ({ images, data }) => {
           />
         ))}
       </StyledSlider>
-      <VerticalBox />
       <StandardArrowWrapper ref={arrowWrapperRef}>
         <ArrowWrapper isDarkTheme={isDarkTheme}>
           <ArrowLeftStandard

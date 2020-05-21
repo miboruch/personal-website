@@ -47,6 +47,16 @@ const StyledTitle = styled(Paragraph)`
   margin-top: 5rem;
 `;
 
+const StyledHeading = styled.h2`
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #4d4d4d;
+  font-weight: bold;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e3e3e3;
+`;
+
 const StyledLine = styled.div`
   width: 100%;
   height: 1px;
@@ -230,12 +240,12 @@ const AboutTemplate = ({ images }) => {
         </ContentWrapper>
       </StyledImage>
       <TextWrapper ref={textWrapperRef}>
-        <HeaderParagraph>About</HeaderParagraph>
+        <StyledHeading>About</StyledHeading>
         <StyledMain ref={textRef}>
           Hello, my name is Michal and I am a 21 years old aspiring junior web
           developer based in <strong>Tarnow</strong> and <strong>Krakow</strong>
-          . I am a computer science student at the University of Applied
-          Sciences in Tarnow. In 2019, may I started my journey with Javascript,
+          . I am a computer science student at the State Higher Vocational
+          School in Tarnow. In 2019, may I started my journey with Javascript,
           and since then I have been constantly increasing my skills and
           knowledge of web development. My main goal is to create modern design
           in combination with clean DRY code. <br />

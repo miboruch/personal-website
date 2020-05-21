@@ -31,7 +31,7 @@ const PageTransitionProvider = ({ children, to }) => {
 
     tl.to(wrapper, {
       autoAlpha: 1,
-      duration: 1
+      duration: 0.6
     });
   };
 

@@ -54,7 +54,7 @@ const StyledInput = styled.input`
   font-family: ${({ theme }) => theme.font.family.futura};
   color: rgba(0, 0, 0, 0.6);
   height: 36px;
-  background: transparent;
+  background: transparent !important;
   border: none;
   border-bottom: 1px solid #ccc;
   transition: border-bottom-color 1s ease, text-decoration 1s ease;
@@ -206,6 +206,7 @@ const Form = ({ setFormState }) => {
               onBlur={handleBlur}
               value={values.name}
               required
+              autoComplete={'off'}
             />
             <StyledLabel>{errors.name ? errors.name : 'name'}</StyledLabel>
           </FormLine>
@@ -217,6 +218,7 @@ const Form = ({ setFormState }) => {
               onBlur={handleBlur}
               value={values.email}
               required
+              autoComplete={'off'}
             />
             <StyledLabel>e-mail</StyledLabel>
           </FormLine>
@@ -228,6 +230,7 @@ const Form = ({ setFormState }) => {
               onBlur={handleBlur}
               value={values.message}
               required
+              autoComplete={'off'}
             />
             <StyledLabel>message</StyledLabel>
           </FormLine>

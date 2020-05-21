@@ -13,9 +13,8 @@ import Form from '../../molecules/Form/Form';
 const StyledWrapper = styled.div`
   width: 100%;
   height: 100%;
-  background: #272727;
-  color: #000;
   position: relative;
+  background-image: ${({ theme }) => theme.color.backgroundDarkGradient};
 
   ${({ theme }) => theme.mq.standard} {
     display: flex;

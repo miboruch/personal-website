@@ -11,7 +11,7 @@ const StyledWrapper = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-  background-color: #222;
+  background-image: ${({ theme }) => theme.color.backgroundDarkGradient};
   overflow: hidden;
 
   &::before {
@@ -21,7 +21,7 @@ const StyledWrapper = styled.div`
     height: 100%;
     top: 0;
     left: 0;
-    background-color: #e7e5e1;
+    background-image: ${({ theme }) => theme.color.backgroundLightGradient};
     transform: ${({ isEven }) =>
       isEven ? 'translateX(-100%)' : 'translateX(0)'};
     transition: transform 1s 2s cubic-bezier(0.66, 0.24, 0, 0.82);
@@ -216,6 +216,9 @@ const SliderContent = ({ image, content, index, isDarkTheme }) => {
   const { currentSlide } = useContext(CurrentSlideContext);
 
   const [tl] = useState(gsap.timeline({ defaults: { ease: 'power3.inOut' } }));
+  const [reverseTl] = useState(
+    gsap.timeline({ defaults: { ease: 'power3.inOut' } })
+  );
 
   useEffect(() => {
     const title = titleRef.current;
@@ -227,7 +230,7 @@ const SliderContent = ({ image, content, index, isDarkTheme }) => {
     gsap.set([title, description], { autoAlpha: 0 });
     gsap.set([line], { width: 0 });
 
-    tl.to(title, { autoAlpha: 1, duration: 1.5, delay: 1 })
+    tl.to(title, { autoAlpha: 1, duration: 2, delay: 1 })
       .to(line, { width: '100%', duration: 1.8 }, '-=0.4')
       .fromTo(
         description,
@@ -273,7 +276,10 @@ const SliderContent = ({ image, content, index, isDarkTheme }) => {
                 {content.description}
               </StyledDescription>
               <OverflowBox>
-                <SlidePageTransitionProvider to={content.pageLink}>
+                <SlidePageTransitionProvider
+                  to={content.pageLink}
+                  isDark={currentSlide % 2 === 0}
+                >
                   <StyledOpenCase ref={openProjectRef}>
                     Open project
                   </StyledOpenCase>
@@ -282,7 +288,10 @@ const SliderContent = ({ image, content, index, isDarkTheme }) => {
             </TextWrapper>
             <StyledLine isDarkTheme={isDarkTheme} ref={lineRef} />
             <AllProjectOverflow>
-              <SlidePageTransitionProvider to='/projects'>
+              <SlidePageTransitionProvider
+                to='/projects'
+                isDark={currentSlide % 2 === 0}
+              >
                 <AllProjectCase
                   small='true'
                   isDarkTheme={isDarkTheme}

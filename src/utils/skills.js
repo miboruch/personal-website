@@ -33,12 +33,12 @@ export const skillsItems = [
   },
   {
     name: 'Gatsby.js',
-    description: `It is very powerful framework based on React, so I used it to build my whole portfolio website. GraphQL API make Gatsby even more powerful, and I am aware how to use GraphQL queries.`,
+    description: `It is very powerful framework based on React, so I used it to build my whole portfolio website. GraphQL API make Gatsby even more powerful so I am aware how to use GraphQL queries and Gatsby Node API`,
     skills: 'GraphQL API, Gatsby Node API'
   },
   {
     name: 'NodeJS, Express',
-    description: `I know basics of Node and I will put my effort to learn Node.js as fast as I can. I have written Rest API in Node but this project is still being developed.`,
-    skills: 'Express server, MongoDB, Socket.io, rooms, namespaces'
+    description: `I am aware of how to create Rest API in a connection with MongoDB database and user authentication. I know how to use back-end Javascript stack in a more advanced way as well - going real-time in a web and much more. `,
+    skills: 'Express server, MongoDB, Socket.io, JWT, rooms, namespaces'
   }
 ];

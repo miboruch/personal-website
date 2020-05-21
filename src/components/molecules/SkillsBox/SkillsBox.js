@@ -32,18 +32,18 @@ const HeaderParagraph = styled(Paragraph)`
 const StyledContentSection = styled.section`
   width: 100%;
   cursor: default;
-  padding: 1rem 0;
+  padding-bottom: 3rem;
 
   &::before{
     content: '${({ value }) => value}';
     position: absolute;
-    top: 100%;
-    right: -30%;
+    top: 90%;
+    right: -20%;
     transform: translateY(-50%);
     left: auto;
-    color: #fcfcfc;
+    color: #ededed;
     text-transform: uppercase;
-    font-size: 80px;
+    font-size: 60px;
     letter-spacing: 5px;
     z-index: -1;
     text-align: left;
@@ -63,7 +63,7 @@ const StyledContentSection = styled.section`
 `;
 
 const StyledSpan = styled.span`
-  font-size: 18px;
+  font-size: 16px;
   color: #4d4d4d;
   font-weight: bold;
   padding-right: 2rem;
@@ -71,7 +71,7 @@ const StyledSpan = styled.span`
   }
 
   ${({ theme }) => theme.mq.standard} {
-    font-size: 24px;
+    font-size: 16px;
   }
 `;
 
@@ -80,10 +80,6 @@ const StyledDescription = styled(Paragraph)`
   text-align: left;
   letter-spacing: 0;
   font-size: 16px;
-
-  ${({ theme }) => theme.mq.tablet} {
-    font-size: 16px;
-  }
 `;
 
 const SkillDescription = styled(Paragraph)`
@@ -91,8 +87,7 @@ const SkillDescription = styled(Paragraph)`
   font-size: 13px;
   letter-spacing: 0;
   font-weight: 500;
-  padding-top: 0.3rem;
-  padding-left: 3rem;
+  padding-top: 1.5rem;
 `;
 
 const ItemsWrapper = styled.div`
@@ -100,6 +95,17 @@ const ItemsWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+`;
+
+const StyledHeading = styled.h2`
+  font-family: ${({ theme }) => theme.font.family.futura};
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #4d4d4d;
+  font-weight: bold;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e3e3e3;
 `;
 
 const SkillsBox = () => {
@@ -120,7 +126,7 @@ const SkillsBox = () => {
 
   return (
     <StyledWrapper>
-      <HeaderParagraph>Skills</HeaderParagraph>
+      <StyledHeading>Skills</StyledHeading>
       <ItemsWrapper ref={itemsRef}>
         {skillsItems.map(skill => (
           <StyledContentSection
@@ -129,6 +135,7 @@ const SkillsBox = () => {
           >
             <StyledDescription>
               <StyledSpan>{skill.name}</StyledSpan>
+              <br />
               {skill.description}
               <SkillDescription>{skill.skills}</SkillDescription>
             </StyledDescription>
