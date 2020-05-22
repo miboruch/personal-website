@@ -1,22 +1,10 @@
 export const skills = [
-  {
-    name: 'HTML, CSS/SASS'
-  },
-  {
-    name: 'Javascript, ES6'
-  },
-  {
-    name: 'React, Redux'
-  },
-  {
-    name: 'Gatsby.js, GraphQL'
-  },
-  {
-    name: 'NodeJS, Express, Socket.io'
-  },
-  {
-    name: 'Typescript'
-  }
+  'HTML, CSS/SASS',
+  'Javascript, ES6',
+  'React, Redux',
+  'Gatsby.js, GraphQL',
+  'NodeJS, Express, Socket.io',
+  'Typescript'
 ];
 
 export const skillsItems = [

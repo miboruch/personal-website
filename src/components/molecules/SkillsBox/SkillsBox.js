@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import gsap from 'gsap';
-import CloseButton from '../../atoms/CloseButton/CloseButton';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { skillsItems } from '../../../utils/skills';
 
@@ -13,20 +11,6 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   color: #2d2d2d;
   margin: 3rem 0;
-`;
-
-const HeaderParagraph = styled(Paragraph)`
-  margin-bottom: 2rem;
-  color: #2d2d2d;
-  font-weight: bold;
-  font-size: 32px;
-  border-top: 1px solid #2d2d2d;
-  padding-top: 1rem;
-
-  ${({ theme }) => theme.mq.standard} {
-    font-weight: bold;
-    font-size: 42px;
-  }
 `;
 
 const StyledContentSection = styled.section`

@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import gsap from 'gsap';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
-import { animated } from 'react-spring';
 import { menuItems } from '../../../utils/items';
 import SocialNavigation from '../../molecules/SocialNavigation/SocialNavigation';
 import { easeExpInOut } from 'd3-ease';
@@ -69,7 +68,7 @@ const NavigationWrapper = styled.div`
   }
 `;
 
-const ParagraphBox = styled(animated.div)`
+const ParagraphBox = styled.div`
   width: 100%;
   height: 33vh;
   text-align: center;
@@ -141,7 +140,6 @@ const StyledMenuItems = styled(Paragraph)`
       }
     `}
 
-  /* Styles for standard window size */
   ${({ theme }) => theme.mq.standard} {
     color: rgba(255, 255, 255, 0.2);
     transition: color 1s ease;
@@ -177,7 +175,6 @@ const StyledMenuItems = styled(Paragraph)`
       `}
   }
   
-  /* Styles for desktop window size */
   ${({ theme }) => theme.mq.desktop}{
     &::before{
       top: -20px;
@@ -199,14 +196,12 @@ const MenuItems = styled.div`
   }
 `;
 
-const Menu = ({ isOpen, boxSize, headerTheme }) => {
+const Menu = ({ isOpen, headerTheme }) => {
   const [tlIn] = useState(gsap.timeline({ defaults: { ease: easeExpInOut } }));
-  const [tlOut] = useState(gsap.timeline({ defaults: { ease: easeExpInOut } }));
   const menuRef = useRef();
   const paragraphWrapperRef = useRef();
 
   useEffect(() => {
-    const menuBox = menuRef.current;
     const menuItems = paragraphWrapperRef.current;
     gsap.set(menuItems.children, { autoAlpha: 0 });
 

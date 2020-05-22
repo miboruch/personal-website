@@ -55,6 +55,8 @@ const StyledTitle = styled(Paragraph)`
 `;
 
 const Projects = ({ data }) => {
+  const titleRef = useRef(null);
+
   const isOnTop = useScrollPosition();
   const imageArray = convertObjectToArray(
     data.image0,
@@ -65,8 +67,6 @@ const Projects = ({ data }) => {
     data.image5
   );
   const { projects } = data.projectData;
-
-  const titleRef = useRef(null);
 
   useEffect(() => {
     const title = titleRef.current;
