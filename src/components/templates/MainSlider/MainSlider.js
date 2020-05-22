@@ -132,6 +132,11 @@ const StyledProjectSmallNavigation = styled.div`
 
   ${({ theme }) => theme.mq.standard} {
     display: flex;
+    transform: translateX(-35%);
+  }
+
+  ${({ theme }) => theme.mq.desktop} {
+    transform: translateX(-50%);
   }
 `;
 

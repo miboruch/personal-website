@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import gsap from 'gsap';
 import styled from 'styled-components';
 import TimeoutBar from '../../atoms/TimeoutBar/TimeoutBar';
-import { animated } from 'react-spring';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
 
-const TimeoutBoxWrapper = styled(animated.div)`
+const TimeoutBoxWrapper = styled.div`
   position: absolute;
   display: none;
   width: 300px;
@@ -52,11 +51,10 @@ const NextStandardWrapper = styled.div`
   }
 `;
 
-const StyledNextLabel = styled(animated(Paragraph))`
+const StyledNextLabel = styled(Paragraph)`
   align-items: center;
   text-transform: uppercase;
   letter-spacing: 5px;
-  //color: #2d2d2d;
   font-size: 12px;
   font-weight: lighter;
   display: none;
