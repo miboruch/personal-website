@@ -244,7 +244,6 @@ const Menu = ({ isOpen, headerTheme }) => {
 
 Menu.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  boxSize: PropTypes.object.isRequired,
   headerTheme: PropTypes.oneOf(['dark', 'light'])
 };
 

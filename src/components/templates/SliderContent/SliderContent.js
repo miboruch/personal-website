@@ -89,6 +89,7 @@ const StyledTitle = styled(Paragraph)`
   letter-spacing: 0;
   margin: 0;
   color: inherit;
+  visibility: hidden;
 `;
 
 const StyledDescription = styled(Paragraph)`
@@ -99,6 +100,7 @@ const StyledDescription = styled(Paragraph)`
   padding: 0 2rem;
   text-align: center;
   color: inherit;
+  visibility: hidden;
 
   ${({ theme }) => theme.mq.standard} {
     margin-top: 0;
@@ -115,6 +117,7 @@ const StyledOpenCase = styled(Paragraph)`
   text-transform: uppercase;
   text-decoration: underline;
   color: inherit;
+  visibility: hidden;
 
   ${({ theme }) => theme.mq.standard} {
     text-align: right;
@@ -151,7 +154,7 @@ const StyledLine = styled.div`
   top: 50%;
   left: 0;
   transform: translateY(-50%);
-  width: 100%;
+  width: 0;
   height: 1px;
   background: ${({ isDarkTheme }) =>
     isDarkTheme ? 'rgba(214, 212, 208, 0.6)' : 'rgba(214, 212, 208, 0.2)'};
@@ -187,6 +190,7 @@ const AllProjectCase = styled(Paragraph)`
   cursor: pointer;
   color: ${({ isDarkTheme }) => (isDarkTheme ? '#222' : '#fff')} !important;
   transition: color 1s ease;
+  visibility: hidden;
 
   &::after {
     content: '';
@@ -226,7 +230,7 @@ const SliderContent = ({ image, content, index, isDarkTheme }) => {
     const allProject = allProjectRef.current;
     const line = lineRef.current;
 
-    gsap.set([title, description], { autoAlpha: 0 });
+    gsap.set([title, description, allProject, openProject], { autoAlpha: 0 });
     gsap.set([line], { width: 0 });
 
     tl.to(title, { autoAlpha: 1, duration: 2, delay: 1 })
@@ -240,13 +244,13 @@ const SliderContent = ({ image, content, index, isDarkTheme }) => {
       .fromTo(
         allProject,
         { transform: 'matrix(0.99, 0.33, 0, 1, 0, 100)' },
-        { transform: 'matrix(1,0,0,1,0,0)', duration: 2 },
+        { transform: 'matrix(1,0,0,1,0,0)', autoAlpha: 1, duration: 2 },
         '-=0.3'
       )
       .fromTo(
         openProject,
         { transform: 'matrix(0.99, 0.33, 0, 1, 0, 100)' },
-        { transform: 'matrix(1,0,0,1,0,0)', duration: 2 },
+        { transform: 'matrix(1,0,0,1,0,0)', autoAlpha: 1, duration: 2 },
         '-=1.7'
       );
   }, []);

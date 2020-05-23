@@ -16,6 +16,7 @@ const StyledBox = styled.div`
   flex-direction: row;
   z-index: 901;
   cursor: pointer;
+  visibility: hidden;
 
   ${({ headerTheme }) =>
     headerTheme === 'light' &&
@@ -51,18 +52,14 @@ const StyledParagraph = styled(Paragraph)`
   }
 `;
 
-const MenuButton = React.forwardRef(
-  ({ isOpen, toggleMenu, headerTheme }, ref) => (
-    <StyledBox onClick={() => toggleMenu()} ref={ref} headerTheme={headerTheme}>
-      <StyledParagraph small='true' headerTheme={headerTheme}>
-        web design & code
-      </StyledParagraph>
-      <Hamburger isOpen={isOpen} headerTheme={headerTheme} />
-    </StyledBox>
-  )
+const MenuButton = ({ isOpen, toggleMenu, headerTheme }) => (
+  <StyledBox onClick={() => toggleMenu()} headerTheme={headerTheme}>
+    <StyledParagraph small='true' headerTheme={headerTheme}>
+      web design & code
+    </StyledParagraph>
+    <Hamburger isOpen={isOpen} headerTheme={headerTheme} />
+  </StyledBox>
 );
-
-MenuButton.displayName = 'MenuButton';
 
 MenuButton.propTypes = {
   headerTheme: PropTypes.oneOf(['dark', 'light'])

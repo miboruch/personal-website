@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useStaticQuery, graphql } from 'gatsby';
+import GatsbyImage from 'gatsby-image';
 import gsap from 'gsap';
 import SocialNavigation from '../../molecules/SocialNavigation/SocialNavigation';
 import Footer from '../../molecules/Footer/Footer';
 import ContactForm from '../ContactForm/ContactForm';
-import GatsbyImage from 'gatsby-image';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
-import { mediaItems } from '../../../utils/items';
 import Form from '../../molecules/Form/Form';
+import { mediaItems } from '../../../utils/items';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -311,7 +311,11 @@ const ContactTemplate = ({ image }) => {
           </StyledBox>
           <StyledCVWrapper>
             {edges.map((file, index) => (
-              <CVLink href={file.node.publicURL} key={`CV${index}`} download>
+              <CVLink
+                href={file.node.publicURL}
+                key={`CV${index}`}
+                download={`Michał Boruch CV - ${file.node.name}`}
+              >
                 download {file.node.name} cv
               </CVLink>
             ))}

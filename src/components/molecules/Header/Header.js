@@ -50,6 +50,7 @@ const StyledLink = styled.a`
   align-items: center;
   color: #fff;
   transition: color 1s ease;
+  visibility: hidden;
 
   ${({ headerTheme }) =>
     headerTheme === 'dark' &&
@@ -68,11 +69,13 @@ const StyledLink = styled.a`
   }
 `;
 
+const StyledLogo = styled(Logo)`
+  visibility: hidden;
+`;
+
 const Header = ({ headerTheme }) => {
-  const menuButton = useRef();
   const headerRef = useRef(null);
   const [isOpen, setOpen] = useState(false);
-  const size = useElementSize(menuButton);
   const pageY = useScrollPosition();
 
   const toggleMenu = () => {
@@ -103,7 +106,6 @@ const Header = ({ headerTheme }) => {
         <MenuButton
           isOpen={isOpen}
           toggleMenu={toggleMenu}
-          ref={menuButton}
           headerTheme={headerTheme}
         />
         <StyledLink
@@ -113,9 +115,9 @@ const Header = ({ headerTheme }) => {
         >
           miboruch@gmail.com
         </StyledLink>
-        <Logo headerTheme={headerTheme} isOpen={isOpen} />
+        <StyledLogo headerTheme={headerTheme} isOpen={isOpen} />
       </StyledHeader>
-      <Menu isOpen={isOpen} boxSize={size} headerTheme={headerTheme} />
+      <Menu isOpen={isOpen} headerTheme={headerTheme} />
     </>
   );
 };
