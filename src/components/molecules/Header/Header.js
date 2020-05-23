@@ -2,13 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import gsap from 'gsap';
 import PropTypes from 'prop-types';
-import { animated } from 'react-spring';
 import Menu from '../../templates/Menu/Menu';
 import { useElementSize, useScrollPosition } from '../../../utils/customHooks';
 import MenuButton from '../MenuButton/MenuButton';
 import Logo from '../../atoms/Logo/Logo';
 
-const StyledHeader = styled(animated.header)`
+const StyledHeader = styled.header`
   position: fixed;
   top: 0;
   left: 0;

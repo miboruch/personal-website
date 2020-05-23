@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import GatsbyImage from 'gatsby-image';
 import gsap from 'gsap';
-import BackgroundImage from 'gatsby-background-image';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
 import Div100vh from 'react-div-100vh';
@@ -28,19 +28,19 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const StyledBackgroundImage = styled(BackgroundImage)`
+const StyledImage = styled(GatsbyImage)`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.7;
-  background-position: center;
+  object-fit: cover;
+  opacity: 0.6;
+  z-index: 10;
 
   ${({ theme }) => theme.mq.standard} {
-    width: 100%;
     opacity: 1;
-    transform: translateX(-15%);
+    left: -20%;
   }
 `;
 
@@ -51,6 +51,7 @@ const StyledContextBox = styled.section`
   width: 100%;
   height: 100%;
   color: ${({ isDarkTheme }) => (isDarkTheme ? '#222' : '#e7e5e1')};
+  transition: color 1s ease;
 
   ${({ theme }) => theme.mq.standard} {
     top: 0;
@@ -61,6 +62,7 @@ const ContentWrapper = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
+  z-index: 12;
 `;
 
 const StyledTitleWrapper = styled.div`
@@ -216,9 +218,6 @@ const SliderContent = ({ image, content, index, isDarkTheme }) => {
   const { currentSlide } = useContext(CurrentSlideContext);
 
   const [tl] = useState(gsap.timeline({ defaults: { ease: 'power3.inOut' } }));
-  const [reverseTl] = useState(
-    gsap.timeline({ defaults: { ease: 'power3.inOut' } })
-  );
 
   useEffect(() => {
     const title = titleRef.current;
@@ -259,11 +258,7 @@ const SliderContent = ({ image, content, index, isDarkTheme }) => {
   return (
     <Div100vh>
       <StyledWrapper isEven={currentSlide % 2 === 0}>
-        <StyledBackgroundImage
-          preserveStackingContext={true}
-          fluid={image.childImageSharp.fluid}
-          isDarkTheme={isDarkTheme}
-        />
+        <StyledImage fluid={image.childImageSharp.fluid} />
         <StyledContextBox isDarkTheme={isDarkTheme}>
           <ContentWrapper>
             <TextWrapper>
@@ -286,7 +281,6 @@ const SliderContent = ({ image, content, index, isDarkTheme }) => {
                 </SlidePageTransitionProvider>
               </OverflowBox>
             </TextWrapper>
-            <StyledLine isDarkTheme={isDarkTheme} ref={lineRef} />
             <AllProjectOverflow>
               <SlidePageTransitionProvider
                 to='/projects'
@@ -302,6 +296,7 @@ const SliderContent = ({ image, content, index, isDarkTheme }) => {
               </SlidePageTransitionProvider>
             </AllProjectOverflow>
           </ContentWrapper>
+          <StyledLine isDarkTheme={isDarkTheme} ref={lineRef} />
         </StyledContextBox>
       </StyledWrapper>
     </Div100vh>

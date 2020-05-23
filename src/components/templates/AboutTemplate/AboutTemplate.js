@@ -18,17 +18,6 @@ const StyledWrapper = styled.div`
   overflow: hidden;
 `;
 
-const HeaderParagraph = styled(Paragraph)`
-  margin-bottom: 2rem;
-  color: #2d2d2d;
-  font-weight: bold;
-  font-size: 32px;
-
-  ${({ theme }) => theme.mq.standard} {
-    font-size: 42px;
-  }
-`;
-
 const StyledImage = styled(BackgroundImage)`
   z-index: 2;
   width: 100%;
@@ -76,30 +65,10 @@ const StyledQuote = styled(Paragraph)`
   letter-spacing: 0;
 `;
 
-const StyledParagraph = styled(Paragraph)`
-  font-size: 16px;
-  color: #8d8d8d;
-  letter-spacing: 0;
-`;
-
 const StyledMain = styled.main`
   font-size: 16px;
   color: #8d8d8d;
   letter-spacing: 0;
-`;
-
-const StyledName = styled(Paragraph)`
-  font-weight: bold;
-  font-size: 12px;
-  text-transform: uppercase;
-  padding-top: 1rem;
-`;
-
-const StyledSkillsOpen = styled(StyledName)`
-  color: #000;
-  padding-top: 2rem;
-  text-align: left;
-  cursor: pointer;
 `;
 
 const TextWrapper = styled(ContentWrapper)`
@@ -216,11 +185,7 @@ const AboutTemplate = ({ images }) => {
         '-=0.55'
       )
       .to(textWrapper, { autoAlpha: 1, duration: 1 })
-      .fromTo(
-        text.children,
-        { y: '+=10' },
-        { y: '0', autoAlpha: 1, stagger: 0.3 }
-      );
+      .fromTo(text.children, { y: '+=10' }, { y: '0', autoAlpha: 1 });
   }, []);
 
   return (
@@ -261,7 +226,7 @@ const AboutTemplate = ({ images }) => {
           Technologies that I use:
           <StyledList>
             {skills.map(item => (
-              <StyledListItem key={item.name}>{item.name}</StyledListItem>
+              <StyledListItem key={item}>{item}</StyledListItem>
             ))}
             <StyledListItem>GIT</StyledListItem>
           </StyledList>
@@ -286,7 +251,7 @@ const AboutTemplate = ({ images }) => {
         <SkillsBoxParagraph>
           {skills.map(item => (
             <>
-              {item.name}
+              {item}
               <br />
             </>
           ))}

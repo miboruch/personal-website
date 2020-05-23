@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { animated } from 'react-spring';
 import Paragraph from '../Paragraph/Paragraph';
 
-const StyledCircle = styled(animated.div)`
+const StyledCircle = styled.div`
   display: none;
   width: 200px;
   height: 200px;
