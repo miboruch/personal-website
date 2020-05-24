@@ -91,7 +91,7 @@ const Header = ({ headerTheme }) => {
     tl.fromTo(
       header.children,
       { y: '-=15' },
-      { y: '0', autoAlpha: 1, duration: 1.2, stagger: 0.3, delay: 1 }
+      { y: '0', autoAlpha: 1, duration: 1.2, stagger: 0.3, delay: 0.7 }
     );
   }, []);
 

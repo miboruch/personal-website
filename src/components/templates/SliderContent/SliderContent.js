@@ -195,7 +195,7 @@ const AllProjectCase = styled(Paragraph)`
   &::after {
     content: '';
     position: absolute;
-    bottom: -2px;
+    bottom: -1px;
     left: 0;
     width: 0;
     height: 2px;
@@ -233,8 +233,8 @@ const SliderContent = ({ image, content, index, isDarkTheme }) => {
     gsap.set([title, description, allProject, openProject], { autoAlpha: 0 });
     gsap.set([line], { width: 0 });
 
-    tl.to(title, { autoAlpha: 1, duration: 2, delay: 1 })
-      .to(line, { width: '100%', duration: 1.8 }, '-=0.4')
+    tl.to(title, { autoAlpha: 1, duration: 1, delay: 1 })
+      .to(line, { width: '100%', duration: 1.2 }, '-=0.4')
       .fromTo(
         description,
         { y: '+=10' },
@@ -244,14 +244,14 @@ const SliderContent = ({ image, content, index, isDarkTheme }) => {
       .fromTo(
         allProject,
         { transform: 'matrix(0.99, 0.33, 0, 1, 0, 100)' },
-        { transform: 'matrix(1,0,0,1,0,0)', autoAlpha: 1, duration: 2 },
-        '-=0.3'
+        { transform: 'matrix(1,0,0,1,0,0)', autoAlpha: 1, duration: 1.5 },
+        '-=0.8'
       )
       .fromTo(
         openProject,
         { transform: 'matrix(0.99, 0.33, 0, 1, 0, 100)' },
-        { transform: 'matrix(1,0,0,1,0,0)', autoAlpha: 1, duration: 2 },
-        '-=1.7'
+        { transform: 'matrix(1,0,0,1,0,0)', autoAlpha: 1, duration: 1.5 },
+        '-=1.1'
       );
   }, []);
 

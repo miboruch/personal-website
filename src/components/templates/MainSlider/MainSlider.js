@@ -197,12 +197,12 @@ const MainSlider = ({ images, data }) => {
     tl.fromTo(
       navigation.children,
       { y: '+=20' },
-      { y: '0', autoAlpha: 1, duration: 2, stagger: 0.3, delay: 1.6 }
+      { y: '0', autoAlpha: 1, duration: 1.2, stagger: 0.3, delay: 1.2 }
     ).fromTo(
       arrowWrapper.children,
       { y: '+=30' },
       { autoAlpha: 1, y: '0', stagger: 0.3, duration: 1 },
-      '-=1'
+      '-=1.5'
     );
   }, []);
 
