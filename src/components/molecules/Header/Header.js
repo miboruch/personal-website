@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import gsap from 'gsap';
 import PropTypes from 'prop-types';
 import Menu from '../../templates/Menu/Menu';
-import { useElementSize, useScrollPosition } from '../../../utils/customHooks';
+import { useScrollPosition } from '../../../utils/customHooks';
 import MenuButton from '../MenuButton/MenuButton';
 import Logo from '../../atoms/Logo/Logo';
 
@@ -69,10 +69,6 @@ const StyledLink = styled.a`
   }
 `;
 
-const StyledLogo = styled(Logo)`
-  visibility: hidden;
-`;
-
 const Header = ({ headerTheme }) => {
   const headerRef = useRef(null);
   const [isOpen, setOpen] = useState(false);
@@ -115,7 +111,7 @@ const Header = ({ headerTheme }) => {
         >
           miboruch@gmail.com
         </StyledLink>
-        <StyledLogo headerTheme={headerTheme} isOpen={isOpen} />
+        <Logo headerTheme={headerTheme} isOpen={isOpen} />
       </StyledHeader>
       <Menu isOpen={isOpen} headerTheme={headerTheme} />
     </>
