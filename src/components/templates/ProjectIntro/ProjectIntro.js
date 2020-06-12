@@ -7,6 +7,11 @@ import Paragraph from '../../atoms/Paragraph/Paragraph';
 import OpenCircle from '../../atoms/OpenCircle/OpenCircle';
 import PageTransitionProvider from '../../../providers/PageTransitionProvider';
 
+if (typeof window !== `undefined`) {
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.core.globals('ScrollTrigger', ScrollTrigger);
+}
+
 const StyledWrapper = styled.section`
   border-top: 1px solid rgba(141, 141, 141, 0.25);
   border-bottom: 1px solid rgba(141, 141, 141, 0.25);
@@ -46,7 +51,6 @@ const StyledImage = styled(GatsbyImage)`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 150%;
-  transition: opacity 1s ease;
 
   ${({ theme }) => theme.mq.standard} {
     width: 120%;
@@ -155,14 +159,14 @@ const MobileLink = styled(Paragraph)`
 `;
 
 const ProjectIntro = ({ data, image, reverse }) => {
+  const wrapperRef = useRef(null);
   const headerRef = useRef(null);
   const descriptionRef = useRef(null);
-  const wrapperRef = useRef(null);
 
   useEffect(() => {
+    const wrapper = wrapperRef.current;
     const header = headerRef.current;
     const description = descriptionRef.current;
-    const wrapper = wrapperRef.current;
 
     gsap.set([wrapper, description], { autoAlpha: 0 });
     gsap.set(wrapper, { x: '-=50' });
@@ -171,9 +175,8 @@ const ProjectIntro = ({ data, image, reverse }) => {
       paused: true,
       scrollTrigger: {
         trigger: wrapper,
-        toggleActions: 'play reverse none none',
-        start: 'top center',
-        markers: true
+        toggleActions: 'play complete pause reverse',
+        start: 'top center'
       },
       defaults: { ease: 'power3.inOut' }
     });
@@ -182,13 +185,14 @@ const ProjectIntro = ({ data, image, reverse }) => {
       .fromTo(
         header,
         { transform: 'matrix(0.99, 0.33, 0, 1, 0, 100)' },
-        { transform: 'matrix(1,0,0,1,0,0)', duration: 1, delay: 1 }
+        { transform: 'matrix(1,0,0,1,0,0)', duration: 1 },
+        '-=0.5'
       )
-      .to(description, { autoAlpha: 1, duration: 1.2 });
+      .to(description, { autoAlpha: 1, duration: 1.2 }, '-=0.4');
   }, []);
 
   return (
-    <StyledWrapper reverse={reverse} ref={wrapperRef}>
+    <StyledWrapper ref={wrapperRef} reverse={reverse}>
       <PhotoWrapper>
         <PageTransitionProvider to={data.pageLink}>
           <StyledLine />

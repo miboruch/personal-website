@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { graphql } from 'gatsby';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Layout from '../components/templates/Layout';
 import SEO from '../components/seo';
 import { convertObjectToArray } from '../utils/functions';
@@ -11,11 +10,6 @@ import Paragraph from '../components/atoms/Paragraph/Paragraph';
 import Footer from '../components/molecules/Footer/Footer';
 import { useScrollPosition } from '../utils/customHooks';
 import ProjectNavigation from '../components/molecules/ProjectNavigation/ProjectNavigation';
-
-if (typeof window !== `undefined`) {
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.core.globals('ScrollTrigger', ScrollTrigger);
-}
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -59,7 +53,6 @@ const StyledTitle = styled(Paragraph)`
 
 const Projects = ({ data }) => {
   const titleRef = useRef(null);
-  const projectWrapperRef = useRef(null);
 
   const isOnTop = useScrollPosition();
   const imageArray = convertObjectToArray(
@@ -96,16 +89,14 @@ const Projects = ({ data }) => {
             <StyledTitle ref={titleRef}>Projects</StyledTitle>
           </OverflowBox>
         </TextWrapper>
-        <div ref={projectWrapperRef}>
-          {projects.map((item, index) => (
-            <ProjectIntro
-              data={item}
-              image={imageArray[index]}
-              key={index}
-              reverse={index % 2 !== 0 ? 'true' : null}
-            />
-          ))}
-        </div>
+        {projects.map((item, index) => (
+          <ProjectIntro
+            data={item}
+            image={imageArray[index]}
+            key={index}
+            reverse={index % 2 !== 0 ? 'true' : null}
+          />
+        ))}
         <ProjectNavigation isOnTop={isOnTop} />
         <Footer />
       </StyledWrapper>
