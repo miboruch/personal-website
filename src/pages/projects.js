@@ -2,9 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { graphql } from 'gatsby';
 import gsap from 'gsap';
-import { Scene, Controller } from 'react-scrollmagic';
-import { Tween } from 'react-gsap';
-import { easeExpInOut } from 'd3-ease';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Layout from '../components/templates/Layout';
 import SEO from '../components/seo';
 import { convertObjectToArray } from '../utils/functions';
@@ -13,6 +11,11 @@ import Paragraph from '../components/atoms/Paragraph/Paragraph';
 import Footer from '../components/molecules/Footer/Footer';
 import { useScrollPosition } from '../utils/customHooks';
 import ProjectNavigation from '../components/molecules/ProjectNavigation/ProjectNavigation';
+
+if (typeof window !== `undefined`) {
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.core.globals('ScrollTrigger', ScrollTrigger);
+}
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -56,6 +59,7 @@ const StyledTitle = styled(Paragraph)`
 
 const Projects = ({ data }) => {
   const titleRef = useRef(null);
+  const projectWrapperRef = useRef(null);
 
   const isOnTop = useScrollPosition();
   const imageArray = convertObjectToArray(
@@ -92,59 +96,16 @@ const Projects = ({ data }) => {
             <StyledTitle ref={titleRef}>Projects</StyledTitle>
           </OverflowBox>
         </TextWrapper>
-        <Controller>
+        <div ref={projectWrapperRef}>
           {projects.map((item, index) => (
-            <Scene
+            <ProjectIntro
+              data={item}
+              image={imageArray[index]}
               key={index}
-              offset={index === 0 ? -200 : -440}
-              triggerHook={0}
-              reverse={true}
-              duration={1}
-            >
-              {(progress, event) => {
-                return (
-                  <div>
-                    <Tween
-                      from={{
-                        opacity: 0,
-                        visibility: 'hidden',
-                        y: '50px',
-                        ease: easeExpInOut
-                      }}
-                      to={{
-                        opacity: 1,
-                        y: 0,
-                        visibility: 'visible',
-                        ease: easeExpInOut
-                      }}
-                      paused={index !== 0}
-                      playState={
-                        index === 0
-                          ? null
-                          : event.type === 'enter' &&
-                            event.scrollDirection === 'FORWARD'
-                          ? 'play'
-                          : event.type === 'enter' &&
-                            event.scrollDirection === 'REVERSE'
-                          ? 'reverse'
-                          : null
-                      }
-                    >
-                      <div>
-                        <ProjectIntro
-                          data={item}
-                          image={imageArray[index]}
-                          key={index}
-                          reverse={index % 2 !== 0 ? 'true' : null}
-                        />
-                      </div>
-                    </Tween>
-                  </div>
-                );
-              }}
-            </Scene>
+              reverse={index % 2 !== 0 ? 'true' : null}
+            />
           ))}
-        </Controller>
+        </div>
         <ProjectNavigation isOnTop={isOnTop} />
         <Footer />
       </StyledWrapper>

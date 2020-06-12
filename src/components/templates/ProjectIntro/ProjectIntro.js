@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import GatsbyImage from 'gatsby-image';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import OpenCircle from '../../atoms/OpenCircle/OpenCircle';
@@ -156,24 +157,38 @@ const MobileLink = styled(Paragraph)`
 const ProjectIntro = ({ data, image, reverse }) => {
   const headerRef = useRef(null);
   const descriptionRef = useRef(null);
+  const wrapperRef = useRef(null);
 
   useEffect(() => {
     const header = headerRef.current;
     const description = descriptionRef.current;
+    const wrapper = wrapperRef.current;
 
-    const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
+    gsap.set([wrapper, description], { autoAlpha: 0 });
+    gsap.set(wrapper, { x: '-=50' });
 
-    gsap.set([description], { autoAlpha: 0 });
+    const tl = gsap.timeline({
+      paused: true,
+      scrollTrigger: {
+        trigger: wrapper,
+        toggleActions: 'play reverse none none',
+        start: 'top center',
+        markers: true
+      },
+      defaults: { ease: 'power3.inOut' }
+    });
 
-    tl.fromTo(
-      header,
-      { transform: 'matrix(0.99, 0.33, 0, 1, 0, 100)' },
-      { transform: 'matrix(1,0,0,1,0,0)', duration: 1, delay: 1 }
-    ).to(description, { autoAlpha: 1, duration: 1.2 });
+    tl.to(wrapper, { autoAlpha: 1, x: '0', duration: 1.5 })
+      .fromTo(
+        header,
+        { transform: 'matrix(0.99, 0.33, 0, 1, 0, 100)' },
+        { transform: 'matrix(1,0,0,1,0,0)', duration: 1, delay: 1 }
+      )
+      .to(description, { autoAlpha: 1, duration: 1.2 });
   }, []);
 
   return (
-    <StyledWrapper reverse={reverse}>
+    <StyledWrapper reverse={reverse} ref={wrapperRef}>
       <PhotoWrapper>
         <PageTransitionProvider to={data.pageLink}>
           <StyledLine />
