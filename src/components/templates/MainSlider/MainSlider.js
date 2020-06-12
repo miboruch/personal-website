@@ -261,7 +261,6 @@ const MainSlider = ({ images, data }) => {
           </StyledParagraph>
         ))}
       </StyledProjectSmallNavigation>
-      {/*Mobile*/}
       <SliderNavigation
         next={data[currentSlide].next}
         isDarkTheme={isDarkTheme}
