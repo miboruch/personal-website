@@ -19,6 +19,7 @@ const TimeoutBoxWrapper = styled.div`
   left: 5px;
   background-color: ${({ isDarkTheme }) => (isDarkTheme ? '#222' : '#f1f1f1')};
   box-sizing: content-box;
+  transition: background-color 0.5s ease;
 
   ${({ theme }) => theme.mq.standard} {
     display: flex;

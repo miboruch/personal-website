@@ -17,6 +17,7 @@ const StyledBox = styled.div`
   z-index: 901;
   cursor: pointer;
   visibility: hidden;
+  transition: background-color 0.5s ease;
 
   ${({ headerTheme }) =>
     headerTheme === 'light' &&
