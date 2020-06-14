@@ -14,7 +14,6 @@ if (typeof window !== `undefined`) {
 
 const StyledWrapper = styled.section`
   border-top: 1px solid rgba(141, 141, 141, 0.25);
-  border-bottom: 1px solid rgba(141, 141, 141, 0.25);
 
   ${({ theme }) => theme.mq.standard} {
     display: flex;
@@ -158,10 +157,35 @@ const MobileLink = styled(Paragraph)`
   }
 `;
 
+const Line = styled.div`
+  width: 0;
+  height: 1px;
+  background-color: #8d8d8d;
+`;
+
 const ProjectIntro = ({ data, image, reverse }) => {
   const wrapperRef = useRef(null);
   const headerRef = useRef(null);
   const descriptionRef = useRef(null);
+  const lineRef = useRef(null);
+
+  useEffect(() => {
+    const line = lineRef.current;
+    gsap.set(line, { width: 0 });
+
+    const tl = gsap.timeline({
+      paused: true,
+      scrollTrigger: {
+        trigger: wrapperRef.current,
+        toggleActions: 'play complete pause reverse',
+        start: 'top center',
+        scrub: 1
+      },
+      defaults: { ease: 'power3.inOut' }
+    });
+
+    tl.to(line, { width: '100%', duration: 1 });
+  }, []);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -192,34 +216,37 @@ const ProjectIntro = ({ data, image, reverse }) => {
   }, []);
 
   return (
-    <StyledWrapper ref={wrapperRef} reverse={reverse}>
-      <PhotoWrapper>
-        <PageTransitionProvider to={data.pageLink}>
-          <StyledLine />
-          <ImageWrapper>
-            <StyledImage fluid={image.childImageSharp.fluid} />
-          </ImageWrapper>
-          <CircleWrapper>
-            <OpenCircle />
-          </CircleWrapper>
-        </PageTransitionProvider>
-      </PhotoWrapper>
-      <ContentWrapper>
-        <PageTransitionProvider to={data.pageLink}>
-          <OverflowBox>
-            <StyledTitle title='true' ref={headerRef}>
-              {data.name}
-            </StyledTitle>
-          </OverflowBox>
-        </PageTransitionProvider>
-        <StyledParagraph small='true' ref={descriptionRef}>
-          {data.primaryDescription}
-        </StyledParagraph>
-        <PageTransitionProvider to={data.pageLink}>
-          <MobileLink>Open {data.name}</MobileLink>
-        </PageTransitionProvider>
-      </ContentWrapper>
-    </StyledWrapper>
+    <>
+      <StyledWrapper ref={wrapperRef} reverse={reverse}>
+        <PhotoWrapper>
+          <PageTransitionProvider to={data.pageLink}>
+            <StyledLine />
+            <ImageWrapper>
+              <StyledImage fluid={image.childImageSharp.fluid} />
+            </ImageWrapper>
+            <CircleWrapper>
+              <OpenCircle />
+            </CircleWrapper>
+          </PageTransitionProvider>
+        </PhotoWrapper>
+        <ContentWrapper>
+          <PageTransitionProvider to={data.pageLink}>
+            <OverflowBox>
+              <StyledTitle title='true' ref={headerRef}>
+                {data.name}
+              </StyledTitle>
+            </OverflowBox>
+          </PageTransitionProvider>
+          <StyledParagraph small='true' ref={descriptionRef}>
+            {data.primaryDescription}
+          </StyledParagraph>
+          <PageTransitionProvider to={data.pageLink}>
+            <MobileLink>Open {data.name}</MobileLink>
+          </PageTransitionProvider>
+        </ContentWrapper>
+      </StyledWrapper>
+      <Line ref={lineRef} />
+    </>
   );
 };
 

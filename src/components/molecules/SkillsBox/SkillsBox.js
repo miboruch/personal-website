@@ -66,7 +66,7 @@ const StyledDescription = styled(Paragraph)`
   font-size: 16px;
 `;
 
-const SkillDescription = styled(Paragraph)`
+const SkillDescription = styled.span`
   color: #5d5d5d;
   font-size: 13px;
   letter-spacing: 0;
