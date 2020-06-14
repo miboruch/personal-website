@@ -117,6 +117,7 @@ const LinkContentWrapper = styled.section`
 const PortfolioProjectTemplate = ({ content, images }) => {
   const titleRef = useRef(null);
   const projectInfoRef = useRef(null);
+  const projectDescriptionRef = useRef(null);
 
   useEffect(() => {
     const title = titleRef.current;
@@ -134,6 +135,24 @@ const PortfolioProjectTemplate = ({ content, images }) => {
       transform: 'matrix(1,0,0,1,0,0)',
       duration: 2
     }).to(projectInfo.children, { autoAlpha: 1, stagger: 0.4 });
+  }, []);
+
+  useEffect(() => {
+    const projectDescription = projectDescriptionRef.current;
+
+    const tl = gsap.timeline({
+      paused: true,
+      scrollTrigger: {
+        trigger: projectDescription,
+        toggleActions: 'play complete pause reverse',
+        start: '-=200 center'
+      },
+      defaults: { ease: 'power3.inOut' }
+    });
+
+    gsap.set([...projectDescription.children], { autoAlpha: 0 });
+
+    tl.to(projectDescription.children, { autoAlpha: 1, stagger: 0.4 });
   }, []);
 
   return (
@@ -163,68 +182,35 @@ const PortfolioProjectTemplate = ({ content, images }) => {
           </ContentBox>
           <Image image={images && images[0].node} />
           <OverflowDescriptionBox>
-            <Controller>
-              <Scene offset={250} triggerHook={0} duration={1}>
-                {(progress, event) => {
-                  return (
-                    <Tween
-                      from={{
-                        opacity: 0,
-                        transform: 'matrix(0.99, 0.1, 0, 1, 0, 100)',
-                        ease: easeExpOut
-                      }}
-                      to={{
-                        opacity: 1,
-                        transform: 'matrix(1,0,0,1,0,0)',
-                        ease: easeExpOut
-                      }}
-                      paused={true}
-                      playState={
-                        event.type === 'enter' &&
-                        event.scrollDirection === 'FORWARD'
-                          ? 'play'
-                          : event.type === 'enter' &&
-                            event.scrollDirection === 'REVERSE'
-                          ? 'reverse'
-                          : null
-                      }
-                    >
-                      <div>
-                        <Description>{content.primaryDescription}</Description>
-                        <TechnologiesWrapper>
-                          <TextLabel>Technologies</TextLabel>
-                          <Description>
-                            {content.secondaryDescription}
-                          </Description>
-                        </TechnologiesWrapper>
-                        <LinkWrapper>
-                          <LinkContentWrapper>
-                            <TextLabel>Link - Live</TextLabel>
-                            <StyledLink
-                              href={content.link}
-                              target='_blank'
-                              rel='noreferrer'
-                            >
-                              {content.name}
-                            </StyledLink>
-                          </LinkContentWrapper>
-                          <LinkContentWrapper>
-                            <TextLabel>Link - Github</TextLabel>
-                            <StyledLink
-                              href={content.githubLink}
-                              target='_blank'
-                              rel='noreferrer'
-                            >
-                              {content.name} - github.com
-                            </StyledLink>
-                          </LinkContentWrapper>
-                        </LinkWrapper>
-                      </div>
-                    </Tween>
-                  );
-                }}
-              </Scene>
-            </Controller>
+            <div ref={projectDescriptionRef}>
+              <Description>{content.primaryDescription}</Description>
+              <TechnologiesWrapper>
+                <TextLabel>Technologies</TextLabel>
+                <Description>{content.secondaryDescription}</Description>
+              </TechnologiesWrapper>
+              <LinkWrapper>
+                <LinkContentWrapper>
+                  <TextLabel>Link - Live</TextLabel>
+                  <StyledLink
+                    href={content.link}
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    {content.name}
+                  </StyledLink>
+                </LinkContentWrapper>
+                <LinkContentWrapper>
+                  <TextLabel>Link - Github</TextLabel>
+                  <StyledLink
+                    href={content.githubLink}
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    {content.name} - github.com
+                  </StyledLink>
+                </LinkContentWrapper>
+              </LinkWrapper>
+            </div>
           </OverflowDescriptionBox>
           <Image image={images && images[1].node} />
           {images[2] && <Image image={images[2].node} />}
