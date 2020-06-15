@@ -162,6 +162,7 @@ const AboutTemplate = ({ images }) => {
   const textRef = useRef(null);
   const quoteRef = useRef(null);
   const textWrapperRef = useRef(null);
+  const skillsBoxRef = useRef(null);
 
   const [isSkillsVisible, setSkillsState] = useState(true);
 
@@ -187,6 +188,25 @@ const AboutTemplate = ({ images }) => {
       .to(textWrapper, { autoAlpha: 1, duration: 1 })
       .fromTo(text.children, { y: '+=10' }, { y: '0', autoAlpha: 1 });
   }, []);
+
+  // useEffect(() => {
+  //   const skillsBox = skillsBoxRef.current;
+  //
+  //   const tl = gsap.timeline({
+  //     paused: true,
+  //     scrollTrigger: {
+  //       trigger: skillsBox,
+  //       toggleActions: 'play complete pause reverse',
+  //       start: '-=200 center',
+  //       markers: true
+  //     },
+  //     defaults: { ease: 'power3.inOut' }
+  //   });
+  //
+  //   gsap.set([...skillsBox.children], { autoAlpha: 0 });
+  //
+  //   tl.to(skillsBox.children, { autoAlpha: 1, stagger: 0.4 });
+  // }, []);
 
   return (
     <StyledWrapper className={'transition-wrapper'}>

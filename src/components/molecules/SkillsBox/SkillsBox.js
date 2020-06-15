@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import gsap from 'gsap';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
@@ -93,25 +93,34 @@ const StyledHeading = styled.h2`
 `;
 
 const SkillsBox = () => {
-  const itemsRef = useRef(null);
-  const [tl] = useState(gsap.timeline({ defaults: { ease: 'power3.inOut' } }));
+  const skillsBoxRef = useRef(null);
 
   useEffect(() => {
-    const items = itemsRef.current;
+    const skillsBox = skillsBoxRef.current;
 
-    gsap.set([...items.children], { autoAlpha: 0 });
+    const tl = gsap.timeline({
+      paused: true,
+      scrollTrigger: {
+        trigger: skillsBox,
+        toggleActions: 'play complete pause reverse',
+        start: '-=100 center'
+      },
+      defaults: { ease: 'power3.inOut' }
+    });
+
+    gsap.set([...skillsBox.children], { autoAlpha: 0 });
 
     tl.fromTo(
-      items.children,
-      { y: '+=30' },
-      { y: '0', autoAlpha: 1, duration: 1, stagger: 0.2 }
+      skillsBox.children,
+      { x: '-=15', y: '+=20' },
+      { x: '0', y: '0', autoAlpha: 1, stagger: 0.3 }
     );
   }, []);
 
   return (
     <StyledWrapper>
       <StyledHeading>Skills</StyledHeading>
-      <ItemsWrapper ref={itemsRef}>
+      <ItemsWrapper ref={skillsBoxRef}>
         {skillsItems.map(skill => (
           <StyledContentSection
             value={skill.name.split(',')[0]}
@@ -121,6 +130,7 @@ const SkillsBox = () => {
               <StyledSpan>{skill.name}</StyledSpan>
               <br />
               {skill.description}
+              <br />
               <SkillDescription>{skill.skills}</SkillDescription>
             </StyledDescription>
           </StyledContentSection>
