@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CloseButton from '../../atoms/CloseButton/CloseButton';
 import { skills } from '../../../utils/skills';
 import { useScrollPosition } from '../../../utils/customHooks';
@@ -19,6 +20,11 @@ const SkillToggleBox = ({ isOpen, setState }) => {
       </SkillsBoxParagraph>
     </SmallSkillsBox>
   );
+};
+
+SkillToggleBox.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  setState: PropTypes.func.isRequired
 };
 
 export default SkillToggleBox;
