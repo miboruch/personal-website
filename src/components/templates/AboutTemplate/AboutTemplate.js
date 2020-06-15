@@ -9,6 +9,7 @@ import SkillsBox from '../../molecules/SkillsBox/SkillsBox';
 import CloseButton from '../../atoms/CloseButton/CloseButton';
 import { useScrollPosition } from '../../../utils/customHooks';
 import { skills } from '../../../utils/skills';
+import SkillToggleBox from '../../molecules/SkillToggleBox/SkillToggleBox';
 
 const StyledWrapper = styled.div`
   background: #f3f3f3;
@@ -88,47 +89,6 @@ const StyledPortfolioImage = styled(StyledImage)`
   }
 `;
 
-const SmallSkillsBox = styled.div`
-  width: 300px;
-  background: #1d1d1d;
-  position: fixed;
-  bottom: 5px;
-  left: 5px;
-  z-index: 600;
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 3rem;
-  opacity: ${({ isOnTop }) => (!isOnTop ? 1 : 0)};
-  transform: translateY(${({ isOnTop }) => (!isOnTop ? '0' : '20%')});
-  transition: transform 1s ease, opacity 1s ease;
-  text-transform: uppercase;
-  line-height: 1.7;
-  -webkit-box-shadow: 10px 10px 30px -15px rgba(0, 0, 0, 1);
-  -moz-box-shadow: 10px 10px 30px -15px rgba(0, 0, 0, 1);
-  box-shadow: 10px 10px 30px -15px rgba(0, 0, 0, 1);
-
-  ${({ theme }) => theme.mq.tablet} {
-    display: flex;
-  }
-
-  ${({ isOpen }) =>
-    !isOpen &&
-    css`
-      opacity: 0 !important;
-      visibility: hidden !important;
-      transition: opacity 1s ease, visibility 1s ease;
-    `}
-`;
-
-const SkillsBoxParagraph = styled(Paragraph)`
-  color: #adadad;
-  letter-spacing: 4px;
-  font-size: 10px;
-  cursor: pointer;
-`;
-
 const StyledList = styled.ul`
   list-style-type: none;
 `;
@@ -162,11 +122,8 @@ const AboutTemplate = ({ images }) => {
   const textRef = useRef(null);
   const quoteRef = useRef(null);
   const textWrapperRef = useRef(null);
-  const skillsBoxRef = useRef(null);
 
-  const [isSkillsVisible, setSkillsState] = useState(true);
-
-  const isOnTop = useScrollPosition();
+  const [areSkillsVisible, setSkillsState] = useState(true);
 
   useEffect(() => {
     const title = titleRef.current;
@@ -188,25 +145,6 @@ const AboutTemplate = ({ images }) => {
       .to(textWrapper, { autoAlpha: 1, duration: 1 })
       .fromTo(text.children, { y: '+=10' }, { y: '0', autoAlpha: 1 });
   }, []);
-
-  // useEffect(() => {
-  //   const skillsBox = skillsBoxRef.current;
-  //
-  //   const tl = gsap.timeline({
-  //     paused: true,
-  //     scrollTrigger: {
-  //       trigger: skillsBox,
-  //       toggleActions: 'play complete pause reverse',
-  //       start: '-=200 center',
-  //       markers: true
-  //     },
-  //     defaults: { ease: 'power3.inOut' }
-  //   });
-  //
-  //   gsap.set([...skillsBox.children], { autoAlpha: 0 });
-  //
-  //   tl.to(skillsBox.children, { autoAlpha: 1, stagger: 0.4 });
-  // }, []);
 
   return (
     <StyledWrapper className={'transition-wrapper'}>
@@ -261,22 +199,12 @@ const AboutTemplate = ({ images }) => {
             <StyledListItem>
               Testing - JEST/React Testing Library
             </StyledListItem>
-            <StyledListItem>TypeScript advanced</StyledListItem>
+            <StyledListItem>advanced TypeScript</StyledListItem>
           </StyledList>
         </StyledMain>
         <SkillsBox />
       </TextWrapper>
-      <SmallSkillsBox isOnTop={isOnTop} isOpen={isSkillsVisible}>
-        <CloseButton lightTheme setBoxState={setSkillsState} />
-        <SkillsBoxParagraph>
-          {skills.map(item => (
-            <>
-              {item}
-              <br />
-            </>
-          ))}
-        </SkillsBoxParagraph>
-      </SmallSkillsBox>
+      <SkillToggleBox isOpen={areSkillsVisible} setState={setSkillsState} />
       <StyledPortfolioImage fluid={images[1].childImageSharp.fluid} />
       <Footer />
     </StyledWrapper>
