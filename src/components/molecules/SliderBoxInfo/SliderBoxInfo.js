@@ -11,7 +11,7 @@ import {
   StyledOverflow,
   StyledNextCase,
   StyledNumber
-} from 'SliderBoxInfo.styles';
+} from './SliderBoxInfo.styles';
 
 const SliderBoxInfo = ({ nextProjectName, allProjectsLength, isDarkTheme }) => {
   const { currentSlide } = useContext(CurrentSlideContext);

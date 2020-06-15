@@ -9,7 +9,7 @@ import {
   SkillDescription,
   ItemsWrapper,
   StyledHeading
-} from 'SkillsBox.styles';
+} from './SkillsBox.styles';
 
 const SkillsBox = () => {
   const skillsBoxRef = useRef(null);

@@ -12,7 +12,7 @@ import {
   StyledTextArea,
   StyledTitle,
   StyledSendMessage
-} from 'Form.styles';
+} from './Form.styles';
 
 const Form = ({ setFormState }) => {
   const formRef = useRef(null);
