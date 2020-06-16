@@ -15,18 +15,22 @@ import {
 
 const Menu = ({ isOpen, headerTheme }) => {
   const [tlIn] = useState(gsap.timeline({ defaults: { ease: easeExpInOut } }));
-  const menuRef = useRef();
-  const paragraphWrapperRef = useRef();
+  const paragraphWrapperRef = useRef(null);
+  const socialNavigationRef = useRef(null);
 
   useEffect(() => {
     const menuItems = paragraphWrapperRef.current;
-    gsap.set(menuItems.children, { autoAlpha: 0 });
+    const socialNavigation = socialNavigationRef.current;
 
-    tlIn.fromTo(
-      menuItems.children,
-      { x: '-=30' },
-      { x: '0', autoAlpha: 1, duration: 1, stagger: 0.3, delay: 1 }
-    );
+    gsap.set([menuItems.children, socialNavigation.children], { autoAlpha: 0 });
+
+    tlIn
+      .fromTo(
+        menuItems.children,
+        { x: '-=30' },
+        { x: '0', autoAlpha: 1, duration: 1, stagger: 0.3, delay: 1 }
+      )
+      .to(socialNavigation.children, { autoAlpha: 1, stagger: 0.3 });
   }, []);
 
   useEffect(() => {
@@ -35,7 +39,7 @@ const Menu = ({ isOpen, headerTheme }) => {
 
   return (
     <>
-      <StyledMenuBox ref={menuRef} headerTheme={headerTheme} isOpen={isOpen}>
+      <StyledMenuBox headerTheme={headerTheme} isOpen={isOpen}>
         <MenuItems ref={paragraphWrapperRef}>
           {menuItems.map(item => (
             <ParagraphBox headerTheme={headerTheme} key={item.id}>
@@ -52,7 +56,11 @@ const Menu = ({ isOpen, headerTheme }) => {
           ))}
         </MenuItems>
         <NavigationWrapper>
-          <SocialNavigation toggleState={isOpen} headerTheme={headerTheme} />
+          <SocialNavigation
+            toggleState={isOpen}
+            headerTheme={headerTheme}
+            ref={socialNavigationRef}
+          />
         </NavigationWrapper>
       </StyledMenuBox>
     </>

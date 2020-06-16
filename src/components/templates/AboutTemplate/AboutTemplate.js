@@ -52,7 +52,7 @@ const AboutTemplate = ({ images }) => {
 
   return (
     <StyledWrapper className={'transition-wrapper'}>
-      <StyledImage fluid={images[0].childImageSharp.fluid}>
+      <StyledImage fluid={images[0].childImageSharp.fluid} fadeIn>
         <OverflowBox>
           <StyledTitle ref={titleRef} title>
             About me
@@ -109,7 +109,7 @@ const AboutTemplate = ({ images }) => {
         <SkillsBox />
       </TextWrapper>
       <SkillToggleBox isOpen={areSkillsVisible} setState={setSkillsState} />
-      <StyledPortfolioImage fluid={images[1].childImageSharp.fluid} />
+      <StyledPortfolioImage fluid={images[1].childImageSharp.fluid} fadeIn />
       <Footer />
     </StyledWrapper>
   );
