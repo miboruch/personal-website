@@ -23,7 +23,6 @@ import {
 
 const AboutTemplate = ({ images }) => {
   const titleRef = useRef(null);
-  const textRef = useRef(null);
   const quoteRef = useRef(null);
   const textWrapperRef = useRef(null);
 
@@ -31,23 +30,40 @@ const AboutTemplate = ({ images }) => {
 
   useEffect(() => {
     const title = titleRef.current;
-    const text = textRef.current;
     const quote = quoteRef.current;
-    const textWrapper = textWrapperRef.current;
 
     const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
 
-    gsap.set([title, quote, textWrapper, ...text.children], { autoAlpha: 0 });
+    gsap.set([title, quote], { autoAlpha: 0 });
 
-    tl.fromTo(title, { y: '+=40' }, { y: '0', autoAlpha: 1, delay: 1 })
-      .fromTo(
-        quote,
-        { y: '+=20' },
-        { y: '0', autoAlpha: 1, duration: 1 },
-        '-=0.55'
-      )
-      .to(textWrapper, { autoAlpha: 1, duration: 1 })
-      .fromTo(text.children, { y: '+=10' }, { y: '0', autoAlpha: 1 });
+    tl.fromTo(title, { y: '+=40' }, { y: '0', autoAlpha: 1, delay: 1 }).fromTo(
+      quote,
+      { y: '+=20' },
+      { y: '0', autoAlpha: 1, duration: 1 },
+      '-=0.55'
+    );
+  }, []);
+
+  useEffect(() => {
+    const textWrapper = textWrapperRef.current;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: textWrapper,
+        start: '-=100 center',
+        toggleActions: 'play complete pause reverse'
+      },
+      defaults: { ease: 'power3.inOut' }
+    });
+
+    gsap.set(textWrapper.children, { autoAlpha: 0, y: '+=20' });
+
+    tl.to(textWrapper.children, {
+      autoAlpha: 1,
+      y: 0,
+      duration: 1.2,
+      stagger: 0.3
+    });
   }, []);
 
   return (
@@ -68,7 +84,7 @@ const AboutTemplate = ({ images }) => {
       </StyledImage>
       <TextWrapper ref={textWrapperRef}>
         <StyledHeading>About</StyledHeading>
-        <StyledMain ref={textRef}>
+        <StyledMain>
           Hello, my name is Michal and I am a 21 years old aspiring junior web
           developer based in <strong>Tarnow</strong> and <strong>Krakow</strong>
           . I am a computer science student at the State Higher Vocational
