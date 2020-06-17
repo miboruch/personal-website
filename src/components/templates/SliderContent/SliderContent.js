@@ -63,7 +63,7 @@ const SliderContent = ({ image, content, index, isDarkTheme }) => {
   }, []);
 
   useEffect(() => {
-    currentSlide === index ? tl.play() : tl.reverse();
+    currentSlide === index ? tl.play() : tl.delay(0).reverse();
   }, [currentSlide]);
 
   return (

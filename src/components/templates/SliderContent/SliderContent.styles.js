@@ -47,7 +47,7 @@ const StyledContextBox = styled.section`
   width: 100%;
   height: 100%;
   color: ${({ isDarkTheme }) => (isDarkTheme ? '#222' : '#e7e5e1')};
-  transition: color 1s ease;
+  transition: color 1s 2s ease;
 
   ${({ theme }) => theme.mq.standard} {
     top: 0;
