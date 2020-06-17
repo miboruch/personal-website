@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ProjectContentBox from '../../atoms/ProjectContentBox/ProjectContentBox';
 import Image from '../../molecules/Image/Image';
 import Footer from '../../molecules/Footer/Footer';
@@ -18,6 +19,11 @@ import {
   StyledLink,
   LinkContentWrapper
 } from './PortfolioProjectTemplate.styles';
+
+if (typeof window !== `undefined`) {
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.core.globals('ScrollTrigger', ScrollTrigger);
+}
 
 const PortfolioProjectTemplate = ({ content, images }) => {
   const titleRef = useRef(null);

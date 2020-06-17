@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { skillsItems } from '../../../utils/skills';
 import {
   StyledWrapper,
@@ -10,6 +11,11 @@ import {
   ItemsWrapper,
   StyledHeading
 } from './SkillsBox.styles';
+
+if (typeof window !== `undefined`) {
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.core.globals('ScrollTrigger', ScrollTrigger);
+}
 
 const SkillsBox = () => {
   const skillsBoxRef = useRef(null);

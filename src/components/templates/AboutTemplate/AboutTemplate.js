@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import PropTypes from 'prop-types';
 import Footer from '../../molecules/Footer/Footer';
 import SkillsBox from '../../molecules/SkillsBox/SkillsBox';
@@ -20,6 +21,11 @@ import {
   OverflowBox,
   StyledListItem
 } from './AboutTemplate.styles';
+
+if (typeof window !== `undefined`) {
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.core.globals('ScrollTrigger', ScrollTrigger);
+}
 
 const AboutTemplate = ({ images }) => {
   const titleRef = useRef(null);
