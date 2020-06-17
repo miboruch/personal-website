@@ -1,196 +1,74 @@
 import React, { useEffect, useRef, useState } from 'react';
-import styled, { css } from 'styled-components';
 import gsap from 'gsap';
 import PropTypes from 'prop-types';
 import Footer from '../../molecules/Footer/Footer';
-import BackgroundImage from 'gatsby-background-image';
-import Paragraph from '../../atoms/Paragraph/Paragraph';
 import SkillsBox from '../../molecules/SkillsBox/SkillsBox';
-import CloseButton from '../../atoms/CloseButton/CloseButton';
-import { useScrollPosition } from '../../../utils/customHooks';
 import { skills } from '../../../utils/skills';
-
-const StyledWrapper = styled.div`
-  background: #f3f3f3;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-`;
-
-const StyledImage = styled(BackgroundImage)`
-  z-index: 2;
-  width: 100%;
-  height: 70vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: #3d3d3d;
-  background-blend-mode: overlay;
-`;
-
-const StyledTitle = styled(Paragraph)`
-  font-family: ${({ theme }) => theme.font.family.avanti};
-  padding: 2rem;
-  margin-top: 5rem;
-`;
-
-const StyledHeading = styled.h2`
-  font-size: 18px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #4d4d4d;
-  font-weight: bold;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #e3e3e3;
-`;
-
-const StyledLine = styled.div`
-  width: 100%;
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.2);
-`;
-
-const ContentWrapper = styled.div`
-  width: 80%;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-`;
-
-const StyledQuote = styled(Paragraph)`
-  font-size: 20px;
-  color: #fff;
-  letter-spacing: 0;
-`;
-
-const StyledMain = styled.main`
-  font-size: 16px;
-  color: #8d8d8d;
-  letter-spacing: 0;
-`;
-
-const TextWrapper = styled(ContentWrapper)`
-  width: 90%;
-  text-align: left;
-  padding: 4rem 2rem;
-  line-height: 1.5;
-
-  ${({ theme }) => theme.mq.standard} {
-    width: 50%;
-  }
-`;
-
-const StyledPortfolioImage = styled(StyledImage)`
-  &:hover {
-    background-blend-mode: normal;
-  }
-`;
-
-const SmallSkillsBox = styled.div`
-  width: 300px;
-  background: #1d1d1d;
-  position: fixed;
-  bottom: 5px;
-  left: 5px;
-  z-index: 600;
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 3rem;
-  opacity: ${({ isOnTop }) => (!isOnTop ? 1 : 0)};
-  transform: translateY(${({ isOnTop }) => (!isOnTop ? '0' : '20%')});
-  transition: transform 1s ease, opacity 1s ease;
-  text-transform: uppercase;
-  line-height: 1.7;
-  -webkit-box-shadow: 10px 10px 30px -15px rgba(0, 0, 0, 1);
-  -moz-box-shadow: 10px 10px 30px -15px rgba(0, 0, 0, 1);
-  box-shadow: 10px 10px 30px -15px rgba(0, 0, 0, 1);
-
-  ${({ theme }) => theme.mq.tablet} {
-    display: flex;
-  }
-
-  ${({ isOpen }) =>
-    !isOpen &&
-    css`
-      opacity: 0 !important;
-      visibility: hidden !important;
-      transition: opacity 1s ease, visibility 1s ease;
-    `}
-`;
-
-const SkillsBoxParagraph = styled(Paragraph)`
-  color: #adadad;
-  letter-spacing: 4px;
-  font-size: 10px;
-  cursor: pointer;
-`;
-
-const StyledList = styled.ul`
-  list-style-type: none;
-`;
-
-const OverflowBox = styled.div`
-  overflow: hidden;
-`;
-
-const StyledListItem = styled.li`
-  text-decoration: none;
-  font-weight: bold;
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: -15px;
-    transform: translate(-50%, -50%);
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: transparent;
-    transition: background 1s ease;
-    border: 1px solid #8d8d8d;
-  }
-`;
+import SkillToggleBox from '../../molecules/SkillToggleBox/SkillToggleBox';
+import {
+  StyledWrapper,
+  StyledImage,
+  StyledTitle,
+  StyledHeading,
+  StyledLine,
+  ContentWrapper,
+  StyledQuote,
+  StyledMain,
+  TextWrapper,
+  StyledPortfolioImage,
+  StyledList,
+  OverflowBox,
+  StyledListItem
+} from './AboutTemplate.styles';
 
 const AboutTemplate = ({ images }) => {
   const titleRef = useRef(null);
-  const textRef = useRef(null);
   const quoteRef = useRef(null);
   const textWrapperRef = useRef(null);
 
-  const [isSkillsVisible, setSkillsState] = useState(true);
-
-  const isOnTop = useScrollPosition();
+  const [areSkillsVisible, setSkillsState] = useState(true);
 
   useEffect(() => {
     const title = titleRef.current;
-    const text = textRef.current;
     const quote = quoteRef.current;
-    const textWrapper = textWrapperRef.current;
 
     const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
 
-    gsap.set([title, quote, textWrapper, ...text.children], { autoAlpha: 0 });
+    gsap.set([title, quote], { autoAlpha: 0 });
 
-    tl.fromTo(title, { y: '+=40' }, { y: '0', autoAlpha: 1, delay: 1 })
-      .fromTo(
-        quote,
-        { y: '+=20' },
-        { y: '0', autoAlpha: 1, duration: 1 },
-        '-=0.55'
-      )
-      .to(textWrapper, { autoAlpha: 1, duration: 1 })
-      .fromTo(text.children, { y: '+=10' }, { y: '0', autoAlpha: 1 });
+    tl.fromTo(title, { y: '+=40' }, { y: '0', autoAlpha: 1, delay: 1 }).fromTo(
+      quote,
+      { y: '+=20' },
+      { y: '0', autoAlpha: 1, duration: 1 },
+      '-=0.55'
+    );
+  }, []);
+
+  useEffect(() => {
+    const textWrapper = textWrapperRef.current;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: textWrapper,
+        start: '-=100 center',
+        toggleActions: 'play complete pause reverse'
+      },
+      defaults: { ease: 'power3.inOut' }
+    });
+
+    gsap.set(textWrapper.children, { autoAlpha: 0, y: '+=20' });
+
+    tl.to(textWrapper.children, {
+      autoAlpha: 1,
+      y: 0,
+      duration: 1.2,
+      stagger: 0.3
+    });
   }, []);
 
   return (
     <StyledWrapper className={'transition-wrapper'}>
-      <StyledImage fluid={images[0].childImageSharp.fluid}>
+      <StyledImage fluid={images[0].childImageSharp.fluid} fadeIn>
         <OverflowBox>
           <StyledTitle ref={titleRef} title>
             About me
@@ -206,7 +84,7 @@ const AboutTemplate = ({ images }) => {
       </StyledImage>
       <TextWrapper ref={textWrapperRef}>
         <StyledHeading>About</StyledHeading>
-        <StyledMain ref={textRef}>
+        <StyledMain>
           Hello, my name is Michal and I am a 21 years old aspiring junior web
           developer based in <strong>Tarnow</strong> and <strong>Krakow</strong>
           . I am a computer science student at the State Higher Vocational
@@ -241,23 +119,13 @@ const AboutTemplate = ({ images }) => {
             <StyledListItem>
               Testing - JEST/React Testing Library
             </StyledListItem>
-            <StyledListItem>TypeScript advanced</StyledListItem>
+            <StyledListItem>advanced TypeScript</StyledListItem>
           </StyledList>
         </StyledMain>
         <SkillsBox />
       </TextWrapper>
-      <SmallSkillsBox isOnTop={isOnTop} isOpen={isSkillsVisible}>
-        <CloseButton lightTheme setBoxState={setSkillsState} />
-        <SkillsBoxParagraph>
-          {skills.map(item => (
-            <>
-              {item}
-              <br />
-            </>
-          ))}
-        </SkillsBoxParagraph>
-      </SmallSkillsBox>
-      <StyledPortfolioImage fluid={images[1].childImageSharp.fluid} />
+      <SkillToggleBox isOpen={areSkillsVisible} setState={setSkillsState} />
+      <StyledPortfolioImage fluid={images[1].childImageSharp.fluid} fadeIn />
       <Footer />
     </StyledWrapper>
   );

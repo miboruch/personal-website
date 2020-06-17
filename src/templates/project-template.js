@@ -4,14 +4,12 @@ import Layout from '../components/templates/Layout';
 import { graphql } from 'gatsby';
 import PortfolioProjectTemplate from '../components/templates/PortfolioProjectTemplate/PortfolioProjectTemplate';
 
-const ProjectTemplate = ({ pageContext: { data }, data: { allFile } }) => {
-  return (
-    <Layout headerTheme='dark'>
-      <SEO title={data.name} />
-      <PortfolioProjectTemplate content={data} images={allFile.edges} />
-    </Layout>
-  );
-};
+const ProjectTemplate = ({ pageContext: { data }, data: { allFile } }) => (
+  <Layout headerTheme='dark'>
+    <SEO title={data.name} />
+    <PortfolioProjectTemplate content={data} images={allFile.edges} />
+  </Layout>
+);
 
 export const query = graphql`
   query ImageQuery($fileDirectory: String!) {

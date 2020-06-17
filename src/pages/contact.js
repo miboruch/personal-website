@@ -5,16 +5,14 @@ import Layout from '../components/templates/Layout';
 import ContactTemplate from '../components/templates/ContactTemplate/ContactTemplate';
 import SEO from '../components/seo';
 
-const ContactPage = ({ data: { image } }) => {
-  return (
-    <Div100vh>
-      <Layout headerTheme='light'>
-        <SEO title='Contact' />
-        <ContactTemplate image={image} />
-      </Layout>
-    </Div100vh>
-  );
-};
+const ContactPage = ({ data: { image } }) => (
+  <Div100vh>
+    <Layout headerTheme='light'>
+      <SEO title='Contact' />
+      <ContactTemplate image={image} />
+    </Layout>
+  </Div100vh>
+);
 
 export const query = graphql`
   query {
