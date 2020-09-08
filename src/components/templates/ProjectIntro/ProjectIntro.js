@@ -52,20 +52,23 @@ const ProjectIntro = ({ data, image, reverse }) => {
     const header = headerRef.current;
     const description = descriptionRef.current;
 
-    gsap.set([wrapper, description], { autoAlpha: 0 });
-    gsap.set(wrapper, { x: '-=50' });
+    // gsap.set([wrapper, description], { autoAlpha: 0 });
+    // gsap.set(wrapper, { x: '-=50' });
+    gsap.set(wrapper, { y: '+=100' });
 
     const tl = gsap.timeline({
       paused: true,
       scrollTrigger: {
         trigger: wrapper,
         toggleActions: 'play complete pause reverse',
-        start: 'top center'
+        // start: 'top center',
+        start: 'top bottom',
+        scrub: 3
       },
       defaults: { ease: 'power3.inOut' }
     });
 
-    tl.to(wrapper, { autoAlpha: 1, x: '0', duration: 1.5 })
+    tl.to(wrapper, { autoAlpha: 1, y: '0', x: '0', duration: 1.5 })
       .fromTo(
         header,
         { transform: 'matrix(0.99, 0.33, 0, 1, 0, 100)' },
@@ -73,6 +76,34 @@ const ProjectIntro = ({ data, image, reverse }) => {
         '-=0.5'
       )
       .to(description, { autoAlpha: 1, duration: 1.2 }, '-=0.4');
+  }, []);
+
+  // * TEST
+  useEffect(() => {
+    const header = headerRef.current;
+    const description = descriptionRef.current;
+
+    gsap.set([header, description], { y: '+=70' });
+    gsap.set(description, { autoAlpha: 0 });
+
+    const tl = gsap.timeline({
+      paused: true,
+      scrollTrigger: {
+        trigger: header,
+        toggleActions: 'play complete pause reverse',
+        // start: 'top center',
+        start: 'bottom bottom',
+        scrub: 4
+      },
+      defaults: { ease: 'power3.inOut' }
+    });
+
+    tl.fromTo(
+      header,
+      { transform: 'matrix(0.99, 0.33, 0, 1, 0, 100)' },
+      { transform: 'matrix(1,0,0,1,0,0)', duration: 1 },
+      '-=0.5'
+    ).to(description, { y: '0', autoAlpha: 1, duration: 1.2 }, '-=0.4');
   }, []);
 
   return (

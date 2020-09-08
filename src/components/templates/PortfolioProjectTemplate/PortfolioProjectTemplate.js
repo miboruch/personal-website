@@ -63,7 +63,7 @@ const PortfolioProjectTemplate = ({ content, images }) => {
 
     gsap.set([...projectDescription.children], { autoAlpha: 0 });
 
-    tl.to(projectDescription.children, { autoAlpha: 1, stagger: 0.4 });
+    tl.to(projectDescription.children, { autoAlpha: 1, stagger: 0.4, y: '0' });
   }, []);
 
   return (

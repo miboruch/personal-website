@@ -58,17 +58,9 @@ const ContactTemplate = ({ image }) => {
     gsap.set([form, ...contact.children], { autoAlpha: 0 });
 
     tl.fromTo(
-      form,
+      [form, contact.children],
       { y: '+=30' },
       { y: '0', autoAlpha: 1, stagger: 0.3, duration: 1.2 }
-    ).fromTo(
-      contact.children,
-      { y: '+=30' },
-      {
-        y: '0',
-        autoAlpha: 1,
-        stagger: 0.7
-      }
     );
   }, []);
 
