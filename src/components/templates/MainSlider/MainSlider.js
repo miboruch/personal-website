@@ -56,6 +56,7 @@ const MainSlider = ({ images, data }) => {
     dots: false,
     infinite: true,
     autoplay: false,
+    fade: true,
     speed: 2000,
     slidesToShow: 1,
     slidesToScroll: 1,
