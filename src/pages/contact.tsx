@@ -5,7 +5,13 @@ import Layout from '../components/templates/Layout';
 import ContactTemplate from '../components/templates/ContactTemplate/ContactTemplate';
 import SEO from '../components/seo';
 
-const ContactPage = ({ data: { image } }) => (
+interface QueryData {
+  data: {
+    image: any;
+  }
+}
+
+const ContactPage: React.FC<QueryData> = ({ data: { image } }) => (
   <Div100vh>
     <Layout headerTheme='light'>
       <SEO title='Contact' />
@@ -14,7 +20,7 @@ const ContactPage = ({ data: { image } }) => (
   </Div100vh>
 );
 
-export const query = graphql`
+graphql`
   query {
     image: file(name: { regex: "/portret/" }) {
       ...smallPhotoFragment

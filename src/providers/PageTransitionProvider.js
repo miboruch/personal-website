@@ -3,7 +3,7 @@ import TransitionLink from 'gatsby-plugin-transition-link';
 import PropTypes from 'prop-types';
 import gsap from 'gsap';
 
-const PageTransitionProvider = ({ children, to }) => {
+const PageTransitionProvider = ({ children, to, dark }) => {
   const exitAnimation = () => {
     const body = document.body;
     const wrapper = body.querySelector('.transition-wrapper');

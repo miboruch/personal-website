@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   siteMetadata: {
     title: `Michal Boruch Portfolio`,
@@ -47,6 +49,18 @@ module.exports = {
       }
     },
     `gatsby-plugin-eslint`,
+    {
+      resolve: 'gatsby-plugin-root-import',
+      options: {
+        src: path.join(__dirname, 'src'),
+        pages: path.join(__dirname, 'src/pages'),
+        components: path.join(__dirname, 'src/components'),
+        styles: path.join(__dirname, 'src/styles'),
+        templates: path.join(__dirname, 'src/templates'),
+        utils: path.join(__dirname, 'src/utils'),
+        assets: path.join(__dirname, 'src/assets')
+      }
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

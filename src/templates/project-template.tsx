@@ -4,14 +4,28 @@ import Layout from '../components/templates/Layout';
 import { graphql } from 'gatsby';
 import PortfolioProjectTemplate from '../components/templates/PortfolioProjectTemplate/PortfolioProjectTemplate';
 
-const ProjectTemplate = ({ pageContext: { data }, data: { allFile } }) => (
+interface QueryData {
+  pageContext: {
+    data: any;
+  };
+  data: {
+    allFile: {
+      edges: any;
+    };
+  };
+}
+
+const ProjectTemplate: React.FC<QueryData> = ({
+  pageContext: { data },
+  data: { allFile }
+}) => (
   <Layout headerTheme='dark'>
     <SEO title={data.name} />
     <PortfolioProjectTemplate content={data} images={allFile.edges} />
   </Layout>
 );
 
-export const query = graphql`
+graphql`
   query ImageQuery($fileDirectory: String!) {
     allFile(filter: { relativeDirectory: { eq: $fileDirectory } }) {
       edges {

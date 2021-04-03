@@ -7,7 +7,28 @@ import { convertObjectToArray } from '../utils/functions';
 import MainSlider from '../components/templates/MainSlider/MainSlider';
 import CurrentSlideContextProvider from '../providers/CurrentSlideContext';
 
-const IndexPage = ({ data }) => {
+interface QueryData {
+  data: {
+    mainPageData: {
+      projects: {
+        index: string;
+        name: string;
+        next: string;
+        description: string;
+        pageLink: string;
+      }[];
+    };
+    image0: any;
+    image1: any;
+    image2: any;
+    image3: any;
+    image4: any;
+    image5: any;
+  };
+}
+
+const IndexPage: React.FC<QueryData> = ({ data }) => {
+  console.log(data);
   const {
     mainPageData: { projects }
   } = data;
@@ -64,7 +85,7 @@ export const smallPhotoFragment = graphql`
   }
 `;
 
-export const query = graphql`
+graphql`
   query {
     image0: file(name: { regex: "/grades-main/" }) {
       ...mockUpFragment
