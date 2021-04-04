@@ -11,7 +11,7 @@ import {
   ParagraphBox,
   StyledMenuItems,
   MenuItems
-} from './Menu.styles';
+} from 'components/navigation/Menu/Menu.styles';
 
 const Menu = ({ isOpen, headerTheme }) => {
   const [tlIn] = useState(gsap.timeline({ defaults: { ease: easeExpInOut } }));

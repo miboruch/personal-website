@@ -2,7 +2,6 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/templates/Layout';
 import SEO from '../components/seo';
-import { convertObjectToArray } from '../utils/functions';
 import ProjectsTemplate from '../components/templates/ProjectsTemplate/ProjectsTemplate';
 
 interface QueryData {
@@ -46,10 +45,10 @@ const Projects: React.FC<QueryData> = ({ data }) => {
 //     image0: file(name: { regex: "/grades-main/" }) {
 //       ...mockUpFragment
 //     }
-//     image1: file(name: { regex: "/chat-main/" }) {
+//     image1: file(name: { regex: "/chat-app-main/" }) {
 //       ...mockUpFragment
 //     }
-//     image2: file(name: { regex: "/buyit-main/" }) {
+//     image2: file(name: { regex: "/buy-it-main/" }) {
 //       ...mockUpFragment
 //     }
 //     image3: file(name: { regex: "/indeed-main-mobile/" }) {

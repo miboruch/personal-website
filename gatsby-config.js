@@ -73,15 +73,35 @@ module.exports = {
         icon: `src/images/icon.png` // This path is relative to the root of the site.
       }
     },
+    // {
+    //   resolve: 'gatsby-source-graphql',
+    //   options: {
+    //     typeName: 'PORTFOLIO',
+    //     fieldName: 'portfolio',
+    //     url:
+    //       'https://api-euwest.graphcms.com/v1/ck3yat3vk6j3c01gcfr6zhmvu/master'
+    //   }
+    // },
+    //-------------------------------
     {
-      resolve: 'gatsby-source-graphql',
+      resolve: `gatsby-source-datocms`,
       options: {
-        typeName: 'PORTFOLIO',
-        fieldName: 'portfolio',
-        url:
-          'https://api-euwest.graphcms.com/v1/ck3yat3vk6j3c01gcfr6zhmvu/master'
+        apiToken: `9125e69c2af52e2ee97f93c818d88b`,
+        environment: `main`,
+        previewMode: true,
+        disableLiveReload: false
       }
     }
+
+    // {
+    //   resolve: 'gatsby-source-graphql',
+    //   options: {
+    //     typeName: 'PORTFOLIO',
+    //     fieldName: 'portfolio',
+    //     url:
+    //       'https://api-euwest.graphcms.com/v1/ck3yat3vk6j3c01gcfr6zhmvu/master'
+    //   }
+    // }
 
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline

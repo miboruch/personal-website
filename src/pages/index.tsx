@@ -3,21 +3,41 @@ import { graphql } from 'gatsby';
 import Div100vh from 'react-div-100vh';
 import Layout from '../components/templates/Layout';
 import SEO from '../components/seo';
-import { convertObjectToArray } from '../utils/functions';
+// import { convertObjectToArray } from '../utils/functions';
 import MainSlider from '../components/templates/MainSlider/MainSlider';
 import CurrentSlideContextProvider from '../providers/CurrentSlideContext';
 
+interface ProjectQuery {
+  index: number;
+  description: string;
+  category: string;
+  githubLink: string;
+  name: string;
+  next: string;
+  pageLink: string;
+  slug: string;
+  primaryDescription: string;
+  secondaryDescription: string;
+  mainTechnology: string;
+  link: string;
+}
+
 interface QueryData {
   data: {
-    mainPageData: {
-      projects: {
-        index: string;
-        name: string;
-        next: string;
-        description: string;
-        pageLink: string;
-      }[];
+    projects: {
+      // allDatoCmsProject: {
+      edges: { node: ProjectQuery }[];
+      // };
     };
+    // mainPageData: {
+    //   projects: {
+    //     index: string;
+    //     name: string;
+    //     next: string;
+    //     description: string;
+    //     pageLink: string;
+    //   }[];
+    // };
     image0: any;
     image1: any;
     image2: any;
@@ -28,18 +48,20 @@ interface QueryData {
 }
 
 const IndexPage: React.FC<QueryData> = ({ data }) => {
-  console.log(data);
   const {
-    mainPageData: { projects }
+    projects: { edges }
   } = data;
-  const imagesArray = convertObjectToArray(
-    data.image0,
+  console.log(data);
+  const imagesArray = [
+    // data.image0,
     data.image1,
-    data.image2,
-    data.image3,
-    data.image4,
-    data.image5
-  );
+    data.image2
+    // data.image3,
+    // data.image4,
+    // data.image5
+  ];
+  console.log(imagesArray);
+  const projects = edges.map(({ node }) => node);
 
   return (
     /* Three themes to choose from: light, dark, default.
@@ -85,15 +107,15 @@ export const smallPhotoFragment = graphql`
   }
 `;
 
-graphql`
+export const query = graphql`
   query {
     image0: file(name: { regex: "/grades-main/" }) {
       ...mockUpFragment
     }
-    image1: file(name: { regex: "/chat-main/" }) {
+    image1: file(name: { regex: "/chat-app-main/" }) {
       ...mockUpFragment
     }
-    image2: file(name: { regex: "/buyit-main/" }) {
+    image2: file(name: { regex: "/buy-it-main/" }) {
       ...mockUpFragment
     }
     image3: file(name: { regex: "/indeed-main-mobile/" }) {
@@ -105,16 +127,54 @@ graphql`
     image5: file(name: { regex: "/weather-mobile/" }) {
       ...mockUpFragment
     }
-    mainPageData: portfolio {
-      projects(orderBy: index_ASC) {
-        index
-        name
-        next
-        description
-        pageLink
+    projects: allDatoCmsProject {
+      edges {
+        node {
+          index
+          description
+          category
+          githubLink
+          name
+          next
+          pageLink
+          slug
+          primaryDescription
+          secondaryDescription
+          mainTechnology
+          link
+        }
       }
     }
   }
 `;
+
+// export const query = graphql`
+//   query MyQuery {
+//     allDatoCmsProject {
+//       edges {
+//         node {
+//           index
+//           description
+//           category
+//           githubLink
+//           name
+//           next
+//           pageLink
+//           slug
+//           primaryDescription
+//           secondaryDescription
+//           mainTechnology
+//           link
+//         }
+//         previous {
+//           id
+//         }
+//       }
+//     }
+//     file(name: { regex: "/grades-main/" }) {
+//       id
+//     }
+//   }
+// `;
 
 export default IndexPage;

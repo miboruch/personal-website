@@ -3,7 +3,6 @@ import { graphql } from 'gatsby';
 import Layout from '../components/templates/Layout';
 import SEO from '../components/seo';
 import AboutTemplate from '../components/templates/AboutTemplate/AboutTemplate';
-import { convertObjectToArray } from 'utils/functions';
 
 interface QueryData {
   data: {

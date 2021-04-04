@@ -18,14 +18,17 @@ interface QueryData {
 const ProjectTemplate: React.FC<QueryData> = ({
   pageContext: { data },
   data: { allFile }
-}) => (
-  <Layout headerTheme='dark'>
-    <SEO title={data.name} />
-    <PortfolioProjectTemplate content={data} images={allFile.edges} />
-  </Layout>
-);
+}) => {
+  console.log(allFile);
+  return (
+    <Layout headerTheme='dark'>
+      <SEO title={data.name} />
+      <PortfolioProjectTemplate content={data} images={allFile.edges} />
+    </Layout>
+  );
+};
 
-graphql`
+export const query = graphql`
   query ImageQuery($fileDirectory: String!) {
     allFile(filter: { relativeDirectory: { eq: $fileDirectory } }) {
       edges {
