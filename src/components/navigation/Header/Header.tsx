@@ -1,17 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
-import styled, { css } from 'styled-components';
 import gsap from 'gsap';
-import PropTypes from 'prop-types';
-import Menu from 'src/components/navigation/Menu/Menu';
-import {useScrollPosition} from 'src/utils';
-import MenuButton from 'src/components/molecules/MenuButton/MenuButton';
+
+import Menu from '../Menu/Menu';
+import MenuButton from 'components/molecules/MenuButton/MenuButton';
+import { useScroll } from 'components/hooks/use-scroll.hook';
 import Logo from '../../atoms/Logo/Logo';
+import { HeaderTheme } from 'types';
+
 import { StyledHeader, StyledLink } from './Header.styles';
 
-const Header = ({ headerTheme }) => {
-  const headerRef = useRef(null);
+interface Props {
+  headerTheme: HeaderTheme;
+}
+
+const Header: React.FC<Props> = ({ headerTheme }) => {
+  const headerRef = useRef<HTMLElement>(null);
   const [isOpen, setOpen] = useState(false);
-  const isOnTop = useScrollPosition();
+  const { isOnTop } = useScroll();
 
   const toggleMenu = () => {
     setOpen(!isOpen);
@@ -21,13 +26,15 @@ const Header = ({ headerTheme }) => {
     const header = headerRef.current;
     const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
 
-    gsap.set([...header.children], { autoAlpha: 0 });
+    if (header) {
+      gsap.set([...header.children], { autoAlpha: 0 });
 
-    tl.fromTo(
-      header.children,
-      { y: '-=15' },
-      { y: '0', autoAlpha: 1, duration: 1.2, stagger: 0.3, delay: 0.7 }
-    );
+      tl.fromTo(
+        header.children,
+        { y: '-=15' },
+        { y: '0', autoAlpha: 1, duration: 1.2, stagger: 0.3, delay: 0.7 }
+      );
+    }
   }, []);
 
   return (
@@ -55,10 +62,6 @@ const Header = ({ headerTheme }) => {
       <Menu isOpen={isOpen} headerTheme={headerTheme} />
     </>
   );
-};
-
-Header.propTypes = {
-  headerTheme: PropTypes.oneOf(['dark', 'light'])
 };
 
 export default Header;

@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CloseButton from '../../atoms/CloseButton/CloseButton';
 import { skills } from '../../../utils/skills';
-import { useScrollPosition } from '../../../utils/customHooks';
+import { useScroll } from 'src/components/hooks/use-scroll.hook';
 import { SmallSkillsBox, SkillsBoxParagraph } from './SkillToggleBox.styles';
 
 const SkillToggleBox = ({ isOpen, setState }) => {
-  const isOnTop = useScrollPosition();
+  const { isOnTop } = useScroll();
   return (
     <SmallSkillsBox isOnTop={isOnTop} isOpen={isOpen}>
       <CloseButton lightTheme setBoxState={setState} />

@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 
-export const useScrollPosition = () => {
+interface UseScrollHookReturn{
+  isOnTop: boolean;
+}
+
+export const useScroll = ():UseScrollHookReturn => {
   const [isOnTop, setIsOnTop] = useState(true);
 
   useEffect(() => {
@@ -13,5 +17,5 @@ export const useScrollPosition = () => {
     return () => window.removeEventListener('scroll', setPosition);
   }, []);
 
-  return isOnTop;
+  return { isOnTop };
 };

@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import ProjectIntro from '../ProjectIntro/ProjectIntro';
 import ProjectNavigation from '../../molecules/ProjectNavigation/ProjectNavigation';
 import Footer from '../../molecules/Footer/Footer';
-import { useScrollPosition } from '../../../utils/customHooks';
+import { useScroll } from 'src/components/hooks/use-scroll.hook';
 import {
   StyledWrapper,
   TextWrapper,
@@ -14,7 +14,7 @@ import {
 
 const ProjectsTemplate = ({ projectsData, images }) => {
   const titleRef = useRef(null);
-  const isOnTop = useScrollPosition();
+  const { isOnTop } = useScroll();
 
   useEffect(() => {
     const title = titleRef.current;

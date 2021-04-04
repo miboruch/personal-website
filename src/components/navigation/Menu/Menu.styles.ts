@@ -45,10 +45,6 @@ const StyledMenuBox = styled.div<MenuProps>`
         : 'translate(calc(100% - 300px), calc(-100% + 60px))'};
   }
 
-  // ${({ theme }) => theme.mq.standard} {
-  //   flex-direction: row;
-  // }
-
   ${({ headerTheme }) =>
     headerTheme === 'light' &&
     css`
@@ -197,9 +193,9 @@ const MenuItems = styled.div`
   display: flex;
   flex-direction: column;
 
-  ${({ theme }) => theme.mq.standard} {
-    flex-direction: row;
-  }
+  // ${({ theme }) => theme.mq.standard} {
+  //   flex-direction: row;
+  // }
 `;
 
 export {
