@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import SliderContent from '../SliderContent/SliderContent';
 import SliderNavigation from '../../molecules/SliderNavigation/SliderNavigation';
-import SocialNavigation from '../../molecules/SocialNavigation/SocialNavigation';
+import SocialNavigation from 'src/components/molecules/SocialNavigation/SocialNavigation';
 import { CurrentSlideContext } from '../../../providers/CurrentSlideContext';
 import SliderBoxInfo from '../../molecules/SliderBoxInfo/SliderBoxInfo';
 import {

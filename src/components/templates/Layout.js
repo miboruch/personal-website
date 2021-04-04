@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from '../../styles/GlobalStyle';
 import { theme } from '../../styles/theme';
-import Header from '../molecules/Header/Header';
+import Header from 'src/components/navigation/Header/Header';
 
 import '../index.css';
 import { CurrentSlideContext } from '../../providers/CurrentSlideContext';

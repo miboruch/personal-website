@@ -1,7 +1,16 @@
 import styled, { css } from 'styled-components';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
+import { HeaderTheme } from 'types';
 
-const StyledMenuBox = styled.div`
+interface HeaderThemeProps {
+  headerTheme?: HeaderTheme;
+}
+
+interface MenuProps extends HeaderThemeProps {
+  isOpen: boolean;
+}
+
+const StyledMenuBox = styled.div<MenuProps>`
   position: fixed;
   top: 0;
   right: 0;
@@ -36,9 +45,9 @@ const StyledMenuBox = styled.div`
         : 'translate(calc(100% - 300px), calc(-100% + 60px))'};
   }
 
-  ${({ theme }) => theme.mq.standard} {
-    flex-direction: row;
-  }
+  // ${({ theme }) => theme.mq.standard} {
+  //   flex-direction: row;
+  // }
 
   ${({ headerTheme }) =>
     headerTheme === 'light' &&
@@ -61,7 +70,7 @@ const NavigationWrapper = styled.div`
   }
 `;
 
-const ParagraphBox = styled.div`
+const ParagraphBox = styled.div<HeaderThemeProps>`
   width: 100%;
   height: 33vh;
   text-align: center;
@@ -101,7 +110,11 @@ const ParagraphBox = styled.div`
   }
 `;
 
-const StyledMenuItems = styled(Paragraph)`
+interface MenuItemsProps extends HeaderThemeProps {
+  before: string;
+}
+
+const StyledMenuItems = styled(Paragraph)<MenuItemsProps>`
   color: rgba(255, 255, 255, 0.8);
   transition: color 1s ease;
   font-family: ${({ theme }) => theme.font.family.avanti};

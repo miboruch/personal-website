@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import gsap from 'gsap';
 import PropTypes from 'prop-types';
-import Menu from '../../templates/Menu/Menu';
-import { useScrollPosition } from '../../../utils/customHooks';
-import MenuButton from '../MenuButton/MenuButton';
+import Menu from 'src/components/navigation/Menu/Menu';
+import {useScrollPosition} from 'src/utils';
+import MenuButton from 'src/components/molecules/MenuButton/MenuButton';
 import Logo from '../../atoms/Logo/Logo';
 import { StyledHeader, StyledLink } from './Header.styles';
 

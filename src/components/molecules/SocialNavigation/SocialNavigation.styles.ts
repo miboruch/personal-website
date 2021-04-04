@@ -1,6 +1,11 @@
 import styled, { css } from 'styled-components';
+import { HeaderTheme } from 'types';
 
-const StyledWrapper = styled.div`
+interface WrapperProps {
+  noPadding?: boolean;
+}
+
+const StyledWrapper = styled.div<WrapperProps>`
   display: flex;
   justify-content: ${({ noPadding }) => (noPadding ? 'left' : 'space-between')};
   align-items: center;
@@ -11,7 +16,12 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const StyledLink = styled.a`
+interface LinkProps extends WrapperProps {
+  headerTheme: HeaderTheme;
+  isDarkTheme?: boolean;
+}
+
+const StyledLink = styled.a<LinkProps>`
   color: ${({ headerTheme }) => (headerTheme === 'light' ? '#000' : '#fff')};
   text-decoration: none;
   padding: ${({ noPadding }) =>
@@ -19,10 +29,10 @@ const StyledLink = styled.a`
   letter-spacing: 1px;
   transition: color 0.5s ease;
 
-  ${({ isDarkTheme }) =>
+  ${({ isDarkTheme, headerTheme }) =>
     isDarkTheme &&
     css`
-      color: ${({ isDarkTheme }) => (isDarkTheme ? '#222' : '#e7e5e1')};
+      color: ${headerTheme ? '#222' : '#e7e5e1'};
     `}
 `;
 

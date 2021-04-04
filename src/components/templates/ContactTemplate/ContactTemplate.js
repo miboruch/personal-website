@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import gsap from 'gsap';
-import SocialNavigation from '../../molecules/SocialNavigation/SocialNavigation';
+import SocialNavigation from 'src/components/molecules/SocialNavigation/SocialNavigation';
 import Footer from '../../molecules/Footer/Footer';
 import ContactForm from '../ContactForm/ContactForm';
 import Form from '../../molecules/Form/Form';
