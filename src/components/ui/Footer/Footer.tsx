@@ -1,8 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
+import { Theme } from 'types';
+
 import { StyledFooter, StyledParagraph, StyledSpan } from './Footer.styles';
 
-const Footer = ({ footerTheme }) => (
+interface Props {
+  footerTheme: Theme;
+}
+
+const Footer: React.FC<Props> = ({ footerTheme }) => (
   <StyledFooter footerTheme={footerTheme}>
     <StyledParagraph>2020</StyledParagraph>
     <StyledParagraph>
@@ -10,9 +16,5 @@ const Footer = ({ footerTheme }) => (
     </StyledParagraph>
   </StyledFooter>
 );
-
-Footer.propTypes = {
-  footerTheme: PropTypes.oneOf(['dark, light'])
-};
 
 export default Footer;

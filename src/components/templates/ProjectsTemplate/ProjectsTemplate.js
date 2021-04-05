@@ -1,9 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+
 import ProjectIntro from '../ProjectIntro/ProjectIntro';
 import ProjectNavigation from '../../molecules/ProjectNavigation/ProjectNavigation';
-import Footer from '../../molecules/Footer/Footer';
+import { Footer } from 'src/components';
 import { useScroll } from 'src/components/hooks/use-scroll.hook';
+
 import {
   StyledWrapper,
   TextWrapper,

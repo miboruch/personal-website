@@ -3,14 +3,14 @@ import gsap from 'gsap';
 
 import Menu from '../Menu/Menu';
 import MenuButton from 'components/molecules/MenuButton/MenuButton';
-import { useScroll } from 'components/hooks/use-scroll.hook';
 import Logo from '../../atoms/Logo/Logo';
-import { HeaderTheme } from 'types';
+import { useScroll } from 'components/hooks/use-scroll.hook';
+import { Theme } from 'types';
 
 import { StyledHeader, StyledLink } from './Header.styles';
 
 interface Props {
-  headerTheme: HeaderTheme;
+  headerTheme: Theme;
 }
 
 const Header: React.FC<Props> = ({ headerTheme }) => {

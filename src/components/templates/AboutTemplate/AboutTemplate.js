@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import PropTypes from 'prop-types';
-import Footer from '../../molecules/Footer/Footer';
+import { Footer } from 'src/components/index';
 import SkillsBox from '../../molecules/SkillsBox/SkillsBox';
-import { skills } from '../../../utils/skills';
+import { skills } from 'src/utils';
 import SkillToggleBox from '../../molecules/SkillToggleBox/SkillToggleBox';
 import {
   StyledWrapper,

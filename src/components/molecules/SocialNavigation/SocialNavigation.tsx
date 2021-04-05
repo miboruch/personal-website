@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { HeaderTheme } from 'types';
+import { Theme } from 'types';
 import { mediaItems } from 'utils';
 
 import { StyledWrapper, StyledLink } from './SocialNavigation.styles';
 
 interface Props {
-  headerTheme: HeaderTheme;
+  headerTheme: Theme;
   noPadding?: boolean;
   isDarkTheme?: boolean;
 }

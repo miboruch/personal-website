@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { easeExpInOut } from 'd3-ease';
 
-import { menuItems } from 'utils';
-import { HeaderTheme } from 'types';
 import SocialNavigation from 'components/molecules/SocialNavigation/SocialNavigation';
 import SlidePageTransitionProvider from '../../../providers/SlidePageTransitionProvider';
+import { Theme } from 'types';
+import { menuItems } from 'utils';
 
 import {
   StyledMenuBox,
@@ -17,7 +17,7 @@ import {
 
 interface Props {
   isOpen: boolean;
-  headerTheme: HeaderTheme;
+  headerTheme: Theme;
 }
 
 const Menu: React.FC<Props> = ({ isOpen, headerTheme }) => {

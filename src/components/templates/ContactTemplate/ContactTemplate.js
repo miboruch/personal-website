@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import gsap from 'gsap';
 import SocialNavigation from 'src/components/molecules/SocialNavigation/SocialNavigation';
-import Footer from '../../molecules/Footer/Footer';
+import { Footer } from 'src/components/index';
 import ContactForm from '../ContactForm/ContactForm';
 import Form from '../../molecules/Form/Form';
-import { mediaItems } from '../../../utils/items';
+import { mediaItems } from 'src/utils';
 import {
   StyledWrapper,
   ContentWrapper,

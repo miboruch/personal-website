@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components';
-import { HeaderTheme } from 'types';
+import { Theme } from 'types';
 
 interface HeaderProps {
   isOnTop: boolean;
-  headerTheme: HeaderTheme;
+  headerTheme: Theme;
   isOpen: boolean;
 }
 
@@ -41,7 +41,7 @@ const StyledHeader = styled.header<HeaderProps>`
 `;
 
 interface LinkProps {
-  headerTheme: HeaderTheme;
+  headerTheme: Theme;
   isOpen: boolean;
 }
 

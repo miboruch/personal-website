@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
-import { HeaderTheme } from 'types';
+
+import { Theme } from 'types';
 
 interface WrapperProps {
   noPadding?: boolean;
@@ -17,7 +18,7 @@ const StyledWrapper = styled.div<WrapperProps>`
 `;
 
 interface LinkProps extends WrapperProps {
-  headerTheme: HeaderTheme;
+  headerTheme: Theme;
   isDarkTheme?: boolean;
 }
 

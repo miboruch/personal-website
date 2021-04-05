@@ -1,1 +1,1 @@
-export type HeaderTheme = 'light' | 'dark';
+export type Theme = 'light' | 'dark';

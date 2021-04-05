@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
-import { HeaderTheme } from 'types';
+import { Theme } from 'types';
 
 interface HeaderThemeProps {
-  headerTheme?: HeaderTheme;
+  headerTheme?: Theme;
 }
 
 interface MenuProps extends HeaderThemeProps {

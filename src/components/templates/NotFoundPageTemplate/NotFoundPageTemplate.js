@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import Div100vh from 'react-div-100vh';
 import gsap from 'gsap';
 import PageTransitionProvider from '../../../providers/PageTransitionProvider';
-import Footer from '../../molecules/Footer/Footer';
+import { Footer } from 'src/components/index';
 import {
   StyledWrapper,
   ContentWrapper,

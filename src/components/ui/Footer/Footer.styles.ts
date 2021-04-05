@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
+import { Theme } from 'types';
 
-const StyledFooter = styled.footer`
+interface Props {
+  footerTheme: Theme;
+}
+
+const StyledFooter = styled.footer<Props>`
   padding: 3rem;
   background: transparent;
   display: flex;
@@ -16,7 +21,7 @@ const StyledParagraph = styled(Paragraph)`
   color: inherit;
 `;
 
-const StyledSpan = styled.span`
+const StyledSpan = styled.span<Props>`
   color: ${({ footerTheme }) =>
     footerTheme === 'light' ? '#929292' : '#9d9d9d'};
 `;

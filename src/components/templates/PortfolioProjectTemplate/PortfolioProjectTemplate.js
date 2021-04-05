@@ -3,7 +3,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ProjectContentBox from '../../atoms/ProjectContentBox/ProjectContentBox';
 import Image from '../../molecules/Image/Image';
-import Footer from '../../molecules/Footer/Footer';
+import { Footer } from 'src/components';
+
 import {
   StyledWrapper,
   TextWrapper,
