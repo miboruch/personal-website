@@ -20,7 +20,7 @@ const ContactPage: React.FC<QueryData> = ({ data: { image } }) => (
   </Div100vh>
 );
 
-graphql`
+export const query = graphql`
   query {
     image: file(name: { regex: "/portret/" }) {
       ...smallPhotoFragment

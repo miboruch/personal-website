@@ -12,25 +12,24 @@ interface QueryData {
 }
 
 const AboutPage: React.FC<QueryData> = ({ data }) => {
-  // const imagesArray = convertObjectToArray(data.image1, data.image2);
+  const imagesArray = [data.image1, data.image2];
   return (
     <Layout headerTheme='light'>
       <SEO title='About' />
-      {/*<AboutTemplate images={imagesArray} />*/}
-      <AboutTemplate images={[]} />
+      <AboutTemplate images={imagesArray} />
     </Layout>
   );
 };
 
-// export const query = graphql`
-//   query {
-//     image1: file(name: { regex: "/portfolio1/" }) {
-//       ...photoFragment
-//     }
-//     image2: file(name: { regex: "/portfolio2/" }) {
-//       ...photoFragment
-//     }
-//   }
-// `;
+export const query = graphql`
+  query {
+    image1: file(name: { regex: "/portfolio1/" }) {
+      ...photoFragment
+    }
+    image2: file(name: { regex: "/portfolio2/" }) {
+      ...photoFragment
+    }
+  }
+`;
 
 export default AboutPage;

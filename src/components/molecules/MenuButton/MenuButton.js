@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Hamburger from '../../atoms/Hamburger/Hamburger';
+import Hamburger from 'src/components/atoms/Hamburger/Hamburger';
 import { StyledBox, StyledParagraph } from './MenuButton.styles';
 
 const MenuButton = ({ isOpen, toggleMenu, headerTheme }) => (

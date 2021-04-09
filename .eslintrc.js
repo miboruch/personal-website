@@ -3,13 +3,7 @@ module.exports = {
     browser: true,
     es6: true
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'prettier',
-    'prettier/react',
-    'plugin:@typescript-eslint/recommended'
-  ],
+  extends: ['eslint:recommended', 'plugin:react/recommended', 'prettier', 'prettier/react', 'plugin:@typescript-eslint/recommended'],
   globals: {
     window: 'true',
     Atomics: 'readonly',
@@ -25,7 +19,7 @@ module.exports = {
   },
   plugins: ['react', 'prettier', 'react-hooks', '@typescript-eslint'],
   rules: {
-    'prettier/prettier': 'warn',
+    'prettier/prettier': 'off',
     'no-unused-vars': 'off',
     'react/prop-types': 'off',
     'no-console': 'warn',
@@ -33,6 +27,6 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 'warn',
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-unused-vars': 'warn',
-    '@typescript-eslint/no-unused-expressions': 'off',
+    '@typescript-eslint/no-unused-expressions': 'off'
   }
 };

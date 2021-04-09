@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
-import CloseButton from '../../atoms/CloseButton/CloseButton';
+import CloseButton from 'src/components/atoms/CloseButton/CloseButton';
 import { ContactFormValidation } from '../../../utils/formValidation';
 import gsap from 'gsap';
 import {
@@ -16,6 +16,8 @@ import {
 
 const Form = ({ setFormState }) => {
   const formRef = useRef(null);
+
+  const handleClose = () => setFormState(false);
 
   useEffect(() => {
     const form = formRef.current;
@@ -49,7 +51,7 @@ const Form = ({ setFormState }) => {
         isSubmitting
       }) => (
         <StyledForm onSubmit={handleSubmit} autoComplete={'off'} ref={formRef}>
-          <CloseButton setBoxState={setFormState} contactPage />
+          <CloseButton handleClose={handleClose} theme={'dark'} contactPage />
           <StyledTitle>Send message</StyledTitle>
           <FormLine>
             <StyledInput

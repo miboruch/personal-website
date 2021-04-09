@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { Theme } from 'types';
 
-const ButtonWrapper = styled.button`
+const ButtonWrapper = styled.button<{ isContactPage: boolean }>`
   cursor: pointer;
   width: 40px;
   height: 40px;
@@ -16,19 +17,19 @@ const ButtonWrapper = styled.button`
   }
 
   ${({ theme }) => theme.mq.standard} {
-    display: ${({ contactPage }) => (contactPage ? 'none' : 'block')};
+    display: ${({ isContactPage }) => (isContactPage ? 'none' : 'block')};
   }
 `;
 
-const InnerButton = styled.div`
+const InnerButton = styled.div<{ theme: Theme }>`
   position: relative;
 
   ::before,
   ::after {
     content: '';
-    width: ${({ lightTheme }) => (lightTheme ? '18px' : '24px')};
+    width: ${({ theme }) => (theme === 'light' ? '18px' : '24px')};
     height: 1px;
-    background: ${({ lightTheme }) => (lightTheme ? '#fff' : '#000')};
+    background: ${({ theme }) => (theme === 'light' ? '#fff' : '#000')};
     position: absolute;
     left: 0;
     transition: all 0.5s ease;

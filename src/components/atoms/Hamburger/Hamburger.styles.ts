@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Props } from './Hamburger';
 
 const StyledHamburger = styled.button`
   cursor: pointer;
@@ -17,7 +18,7 @@ const StyledHamburger = styled.button`
   }
 `;
 
-const InnerHamburger = styled.div`
+const InnerHamburger = styled.div<Props>`
   position: relative;
 
   ${({ isOpen }) =>
@@ -30,8 +31,7 @@ const InnerHamburger = styled.div`
   &::after {
     content: '';
     height: 1px;
-    background: ${({ headerTheme }) =>
-      headerTheme === 'light' ? '#000' : '#fff'};
+    background: ${({ theme }) => (theme === 'light' ? '#000' : '#fff')};
     position: absolute;
     left: 0;
     transition: all 0.5s ease;
