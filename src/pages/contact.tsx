@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Div100vh from 'react-div-100vh';
-import Layout from '../components/templates/Layout';
+import Layout from 'components/templates/Layout';
 import ContactTemplate from '../components/templates/ContactTemplate/ContactTemplate';
 import SEO from '../components/seo';
 

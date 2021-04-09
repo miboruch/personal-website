@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Div100vh from 'react-div-100vh';
-import Layout from '../components/templates/Layout';
+import Layout from 'components/templates/Layout';
 import SEO from '../components/seo';
 // import { convertObjectToArray } from '../utils/functions';
 import MainSlider from '../components/templates/MainSlider/MainSlider';

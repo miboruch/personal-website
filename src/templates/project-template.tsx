@@ -1,6 +1,6 @@
 import React from 'react';
 import SEO from '../components/seo';
-import Layout from '../components/templates/Layout';
+import Layout from 'components/templates/Layout';
 import { graphql } from 'gatsby';
 import PortfolioProjectTemplate from '../components/templates/PortfolioProjectTemplate/PortfolioProjectTemplate';
 

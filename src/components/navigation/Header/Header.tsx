@@ -10,10 +10,10 @@ import { Theme } from 'types';
 import { StyledHeader, StyledLink } from './Header.styles';
 
 interface Props {
-  headerTheme: Theme;
+  colorTheme: Theme;
 }
 
-const Header: React.FC<Props> = ({ headerTheme }) => {
+const Header: React.FC<Props> = ({ colorTheme }) => {
   const headerRef = useRef<HTMLElement>(null);
   const [isOpen, setOpen] = useState(false);
   const { isOnTop } = useScroll();
@@ -29,37 +29,20 @@ const Header: React.FC<Props> = ({ headerTheme }) => {
     if (header) {
       gsap.set([...header.children], { autoAlpha: 0 });
 
-      tl.fromTo(
-        header.children,
-        { y: '-=15' },
-        { y: '0', autoAlpha: 1, duration: 1.2, stagger: 0.3, delay: 0.7 }
-      );
+      tl.fromTo(header.children, { y: '-=15' }, { y: '0', autoAlpha: 1, duration: 1.2, stagger: 0.3, delay: 0.7 });
     }
   }, []);
 
   return (
     <>
-      <StyledHeader
-        isOnTop={isOnTop}
-        isOpen={isOpen}
-        headerTheme={headerTheme}
-        ref={headerRef}
-      >
-        <MenuButton
-          isOpen={isOpen}
-          toggleMenu={toggleMenu}
-          headerTheme={headerTheme}
-        />
-        <StyledLink
-          href='mailto:miboruch@gmail.com'
-          headerTheme={headerTheme}
-          isOpen={isOpen}
-        >
+      <StyledHeader isOnTop={isOnTop} isOpen={isOpen} headerTheme={colorTheme} ref={headerRef}>
+        <MenuButton isOpen={isOpen} toggleMenu={toggleMenu} colorTheme={colorTheme} />
+        <StyledLink href='mailto:miboruch@gmail.com' headerTheme={colorTheme} isOpen={isOpen}>
           miboruch@gmail.com
         </StyledLink>
-        <Logo headerTheme={headerTheme} isOpen={isOpen} />
+        <Logo headerTheme={colorTheme} isOpen={isOpen} />
       </StyledHeader>
-      <Menu isOpen={isOpen} headerTheme={headerTheme} />
+      <Menu isOpen={isOpen} colorTheme={colorTheme} />
     </>
   );
 };

@@ -1,7 +1,14 @@
 import styled, { css } from 'styled-components';
-import Paragraph from '../../atoms/Paragraph/Paragraph';
 
-const StyledBox = styled.div`
+import { Theme } from 'types';
+
+import { Paragraph, ParagraphSizes } from 'styles';
+
+interface MenuButtonProps {
+  colorTheme: Theme;
+}
+
+const StyledBox = styled.div<MenuButtonProps>`
   text-align: right;
   width: 200px;
   height: 62px;
@@ -16,8 +23,8 @@ const StyledBox = styled.div`
   visibility: hidden;
   transition: background-color 0.5s ease;
 
-  ${({ headerTheme }) =>
-    headerTheme === 'light' &&
+  ${({ colorTheme }) =>
+    colorTheme === 'light' &&
     css`
       background-color: ${({ theme }) => theme.color.lightThemeBackground};
     `}
@@ -31,7 +38,11 @@ const StyledBox = styled.div`
   }
 `;
 
-const StyledParagraph = styled(Paragraph)`
+interface ParagraphProps extends MenuButtonProps {
+  size: ParagraphSizes;
+}
+
+const StyledParagraph = styled(Paragraph)<ParagraphProps>`
   font-family: ${({ theme }) => theme.font.family.futura};
   padding-left: 2rem;
   width: 120px;
@@ -39,8 +50,8 @@ const StyledParagraph = styled(Paragraph)`
   text-transform: uppercase;
   color: #fff;
 
-  ${({ headerTheme }) =>
-    headerTheme === 'light' &&
+  ${({ colorTheme }) =>
+    colorTheme === 'light' &&
     css`
       color: #000;
     `}

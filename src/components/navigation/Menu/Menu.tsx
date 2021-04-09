@@ -17,10 +17,10 @@ import {
 
 interface Props {
   isOpen: boolean;
-  headerTheme: Theme;
+  colorTheme: Theme;
 }
 
-const Menu: React.FC<Props> = ({ isOpen, headerTheme }) => {
+const Menu: React.FC<Props> = ({ isOpen, colorTheme }) => {
   const [tlIn] = useState(gsap.timeline({ defaults: { ease: easeExpInOut } }));
   const paragraphWrapperRef = useRef<HTMLDivElement>(null);
   const socialNavigationRef = useRef<HTMLDivElement>(null);
@@ -49,14 +49,14 @@ const Menu: React.FC<Props> = ({ isOpen, headerTheme }) => {
   }, [isOpen]);
 
   return (
-    <StyledMenuBox headerTheme={headerTheme} isOpen={isOpen}>
+    <StyledMenuBox headerTheme={colorTheme} isOpen={isOpen}>
       <MenuItems ref={paragraphWrapperRef}>
         {menuItems.map(item => (
-          <ParagraphBox headerTheme={headerTheme} key={item.id}>
+          <ParagraphBox headerTheme={colorTheme} key={item.id}>
             <SlidePageTransitionProvider to={item.link} isDark={true}>
               <StyledMenuItems
                 title='true'
-                headerTheme={headerTheme}
+                headerTheme={colorTheme}
                 before={item.before}
               >
                 {item.name}
@@ -66,7 +66,7 @@ const Menu: React.FC<Props> = ({ isOpen, headerTheme }) => {
         ))}
       </MenuItems>
       <NavigationWrapper>
-        <SocialNavigation headerTheme={headerTheme} ref={socialNavigationRef} />
+        <SocialNavigation headerTheme={colorTheme} ref={socialNavigationRef} />
       </NavigationWrapper>
     </StyledMenuBox>
   );
