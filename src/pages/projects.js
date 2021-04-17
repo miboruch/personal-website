@@ -6,15 +6,15 @@ import { convertObjectToArray } from '../utils/functions';
 import ProjectsTemplate from '../components/templates/ProjectsTemplate/ProjectsTemplate';
 
 const Projects = ({ data }) => {
-  const imageArray = convertObjectToArray(
+  const imageArray = [
     data.image0,
     data.image1,
     data.image2,
     data.image3,
     data.image4,
     data.image5
-  );
-  const { projects } = data.projectData;
+  ];
+  const projects = data.projects.edges.map(({ node }) => node);
 
   return (
     <Layout headerTheme='dark'>
@@ -24,15 +24,45 @@ const Projects = ({ data }) => {
   );
 };
 
+// export const query = graphql`
+//   query {
+//     image0: file(name: { regex: "/grades-main/" }) {
+//       ...mockUpFragment
+//     }
+//     image1: file(name: { regex: "/chat-main/" }) {
+//       ...mockUpFragment
+//     }
+//     image2: file(name: { regex: "/buyit-main/" }) {
+//       ...mockUpFragment
+//     }
+//     image3: file(name: { regex: "/indeed-main-mobile/" }) {
+//       ...mockUpFragment
+//     }
+//     image4: file(name: { regex: "/wallpapers-mobile/" }) {
+//       ...mockUpFragment
+//     }
+//     image5: file(name: { regex: "/weather-mobile/" }) {
+//       ...mockUpFragment
+//     }
+//     projectData: portfolio {
+//       projects(orderBy: index_ASC) {
+//         name
+//         primaryDescription
+//         pageLink
+//       }
+//     }
+//   }
+// `;
+
 export const query = graphql`
   query {
     image0: file(name: { regex: "/grades-main/" }) {
       ...mockUpFragment
     }
-    image1: file(name: { regex: "/chat-main/" }) {
+    image1: file(name: { regex: "/chat-app-main/" }) {
       ...mockUpFragment
     }
-    image2: file(name: { regex: "/buyit-main/" }) {
+    image2: file(name: { regex: "/buy-it-main/" }) {
       ...mockUpFragment
     }
     image3: file(name: { regex: "/indeed-main-mobile/" }) {
@@ -44,11 +74,13 @@ export const query = graphql`
     image5: file(name: { regex: "/weather-mobile/" }) {
       ...mockUpFragment
     }
-    projectData: portfolio {
-      projects(orderBy: index_ASC) {
-        name
-        primaryDescription
-        pageLink
+    projects: allDatoCmsProject {
+      edges {
+        node {
+          name
+          pageLink
+          primaryDescription
+        }
       }
     }
   }

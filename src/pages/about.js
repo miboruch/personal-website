@@ -3,10 +3,10 @@ import { graphql } from 'gatsby';
 import Layout from '../components/templates/Layout';
 import SEO from '../components/seo';
 import AboutTemplate from '../components/templates/AboutTemplate/AboutTemplate';
-import { convertObjectToArray } from '../utils/functions';
 
 const AboutPage = ({ data }) => {
-  const imagesArray = convertObjectToArray(data.image1, data.image2);
+  const imagesArray = [data.image1, data.image2];
+
   return (
     <Layout headerTheme='light'>
       <SEO title='About' />

@@ -8,17 +8,32 @@ import MainSlider from '../components/templates/MainSlider/MainSlider';
 import CurrentSlideContextProvider from '../providers/CurrentSlideContext';
 
 const IndexPage = ({ data }) => {
+  // const {
+  //   mainPageData: { projects }
+  // } = data;
+  // const imagesArray = convertObjectToArray(
+  //   data.image0,
+  //   data.image1,
+  //   data.image2,
+  //   data.image3,
+  //   data.image4,
+  //   data.image5
+  // );
+
   const {
-    mainPageData: { projects }
+    projects: { edges }
   } = data;
-  const imagesArray = convertObjectToArray(
-    data.image0,
+  console.log(data);
+  const imagesArray = [
+    // data.image0,
     data.image1,
-    data.image2,
-    data.image3,
-    data.image4,
-    data.image5
-  );
+    data.image2
+    // data.image3,
+    // data.image4,
+    // data.image5
+  ];
+  console.log(imagesArray);
+  const projects = edges.map(({ node }) => node);
 
   return (
     /* Three themes to choose from: light, dark, default.
@@ -64,15 +79,47 @@ export const smallPhotoFragment = graphql`
   }
 `;
 
+// export const query = graphql`
+//   query {
+//     image0: file(name: { regex: "/grades-main/" }) {
+//       ...mockUpFragment
+//     }
+//     image1: file(name: { regex: "/chat-main/" }) {
+//       ...mockUpFragment
+//     }
+//     image2: file(name: { regex: "/buyit-main/" }) {
+//       ...mockUpFragment
+//     }
+//     image3: file(name: { regex: "/indeed-main-mobile/" }) {
+//       ...mockUpFragment
+//     }
+//     image4: file(name: { regex: "/wallpapers-mobile/" }) {
+//       ...mockUpFragment
+//     }
+//     image5: file(name: { regex: "/weather-mobile/" }) {
+//       ...mockUpFragment
+//     }
+//     mainPageData: portfolio {
+//       projects(orderBy: index_ASC) {
+//         index
+//         name
+//         next
+//         description
+//         pageLink
+//       }
+//     }
+//   }
+// `;
+
 export const query = graphql`
   query {
     image0: file(name: { regex: "/grades-main/" }) {
       ...mockUpFragment
     }
-    image1: file(name: { regex: "/chat-main/" }) {
+    image1: file(name: { regex: "/chat-app-main/" }) {
       ...mockUpFragment
     }
-    image2: file(name: { regex: "/buyit-main/" }) {
+    image2: file(name: { regex: "/buy-it-main/" }) {
       ...mockUpFragment
     }
     image3: file(name: { regex: "/indeed-main-mobile/" }) {
@@ -84,13 +131,22 @@ export const query = graphql`
     image5: file(name: { regex: "/weather-mobile/" }) {
       ...mockUpFragment
     }
-    mainPageData: portfolio {
-      projects(orderBy: index_ASC) {
-        index
-        name
-        next
-        description
-        pageLink
+    projects: allDatoCmsProject {
+      edges {
+        node {
+          index
+          description
+          category
+          githubLink
+          name
+          next
+          pageLink
+          slug
+          primaryDescription
+          secondaryDescription
+          mainTechnology
+          link
+        }
       }
     }
   }
