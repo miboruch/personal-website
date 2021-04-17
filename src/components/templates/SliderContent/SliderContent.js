@@ -69,7 +69,7 @@ const SliderContent = ({ image, content, index, isDarkTheme }) => {
   return (
     <Div100vh>
       <StyledWrapper isEven={currentSlide % 2 === 0}>
-        <StyledImage fluid={image.childImageSharp.fluid} />
+        {/*<StyledImage fluid={image.childImageSharp.fluid} />*/}
         <StyledContextBox isDarkTheme={isDarkTheme}>
           <ContentWrapper>
             <TextWrapper>
