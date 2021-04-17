@@ -1,7 +1,7 @@
 import React from 'react';
+import gsap from 'gsap';
 import TransitionLink from 'gatsby-plugin-transition-link';
 import PropTypes from 'prop-types';
-import gsap from 'gsap';
 
 const PageTransitionProvider = ({ children, to, dark }) => {
   const exitAnimation = () => {

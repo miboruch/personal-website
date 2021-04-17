@@ -3,7 +3,7 @@ import gsap from 'gsap';
 
 import Menu from '../Menu/Menu';
 import MenuButton from 'components/molecules/MenuButton/MenuButton';
-import Logo from '../../atoms/Logo/Logo';
+import Logo from 'components/navigation/Header/components/Logo/Logo';
 import { useScroll } from 'components/hooks/use-scroll.hook';
 import { Theme } from 'types';
 

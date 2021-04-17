@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import Paragraph from '../Paragraph/Paragraph';
+
+import { Paragraph, ParagraphSizes } from 'styles';
 
 const StyledCircle = styled.div`
   display: none;
@@ -22,7 +23,7 @@ const StyledCircle = styled.div`
   }
 `;
 
-const StyledCircleText = styled(Paragraph)`
+const StyledCircleText = styled(Paragraph)<{size: ParagraphSizes}>`
   width: auto;
   text-align: center;
   line-height: 2;

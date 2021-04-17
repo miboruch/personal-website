@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CloseButton from 'src/components/atoms/CloseButton/CloseButton';
+
+import { CloseButton } from 'src/components/index';
 import { skills } from 'src/utils';
 import { useScroll } from 'src/components/hooks/use-scroll.hook';
 import { SmallSkillsBox, SkillsBoxParagraph } from './SkillToggleBox.styles';

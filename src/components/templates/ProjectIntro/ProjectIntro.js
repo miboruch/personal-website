@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import OpenCircle from '../../atoms/OpenCircle/OpenCircle';
-import PageTransitionProvider from '../../../providers/PageTransitionProvider';
+import OpenCircle from 'src/components/atoms/OpenCircle/OpenCircle';
+import PageTransitionProvider from 'src/providers/PageTransitionProvider';
 import {
   StyledWrapper,
   CircleWrapper,
@@ -66,12 +66,7 @@ const ProjectIntro = ({ data, image, reverse }) => {
     });
 
     tl.to(wrapper, { autoAlpha: 1, x: '0', duration: 1.5 })
-      .fromTo(
-        header,
-        { transform: 'matrix(0.99, 0.33, 0, 1, 0, 100)' },
-        { transform: 'matrix(1,0,0,1,0,0)', duration: 1 },
-        '-=0.5'
-      )
+      .fromTo(header, { transform: 'matrix(0.99, 0.33, 0, 1, 0, 100)' }, { transform: 'matrix(1,0,0,1,0,0)', duration: 1 }, '-=0.5')
       .to(description, { autoAlpha: 1, duration: 1.2 }, '-=0.4');
   }, []);
 

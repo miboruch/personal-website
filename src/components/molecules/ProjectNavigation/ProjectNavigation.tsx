@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import PageTransitionProvider from '../../../providers/PageTransitionProvider';
+import PageTransitionProvider from 'providers/PageTransitionProvider';
 import { NavigationBox, NavigationParagraph } from './ProjectNavigation.styles';
 
 interface Props {

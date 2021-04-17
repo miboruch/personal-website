@@ -3,17 +3,11 @@ import gsap from 'gsap';
 import { easeExpInOut } from 'd3-ease';
 
 import SocialNavigation from 'components/molecules/SocialNavigation/SocialNavigation';
-import SlidePageTransitionProvider from '../../../providers/SlidePageTransitionProvider';
+import SlidePageTransitionProvider from 'providers/SlidePageTransitionProvider';
 import { Theme } from 'types';
 import { menuItems } from 'utils';
 
-import {
-  StyledMenuBox,
-  NavigationWrapper,
-  ParagraphBox,
-  StyledMenuItems,
-  MenuItems
-} from 'components/navigation/Menu/Menu.styles';
+import { StyledMenuBox, NavigationWrapper, ParagraphBox, StyledMenuItems, MenuItems } from 'components/navigation/Menu/Menu.styles';
 
 interface Props {
   isOpen: boolean;
@@ -35,11 +29,7 @@ const Menu: React.FC<Props> = ({ isOpen, colorTheme }) => {
       });
 
       tlIn
-        .fromTo(
-          menuItems.children,
-          { x: '-=30' },
-          { x: '0', autoAlpha: 1, duration: 1, stagger: 0.3, delay: 1 }
-        )
+        .fromTo(menuItems.children, { x: '-=30' }, { x: '0', autoAlpha: 1, duration: 1, stagger: 0.3, delay: 1 })
         .to(socialNavigation.children, { autoAlpha: 1, stagger: 0.3 });
     }
   }, []);
@@ -51,15 +41,11 @@ const Menu: React.FC<Props> = ({ isOpen, colorTheme }) => {
   return (
     <StyledMenuBox headerTheme={colorTheme} isOpen={isOpen}>
       <MenuItems ref={paragraphWrapperRef}>
-        {menuItems.map(item => (
-          <ParagraphBox headerTheme={colorTheme} key={item.id}>
-            <SlidePageTransitionProvider to={item.link} isDark={true}>
-              <StyledMenuItems
-                title='true'
-                headerTheme={colorTheme}
-                before={item.before}
-              >
-                {item.name}
+        {menuItems.map(({ id, link, name, before }) => (
+          <ParagraphBox headerTheme={colorTheme} key={id}>
+            <SlidePageTransitionProvider to={link} isDark={true}>
+              <StyledMenuItems title='true' headerTheme={colorTheme} before={before}>
+                {name}
               </StyledMenuItems>
             </SlidePageTransitionProvider>
           </ParagraphBox>
